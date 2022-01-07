@@ -1,5 +1,13 @@
-name: "Create a simple Rmarkdown website"
+name: "OmarEAD"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+    code_folding: show
+    theme: flatly
 navbar:
+  title: "Omar Cléo"
   left:
     - text: "Home"
       href: index.html
