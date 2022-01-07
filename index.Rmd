@@ -1,0 +1,67 @@
+---
+title: "RMarkdown"
+author: "Omar Cléo"
+date: "`r format(Sys.time(),'%p %d %B %Y')`"
+#date: "`r format(Sys.time(),'%I:%M %p %d %B %Y')`"
+output: bookdown::html_document2
+#output:
+#  bookdown::pdf_book:
+#    base_format: rticles::plos_article
+# output: 
+#   pdf_document :
+#     latex_engine : pdflatex
+#   word_document:
+#     toc: yes
+#   html_document:
+#     df_print: paged
+#     toc: yes
+#     toc_float: true
+#     number_sections: true
+bibliography: bibliografia.bib
+---
+
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      size = "footnotesize",
+                      comment = NA,
+                      warning = FALSE,
+                      message = FALSE,
+                      #out.width = "1\\linewidth",
+                      fig.align = "center",
+                      fig.width = 8, 
+                      fig.height = 4, 
+                      fig.show = "hold",
+                      fig.path = "Figuras1/",
+                      fig.pos = "!htb",
+                      background = "#E6E6FA",
+                      dev = c("png",'pdf'),
+                      res=300,
+                      dpi = 300,
+                      cache = TRUE)
+
+
+```
+
+```{r library, echo=FALSE,results='hide'}
+library(nlme)
+library(tinytex)
+library(knitr)
+library(kableExtra)
+library(xtable)
+```
+
+```{r functions, echo=FALSE}
+# A function to scale input to 0-1
+scale_01 <- function(x){
+  (x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE))
+}
+```
+
+```{r read-data, echo=FALSE}
+# gapminder <- read_csv(here::here("data", "gapminder.csv"))
+```
+
+# Meu site
+
+## Vamos começar
