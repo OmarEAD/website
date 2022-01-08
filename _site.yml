@@ -14,7 +14,7 @@ navbar:
     - text: "Getting Started"
       menu:
         - text: "Create a Project"
-          href: project.html
+          href: teste1.html
         - text: "Set Build Options"
           href: build.html
         - text: "Create a _site.yml"

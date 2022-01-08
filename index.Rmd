@@ -1,9 +1,12 @@
 ---
-title: "RMarkdown"
-author: "Omar Cléo"
-date: "`r format(Sys.time(),'%p %d %B %Y')`"
+title: "OMAR CLÉO NEVES PEREIRA"
+#author: "Seja bem-vindo à minha página pessoal"
+#date: "`r format(Sys.time(),'%p %d %B %Y')`"
 #date: "`r format(Sys.time(),'%I:%M %p %d %B %Y')`"
-output: bookdown::html_document2
+output: 
+  html_document:
+    css: style.css
+  
 #output:
 #  bookdown::pdf_book:
 #    base_format: rticles::plos_article
@@ -32,7 +35,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       fig.width = 8, 
                       fig.height = 4, 
                       fig.show = "hold",
-                      fig.path = "Figuras1/",
+                      fig.path = "Figuras/",
                       fig.pos = "!htb",
                       background = "#E6E6FA",
                       dev = c("png",'pdf'),
@@ -62,6 +65,36 @@ scale_01 <- function(x){
 # gapminder <- read_csv(here::here("data", "gapminder.csv"))
 ```
 
-# Meu site
 
-## Vamos começar
+[![](./Figuras/linkedin.jpg "linkedin"){width=5%}](https://linkedin.com/in/omar-cléo-neves-pereira)
+[![](./Figuras/lattes.png "lattes"){width=5%}](http://lattes.cnpq.br/9448206585707320)
+[![](./Figuras/github.png "lattes"){width=5%}](https://github.com/OmarEAD)
+
+Seja bem-vindo à minha página pessoal!
+
+![](./Figuras/foto.jpg){width=80%} 
+
+## Olá, aqui é o Omar!
+
+O desejo de trabalhar com agricultura surgiu desde criança, ao ver meu pai cultivando todos os dias em nossa horta caseira. Naquele pedacinho de terra, de aproximadamente de 25 metros quadrados, meu pai conseguia contribuir para a alimentação de nossa família, amigos e vizinhos. Isto foi muito motivador.
+
+A agricultura brasileira tem se superado todos os anos e hoje alimenta grande parte do planeta. Este sucesso foi possível devido ao comprometimento das pessoas envolvidas neste processo, as quais se aperfeiçoaram de forma inter e multidisciplinares. A tecnologia empregada por meu pai já não seria suficiente hoje, mas o espírito, para servir ao maior número de pessoas, é o mesmo.
+
+Minhas especialidades incluem a formação em Agronomia (graduação, mestrado e doutorado), Física (bacharelado e mestrado) e Bioestatística (pós-doutorado), áreas que também atuo como pesquisador e professor. Como resultado prático desta multidisciplinaridade, destaco o desenvolvimento de um equipamento para monitoramento da atividade iónica da solução do solo, patenteado pela Universidade Estadual de Maringá.
+
+Também tenho como especialidade a programação em R, Latex (knitr), Markdown, e em outras linguagens, com as quais é possível gerar relatórios dinâmicos, além de apresentações e textos. Destaco ainda, minha competência na análise e ciência de dados e estatística, e, claro, meu entusiasmo em sempre estar disposto a aprender novas habilidades. Neste contexto me coloco a disposição para me envolver e atuar em novos projetos e desafios.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
