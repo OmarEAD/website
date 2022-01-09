@@ -13,7 +13,7 @@ navbar:
       href: index.html
     - text: "Getting Started"
       menu:
-        - text: "Create a Project"
+        - text: "R"
           href: teste1.html
         - text: "Set Build Options"
           href: build.html
