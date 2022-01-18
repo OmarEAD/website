@@ -1,0 +1,160 @@
+---
+title: "Modelando a evapotranspiração acumulada ao longo do tempo"
+author: "Omar Cléo Neves Pereira, Altair Bertonha"
+#date: "`r format(Sys.time(),'%d %B %Y')`"
+output: bookdown::html_document2
+bibliography: bibliografiaETbook.bib
+---
+
+<!-- \renewcommand{\figurename}{Figura} -->
+<!-- \renewcommand{\tablename}{Tabela} -->
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      size = "footnotesize",
+                      comment = NA,
+                      warning = FALSE,
+                      message = FALSE,
+                      #out.width = "1\\linewidth",
+                      fig.align = "center",
+                      fig.width = 8, 
+                      fig.height = 4, 
+                      fig.show = "hold",
+                      fig.path = "FigurasETbook/",
+                      fig.pos = "!htb",
+                      background = "#E6E6FA",
+                      dev = c("png",'pdf'),
+                      res=300,
+                      dpi = 300,
+                      cache = TRUE)
+```
+
+```{r library, results='hide', echo=FALSE}
+#library(readr)
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+```
+
+```{r dados, echo=F, results='hide'}
+#rm(list=ls(all=TRUE))
+library(nlme)
+library(lattice)
+library(xtable)
+require(PMCMR)
+#setwd("C:/Users/UEM/Dropbox/Evapotr/Stevia")
+setwd('C:/Users/perei/Dropbox/LivroEvapotranspiração/ArquivosAlface')
+#setwd("C:/Users/UEM/Dropbox/Evapotranspiração/Alface/Alface2016")
+dados <- read.table("AlfaceTotal.txt",header=T); dados[1:28,]
+dados <- groupedData(acum~day|plant, dados)
+
+##########################################################
+###############    ARRUMANDO OS DADOS     ################
+###############     SELECIONANDO N=0      ################
+##########################################################
+
+dados<-subset(dados, dados$treat %in% c('T1', "T6", "T11", "T16")) 
+levels(dados$treat)
+#levels(dados$treat)<-c('W1','W2','W3','W4')
+dados$treat <- factor(ifelse(dados$treat=="T1",'W1',
+                      ifelse(dados$treat=="T6", 'W2',
+                             ifelse(dados$treat=="T11", 'W3', 'W4'))))
+dados <- na.omit(dados)
+unique(dados$plant)
+anyNA(dados)
+colnames(dados)[8]<-'rain'
+
+# 33 plantas; 23 dias; 4 tratamentos (agua)
+str(dados)
+
+# Observações: no dia 31/03, os valores meteorológicos são:
+# 31/03  classA: 407; wetbulb: 24; temp:	27,4; rain:	0
+
+length(unique(subset(dados,treat=='W1')$plant))
+length(unique(subset(dados,treat=='W2')$plant))
+length(unique(subset(dados,treat=='W3')$plant))
+length(unique(subset(dados,treat=='W4')$plant))
+#
+
+```
+
+```{r modelo, echo=F, results='hide'}
+
+dd3 <- dados[,10]/1000
+dados$acum <- dd3
+head(dados)
+# A: assíntota a esquerda
+# B: assíntota a direita
+# C: ponto de inflexão
+# D: parâmetro de escala
+#
+modelo.nls <- nls( acum ~ SSfpl(day, A, B, C, D), data = dados )
+modelo.lis <- nlsList( acum ~ SSfpl(day, A, B, C, D), data = dados )
+m1 <- nlme(modelo.lis, random=A + B + C + D ~ 1)
+m1.1 <- update(m1, weights = varPower())
+#
+zeros_2 <- rep(0, 2)
+zeros_3 <- rep(0, 3)
+zeros_4 <- rep(0, 4)
+fixos <- fixef( m1.1)
+# A: assíntota a esquerda
+# B: assíntota a direita
+# C: ponto de inflexão
+# D: parâmetro de escala
+#
+
+mm44.1 <- nlme(acum ~ SSfpl(day, A, B, C, D),
+               data=dados,
+               fixed = list(A~treat, B~treat, C~treat, D~treat),
+               random =   A + B + C   ~ 1,
+               start = c(fixos[1],0,0,0,  fixos[2],0,0,0, fixos[3],0,0,0, fixos[4],0,0,0),
+               weights = varPower()
+               #weights = varPower(0.5,form = ~ fitted(.) | treat)
+)
+#
+summary(mm44.1)
+modelo <- mm44.1
+
+```
+
+
+> O conhecimento da evapotranspiração acumulada por plantas anuais ao longo do seu ciclo de vida pode ser uma ferramenta importante na tomada de decisão quando se considera a viabilidade econômica da cultura. Este conhecimento pode ajudar a entender o quanto as plantas, submetidas a um manejo específico, podem evapotranspirar ao final do ciclo. Esta informação auxilia na estimativa da quantidade de uma variável de produção, por exemplo a massa de matéria fresca, além de indicar um período mais interessante para a realização da sua colheita. O objetivo deste capítulo é, a partir da estimativa da evapotranspiração diária ao longo do ciclo, modelar a evapotranspiração acumulada durante um período da vida de plantas anuais. Para fazer isto, precisamos entender que o comportamento da variável resposta, ou seja, a evapotranspiração acumulada, ao longo do tempo não é linear, e ter em mente que as varías observações realizadas em uma mesma unidade experimental apresentam correlações e que estas correlações são mais intensas quanto mais próximas temporalmente são as medidas. Esta compreensão nos remete a análise de dados longitudinais a partir dos modelos não lineares de efeitos mistos.
+
+# Introdução
+
+Havendo água disponível no solo, o fluxo de água pelas plantas depende somente da demanda atmosférica. Dessa forma, variáveis físicas como a temperatura, umidade relativa do ar, vento e radiação solar influenciam diretamente a evapotranspiração ($ET$) de uma superfície vegetada (@novak2012evapotranspiration). Além disso, o estádio de desenvolvimento das plantas também deve afetar a $ET$. 
+
+
+Plantas de ciclo anual apresentam pequena demanda por água enquanto seu sistema radicular é pouco volumoso, atingindo taxas máximas no pleno crescimento, e diminuindo nos estádios finais do desenvolvimento. Para estas espécies, a $ET$ acumulada ao longo do ciclo da planta está diretamente relacionada com a sua produtividade. Em outras palavras, quanto maior a quantidade acumulada de água evapotranspirada, maior a quantidade das variáveis de produção como massa fresca e seca, número de folhas e área foliar (@alface , @stevia).
+
+Neste capítulo pretendemos dar uma ideia do uso dos modelos não lineares de efeitos mistos para modelar a $ET$ acumulada ao longo do tempo de plantas de ciclo anual.
+
+
+# Perfil de resposta
+
+A Figura \@ref(fig:perfil1)) apresenta a $ET$ acumulada de uma única planta de alface ao longo de 23 dias consecutivos, sendo o primeiro dia equivalente ao $35^o$ dia após a semeadura. Durante este período, mediu-se a $ET$ diária da planta. Assim, o primeiro dia no gráfico traz o valor da $ET$ das últimas 24 horas, o segundo dia refere-se as últimas 48 horas e assim sucessivamente. A $ET$ diária deve ser entendida como a taxa com que a $ET$ acumulada ocorre ao longo do tempo. Em termos matemáticos, a $ET$ diária pode ser entendida como uma aproximação da derivada (taxa) da $ET$ acumulada com relação ao tempo.
+
+```{r perfil1, fig.cap="Name", echo=FALSE, results='hide'}
+unique(dados$plant)
+aa <- 102
+pp <- subset(dados, plant==aa)
+pp$evapotr/1000
+#
+pplot <- augPred(modelo)
+ppq <- subset(pplot,.groups==aa)
+par(mfrow=c(1,1))
+par(mar=c(2.6,2.5,0.5,0.5), mgp=c(1.5,0.5,0), las=0, cex= 1.2)
+plot(acum ~ day,ppq[1:23,], xlab = "Time (days)", ylab = 'Accumulated ET (kg)',pch = 16)
+
+```
+
+
+
+
+
+
+# Referências
+
+\bibliographystyle{apa}
+	\bibliography{ReferenciasETbook}
+
