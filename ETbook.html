@@ -456,9 +456,9 @@ Figure 2.1: Perfil de resposta da <span class="math inline">\(ET\)</span> acumul
 </div>
 <div id="um-modelo-para-dados-de-crescimento" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Um modelo para dados de crescimento</h1>
-<p>Para descrever o comportamento da <span class="math inline">\(ET\)</span> acumulada ao longo do tempo precisamos de uma função que também tenha um formato de <span class="math inline">\(S\)</span> (<span class="math inline">\(S\)</span>-shaped function). Além disso, espera-se que o modelo escolhido seja interpretável e parcimonioso nos parâmetros. Uma opção empírica é o modelo polinomial, que é linear nos parâmetros. Este tipo de modelo pode promover bons ajustes estatísticos e ser computacionalmente mais simples, mas não agregam nenhuma consideração teórica sobre os mecanismos físico e/ou biológico que geraram os dados. Por outro lado, um modelo não linear está associado à algum conhecimento teórico a respeito do fenômeno que se estuda. Além da interpretabilidade, estes modelos usam poucos parâmetros em comparação com os modelos lineares, configurando assim, uma descrição mais parcimoniosa dos dados (<span class="citation">Pinheiro and Bates (2000)</span>).</p>
+<p>Para descrever o comportamento da <span class="math inline">\(ET\)</span> acumulada ao longo do tempo precisamos de uma função que também tenha um formato de <span class="math inline">\(S\)</span> (<span class="math inline">\(S\)</span>-shaped function). Além disso, espera-se que o modelo escolhido seja interpretável e parcimonioso nos parâmetros. Uma opção empírica é o modelo polinomial, que é linear nos parâmetros. Este tipo de modelo pode promover bons ajustes estatísticos e ser computacionalmente mais simples, mas não agregam nenhuma consideração teórica sobre os mecanismos físico e/ou biológico que geraram os dados. Por outro lado, um modelo não linear está associado à algum conhecimento teórico a respeito do fenômeno que se estuda. Além da interpretabilidade, estes modelos usam poucos parâmetros em comparação com os modelos lineares, configurando assim, uma descrição mais parcimoniosa dos dados (<span class="citation">J. C. Pinheiro and Bates (2000)</span>).</p>
 <p>Tratando-se da <span class="math inline">\(ET\)</span> acumulada ao longo do tempo, temos alguns aspectos físicos e biológicos que podemos pontuar para a escolha de um modelo. Uma função que descreva esta variável resposta precisa de parâmetros que a delimite entre um valor mínimo e um máximo. Colocado de outra forma, o valor mínimo deve ser muito próximo de zero e indicar o início do crescimento da planta, e o máximo deve ser um valor para o qual a <span class="math inline">\(ET\)</span> acumulada tende assintoticamente quando o final do ciclo de vida se aproxima. Outro aspecto a ser destacado é que o modelo deve apresentar um ponto de inflexão, que indica o dia em que a taxa da <span class="math inline">\(ET\)</span> acumulada (<span class="math inline">\(ET\)</span> diária) atinge um máximo.</p>
-<p>Há várias funções capazes de caracterizar a <span class="math inline">\(ET\)</span> acumulada ao longo do tempo da forma que acabamos de descrever. A título de exemplo, usaremos a função logística de quatro parâmetros (<span class="math inline">\(4PL\)</span>) para descrever nossa variável resposta. Esta função é muito usada para modelar dados de crescimento ou decaimento da variável resposta ao longo do tempo. Na literatura encontra-se algumas parametrizações para esta função, mas a que vamos usar aqui é a dada por <span class="citation">Pinheiro and Bates (2000)</span>:</p>
+<p>Há várias funções capazes de caracterizar a <span class="math inline">\(ET\)</span> acumulada ao longo do tempo da forma que acabamos de descrever. A título de exemplo, usaremos a função logística de quatro parâmetros (<span class="math inline">\(4PL\)</span>) para descrever nossa variável resposta. Esta função é muito usada para modelar dados de crescimento ou decaimento da variável resposta ao longo do tempo. Na literatura encontra-se algumas parametrizações para esta função, mas a que vamos usar aqui é a dada por <span class="citation">J. C. Pinheiro and Bates (2000)</span>:</p>
 <p><span class="math display" id="eq:1">\[\begin{equation} 
 ET(t) = \phi_1 + \frac{\phi_2 - \phi_1}{1 + exp[(\phi_3 - t) / \phi_4 ]}  
 \tag{3.1}
@@ -467,25 +467,112 @@ ET(t) = \phi_1 + \frac{\phi_2 - \phi_1}{1 + exp[(\phi_3 - t) / \phi_4 ]}
 <div class="figure" style="text-align: center"><span id="fig:parametros"></span>
 <img src="FigurasETbook/parametros-1.png" alt="Representação gráfica dos parâmetros da $4PL$. Figura adaptada de @Pinheiro_livro." width="2400" />
 <p class="caption">
-Figure 3.1: Representação gráfica dos parâmetros da <span class="math inline">\(4PL\)</span>. Figura adaptada de <span class="citation">Pinheiro and Bates (2000)</span>.
+Figure 3.1: Representação gráfica dos parâmetros da <span class="math inline">\(4PL\)</span>. Figura adaptada de <span class="citation">J. C. Pinheiro and Bates (2000)</span>.
 </p>
 </div>
 <p>Para compreender melhor o que dissemos, vamos observar a Figura <a href="#fig:poli4pl">3.2</a>. Ela traz os dados observados e vistos na Figura <a href="#fig:perfil1">2.1</a> representados pelos pontos pretos, e outras duas curvas representando dois diferentes ajustes realizados a partir destes dados. O primeiro ajuste é um modelo polinomial de grau cinco (fifth-degree polynomial) e o outro é dado pela Equação <a href="#eq:1">(3.1)</a>. O gráfico desta Figura foi estendido até o <span class="math inline">\(40^o\)</span> dia a fim de mostrar o comportamento destes ajustes ao longo do tempo.</p>
 <p>Tanto o modelo polinomial de quinto grau quanto o modelo não linear <span class="math inline">\(4PL\)</span> se ajustaram muito bem aos dados. Entretanto, o modelo polinomial vai a zero após do <span class="math inline">\(30^o\)</span> dia, o que fisicamente é impossível. Além disso, este modelo apresenta cinco parâmetros sem qualquer explicação física e/ou biológica para o fenômeno que estamos estudando. O modelo não linear <span class="math inline">\(4PL\)</span> é uma função sempre crescente, sendo compatível com uma variável que é acumulada ao longo do tempo. Porém, este ajuste não permite o crescimento infinito da <span class="math inline">\(ET\)</span> acumulada quando o tempo se torna cada vez maior. Ele limita a <span class="math inline">\(ET\)</span> acumulada num valor que pode ser entendido como uma quantidade máxima que esta planta pode evapotranspirar ao longo do seu ciclo de vida.</p>
 <p>Vemos também que, a partir de <span class="math inline">\(\sim 20^o\)</span> dia, o acumulo de água evapotranspirada é cada vez menor. Isto indica que este dia é o ponto de inflexão do modelo não linear <span class="math inline">\(4PL\)</span>. Para dar um exemplo de uma aplicação prática do ponto de inflexão do modelo no manejo de plantas de ciclo anual, suponha que o produto comercial de uma determinada planta cultivada seja suas folhas. Sabe-se que as variáveis de produção apresentam uma correlação positiva com a quantidade total de água evapotranspirada ao longo do ciclo de vida da planta. Isto é, quanto maior o total de água evapotranspirada, maiores serão os valores das variáveis de produção (<span class="citation">Pereira et al. (2019)</span>, <span class="citation">Pereira et al. (2018)</span>). Dessa forma, o ponto de inflexão pode indicar a proximidade do dia da colheita. A partir deste ponto as taxas de <span class="math inline">\(ET\)</span> diminuem e, portanto, as plantas passam a acumular menores quantidades de matéria fresca ao longo do tempo. Assim, este ponto pode ser considerado quando se pensa em termos da viabilidade econômica da cultura.</p>
-<p>Outro ponto importante além da interpretabilidade dos parâmetros, é que o modelo não linear <span class="math inline">\(4PL\)</span> é mais parcimonioso quando comparado com o modelo linear. Em geral, os modelos não lineares utilizam um número de parâmetros menor que os lineares o que lhes confere maior parcimônia. Além disso, como podemos observar na Figura <a href="#fig:poli4pl">3.2</a>, em regiões fora do intervalo dos dados, o modelo não linear fornece previsões mais confiáveis para a variável resposta (<span class="citation">Pinheiro and Bates (2000)</span>).</p>
+<p>Outro ponto importante além da interpretabilidade dos parâmetros, é que o modelo não linear <span class="math inline">\(4PL\)</span> é mais parcimonioso quando comparado com o modelo linear. Em geral, os modelos não lineares utilizam um número de parâmetros menor que os lineares o que lhes confere maior parcimônia. Além disso, como podemos observar na Figura <a href="#fig:poli4pl">3.2</a>, em regiões fora do intervalo dos dados, o modelo não linear fornece previsões mais confiáveis para a variável resposta (<span class="citation">J. C. Pinheiro and Bates (2000)</span>).</p>
 <div class="figure" style="text-align: center"><span id="fig:poli4pl"></span>
-<img src="FigurasETbook/poli4pl-1.png" alt="Perfil de resposta da $ET$ acumulada por uma única planta de alface ao longo de 23 dias consecutivos. O gráfico foi estendido até o $40^o$ dia para mostrar o comportamento de dois ajustes realizados para estes dados, um polinomial de quinto grau e o modelo não linear dado." width="2400" />
+<img src="FigurasETbook/poli4pl-1.png" alt="Perfil de resposta da $ET$ acumulada por uma única planta de alface ao longo de 23 dias consecutivos. O gráfico foi estendido até o $40^o$ dia para mostrar o comportamento de dois ajustes realizados para estes dados, um polinomial de quinto grau e o modelo não linear." width="2400" />
 <p class="caption">
-Figure 3.2: Perfil de resposta da <span class="math inline">\(ET\)</span> acumulada por uma única planta de alface ao longo de 23 dias consecutivos. O gráfico foi estendido até o <span class="math inline">\(40^o\)</span> dia para mostrar o comportamento de dois ajustes realizados para estes dados, um polinomial de quinto grau e o modelo não linear dado.
+Figure 3.2: Perfil de resposta da <span class="math inline">\(ET\)</span> acumulada por uma única planta de alface ao longo de 23 dias consecutivos. O gráfico foi estendido até o <span class="math inline">\(40^o\)</span> dia para mostrar o comportamento de dois ajustes realizados para estes dados, um polinomial de quinto grau e o modelo não linear.
 </p>
 </div>
 </div>
-<div id="referências" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Referências</h1>
+<div id="dados-longitudinais" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Dados longitudinais</h1>
+<p>Evidentemente, para fazer sentido, um experimento deve gerar dados a partir de mais de uma unidade experimental. No nosso caso, mais de uma planta deve ser observada ao longo do tempo, ou seja, devemos obter mais de um perfil de resposta. Estudos em que a variável resposta é observada repetidamente ao longo do tempo nas unidades experimentais são chamados de <em>estudos longitudinais</em>. Esse tipo de estudo é comum na agricultura quando se analisa crescimento ou decaimento da variável resposta ao longo do tempo (<span class="citation">Pereira et al. (2019)</span>, <span class="citation">Pereira et al. (2018)</span>, <span class="citation">Brouwer and De Wit (1968)</span>, <span class="citation">YAN et al. (2004)</span>, <span class="citation">Paine et al. (2012)</span>, <span class="citation">Hansen et al. (1994)</span>).</p>
+<p>Medidas realizadas em uma mesma unidade experimental muito provavelmente são correlacionadas. Suponha duas plantas em que a <span class="math inline">\(ET\)</span> é registrada diariamente. Se todas as covariáveis (adubação, cultivar, época de plantio, água no solo, etc.), forem mantidas constantes ao longo do tempo, plantas com altas taxas de <span class="math inline">\(ET\)</span> num determinado dia provavelmente também terão altas taxas de <span class="math inline">\(ET\)</span> no dia seguinte. O mesmo para plantas com taxas menores de <span class="math inline">\(ET\)</span>. Se num dia a taxa é baixa, provavelmente no dia seguinte ela também será. Em outras palavras, medidas realizadas em uma mesma unidade experimental tenderão a ser similares ao longo do tempo. É a expressão individual de cada planta.</p>
+<p>Além da correlação entre as observações realizadas dentro de uma mesma unidade experimental, deve-se ter em mente que, muito provavelmente, estas correlações são maiores para observações realizadas entre tempos vizinhos que aquelas realizadas entre tempos mais distantes.</p>
+</div>
+<div id="modelo-de-efeitos-mistos" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Modelo de efeitos mistos</h1>
+<p>Em um estudo longitudinal, o acompanhamento das unidades experimentais ao longo do tempo gera um conjunto de dados correlacionados. Como discutido, estas correlações dentro de uma mesma unidade experimental são mais fortes entre observações vizinhas. Quanto mais distantes temporalmente estão duas medidas, menor a correlação entre elas. Além disso, quando observamos as unidades experimentais que receberam as mesmas condições para o crescimento ao longo do tempo e que fazem parte de um mesmo tratamento, temos uma variabilidade entre elas que atribuímos ao acaso. Os efeitos de tratamento e as correlações e variabilidades em um estudo longitudinal indicam que precisamos de uma ferramenta que, além de flexível na forma de especificar um modelo matemático, também dê enfase à cada unidade experimental.</p>
+<p>Nos modelos de efeitos mistos, selecionamos uma função comum para descrever a variável resposta com relação as covariáveis estudadas, ou seja, as respostas das unidades experimentais em uma população. Mas além disso, coeficientes específicos desta função podem ser únicos para cada unidade experimental. Num modelo de efeitos mistos assumimos que as unidades experimentais de uma população tem a mesma forma funcional, mas os parâmetros da função podem variar entre as unidades.</p>
+<p>O nome <em>modelo misto</em> vem do fato deste modelo misturar <em>efeitos fixos</em> e <em>efeitos aleatórios</em>. Um modelo de efeitos mistos é um modelo paramétrico que descreve as relações entre a variável resposta e as covariáveis (efeitos fixos) e que leva em consideração as respostas individuais de cada unidade experimental (efeitos aleatórios). Em outras palavras, os parâmetros de efeitos fixos descrevem as relações da variável resposta e as covariáveis numa população inteira e os efeitos aleatórios especificam a contribuição de cada indivíduo dentro de uma população (<span class="citation">West, Welch, and Galecki (2014)</span>, <span class="citation">J. C. Pinheiro and Bates (2000)</span>, <span class="citation">Fitzmaurice et al. (2008)</span>, <span class="citation">Brown and Prescott (2014)</span>, <span class="citation">Demidenko (2013)</span>).</p>
+<p>Para ilustrar a forma de escrever um modelo não linear <span class="math inline">\(4PL\)</span> com efeitos mistos, vamos supor que estamos estudando a <span class="math inline">\(ET\)</span> acumulada em função de quatro níveis de água no solo, <span class="math inline">\(W_1\)</span>, <span class="math inline">\(W_2\)</span>, <span class="math inline">\(W_3\)</span> e <span class="math inline">\(W_4\)</span> (Poderia ser mais níveis de água no solo ou menos. Mas para exemplificar, estamos supondo quatro tratamentos.). Assumiremos que a variável resposta, a <span class="math inline">\(ET\)</span> acumulada, tem distribuição de probabilidade normal. Seja <span class="math inline">\(ET_{ij}\)</span> a <span class="math inline">\(ET\)</span> acumulada na ocasião <span class="math inline">\(j\)</span> para a planta <span class="math inline">\(i\)</span>, com <span class="math inline">\(j=1, 2, \cdots, n_i\)</span> e <span class="math inline">\(i=1,2, \cdots, N\)</span>, em que <span class="math inline">\(n_i\)</span> é o número de observações para a <span class="math inline">\(i\)</span>-ésima planta, e <span class="math inline">\(N\)</span> é o número total de plantas. O modelo não linear <span class="math inline">\(4PL\)</span> de efeitos mistos pode ser expresso como <span class="citation">Pereira et al. (2018)</span> e <span class="citation">Pereira et al. (2019)</span>:</p>
+<p><span class="math display" id="eq:2">\[\begin{equation} 
+ET_{ij} = \phi_{1i} + \frac{\phi_{2i} - \phi_{1i}}{1 + exp[(\phi_{3i} - t_j) / \phi_{4i} ]}  + \epsilon_{ij}
+\tag{5.1}
+\end{equation}\]</span></p>
+<p>sendo</p>
+<p><span class="math display">\[\begin{align}\label{eq:model_2}
+\boldsymbol{\phi}_i = \begin{bmatrix}
+\phi_{1i} \\
+\phi_{2i} \\
+\phi_{3i} \\
+\phi_{4i}
+\end{bmatrix} &amp;= \begin{bmatrix}
+\beta_1 + \gamma_1 x_{1i} + \delta_1 x_{2i} + \zeta_1 x_{3i} \\
+\beta_2 + \gamma_2 x_{1i} + \delta_2 x_{2i} + \zeta_2 x_{3i} \\
+\beta_3 + \gamma_3 x_{1i} + \delta_3 x_{2i} + \zeta_3 x_{3i} \\
+\beta_4 + \gamma_4 x_{1i} + \delta_4 x_{2i} + \zeta_4 x_{3i} \end{bmatrix} + \begin{bmatrix}
+b_{1i} \\
+b_{2i} \\
+b_{3i} \\
+b_{4i} 
+\end{bmatrix} \\
+&amp;= \boldsymbol{\beta} + \boldsymbol{\gamma} x_{1i} + \boldsymbol{\delta} x_{2i} + \boldsymbol{\zeta} x_{3i} + \boldsymbol{b}_i .
+\end{align}\]</span></p>
+<p>em que os parâmetros <span class="math inline">\(\boldsymbol{\beta}\)</span>, <span class="math inline">\(\boldsymbol{\gamma}\)</span>, <span class="math inline">\(\boldsymbol{\delta}\)</span>, $ $ representam os efeitos fixos e <span class="math inline">\(\boldsymbol{b}_i\)</span> os efeitos aleatórios do modelo. <span class="math inline">\(x_{ki}\)</span> com <span class="math inline">\(k=1,2,3\)</span> são coveriáveis indicadoras de tratamentos ou grupos e valem ou zero ou um. O parâmetro <span class="math inline">\(\boldsymbol{\beta}\)</span> é o nível de referência no estudo. Quando <span class="math inline">\(x_{1i} = x_{2i} = x_{3i} = 0\)</span>, então <span class="math inline">\(\boldsymbol{\phi}_i = \boldsymbol{\beta} + \boldsymbol{b_i}\)</span> e a <span class="math inline">\(i\)</span>-ésima planta pertence ao tratamento <span class="math inline">\(W_1\)</span>. Quando <span class="math inline">\(x_{1i} = 1\)</span> e <span class="math inline">\(x_{2i} = x_{3i} = 0\)</span>, <span class="math inline">\(\boldsymbol{\phi}_i = \boldsymbol{\beta} + \boldsymbol{\gamma} + \boldsymbol{b_i}\)</span> e a <span class="math inline">\(i\)</span>-ésima planta pertence ao tratamento <span class="math inline">\(W_2\)</span>. Se <span class="math inline">\(x_{2i} = 1\)</span> e <span class="math inline">\(x_{1i} = x_{3i} = 0\)</span>, <span class="math inline">\(\boldsymbol{\phi}_i = \boldsymbol{\beta} + \boldsymbol{\delta}+ \boldsymbol{b_i}\)</span> e a <span class="math inline">\(i\)</span>-ésima planta pertence ao tratamento <span class="math inline">\(W_3\)</span>. E por último, se <span class="math inline">\(x_{3i} = 1\)</span> e <span class="math inline">\(x_{1i} = x_{2i} = 0\)</span>, <span class="math inline">\(\boldsymbol{\phi}_i\)</span> = <span class="math inline">\(\boldsymbol{\beta}\)</span> + <span class="math inline">\(\boldsymbol{\zeta}\)</span> + <span class="math inline">\(\boldsymbol{b_i}\)</span> e a <span class="math inline">\(i\)</span>-ésima planta pertence ao tratamento <span class="math inline">\(W_4\)</span>. Os efeitos aleatórios <span class="math inline">\(\boldsymbol{b_i}\)</span> são considerados independentes entre plantas e se distribuem normalmente com média zero e matriz de covariância <span class="math inline">\(\boldsymbol{\Psi}\)</span> (<span class="math inline">\(\boldsymbol{b_i}\)</span> <span class="math inline">\(\sim\)</span> N(<span class="math inline">\(\boldsymbol{0}\)</span>,<span class="math inline">\(\boldsymbol{\Psi}\)</span>)). Neste caso a matriz de covariância é dada por:</p>
+<p><span class="math display">\[\begin{align}
+\boldsymbol{\Psi} = 
+\begin{bmatrix} 
+\sigma_1^2 &amp; \sigma_{12} &amp; \sigma_{13} &amp; \sigma_{14} \\ 
+\sigma_{12} &amp; \sigma_2^2 &amp; \sigma_{23} &amp; \sigma_{24} \\ 
+\sigma_{13} &amp; \sigma_{23} &amp; \sigma_{3}^2  &amp; \sigma_{34}  \\
+\sigma_{14} &amp; \sigma_{24} &amp; \sigma_{34} &amp; \sigma_{4}^2
+\end{bmatrix} 
+\end{align}\]</span></p>
+<p>em que <span class="math inline">\(\sigma_1^2\)</span>, <span class="math inline">\(\sigma_2^2\)</span>, <span class="math inline">\(\sigma_3^2\)</span> e <span class="math inline">\(\sigma_4^2\)</span> são as variâncias dos efeitos aleatórios <span class="math inline">\(b_{1i}\)</span>, <span class="math inline">\(b_{2i}\)</span>, <span class="math inline">\(b_{3i}\)</span> e <span class="math inline">\(b_{4i}\)</span> respectivamente, e <span class="math inline">\(\sigma_{12}\)</span>, <span class="math inline">\(\sigma_{13}\)</span>, <span class="math inline">\(\sigma_{14}\)</span>, <span class="math inline">\(\sigma_{23}\)</span>, <span class="math inline">\(\sigma_{24}\)</span> e <span class="math inline">\(\sigma_{34}\)</span> são as covariâncias entre eles. As variâncias dos efeitos aleatórios indicam como um parâmetro do modelo varia entre as unidades experimentais. Frequentemente, supõe-se que os erros dentro dos grupos <span class="math inline">\(\epsilon_{ij}\)</span> sejam independentes entre as observações de uma mesma unidade experimental e que sejam distribuídos da mesma forma entre as unidades experimentais. Para uma dada unidade amostral <span class="math inline">\(i\)</span> podemos escrever o erro <span class="math inline">\(\epsilon_{ij}\)</span> como o vetor indexado pelo tempo <span class="math inline">\(j\)</span>, ou seja,</p>
+<p><span class="math display">\[ \boldsymbol{\epsilon_{i}} = 
+\begin{bmatrix}
+\epsilon_{1i} \\
+\epsilon_{2i} \\
+\vdots \\
+\epsilon_{n_i i} 
+\end{bmatrix} \, ,
+ \]</span></p>
+<p>em que cada vetor <span class="math inline">\(\boldsymbol{\epsilon_i}\)</span> tem <span class="math inline">\(n_i\)</span> observações ao longo do tempo e supõe-se que seguem distribuição normal multivariada com média zero e matriz de covariância <span class="math inline">\(\boldsymbol{\Lambda_i}\)</span>, isto é,</p>
+<p><span class="math display" id="eq:erros">\[\begin{equation}
+\boldsymbol{\epsilon_{i}} \sim N(\boldsymbol{0},  \boldsymbol{\Lambda_i} ) \, . 
+\tag{5.2}
+\end{equation}\]</span></p>
+<p>
+Na maioria das vezes considera-se <span class="math inline">\(\boldsymbol{\Lambda_i}\)</span> = <span class="math inline">\(\sigma^2 \boldsymbol{I}\)</span>, sendo <span class="math inline">\(\sigma^2\)</span> uma variância constante para todos os <span class="math inline">\(j\)</span> tempos.</p>
+<p>Ao tratar dos modelos não lineares de efeitos mistos, devemos considerar a dificuldade técnica na estimação de seus parâmetros. Num modelo linear de efeitos mistos, as derivadas do logaritmo da função de verossimilhança possibilita, de maneira simples, a implementação de algoritmos, como o Newton-Raphson, para obtenção das estimativas dos parâmetros do modelo. Os modelos não lineares podem, porém, apresentar coeficientes aleatórios não lineares o que impossibilita explicitar diretamente os parâmetros a partir da função de verossimilhança. Métodos que dependem de aproximações lineares como por exemplo a aproximação de Taylor de primeira ordem podem ser usados para estimação do modelo.</p>
+<p>As análises de modelos não lineares de efeitos mistos podem ser, preferencialmente, realizadas pelo <em>software</em> <code>R</code> (<span class="citation">R Core Team (2018)</span>) com o pacote <code>nlme</code> (<span class="citation">J. Pinheiro et al. (2017)</span>), ou ainda, no <em>software</em> <span class="math inline">\(SAS\)</span> usando a PROC NLMIXED. Um excelente texto para aprender estas habilidades é <span class="citation">J. C. Pinheiro and Bates (2000)</span>.</p>
+</div>
+<div id="estrutura-de-covariância-de-boldsymbollambda_i" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Estrutura de covariância de <span class="math inline">\(\boldsymbol{\Lambda_i}\)</span></h1>
+<p>Os modelos de efeitos mistos permitem que as dependências entre as observações sejam especificadas nos parâmetros do modelo por meio dos efeitos aleatórios. Dito de outra maneira, as respostas das unidades experimentais de uma população tendem a seguir uma forma não linear de crescimento, porém, cada unidade experimental tem sua própria forma de crescer e o modelo de efeitos mistos permite a inclusão de coeficientes específicos para obter curvas de crescimento ajustadas que se alinham melhor com as respostas individuais destas unidades experimentais.</p>
+<p>Dessa forma, vemos que os modelos mistos permitem relevante flexibilidade para a especificação da estrutura de correlação dos efeitos aleatórios. Entretanto, a estrutura de dependência das observações dentro das unidades experimentais, <span class="math inline">\(\boldsymbol{\Lambda_i}\)</span>, até agora foram consideradas independentes, identicamente distribuídas com média zero e variância constante. Dependendo da escolha do modelo, as respostas de crescimento podem ser bem explicadas apenas com a inclusão de coeficientes específicos para as unidades experimentais. Porém, isto pode não ser suficiente e, neste caso, modelar a dependência residual dos dados se torna importante.</p>
+</div>
+<div id="referências" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Referências</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-brouwer1968simulation" class="csl-entry">
+Brouwer, R, and CT De Wit. 1968. <span>“A Simulation Model of Plant Growth with Special Attention to Root Growth and Its Consequences.”</span> IBS.
+</div>
+<div id="ref-brown2014applied" class="csl-entry">
+Brown, Helen, and Robin Prescott. 2014. <em>Applied Mixed Models in Medicine</em>. John Wiley &amp; Sons.
+</div>
+<div id="ref-demidenko2013mixed" class="csl-entry">
+Demidenko, Eugene. 2013. <em>Mixed Models: Theory and Applications with r</em>. John Wiley &amp; Sons.
+</div>
+<div id="ref-fitzmaurice2008longitudinal" class="csl-entry">
+Fitzmaurice, Garrett, Marie Davidian, Geert Verbeke, and Geert Molenberghs. 2008. <em>Longitudinal Data Analysis</em>. CRC press.
+</div>
+<div id="ref-hansen1994relation" class="csl-entry">
+Hansen, Lee D, Mark S Hopkin, David R Rank, Thimmappa S Anekonda, R William Breidenbach, and Richard S Criddle. 1994. <span>“The Relation Between Plant Growth and Respiration: A Thermodynamic Model.”</span> <em>Planta</em> 194 (1): 77–85.
+</div>
 <div id="ref-novak2012evapotranspiration" class="csl-entry">
 Novák, Viliam. 2012. <em>Evapotranspiration in the Soil-Plant-Atmosphere System</em>. Springer Science &amp; Business Media.
+</div>
+<div id="ref-paine2012fit" class="csl-entry">
+Paine, CE Timothy, Toby R Marthews, Deborah R Vogt, Drew Purves, Mark Rees, Andy Hector, and Lindsay A Turnbull. 2012. <span>“How to Fit Nonlinear Plant Growth Models and Calculate Growth Rates: An Update for Ecologists.”</span> <em>Methods in Ecology and Evolution</em> 3 (2): 245–56.
 </div>
 <div id="ref-stevia" class="csl-entry">
 Pereira, Omar Cléo Neves, Paulo Vitor Costa Pereira, Altair Bertonha, and Isolde Terezinha Santos Previdelli. 2018. <span>“Longitudinal Data Analysis of Stevia Rebaudiana Evapotranspiration According to Water Levels.”</span> <em>Revista Brasileira de Biometria</em> 36 (4): 791–801.
@@ -495,6 +582,18 @@ Pereira, Omar Cléo Neves, Tiago Peres da Silva Suguiura, Anaih Pastana Pereira,
 </div>
 <div id="ref-Pinheiro_livro" class="csl-entry">
 Pinheiro, José C, and Douglas M Bates. 2000. <em>Mixed-Effects Models in s and s-PLUS</em>. Springer Science &amp; Business Media.
+</div>
+<div id="ref-pinheiro2017package" class="csl-entry">
+Pinheiro, José, Douglas Bates, Saikat DebRoy, Deepayan Sarkar, Siem Heisterkamp, Bert Van Willigen, and R Maintainer. 2017. <span>“Package <span>‘Nlme’</span>.”</span> <em>Linear and Nonlinear Mixed Effects Models, Version</em>, 3–1.
+</div>
+<div id="ref-rcore" class="csl-entry">
+R Core Team. 2018. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div id="ref-west2014linear" class="csl-entry">
+West, Brady T, Kathleen B Welch, and Andrzej T Galecki. 2014. <em>Linear Mixed Models: A Practical Guide Using Statistical Software</em>. Chapman; Hall/CRC.
+</div>
+<div id="ref-yan2004dynamic" class="csl-entry">
+YAN, HONG-PING, Meng Zhen Kang, Philippe De Reffye, and Michael Dingkuhn. 2004. <span>“A Dynamic, Architectural Plant Model Simulating Resource-Dependent Growth.”</span> <em>Annals of Botany</em> 93 (5): 591–602.
 </div>
 </div>
 </div>

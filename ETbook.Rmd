@@ -233,7 +233,7 @@ Vemos também que, a partir de $\sim 20^o$ dia, o acumulo de água evapotranspir
 Outro ponto importante além da interpretabilidade dos parâmetros, é que o modelo não linear $4PL$ é mais parcimonioso quando comparado com o modelo linear. Em geral, os modelos não lineares utilizam um número de parâmetros menor que os lineares o que lhes confere maior parcimônia. Além disso, como podemos observar na Figura \@ref(fig:poli4pl), em regiões fora do intervalo dos dados, o modelo não linear fornece previsões mais confiáveis para a variável resposta (@Pinheiro_livro).
 
 
-```{r poli4pl,echo=F,results='hide', fig.cap="Perfil de resposta da $ET$ acumulada por uma única planta de alface ao longo de 23 dias consecutivos. O gráfico foi estendido até o $40^o$ dia para mostrar o comportamento de dois ajustes realizados para estes dados, um polinomial de quinto grau e o modelo não linear dado."}
+```{r poli4pl,echo=F,results='hide', fig.cap="Perfil de resposta da $ET$ acumulada por uma única planta de alface ao longo de 23 dias consecutivos. O gráfico foi estendido até o $40^o$ dia para mostrar o comportamento de dois ajustes realizados para estes dados, um polinomial de quinto grau e o modelo não linear."}
 unique(dados$plant)
 aa <- 102
 pp <- subset(dados, plant==aa)
@@ -267,6 +267,102 @@ legend(0.0,4,c("Fifth-degree polynomial regression", "4PL nonlinear regression")
 
 ```
 
+
+
+
+# Dados longitudinais
+
+Evidentemente, para fazer sentido, um experimento deve gerar dados a partir de mais de uma unidade experimental. No nosso caso, mais de uma planta deve ser observada ao longo do tempo, ou seja, devemos obter mais de um perfil de resposta. Estudos em que a variável resposta é observada repetidamente ao longo do tempo nas unidades experimentais são chamados de _estudos longitudinais_. Esse tipo de estudo é comum na agricultura quando se analisa crescimento ou decaimento da variável resposta ao longo do tempo (@alface, @stevia, @brouwer1968simulation, @yan2004dynamic, @paine2012fit, @hansen1994relation).
+
+Medidas realizadas em uma mesma unidade experimental muito provavelmente são correlacionadas. Suponha duas plantas em que a $ET$ é registrada diariamente. Se todas as covariáveis (adubação, cultivar, época de plantio, água no solo, etc.), forem mantidas constantes ao longo do tempo, plantas com altas taxas de $ET$ num determinado dia provavelmente também terão altas taxas de $ET$ no dia seguinte. O mesmo para plantas com taxas menores de $ET$. Se num dia a taxa é baixa, provavelmente no dia seguinte ela também será. Em outras palavras, medidas realizadas em uma mesma unidade experimental tenderão a ser similares ao longo do tempo. É a expressão individual de cada planta. 
+
+Além da correlação entre as observações realizadas dentro de uma mesma unidade experimental, deve-se ter em mente que, muito provavelmente, estas correlações são maiores para observações realizadas entre tempos vizinhos que aquelas realizadas entre tempos mais distantes.
+
+
+# Modelo de efeitos mistos
+
+Em um estudo longitudinal, o acompanhamento das unidades experimentais ao longo do tempo gera um conjunto de dados correlacionados. Como discutido, estas correlações dentro de uma mesma unidade experimental são mais fortes entre observações vizinhas. Quanto mais distantes temporalmente estão duas medidas, menor a correlação entre elas. Além disso, quando observamos as unidades experimentais que receberam as mesmas condições para o crescimento ao longo do tempo e que fazem parte de um mesmo tratamento, temos uma variabilidade entre elas que atribuímos ao acaso. Os efeitos de tratamento e as correlações e variabilidades em um estudo longitudinal indicam que precisamos de uma ferramenta que, além de flexível na forma de especificar um modelo matemático, também dê enfase à cada unidade experimental.
+
+Nos modelos de efeitos mistos, selecionamos uma função comum para descrever a variável resposta com relação as covariáveis estudadas, ou seja, as respostas das unidades experimentais em uma população. Mas além disso, coeficientes específicos desta função podem ser únicos para cada unidade experimental. Num modelo de efeitos mistos assumimos que as unidades experimentais de uma população tem a mesma forma funcional, mas os parâmetros da função podem variar entre as unidades. 
+
+O nome _modelo misto_ vem do fato deste modelo misturar _efeitos fixos_ e _efeitos aleatórios_. Um modelo de efeitos mistos é um modelo paramétrico que descreve as relações entre a variável resposta e as covariáveis (efeitos fixos) e que leva em consideração as respostas individuais de cada unidade experimental (efeitos aleatórios). Em outras palavras, os parâmetros de efeitos fixos descrevem as relações da variável resposta e as covariáveis numa população inteira e os efeitos aleatórios especificam a contribuição de cada indivíduo dentro de uma população (@west2014linear, @Pinheiro_livro, @fitzmaurice2008longitudinal, @brown2014applied, @demidenko2013mixed).
+
+Para ilustrar a forma de escrever um modelo não linear $4PL$ com efeitos mistos, vamos supor que estamos estudando a $ET$ acumulada em função de quatro níveis de água no solo, $W_1$, $W_2$, $W_3$ e $W_4$ (Poderia ser mais níveis de água no solo ou menos. Mas para exemplificar, estamos supondo quatro tratamentos.). Assumiremos que a variável resposta, a $ET$ acumulada, tem distribuição de probabilidade normal. Seja $ET_{ij}$ a $ET$ acumulada na ocasião $j$ para a planta $i$, com $j=1, 2, \cdots, n_i$ e $i=1,2, \cdots, N$, em que $n_i$ é o número de observações para a $i$-ésima planta, e $N$ é o número total de plantas. O modelo não linear $4PL$ de efeitos mistos pode ser expresso como @stevia e @alface:
+
+\begin{equation} 
+ET_{ij} = \phi_{1i} + \frac{\phi_{2i} - \phi_{1i}}{1 + exp[(\phi_{3i} - t_j) / \phi_{4i} ]}  + \epsilon_{ij}
+(\#eq:2)
+\end{equation}
+
+sendo
+
+\begin{align}\label{eq:model_2}
+\boldsymbol{\phi}_i = \begin{bmatrix}
+\phi_{1i} \\
+\phi_{2i} \\
+\phi_{3i} \\
+\phi_{4i}
+\end{bmatrix} &= \begin{bmatrix}
+\beta_1 + \gamma_1 x_{1i} + \delta_1 x_{2i} + \zeta_1 x_{3i} \\
+\beta_2 + \gamma_2 x_{1i} + \delta_2 x_{2i} + \zeta_2 x_{3i} \\
+\beta_3 + \gamma_3 x_{1i} + \delta_3 x_{2i} + \zeta_3 x_{3i} \\
+\beta_4 + \gamma_4 x_{1i} + \delta_4 x_{2i} + \zeta_4 x_{3i} \end{bmatrix} + \begin{bmatrix}
+b_{1i} \\
+b_{2i} \\
+b_{3i} \\
+b_{4i} 
+\end{bmatrix} \\
+&= \boldsymbol{\beta} + \boldsymbol{\gamma} x_{1i} + \boldsymbol{\delta} x_{2i} + \boldsymbol{\zeta} x_{3i} + \boldsymbol{b}_i .
+\end{align}
+
+
+
+
+
+em que os parâmetros $\boldsymbol{\beta}$, $\boldsymbol{\gamma}$, $\boldsymbol{\delta}$, $ \boldsymbol{\zeta}$ representam os efeitos fixos e $\boldsymbol{b}_i$ os efeitos aleatórios do modelo. $x_{ki}$ com $k=1,2,3$ são coveriáveis indicadoras de tratamentos ou grupos e valem ou zero ou um. O parâmetro $\boldsymbol{\beta}$ é o nível de referência no estudo. Quando $x_{1i} = x_{2i} = x_{3i} = 0$, então $\boldsymbol{\phi}_i = \boldsymbol{\beta} + \boldsymbol{b_i}$ e a $i$-ésima planta pertence ao tratamento $W_1$. Quando $x_{1i} = 1$ e $x_{2i} = x_{3i} = 0$, $\boldsymbol{\phi}_i = \boldsymbol{\beta} +  \boldsymbol{\gamma} + \boldsymbol{b_i}$ e a $i$-ésima planta pertence ao tratamento $W_2$. Se $x_{2i} = 1$ e $x_{1i} = x_{3i} = 0$, $\boldsymbol{\phi}_i = \boldsymbol{\beta} +  \boldsymbol{\delta}+ \boldsymbol{b_i}$ e a $i$-ésima planta pertence ao tratamento $W_3$. E por último, se $x_{3i} = 1$ e $x_{1i} = x_{2i} = 0$,  $\boldsymbol{\phi}_i$ = $\boldsymbol{\beta}$ + $\boldsymbol{\zeta}$ + $\boldsymbol{b_i}$ e a $i$-ésima planta pertence ao tratamento $W_4$. Os efeitos aleatórios $\boldsymbol{b_i}$ são considerados independentes entre plantas e se distribuem normalmente com média zero e matriz de covariância $\boldsymbol{\Psi}$ ($\boldsymbol{b_i}$ $\sim$ N($\boldsymbol{0}$,$\boldsymbol{\Psi}$)). Neste caso a matriz de covariância é dada por:
+
+\begin{align}
+\boldsymbol{\Psi} = 
+\begin{bmatrix} 
+\sigma_1^2 & \sigma_{12} & \sigma_{13} & \sigma_{14} \\ 
+\sigma_{12} & \sigma_2^2 & \sigma_{23} & \sigma_{24} \\ 
+\sigma_{13} & \sigma_{23} & \sigma_{3}^2  & \sigma_{34}  \\
+\sigma_{14} & \sigma_{24} & \sigma_{34} & \sigma_{4}^2
+\end{bmatrix} 
+\end{align}
+
+em que $\sigma_1^2$, $\sigma_2^2$, $\sigma_3^2$ e $\sigma_4^2$ são as variâncias dos efeitos aleatórios $b_{1i}$, $b_{2i}$, $b_{3i}$ e $b_{4i}$ respectivamente, e $\sigma_{12}$, $\sigma_{13}$, $\sigma_{14}$, $\sigma_{23}$, $\sigma_{24}$ e $\sigma_{34}$ são as covariâncias entre eles. As variâncias dos efeitos aleatórios indicam como um parâmetro do modelo varia entre as unidades experimentais. Frequentemente, supõe-se que os erros dentro dos grupos $\epsilon_{ij}$ sejam independentes entre as observações de uma mesma unidade experimental e que sejam distribuídos da mesma forma entre as unidades experimentais. Para uma dada unidade amostral $i$ podemos escrever o erro $\epsilon_{ij}$ como o vetor indexado pelo tempo $j$, ou seja,
+
+$$ \boldsymbol{\epsilon_{i}} = 
+\begin{bmatrix}
+\epsilon_{1i} \\
+\epsilon_{2i} \\
+\vdots \\
+\epsilon_{n_i i} 
+\end{bmatrix} \, ,
+ $$ 
+
+em que cada vetor $\boldsymbol{\epsilon_i}$ tem $n_i$ observações ao longo do tempo e supõe-se que seguem distribuição normal multivariada com média zero e matriz de covariância $\boldsymbol{\Lambda_i}$, isto é, 
+
+\begin{equation}
+\boldsymbol{\epsilon_{i}} \sim N(\boldsymbol{0},  \boldsymbol{\Lambda_i} ) \, . 
+(\#eq:erros)
+\end{equation}
+
+\noindent
+Na maioria das vezes considera-se $\boldsymbol{\Lambda_i}$ = $\sigma^2 \boldsymbol{I}$, sendo $\sigma^2$ uma variância constante para todos os $j$ tempos.
+
+Ao tratar dos modelos não lineares de efeitos mistos, devemos considerar a dificuldade técnica na estimação de seus parâmetros. Num modelo linear de efeitos mistos, as derivadas do logaritmo da função de verossimilhança possibilita, de maneira simples, a implementação de algoritmos, como o Newton-Raphson, para obtenção das estimativas dos parâmetros do modelo. Os modelos não lineares podem, porém, apresentar coeficientes aleatórios não lineares o que impossibilita explicitar diretamente os parâmetros a partir da função de verossimilhança. Métodos que dependem de aproximações lineares como por exemplo a aproximação de Taylor de primeira ordem podem ser usados para estimação do modelo. 
+
+As análises de modelos não lineares de efeitos mistos podem ser, preferencialmente, realizadas pelo _software_ `R` (@rcore) com o pacote `nlme` (@pinheiro2017package), ou ainda, no _software_ $SAS$ usando a PROC NLMIXED. Um excelente texto para aprender estas habilidades é @Pinheiro_livro.
+
+
+# Estrutura de covariância de $\boldsymbol{\Lambda_i}$ 
+
+
+Os modelos de efeitos mistos permitem que as dependências entre as observações sejam especificadas nos parâmetros do modelo por meio dos efeitos aleatórios. Dito de outra maneira, as respostas das unidades experimentais de uma população tendem a seguir uma forma não linear de crescimento, porém, cada unidade experimental tem sua própria forma de crescer e o modelo de efeitos mistos permite a inclusão de coeficientes específicos para obter curvas de crescimento ajustadas que se alinham melhor com as respostas individuais destas unidades experimentais. 
+
+Dessa forma, vemos que os modelos mistos permitem relevante flexibilidade para a especificação da estrutura de correlação dos efeitos aleatórios. Entretanto, a estrutura de dependência das observações dentro das unidades experimentais, $\boldsymbol{\Lambda_i}$, até agora foram consideradas independentes, identicamente distribuídas com média zero e variância constante. Dependendo da escolha do modelo, as respostas de crescimento podem ser bem explicadas apenas com a inclusão de coeficientes específicos para as unidades experimentais. Porém, isto pode não ser suficiente e, neste caso, modelar a dependência residual dos dados se torna importante.
 
 
 
