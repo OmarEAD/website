@@ -2,8 +2,10 @@
 title: "Modelando a evapotranspiração acumulada ao longo do tempo"
 author: "Omar Cléo Neves Pereira, Altair Bertonha"
 #date: "`r format(Sys.time(),'%d %B %Y')`"
-output: bookdown::html_document2
+output:
+  bookdown::html_document2
 bibliography: bibliografiaETbook.bib
+#biblio-style: authoryear
 ---
 
 <!-- \renewcommand{\figurename}{Figura} -->
@@ -27,6 +29,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       res=300,
                       dpi = 300,
                       cache = TRUE)
+
 ```
 
 ```{r library, results='hide', echo=FALSE}
@@ -132,9 +135,9 @@ Neste capítulo pretendemos dar uma ideia do uso dos modelos não lineares de ef
 
 # Perfil de resposta
 
-A Figura \@ref(fig:perfil1)) apresenta a $ET$ acumulada de uma única planta de alface ao longo de 23 dias consecutivos, sendo o primeiro dia equivalente ao $35^o$ dia após a semeadura. Durante este período, mediu-se a $ET$ diária da planta. Assim, o primeiro dia no gráfico traz o valor da $ET$ das últimas 24 horas, o segundo dia refere-se as últimas 48 horas e assim sucessivamente. A $ET$ diária deve ser entendida como a taxa com que a $ET$ acumulada ocorre ao longo do tempo. Em termos matemáticos, a $ET$ diária pode ser entendida como uma aproximação da derivada (taxa) da $ET$ acumulada com relação ao tempo.
+A Figura \@ref(fig:perfil1) apresenta a $ET$ acumulada de uma única planta de alface ao longo de 23 dias consecutivos, sendo o primeiro dia equivalente ao $35^o$ dia após a semeadura. Durante este período, mediu-se a $ET$ diária da planta. Assim, o primeiro dia no gráfico traz o valor da $ET$ das últimas 24 horas, o segundo dia refere-se as últimas 48 horas e assim sucessivamente. A $ET$ diária deve ser entendida como a taxa com que a $ET$ acumulada ocorre ao longo do tempo. Em termos matemáticos, a $ET$ diária pode ser entendida como uma aproximação da derivada (taxa) da $ET$ acumulada com relação ao tempo.
 
-```{r perfil1, fig.cap="Name", echo=FALSE, results='hide'}
+```{r perfil1, fig.cap="Perfil de resposta da $ET$ acumulada por uma única planta de alface ao longo de 23 dias consecutivos.", echo=FALSE, results='hide'}
 unique(dados$plant)
 aa <- 102
 pp <- subset(dados, plant==aa)
@@ -149,7 +152,78 @@ plot(acum ~ day,ppq[1:23,], xlab = "Time (days)", ylab = 'Accumulated ET (kg)',p
 ```
 
 
+Queremos descrever o comportamento da nossa variável de interesse ou _variável resposta_, a $ET$ acumulada ao longo do tempo para plantas de ciclo anual. Como a quantidade de água evapotranspirada num dia é somada à $ET$ acumulada dos dias anteriores, seus valores ao longo do tempo ou são iguais (caso a $ET$ seja nula ao longo de um dia todo) ou maiores que o valor imediatamente anterior. 
 
+Observações da variável resposta em mais de um momento em uma mesma unidade experimental, constitui o que chamamos de _perfil de resposta_. Portanto, a Figura \@ref(fig:perfil1) mostra o perfil de resposta de uma planta de alface ao longo do tempo. Este perfil, aparentemente, apresenta o formato de um $S$ ($S$-shaped). 
+
+Nos primeiros dias de observação (Figura \@ref(fig:perfil1)), a $ET$ acumulada é pequena pois a planta está no início do crescimento. Conforme os dias passam, os valores da $ET$ diária aumentam sucessivamente até aproximadamente o $20^o$ dia. Durante este período a planta está em pleno crescimento, aumentando o consumo de água dia após dia. Após $\sim 20^o$ dia, a $ET$ diária, ou seja, a taxa de variação da $ET$ acumulada, começa a diminuir. Isto faz com que a $ET$ acumulada, que vinha crescendo exponencialmente, passe a ter um crescimento menos vigoroso e, portanto, tendendo lentamente a um valor máximo.
+
+
+# Um modelo para dados de crescimento
+
+Para descrever o comportamento da $ET$ acumulada ao longo do tempo precisamos de uma função que também tenha um formato de $S$ ($S$-shaped function). Além disso, espera-se que o modelo escolhido seja interpretável e parcimonioso nos parâmetros. Uma opção empírica é o modelo polinomial, que é linear nos parâmetros. Este tipo de modelo pode promover bons ajustes estatísticos e ser computacionalmente mais simples, mas não agregam nenhuma consideração teórica sobre os mecanismos físico e/ou biológico que geraram os dados. Por outro lado, um modelo não linear está associado à algum conhecimento teórico a respeito do fenômeno que se estuda. Além da interpretabilidade, estes modelos usam poucos parâmetros em comparação com os modelos lineares, configurando assim, uma descrição mais parcimoniosa dos dados (@Pinheiro_livro).
+
+Tratando-se da $ET$ acumulada ao longo do tempo, temos alguns aspectos físicos e biológicos que podemos pontuar para a escolha de um modelo. Uma função que descreva esta variável resposta precisa de parâmetros que a delimite entre um valor mínimo e um máximo. Colocado de outra forma, o valor mínimo deve ser muito próximo de zero e indicar o início do crescimento da planta, e o máximo deve ser um valor para o qual a $ET$ acumulada tende assintoticamente quando o final do ciclo de vida se aproxima. Outro aspecto a ser destacado é que o modelo deve apresentar um ponto de inflexão, que indica o dia em que a taxa da $ET$ acumulada ($ET$ diária) atinge um máximo.
+
+
+Há várias funções capazes de caracterizar a $ET$ acumulada ao longo do tempo da forma que acabamos de descrever. A título de exemplo, usaremos a função logística de quatro parâmetros ($4PL$) para descrever nossa variável resposta. Esta função é muito usada para modelar dados de crescimento ou decaimento da variável resposta ao longo do tempo. Na literatura encontra-se algumas parametrizações para esta função, mas a que vamos usar aqui é a dada por @Pinheiro_livro:
+	
+\begin{equation} 
+ET(t) = \phi_1 + \frac{\phi_2 - \phi_1}{1 + exp[(\phi_3 - t) / \phi_4 ]}  
+(\#eq:1)
+\end{equation}
+
+em que $ET(t)$ é a $ET$ acumulada em função do tempo e $\phi_{1-4}$ são os parâmetros do modelo \@ref(eq:1). $\phi_1$ é a assintota horizontal inferior que dá o valor da $ET$ acumulada quando $t \to - \infty$. Biologicamente, este parâmetro não tem uma interpretação consistente, mas é importante no ajuste pois assegura que a $ET$ acumulada nos tempos próximos a zero sejam muito pequenas (@alface, @stevia). $\phi_2$ é a assintota horizontal superior e dá o valor da $ET$ acumulada quando $t \to \infty$. Este parâmetro pode ser interpretado como uma estimativa de máxima $ET$ acumulada que as plantas podem atingir ao final do seu ciclo de vida. $\phi_3$ é o ponto de inflexão da curva e indica o dia (tempo) em que a $ET$ diária atinge um máximo. O tempo correspondente a $\phi_3$ resulta numa $ET$ acumulada entre $\phi_1$ e $\phi_2$. Mais precisamente, a $ET$ acumulada até o tempo $\phi_3$ é o valor médio das duas assíntotas, ou seja, ($\phi_1$ + $\phi_2$)/2. $\phi_4$ é o parâmetro de escala. O dia (tempo) correspondente a $\phi_3$ + $\phi_4$ dá $\sim$ 0.75 ($\phi_2$ - $\phi_1$) da $ET$ acumulada. Portanto, $\phi_4$ indica o quão rapidamente a $ET$ acumulada sai das proximidades de $\phi_1$ até valores próximos a $\phi_2$. Quanto maior $\phi_4$, mais lentamente isto ocorre.
+
+```{r parametros, echo=F, fig.cap="Representação gráfica dos parâmetros da $4PL$ . Figura adaptada de @Pinheiro_livro."}
+
+phi1 <- 1
+phi2 <- 2
+phi3 <- 3
+phi4 <- 1
+lix  <- -0.5
+lsx  <- 6
+liy  <- 0.6
+lsy  <- 2.3
+x1 <- -1
+y1 <- 0.7
+x2 <- 7
+y2 <- 0.7
+par(mar=c(0,0,0,0), mgp=c(1.5,0.5,0), las=0, cex= 1.2)
+curve(phi1 + (phi2-phi1)/(1+exp((phi3-x)/phi4)), from = lix, to = lsx, ylim=c(liy,lsy),
+      xlim=c(-1.05,7),xlab="", ylab="",xaxt='n', yaxt='n',bty ="n")
+arrows(x1,y1,x2,y2,length = 0.15)
+arrows(0,0.6,0,2.3,length = 0.15)
+text(6.60,0.65, paste("x", sep = ''), pos = 4, cex = 1.2)
+text(-0.3,2.19, paste("y", sep = ''), pos = 4, cex = 1.2)
+#
+lines(c(x1,x2),c(y1+0.25,y1+0.25), lty = 2)
+lines(c(x1,x2),c(2.04,2.04), lty = 2)
+lines(c(3,3),c(y1,1.7),lty=2)
+#phi1 + ((phi2-phi1)/(1+exp(-1)))  para obter o valor da funcao:  1.731059
+lines(c(4,4),c(1.3, 1.731059),lty=2)
+#
+arrows(-0.3, 0.88,-0.3,y1+0.25,length = 0.08)
+arrows(-0.3, 0.77,-0.3,0.7,length = 0.08)
+text(-0.57,0.83, expression(phi[1]), pos = 4, cex = 1.2)
+#
+arrows(-0.8, 1.5,-0.8,2.04,length = 0.08)
+arrows(-0.8, 1.4,-0.8,0.7,length = 0.08)
+text(-1.1,1.47, expression(phi[2]), pos = 4, cex = 1.2)
+#
+text(2.6,1.64, expression(phi[3]), pos = 4, cex = 1.2)
+#
+arrows(3.4, 1.35,3,1.35,length = 0.08)
+arrows(3.6, 1.35,4,1.35,length = 0.08)
+text(3.3,1.31, expression(phi[4]), pos = 4, cex = 1.2)
+#
+
+```
+
+
+Para compreender melhor o que dissemos, vamos observar a Figura \ref{fig:poli4pl}. Ela traz os dados observados e vistos na Figura \ref{fig:perfil1} representados pelos pontos pretos, e outras duas curvas representando dois diferentes ajustes realizados a partir destes dados. O primeiro ajuste é um modelo polinomial de grau cinco (fifth-degree polynomial) e o outro é dado pela Equação (\ref{eq:1}). O gráfico desta Figura foi estendido até o $40^o$ dia a fim de mostrar o comportamento destes ajustes ao longo do tempo. 
+
+Tanto o modelo polinomial de quinto grau quanto o modelo não linear $4PL$ se ajustaram muito bem aos dados. Entretanto, o modelo polinomial vai a zero após do $30^o$ dia, o que fisicamente é impossível. Além disso, este modelo apresenta cinco parâmetros sem qualquer explicação física e/ou biológica para o fenômeno que estamos estudando. O modelo não linear $4PL$ é uma função sempre crescente, sendo compatível com uma variável que é acumulada ao longo do tempo. Porém, este ajuste não permite o crescimento infinito da $ET$ acumulada quando o tempo se torna cada vez maior. Ele limita a $ET$ acumulada num valor que pode ser entendido como uma quantidade máxima que esta planta pode evapotranspirar ao longo do seu ciclo de vida. 
 
 
 

@@ -1,6 +1,6 @@
 name: "OmarEAD"
 output:
-  html_document:
+  bookdown::html_document2:
     toc: true
     toc_float:
       collapsed: false
