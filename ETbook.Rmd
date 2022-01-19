@@ -175,7 +175,7 @@ ET(t) = \phi_1 + \frac{\phi_2 - \phi_1}{1 + exp[(\phi_3 - t) / \phi_4 ]}
 
 em que $ET(t)$ é a $ET$ acumulada em função do tempo e $\phi_{1-4}$ são os parâmetros do modelo \@ref(eq:1). $\phi_1$ é a assintota horizontal inferior que dá o valor da $ET$ acumulada quando $t \to - \infty$. Biologicamente, este parâmetro não tem uma interpretação consistente, mas é importante no ajuste pois assegura que a $ET$ acumulada nos tempos próximos a zero sejam muito pequenas (@alface, @stevia). $\phi_2$ é a assintota horizontal superior e dá o valor da $ET$ acumulada quando $t \to \infty$. Este parâmetro pode ser interpretado como uma estimativa de máxima $ET$ acumulada que as plantas podem atingir ao final do seu ciclo de vida. $\phi_3$ é o ponto de inflexão da curva e indica o dia (tempo) em que a $ET$ diária atinge um máximo. O tempo correspondente a $\phi_3$ resulta numa $ET$ acumulada entre $\phi_1$ e $\phi_2$. Mais precisamente, a $ET$ acumulada até o tempo $\phi_3$ é o valor médio das duas assíntotas, ou seja, ($\phi_1$ + $\phi_2$)/2. $\phi_4$ é o parâmetro de escala. O dia (tempo) correspondente a $\phi_3$ + $\phi_4$ dá $\sim$ 0.75 ($\phi_2$ - $\phi_1$) da $ET$ acumulada. Portanto, $\phi_4$ indica o quão rapidamente a $ET$ acumulada sai das proximidades de $\phi_1$ até valores próximos a $\phi_2$. Quanto maior $\phi_4$, mais lentamente isto ocorre.
 
-```{r parametros, echo=F, fig.cap="Representação gráfica dos parâmetros da $4PL$ . Figura adaptada de @Pinheiro_livro."}
+```{r parametros, echo=F, fig.cap="Representação gráfica dos parâmetros da $4PL$. Figura adaptada de @Pinheiro_livro."}
 
 phi1 <- 1
 phi2 <- 2
@@ -221,9 +221,52 @@ text(3.3,1.31, expression(phi[4]), pos = 4, cex = 1.2)
 ```
 
 
-Para compreender melhor o que dissemos, vamos observar a Figura \ref{fig:poli4pl}. Ela traz os dados observados e vistos na Figura \ref{fig:perfil1} representados pelos pontos pretos, e outras duas curvas representando dois diferentes ajustes realizados a partir destes dados. O primeiro ajuste é um modelo polinomial de grau cinco (fifth-degree polynomial) e o outro é dado pela Equação (\ref{eq:1}). O gráfico desta Figura foi estendido até o $40^o$ dia a fim de mostrar o comportamento destes ajustes ao longo do tempo. 
+Para compreender melhor o que dissemos, vamos observar a Figura \@ref(fig:poli4pl). Ela traz os dados observados e vistos na Figura \@ref(fig:perfil1) representados pelos pontos pretos, e outras duas curvas representando dois diferentes ajustes realizados a partir destes dados. O primeiro ajuste é um modelo polinomial de grau cinco (fifth-degree polynomial) e o outro é dado pela Equação \@ref(eq:1). O gráfico desta Figura foi estendido até o $40^o$ dia a fim de mostrar o comportamento destes ajustes ao longo do tempo. 
 
 Tanto o modelo polinomial de quinto grau quanto o modelo não linear $4PL$ se ajustaram muito bem aos dados. Entretanto, o modelo polinomial vai a zero após do $30^o$ dia, o que fisicamente é impossível. Além disso, este modelo apresenta cinco parâmetros sem qualquer explicação física e/ou biológica para o fenômeno que estamos estudando. O modelo não linear $4PL$ é uma função sempre crescente, sendo compatível com uma variável que é acumulada ao longo do tempo. Porém, este ajuste não permite o crescimento infinito da $ET$ acumulada quando o tempo se torna cada vez maior. Ele limita a $ET$ acumulada num valor que pode ser entendido como uma quantidade máxima que esta planta pode evapotranspirar ao longo do seu ciclo de vida. 
+
+
+
+
+Vemos também que, a partir de $\sim 20^o$ dia, o acumulo de água evapotranspirada é cada vez menor. Isto indica que este dia é o ponto de inflexão do modelo não linear $4PL$. Para dar um exemplo de uma aplicação prática do ponto de inflexão do modelo no manejo de plantas de ciclo anual, suponha que o produto comercial de uma determinada planta cultivada seja suas folhas. Sabe-se que as variáveis de produção apresentam uma correlação positiva com a quantidade total de água evapotranspirada ao longo do ciclo de vida da planta. Isto é, quanto maior o total de água evapotranspirada, maiores serão os valores das variáveis de produção (@alface, @stevia). Dessa forma, o ponto de inflexão pode indicar a proximidade do dia da colheita. A partir deste ponto as taxas de $ET$ diminuem e, portanto, as plantas passam a acumular menores quantidades de matéria fresca ao longo do tempo. Assim, este ponto pode ser considerado quando se pensa em termos da viabilidade econômica da cultura.
+
+Outro ponto importante além da interpretabilidade dos parâmetros, é que o modelo não linear $4PL$ é mais parcimonioso quando comparado com o modelo linear. Em geral, os modelos não lineares utilizam um número de parâmetros menor que os lineares o que lhes confere maior parcimônia. Além disso, como podemos observar na Figura \@ref(fig:poli4pl), em regiões fora do intervalo dos dados, o modelo não linear fornece previsões mais confiáveis para a variável resposta (@Pinheiro_livro).
+
+
+```{r poli4pl,echo=F,results='hide', fig.cap="Perfil de resposta da $ET$ acumulada por uma única planta de alface ao longo de 23 dias consecutivos. O gráfico foi estendido até o $40^o$ dia para mostrar o comportamento de dois ajustes realizados para estes dados, um polinomial de quinto grau e o modelo não linear dado."}
+unique(dados$plant)
+aa <- 102
+pp <- subset(dados, plant==aa)
+pp$evapotr/1000
+#
+pplot <- augPred(modelo)
+ppq <- subset(pplot,.groups==aa)
+#modelo quadratico
+fit11 <- lm(acum~day+I(day^2)+I(day^3)+I(day^4)+I(day^5), pp)
+fit12 <- lm(acum~poly(day,5),pp)
+summary(fit11)
+summary(fit12)
+cc <- summary(fit11)$coef[,1]
+#
+df <- data.frame(day=seq(0,60,1))
+par(mfrow=c(1,1))
+par(mar=c(2.6,2.5,0.5,0.5), mgp=c(1.5,0.5,0), las=0, cex= 1.2)
+plot(acum ~ day,ppq[1:23,], xlab = "Time (days)", ylab = 'Accumulated ET (kg)',pch = 16,
+     xlim=c(0,40), ylim=c(0,4))
+points(0:60, predict(fit11,df),type = 'l',lty=2)
+#
+aa <- 102
+pp <- subset(dados, plant==aa)
+pp$evapotr/1000
+#
+pplot <- augPred(modelo,maximum = 60)
+ppq <- subset(pplot,.groups==aa)
+lines(ppq[24:dim(ppq)[1],3]~ppq[24:dim(ppq)[1],1],type = 'l',lty=6)
+legend(0.0,4,c("Fifth-degree polynomial regression", "4PL nonlinear regression"), lty=c(2,6), bty='n')
+
+
+```
+
 
 
 
