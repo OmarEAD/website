@@ -3,10 +3,12 @@ title: "OMAR CLÉO NEVES PEREIRA"
 #author: "Seja bem-vindo à minha página pessoal"
 #date: "`r format(Sys.time(),'%p %d %B %Y')`"
 #date: "`r format(Sys.time(),'%I:%M %p %d %B %Y')`"
+#output: 
+#  html_document:
+#    css: style.css
 output: 
-  html_document:
-    css: style.css
-  
+  bookdown::html_document2:
+    css: style.css  
 #output:
 #  bookdown::pdf_book:
 #    base_format: rticles::plos_article

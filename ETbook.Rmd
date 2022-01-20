@@ -2,8 +2,11 @@
 title: "Modelando a evapotranspiração acumulada ao longo do tempo[^1]"
 author: "Omar Cléo Neves Pereira, Altair Bertonha"
 #date: "`r format(Sys.time(),'%d %B %Y')`"
-output:
-  bookdown::html_document2
+#output:
+#  bookdown::html_document2
+output: 
+  bookdown::html_document2:
+    css: style.css  
 bibliography: bibliografiaETbook.bib
 #biblio-style: authoryear
 ---
