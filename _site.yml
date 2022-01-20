@@ -27,7 +27,7 @@ navbar:
           href: images.html
         - text: "Embed a webpage"
           href: embed.html
-    - text: "Publish and Update"      
+    - text: "Mixed"      
       menu: 
         - text: "Publishing"
           href: publishing.html
