@@ -39,89 +39,6 @@ library(tidyverse)
 library(ggplot2)
 ```
 
-```{r dados, echo=F, results='hide'}
-#rm(list=ls(all=TRUE))
-library(nlme)
-library(lattice)
-library(xtable)
-require(PMCMR)
-#setwd("C:/Users/UEM/Dropbox/Evapotr/Stevia")
-setwd('C:/Users/perei/Dropbox/LivroEvapotranspiração/ArquivosAlface')
-#setwd("C:/Users/UEM/Dropbox/Evapotranspiração/Alface/Alface2016")
-dados <- read.table("AlfaceTotal.txt",header=T); dados[1:28,]
-dados <- groupedData(acum~day|plant, dados)
-
-##########################################################
-###############    ARRUMANDO OS DADOS     ################
-###############     SELECIONANDO N=0      ################
-##########################################################
-
-dados<-subset(dados, dados$treat %in% c('T1', "T6", "T11", "T16")) 
-levels(dados$treat)
-#levels(dados$treat)<-c('W1','W2','W3','W4')
-dados$treat <- factor(ifelse(dados$treat=="T1",'W1',
-                      ifelse(dados$treat=="T6", 'W2',
-                             ifelse(dados$treat=="T11", 'W3', 'W4'))))
-dados <- na.omit(dados)
-unique(dados$plant)
-anyNA(dados)
-colnames(dados)[8]<-'rain'
-
-# 33 plantas; 23 dias; 4 tratamentos (agua)
-str(dados)
-
-# Observações: no dia 31/03, os valores meteorológicos são:
-# 31/03  classA: 407; wetbulb: 24; temp:	27,4; rain:	0
-
-length(unique(subset(dados,treat=='W1')$plant))
-length(unique(subset(dados,treat=='W2')$plant))
-length(unique(subset(dados,treat=='W3')$plant))
-length(unique(subset(dados,treat=='W4')$plant))
-#
-
-```
-
-```{r modelo, echo=F, results='hide'}
-
-dd3 <- dados[,10]/1000
-dados$acum <- dd3
-head(dados)
-# A: assíntota a esquerda
-# B: assíntota a direita
-# C: ponto de inflexão
-# D: parâmetro de escala
-#
-modelo.nls <- nls( acum ~ SSfpl(day, A, B, C, D), data = dados )
-modelo.lis <- nlsList( acum ~ SSfpl(day, A, B, C, D), data = dados )
-m1 <- nlme(modelo.lis, random=A + B + C + D ~ 1)
-m1.1 <- update(m1, weights = varPower())
-#
-zeros_2 <- rep(0, 2)
-zeros_3 <- rep(0, 3)
-zeros_4 <- rep(0, 4)
-fixos <- fixef( m1.1)
-# A: assíntota a esquerda
-# B: assíntota a direita
-# C: ponto de inflexão
-# D: parâmetro de escala
-#
-
-mm44.1 <- nlme(acum ~ SSfpl(day, A, B, C, D),
-               data=dados,
-               fixed = list(A~treat, B~treat, C~treat, D~treat),
-               random =   A + B + C   ~ 1,
-               start = c(fixos[1],0,0,0,  fixos[2],0,0,0, fixos[3],0,0,0, fixos[4],0,0,0),
-               weights = varPower()
-               #weights = varPower(0.5,form = ~ fitted(.) | treat)
-)
-#
-summary(mm44.1)
-modelo <- mm44.1
-
-```
-
-
-
 [^1]: Este artigo é um capítulo do livro _Water Chemistry_. __Modeling Accumulated Evapotranspiration Over Time__ by _Omar Cléo Neves Pereira_ and _Altair Bertonha_. Você pode obter o artigo original clicando [aqui](https://www.intechopen.com/chapters/67735)
 
 > O conhecimento da evapotranspiração acumulada por plantas anuais ao longo do seu ciclo de vida pode ser uma ferramenta importante na tomada de decisão quando se considera a viabilidade econômica da cultura. Este conhecimento pode ajudar a entender o quanto as plantas, submetidas a um manejo específico, podem evapotranspirar ao final do ciclo. Esta informação auxilia na estimativa da quantidade de uma variável de produção, por exemplo a massa de matéria fresca, além de indicar um período mais interessante para a realização da sua colheita. O objetivo deste capítulo é, a partir da estimativa da evapotranspiração diária ao longo do ciclo, modelar a evapotranspiração acumulada durante um período da vida de plantas anuais. Para fazer isto, precisamos entender que o comportamento da variável resposta, ou seja, a evapotranspiração acumulada, ao longo do tempo não é linear, e ter em mente que as varías observações realizadas em uma mesma unidade experimental apresentam correlações e que estas correlações são mais intensas quanto mais próximas temporalmente são as medidas. Esta compreensão nos remete a análise de dados longitudinais a partir dos modelos não lineares de efeitos mistos.
@@ -140,20 +57,9 @@ Neste capítulo pretendemos dar uma ideia do uso dos modelos não lineares de ef
 
 A Figura \@ref(fig:perfil1) apresenta a $ET$ acumulada de uma única planta de alface ao longo de 23 dias consecutivos, sendo o primeiro dia equivalente ao $35^o$ dia após a semeadura. Durante este período, mediu-se a $ET$ diária da planta. Assim, o primeiro dia no gráfico traz o valor da $ET$ das últimas 24 horas, o segundo dia refere-se as últimas 48 horas e assim sucessivamente. A $ET$ diária deve ser entendida como a taxa com que a $ET$ acumulada ocorre ao longo do tempo. Em termos matemáticos, a $ET$ diária pode ser entendida como uma aproximação da derivada (taxa) da $ET$ acumulada com relação ao tempo.
 
-```{r perfil1, fig.cap="Perfil de resposta da $ET$ acumulada por uma única planta de alface ao longo de 23 dias consecutivos.", echo=FALSE, results='hide'}
-unique(dados$plant)
-aa <- 102
-pp <- subset(dados, plant==aa)
-pp$evapotr/1000
-#
-pplot <- augPred(modelo)
-ppq <- subset(pplot,.groups==aa)
-par(mfrow=c(1,1))
-par(mar=c(2.6,2.5,0.5,0.5), mgp=c(1.5,0.5,0), las=0, cex= 1.2)
-plot(acum ~ day,ppq[1:23,], xlab = "Time (days)", ylab = 'Accumulated ET (kg)',pch = 16)
-
+```{r perfil1, echo=FALSE, fig.align = 'center', fig.cap = "Perfil de resposta da $ET$ acumulada por uma única planta de alface ao longo de 23 dias consecutivos."}
+knitr::include_graphics(here::here("FigurasETbook2", "perfil1-1.png"))
 ```
-
 
 Queremos descrever o comportamento da nossa variável de interesse ou _variável resposta_, a $ET$ acumulada ao longo do tempo para plantas de ciclo anual. Como a quantidade de água evapotranspirada num dia é somada à $ET$ acumulada dos dias anteriores, seus valores ao longo do tempo ou são iguais (caso a $ET$ seja nula ao longo de um dia todo) ou maiores que o valor imediatamente anterior. 
 
@@ -178,49 +84,8 @@ ET(t) = \phi_1 + \frac{\phi_2 - \phi_1}{1 + exp[(\phi_3 - t) / \phi_4 ]}
 
 em que $ET(t)$ é a $ET$ acumulada em função do tempo e $\phi_{1-4}$ são os parâmetros do modelo \@ref(eq:1). $\phi_1$ é a assintota horizontal inferior que dá o valor da $ET$ acumulada quando $t \to - \infty$. Biologicamente, este parâmetro não tem uma interpretação consistente, mas é importante no ajuste pois assegura que a $ET$ acumulada nos tempos próximos a zero sejam muito pequenas (@alface, @stevia). $\phi_2$ é a assintota horizontal superior e dá o valor da $ET$ acumulada quando $t \to \infty$. Este parâmetro pode ser interpretado como uma estimativa de máxima $ET$ acumulada que as plantas podem atingir ao final do seu ciclo de vida. $\phi_3$ é o ponto de inflexão da curva e indica o dia (tempo) em que a $ET$ diária atinge um máximo. O tempo correspondente a $\phi_3$ resulta numa $ET$ acumulada entre $\phi_1$ e $\phi_2$. Mais precisamente, a $ET$ acumulada até o tempo $\phi_3$ é o valor médio das duas assíntotas, ou seja, ($\phi_1$ + $\phi_2$)/2. $\phi_4$ é o parâmetro de escala. O dia (tempo) correspondente a $\phi_3$ + $\phi_4$ dá $\sim$ 0.75 ($\phi_2$ - $\phi_1$) da $ET$ acumulada. Portanto, $\phi_4$ indica o quão rapidamente a $ET$ acumulada sai das proximidades de $\phi_1$ até valores próximos a $\phi_2$. Quanto maior $\phi_4$, mais lentamente isto ocorre.
 
-```{r parametros, echo=F, fig.cap="Representação gráfica dos parâmetros da $4PL$. Figura adaptada de @Pinheiro_livro."}
-
-phi1 <- 1
-phi2 <- 2
-phi3 <- 3
-phi4 <- 1
-lix  <- -0.5
-lsx  <- 6
-liy  <- 0.6
-lsy  <- 2.3
-x1 <- -1
-y1 <- 0.7
-x2 <- 7
-y2 <- 0.7
-par(mar=c(0,0,0,0), mgp=c(1.5,0.5,0), las=0, cex= 1.2)
-curve(phi1 + (phi2-phi1)/(1+exp((phi3-x)/phi4)), from = lix, to = lsx, ylim=c(liy,lsy),
-      xlim=c(-1.05,7),xlab="", ylab="",xaxt='n', yaxt='n',bty ="n")
-arrows(x1,y1,x2,y2,length = 0.15)
-arrows(0,0.6,0,2.3,length = 0.15)
-text(6.60,0.65, paste("x", sep = ''), pos = 4, cex = 1.2)
-text(-0.3,2.19, paste("y", sep = ''), pos = 4, cex = 1.2)
-#
-lines(c(x1,x2),c(y1+0.25,y1+0.25), lty = 2)
-lines(c(x1,x2),c(2.04,2.04), lty = 2)
-lines(c(3,3),c(y1,1.7),lty=2)
-#phi1 + ((phi2-phi1)/(1+exp(-1)))  para obter o valor da funcao:  1.731059
-lines(c(4,4),c(1.3, 1.731059),lty=2)
-#
-arrows(-0.3, 0.88,-0.3,y1+0.25,length = 0.08)
-arrows(-0.3, 0.77,-0.3,0.7,length = 0.08)
-text(-0.57,0.83, expression(phi[1]), pos = 4, cex = 1.2)
-#
-arrows(-0.8, 1.5,-0.8,2.04,length = 0.08)
-arrows(-0.8, 1.4,-0.8,0.7,length = 0.08)
-text(-1.1,1.47, expression(phi[2]), pos = 4, cex = 1.2)
-#
-text(2.6,1.64, expression(phi[3]), pos = 4, cex = 1.2)
-#
-arrows(3.4, 1.35,3,1.35,length = 0.08)
-arrows(3.6, 1.35,4,1.35,length = 0.08)
-text(3.3,1.31, expression(phi[4]), pos = 4, cex = 1.2)
-#
-
+```{r parametros, echo=FALSE, fig.align = 'center', fig.cap = "Representação gráfica dos parâmetros da $4PL$. Figura adaptada de @Pinheiro_livro."}
+knitr::include_graphics(here::here("FigurasETbook2", "parametros-1.png"))
 ```
 
 
@@ -228,49 +93,13 @@ Para compreender melhor o que dissemos, vamos observar a Figura \@ref(fig:poli4p
 
 Tanto o modelo polinomial de quinto grau quanto o modelo não linear $4PL$ se ajustaram muito bem aos dados. Entretanto, o modelo polinomial vai a zero após do $30^o$ dia, o que fisicamente é impossível. Além disso, este modelo apresenta cinco parâmetros sem qualquer explicação física e/ou biológica para o fenômeno que estamos estudando. O modelo não linear $4PL$ é uma função sempre crescente, sendo compatível com uma variável que é acumulada ao longo do tempo. Porém, este ajuste não permite o crescimento infinito da $ET$ acumulada quando o tempo se torna cada vez maior. Ele limita a $ET$ acumulada num valor que pode ser entendido como uma quantidade máxima que esta planta pode evapotranspirar ao longo do seu ciclo de vida. 
 
-
-
-
 Vemos também que, a partir de $\sim 20^o$ dia, o acumulo de água evapotranspirada é cada vez menor. Isto indica que este dia é o ponto de inflexão do modelo não linear $4PL$. Para dar um exemplo de uma aplicação prática do ponto de inflexão do modelo no manejo de plantas de ciclo anual, suponha que o produto comercial de uma determinada planta cultivada seja suas folhas. Sabe-se que as variáveis de produção apresentam uma correlação positiva com a quantidade total de água evapotranspirada ao longo do ciclo de vida da planta. Isto é, quanto maior o total de água evapotranspirada, maiores serão os valores das variáveis de produção (@alface, @stevia). Dessa forma, o ponto de inflexão pode indicar a proximidade do dia da colheita. A partir deste ponto as taxas de $ET$ diminuem e, portanto, as plantas passam a acumular menores quantidades de matéria fresca ao longo do tempo. Assim, este ponto pode ser considerado quando se pensa em termos da viabilidade econômica da cultura.
 
 Outro ponto importante além da interpretabilidade dos parâmetros, é que o modelo não linear $4PL$ é mais parcimonioso quando comparado com o modelo linear. Em geral, os modelos não lineares utilizam um número de parâmetros menor que os lineares o que lhes confere maior parcimônia. Além disso, como podemos observar na Figura \@ref(fig:poli4pl), em regiões fora do intervalo dos dados, o modelo não linear fornece previsões mais confiáveis para a variável resposta (@Pinheiro_livro).
 
-
-```{r poli4pl,echo=F,results='hide', fig.cap="Perfil de resposta da $ET$ acumulada por uma única planta de alface ao longo de 23 dias consecutivos. O gráfico foi estendido até o $40^o$ dia para mostrar o comportamento de dois ajustes realizados para estes dados, um polinomial de quinto grau e o modelo não linear."}
-unique(dados$plant)
-aa <- 102
-pp <- subset(dados, plant==aa)
-pp$evapotr/1000
-#
-pplot <- augPred(modelo)
-ppq <- subset(pplot,.groups==aa)
-#modelo quadratico
-fit11 <- lm(acum~day+I(day^2)+I(day^3)+I(day^4)+I(day^5), pp)
-fit12 <- lm(acum~poly(day,5),pp)
-summary(fit11)
-summary(fit12)
-cc <- summary(fit11)$coef[,1]
-#
-df <- data.frame(day=seq(0,60,1))
-par(mfrow=c(1,1))
-par(mar=c(2.6,2.5,0.5,0.5), mgp=c(1.5,0.5,0), las=0, cex= 1.2)
-plot(acum ~ day,ppq[1:23,], xlab = "Time (days)", ylab = 'Accumulated ET (kg)',pch = 16,
-     xlim=c(0,40), ylim=c(0,4))
-points(0:60, predict(fit11,df),type = 'l',lty=2)
-#
-aa <- 102
-pp <- subset(dados, plant==aa)
-pp$evapotr/1000
-#
-pplot <- augPred(modelo,maximum = 60)
-ppq <- subset(pplot,.groups==aa)
-lines(ppq[24:dim(ppq)[1],3]~ppq[24:dim(ppq)[1],1],type = 'l',lty=6)
-legend(0.0,4,c("Fifth-degree polynomial regression", "4PL nonlinear regression"), lty=c(2,6), bty='n')
-
-
+```{r poli4pl, echo=F, fig.cap="Perfil de resposta da $ET$ acumulada por uma única planta de alface ao longo de 23 dias consecutivos. O gráfico foi estendido até o $40^o$ dia para mostrar o comportamento de dois ajustes realizados para estes dados, um polinomial de quinto grau e o modelo não linear.", fig.align = 'center'}
+knitr::include_graphics(here::here("FigurasETbook2", "poli4pl-1.png"))
 ```
-
-
 
 
 # Dados longitudinais
@@ -317,10 +146,6 @@ b_{4i}
 \end{bmatrix} \\
 &= \boldsymbol{\beta} + \boldsymbol{\gamma} x_{1i} + \boldsymbol{\delta} x_{2i} + \boldsymbol{\zeta} x_{3i} + \boldsymbol{b}_i .
 \end{align}
-
-
-
-
 
 em que os parâmetros $\boldsymbol{\beta}$, $\boldsymbol{\gamma}$, $\boldsymbol{\delta}$, $ \boldsymbol{\zeta}$ representam os efeitos fixos e $\boldsymbol{b}_i$ os efeitos aleatórios do modelo. $x_{ki}$ com $k=1,2,3$ são coveriáveis indicadoras de tratamentos ou grupos e valem ou zero ou um. O parâmetro $\boldsymbol{\beta}$ é o nível de referência no estudo. Quando $x_{1i} = x_{2i} = x_{3i} = 0$, então $\boldsymbol{\phi}_i = \boldsymbol{\beta} + \boldsymbol{b_i}$ e a $i$-ésima planta pertence ao tratamento $W_1$. Quando $x_{1i} = 1$ e $x_{2i} = x_{3i} = 0$, $\boldsymbol{\phi}_i = \boldsymbol{\beta} +  \boldsymbol{\gamma} + \boldsymbol{b_i}$ e a $i$-ésima planta pertence ao tratamento $W_2$. Se $x_{2i} = 1$ e $x_{1i} = x_{3i} = 0$, $\boldsymbol{\phi}_i = \boldsymbol{\beta} +  \boldsymbol{\delta}+ \boldsymbol{b_i}$ e a $i$-ésima planta pertence ao tratamento $W_3$. E por último, se $x_{3i} = 1$ e $x_{1i} = x_{2i} = 0$,  $\boldsymbol{\phi}_i$ = $\boldsymbol{\beta}$ + $\boldsymbol{\zeta}$ + $\boldsymbol{b_i}$ e a $i$-ésima planta pertence ao tratamento $W_4$. Os efeitos aleatórios $\boldsymbol{b_i}$ são considerados independentes entre plantas e se distribuem normalmente com média zero e matriz de covariância $\boldsymbol{\Psi}$ ($\boldsymbol{b_i}$ $\sim$ N($\boldsymbol{0}$,$\boldsymbol{\Psi}$)). Neste caso a matriz de covariância é dada por:
 
@@ -410,111 +235,9 @@ Para exemplificar o que fizemos até agora, vamos trabalhar alguns dados reais d
 
 Os gráficos de perfis da $ET$ acumulada para todos os vasos em cada tratamento podem ser vistos na Figura \ref{fig:perfiltotal}. Nota-se que a assintota inferior, quando $t \to - \infty$,  é aparentemente a mesma para todas as plantas, ou seja, os efeitos individuais e de tratamento parecem não ser importantes para este parâmetro.
 
-```{r echo=FALSE, results='hide', fig.show='hide'}
-setwd('C:/Users/perei/Dropbox/LivroEvapotranspiração/ArquivosAlface')
-dados <- read.table("AlfaceTotal.txt",header=T)
-dados <- groupedData(acum~day|plant, dados)
-
-##########################################################
-###############    ARRUMANDO OS DADOS     ################
-###############     SELECIONANDO N=0      ################
-##########################################################
-
-dados<-subset(dados, dados$treat %in% c('T1', "T6", "T11", "T16")) 
-levels(dados$treat)
-dados$treat <- factor(ifelse(dados$treat=="T1",'W1',
-                             ifelse(dados$treat=="T6", 'W2',
-                                    ifelse(dados$treat=="T11", 'W3', 'W4'))))
-dados <- na.omit(dados)
-unique(dados$plant)
-anyNA(dados)
-colnames(dados)[8]<-'rain'
-
-# 33 plantas; 23 dias; 4 tratamentos (agua)
-# Observações: no dia 31/03, os valores meteorológicos são:
-# 31/03  classA: 407; wetbulb: 24; temp:	27,4; rain:	0
-
-length(unique(subset(dados,treat=='W1')$plant))
-length(unique(subset(dados,treat=='W2')$plant))
-length(unique(subset(dados,treat=='W3')$plant))
-length(unique(subset(dados,treat=='W4')$plant))
-#
-
-#=================================================================
-# novos dados: somente w1 e w3 ou w3 e w4
-#=================================================================
-#
-dd3 <- dados[,10]/1000
-dados$acum <- dd3
-head(dados)
-dET <- subset(dados, dados$treat %in% c('W2','W3','W4') )
-dET$treat <- relevel(dET$treat, ref = 'W2')
-#=================================================================
-# alguns graficos para escolha dos vasos (w3 e w4)
-#=================================================================
-#
-xyplot(acum~day|treat,groups = plant,dET,type='l')
-#
-dday <- subset(dET, day==23)
-dday$acum
-plant.w1 <- c(1,5,6,9) # acum no ultimo dia: c(2.485, 2.449, 2.432, 2.376)
-plant.w2 <- c(51,54,58,59)
-plant.w3 <- c(101,102,109,110) # acum no ultimo dia: c(2.485, 2.449, 2.432, 2.376)
-plant.w4 <- c(151,155,156,157)
-#
-dETn <- subset(dET,dET$plant %in% c(plant.w2,plant.w3,plant.w4))
-#
-xyplot(acum~day|treat,groups = plant,dETn,type='b')
-#=================================================================
-# nls e nlsList em kilogramas
-#=================================================================
-# A: assíntota a esquerda
-# B: assíntota a direita
-# C: ponto de inflexão
-# D: parâmetro de escala
-#
-modelo.nls <- nls( acum ~ SSfpl(day, A, B, C, D), data = dETn )
-modelo.lis <- nlsList( acum ~ SSfpl(day, A, B, C, D), data = dETn )
-m1 <- nlme(modelo.lis, random=A + B + C + D ~ 1,
-           control=nls.control(maxiter = 4000)
-           )
-
-#
-fixos <- fixef( m1)
-# A: assíntota a esquerda
-# B: assíntota a direita
-# C: ponto de inflexão
-# D: parâmetro de escala
-#
-# para w1 e w3
-mET <- nlme(acum ~ SSfpl(day, A, B, C, D),
-               data=dETn,
-               fixed = list(A~1, B~treat, C~treat, D~1),
-               random =  B + C + D ~ 1,
-               start = c(fixos[1],  fixos[2],0,0, fixos[3],0,0, fixos[4])
-               ,weights = varIdent(form = ~1 | treat) 
-               #,control=nls.control(maxiter = 4000,tol = 1e-02, minFactor = 1/1024)
-               ,corr = corAR1(0.5,form = ~ 1 | plant)
-)
-
-modelo <- mET
-summary(modelo)
-plot(mET, id = 0.05, adj = -1,  xlab=list(label="Fitted values",cex=1.5), col='black',
-     ylab=list(label="Standardized residuals",cex=1.5),mgp=c(1.5,0.5,0) )
-predito <- predict(modelo); observado <- dETn$acum
-plot(predito, observado, pch=20, cex.lab=1.3, xlab="Fitted values", 
-     ylab="Observed values",mgp=c(1.5,0.5,0)); abline(a=0, b=1, lwd=2)
-qqnorm(residuals(modelo), pch=20, cex.lab=1.3, main="",mgp=c(1.5,0.5,0)); qqline(residuals(modelo))
-
+```{r grafperfisfinal,echo=F, fig.cap="Perfis de resposta da $ET$ acumulada pelas plantas de alface ao longo de 23 dias consecutivos para os níveis de água no solo $W_1$, $W_2$ e $W_3$.", fig.align = 'center'}
+knitr::include_graphics(here::here("FigurasETbook2", "grafperfisfinal-1.png"))
 ```
-
-
-```{r grafperfisfinal,echo=F, fig.cap="Perfis de resposta da $ET$ acumulada pelas plantas de alface ao longo de 23 dias consecutivos para os níveis de água no solo $W_1$, $W_2$ e $W_3$."}
-xyplot(acum~day|factor(treat,labels=c('W1','W2','W3')),groups = plant,dETn,type='b',
-       xlab = 'Day', ylab = 'Accumulated ET (kg)', col = 'black',
-       par.settings = list(strip.background=list(col="gray")))
-```
-
 
 Modelamos estes dados usando a Equação \@ref(eq:2) tendo o tratamento $W_1$ como referência. Os efeitos aleatórios foram adicionados aos parâmetros $\phi_{2i}$, $\phi_{3i}$ e $\phi_{4i}$, e os tratamentos foram importantes para explicar os parâmetros $\phi_{2i}$ e $\phi_{3i}$. Além disso, consideramos heterogeneidade nos tratamentos e uma estrutura de correlação AR(1) para $\boldsymbol{\Lambda_i}$. As estimativas dos parâmetros do modelo estão apresentadas na Tabela \@ref(tab:tabela1).
 
@@ -533,114 +256,9 @@ O parâmetro $\phi_{2i}$ parece ser influenciado pelos tratamentos e seu valor f
 
 O primeiro gráfico apresentado na Figura \@ref(fig:perfilfinal) traz a média da $ET$ acumulada em cada dia pelas quatro plantas de cada tratamento. As linhas sólidas são os ajustes para os tratamentos feitos pela Equação \@ref(eq:2). Os demais gráficos apresentam todos os valores observados para as 4 plantas em cada tratamento e as linhas sólidas indicam o modelo individual para cada planta.
 
-
-```{r perfilfinal,echo=F, fig.cap="Perfis de resposta da $ET$ acumulada pelas plantas de alface ao longo de 23 dias consecutivos para os níveis de água no solo $W_1$, $W_2$ e $W_3$."}
-
-#=================================================================
-# Gráfico dos perfis marginais junto com os perfis médios
-#=================================================================
-#
-# tem que usar a versão 3.1.1 do R
-#perfil_marginal_1 <- subset(augPred(modelo, level=0), .type == "predicted" & .groups == 1, -c(.type,.groups))
-perfil_marginal_2 <- subset(augPred(modelo, level=0), .type == "predicted" & .groups == 51, -c(.type,.groups))
-perfil_marginal_3 <- subset(augPred(modelo, level=0), .type == "predicted" & .groups == 101, -c(.type,.groups))
-perfil_marginal_4 <- subset(augPred(modelo, level=0), .type == "predicted" & .groups == 151, -c(.type,.groups))
-
-dados_wide <- reshape(dETn[,-c(2,5:9,11:19)], timevar="day", 
-                      idvar=c("plant", "treat"), direction="wide")
-
-# dd1 <- dados[,-c(2,5:9,11:19)]
-# dd2 <- dd1[,4]/1000
-# dd1$acum <- dd2
-# head(dd1)
-# dados_wide <- reshape(dd1, timevar="day", 
-#                       idvar=c("plant", "treat"), direction="wide")
-
-#tratamento_1 <- subset(dados_wide, treat=="W1", -c(plant, treat))
-tratamento_2 <- subset(dados_wide, treat=="W2", -c(plant, treat))
-tratamento_3 <- subset(dados_wide, treat=="W3", -c(plant, treat))
-tratamento_4 <- subset(dados_wide, treat=="W4", -c(plant, treat))
-#tratamento_1_media <- apply(tratamento_1,2,mean)
-tratamento_2_media <- apply(tratamento_2,2,mean)
-tratamento_3_media <- apply(tratamento_3,2,mean)
-tratamento_4_media <- apply(tratamento_4,2,mean)
-
-#cores <- c("purple", "navy", "mediumblue", "cyan")
-cinza <- gray.colors(12)#; pie(rep(1, 12), col = cinza)
-cores <- c("black", cinza[3], cinza[7])
-
-
-
-#tratamento_1 <- subset(dados_wide, treat=="W1", -treat)
-tratamento_2 <- subset(dados_wide, treat=="W2", -treat)
-tratamento_3 <- subset(dados_wide, treat=="W3", -treat)
-tratamento_4 <- subset(dados_wide, treat=="W4", -treat)
-
-#perfis_condicionais_1 <- subset(augPred(modelo, level=1), .type == "predicted" & .groups %in% tratamento_1$plant, -.type)
-perfis_condicionais_2 <- subset(augPred(modelo, level=1), .type == "predicted" & .groups %in% tratamento_2$plant, -.type)
-perfis_condicionais_3 <- subset(augPred(modelo, level=1), .type == "predicted" & .groups %in% tratamento_3$plant, -.type)
-perfis_condicionais_4 <- subset(augPred(modelo, level=1), .type == "predicted" & .groups %in% tratamento_4$plant, -.type)
-
-grafico_condicionais <- function(perfis, plantas, cor) {
-  for (i in 1:length(unique(perfis$.groups))) {
-    aux <- subset(perfis, .groups==plantas[i])
-    with(aux, lines(day, acum, col=cor))  
-  }  
-}
-
-#pdf("Todos_perfis_old.pdf", width=10, height=5)
-par(mfrow=c(2,2))
-#todos os medios
-par(mar=c(1,2.5,1,0)+0.1)
-with(perfil_marginal_2, plot(day, acum, type="l", lwd=2, col=cores[1], xaxt = "n",
-                             xlab="Day", ylab="Accumulated ET (kg)",
-                             ylim=c(0,2.500),mgp=c(1.5,0.5,0)))
-#with(perfil_marginal_2, lines(day, acum, lwd=2, col=cores[2]))
-with(perfil_marginal_3, lines(day, acum, lwd=2, col=cores[2]))
-with(perfil_marginal_4, lines(day, acum, lwd=2, col=cores[3]))
-#points(1:23, tratamento_1_media, pch=20, col=cores[1])
-points(1:23, tratamento_2_media, pch=0, col=cores[1])
-points(1:23, tratamento_3_media, pch=18, col=cores[2])
-points(1:23, tratamento_4_media, pch=17, col=cores[3])
-legend("topleft", c(expression(italic(W[1])), expression(italic(W[2])),expression(italic(W[3]))), 
-       col=cores, lty=c(1,1,1), lwd=2, 
-       pch=c(0,18,17), bty="n", cex=1.2)
-
-#W2
-par(mar=c(1,2,1,1)+0.1)
-matplot(1:23, t(tratamento_2[2:24]), col=cores[1], pch=0, cex=1, xlab="",
-        ylab="", #main=expression(italic(W[2])),
-        ylim=c(0,2.500),xaxt = "n",yaxt = "n",mgp=c(1.5,0.5,0))
-grafico_condicionais(perfis_condicionais_2, tratamento_2$plant, cores[1])
-#with(perfil_marginal_2, lines(day, acum, lwd=3))
-legend("top", c(expression(italic(W[1]))), bty="n", cex=1.2)
-#W3
-par(mar=c(2.5,2.5,0,0)+0.1)
-matplot(1:23, t(tratamento_3[2:24]), col=cores[2], pch=18, cex=1, xlab="Day",
-        ylab="Accumulated ET (kg)", #main=expression(italic(W[3])),
-        ylim=c(0,2.500),mgp=c(1.5,0.5,0))
-grafico_condicionais(perfis_condicionais_3, tratamento_3$plant, cores[2])
-#with(perfil_marginal_3, lines(day, acum, lwd=3))
-legend("top", c(expression(italic(W[2]))), bty="n", cex=1.2)
-#W4
-par(mar=c(2.5,2,0,1)+0.1)
-matplot(1:23, t(tratamento_4[2:24]), col=cores[3], pch=17, cex=1, xlab="Day",
-        ylab="", #main=expression(italic(W[4])),
-        ylim=c(0,2.500),yaxt = "n",mgp=c(1.5,0.5,0))
-grafico_condicionais(perfis_condicionais_4, tratamento_4$plant, cores[3])
-#with(perfil_marginal_4, lines(day, acum, lwd=3))
-legend("top", c(expression(italic(W[3]))), bty="n", cex=1.2)
-#dev.off()
-
-par(mfrow=c(1,1))
-
-
-
-
-
+```{r perfilfinal,echo=F, fig.cap="Perfis de resposta da $ET$ acumulada pelas plantas de alface ao longo de 23 dias consecutivos para os níveis de água no solo $W_1$, $W_2$ e $W_3$.", fig.align = 'center'}
+knitr::include_graphics(here::here("FigurasETbook2", "perfilfinal-1.png"))
 ```
-
-
 
 
 # Referências
