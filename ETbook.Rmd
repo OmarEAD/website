@@ -268,4 +268,3 @@ knitr::include_graphics(here::here("FigurasETbook2", "perfilfinal-1.png"))
 
 \bibliographystyle{apa}
 	\bibliography{ReferenciasETbook}
-
