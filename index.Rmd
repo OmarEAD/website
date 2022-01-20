@@ -43,7 +43,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       dev = c("png",'pdf'),
                       res=300,
                       dpi = 300,
-                      cache = TRUE)
+                      cache = F)
 
 
 ```
