@@ -17,9 +17,9 @@ navbar:
           href: ETbook.html
         - text: "Teste"
           href: teste.html
-        - text: "Create a _site.yml"
+        - text: "Teste2"
           href: create_yml.html
-    - text: "Add Features"
+    - text: "Testando"
       menu: 
         - text: "Tables and Plots"
           href: tables_plots.html
