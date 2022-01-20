@@ -11,10 +11,10 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Getting Started"
+    - text: "Dados longitudinais"
       menu:
-        - text: "R - teste"
-          href: teste1.html
+        - text: "Evapotranspiração"
+          href: ETbook.html
         - text: "Set Build Options"
           href: build.html
         - text: "Create a _site.yml"
