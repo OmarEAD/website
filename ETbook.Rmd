@@ -515,18 +515,18 @@ xyplot(acum~day|factor(treat,labels=c('W1','W2','W3')),groups = plant,dETn,type=
 
 Modelamos estes dados usando a Equação \@ref(eq:2) tendo o tratamento $W_1$ como referência. Os efeitos aleatórios foram adicionados aos parâmetros $\phi_{2i}$, $\phi_{3i}$ e $\phi_{4i}$, e os tratamentos foram importantes para explicar os parâmetros $\phi_{2i}$ e $\phi_{3i}$. Além disso, consideramos heterogeneidade nos tratamentos e uma estrutura de correlação AR(1) para $\boldsymbol{\Lambda_i}$. As estimativas dos parâmetros do modelo estão apresentadas na Tabela \ref{tab:parametros}.
 
-
 | Parâmetros | $\widehat{\boldsymbol{\beta}}$ ($W_1$) | $\widehat{\boldsymbol{\gamma}}$ ($W_2$) | $\widehat{\boldsymbol{\delta}}$ ($W_3$) |
 |------------|:--------------------------------------:|:---------------------------------------:|:---------------------------------------:|
-| $\phi_1$   |                -0.133363               |                                         |                                         |
-| $\phi_2$   |                2.439746                |                                         |                                         |
-| $\phi_3$   |                16.648272               |                                         |                                         |
-| $\phi_4$   |                5.765065                |                                         |                                         |
+| $\phi_1$   |                -0.133363               |                    -                    |                    -                    |
+| $\phi_2$   |                2.439746                |                 0.935210                |                -0.272847                |
+| $\phi_3$   |                16.648272               |              $0.405882^NS$              |                -2.302124                |
+| $\phi_4$   |                5.765065                |                    -                    |                    -                    |
 
 
 O parâmetro $\phi_{2i}$ parece ser influenciado pelos tratamentos e seu valor foi estimado em $\sim$ 2.44kg para $W_1$, $\sim$ 2.44 + 0.94 = 3.38kg para $W_2$, e $\sim$ 2.44 + (-0.27) = 2.17kg para $W_3$. O ponto de inflexão, ou seja, o dia em que a taxa da $ET$ acumulada foi máxima, também parece ser influenciado pelos tratamentos. $W_1$ e $W_2$ não foram estatisticamente diferentes para o parâmetro $\phi_{3i}$, mas $W_3$, com estimativa de $\sim$ 14 dias, parece ser estatisticamente diferente de $W_1$ ($\sim$ 17 dias).
 
 O primeiro gráfico apresentado na Figura \@ref(fig:perfilfinal) traz a média da $ET$ acumulada em cada dia pelas quatro plantas de cada tratamento. As linhas sólidas são os ajustes para os tratamentos feitos pela Equação \@ref(eq:2). Os demais gráficos apresentam todos os valores observados para as 4 plantas em cada tratamento e as linhas sólidas indicam o modelo individual para cada planta.
+
 
 ```{r perfilfinal,echo=F, fig.cap="Perfis de resposta da $ET$ acumulada pelas plantas de alface ao longo de 23 dias consecutivos para os níveis de água no solo $W_1$, $W_2$ e $W_3$."}
 

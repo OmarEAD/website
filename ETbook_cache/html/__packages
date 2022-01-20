@@ -11,3 +11,4 @@ forcats
 nlme
 lattice
 xtable
+kableExtra
