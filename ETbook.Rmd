@@ -1,5 +1,5 @@
 ---
-title: "Modelando a evapotranspiração acumulada ao longo do tempo"
+title: "Modelando a evapotranspiração acumulada ao longo do tempo[^1]"
 author: "Omar Cléo Neves Pereira, Altair Bertonha"
 #date: "`r format(Sys.time(),'%d %B %Y')`"
 output:
@@ -120,6 +120,9 @@ modelo <- mm44.1
 
 ```
 
+
+
+[^1]: Este artigo é um capítulo do livro _Water Chemistry_. __Modeling Accumulated Evapotranspiration Over Time__ by _Omar Cléo Neves Pereira_ and _Altair Bertonha_. Você pode obter o artigo original clicando [aqui](https://www.intechopen.com/chapters/67735)
 
 > O conhecimento da evapotranspiração acumulada por plantas anuais ao longo do seu ciclo de vida pode ser uma ferramenta importante na tomada de decisão quando se considera a viabilidade econômica da cultura. Este conhecimento pode ajudar a entender o quanto as plantas, submetidas a um manejo específico, podem evapotranspirar ao final do ciclo. Esta informação auxilia na estimativa da quantidade de uma variável de produção, por exemplo a massa de matéria fresca, além de indicar um período mais interessante para a realização da sua colheita. O objetivo deste capítulo é, a partir da estimativa da evapotranspiração diária ao longo do ciclo, modelar a evapotranspiração acumulada durante um período da vida de plantas anuais. Para fazer isto, precisamos entender que o comportamento da variável resposta, ou seja, a evapotranspiração acumulada, ao longo do tempo não é linear, e ter em mente que as varías observações realizadas em uma mesma unidade experimental apresentam correlações e que estas correlações são mais intensas quanto mais próximas temporalmente são as medidas. Esta compreensão nos remete a análise de dados longitudinais a partir dos modelos não lineares de efeitos mistos.
 
@@ -513,7 +516,7 @@ xyplot(acum~day|factor(treat,labels=c('W1','W2','W3')),groups = plant,dETn,type=
 ```
 
 
-Modelamos estes dados usando a Equação \@ref(eq:2) tendo o tratamento $W_1$ como referência. Os efeitos aleatórios foram adicionados aos parâmetros $\phi_{2i}$, $\phi_{3i}$ e $\phi_{4i}$, e os tratamentos foram importantes para explicar os parâmetros $\phi_{2i}$ e $\phi_{3i}$. Além disso, consideramos heterogeneidade nos tratamentos e uma estrutura de correlação AR(1) para $\boldsymbol{\Lambda_i}$. As estimativas dos parâmetros do modelo estão apresentadas na Tabela \ref{tab:parametros}.
+Modelamos estes dados usando a Equação \@ref(eq:2) tendo o tratamento $W_1$ como referência. Os efeitos aleatórios foram adicionados aos parâmetros $\phi_{2i}$, $\phi_{3i}$ e $\phi_{4i}$, e os tratamentos foram importantes para explicar os parâmetros $\phi_{2i}$ e $\phi_{3i}$. Além disso, consideramos heterogeneidade nos tratamentos e uma estrutura de correlação AR(1) para $\boldsymbol{\Lambda_i}$. As estimativas dos parâmetros do modelo estão apresentadas na Tabela \@ref(tab:tabela1).
 
 | Parâmetros | $\widehat{\boldsymbol{\beta}}$ ($W_1$) | $\widehat{\boldsymbol{\gamma}}$ ($W_2$) | $\widehat{\boldsymbol{\delta}}$ ($W_3$) |
 |------------|:--------------------------------------:|:---------------------------------------:|:---------------------------------------:|
@@ -521,6 +524,9 @@ Modelamos estes dados usando a Equação \@ref(eq:2) tendo o tratamento $W_1$ co
 | $\phi_2$   |                2.439746                |                 0.935210                |                -0.272847                |
 | $\phi_3$   |                16.648272               |              $0.405882^NS$              |                -2.302124                |
 | $\phi_4$   |                5.765065                |                    -                    |                    -                    |
+
+
+Table: (\#tab:tabela1)  Estimativas para os parâmetros de efeitos fixos do modelo. O único parâmetro não significativo ($^{NS}$) foi $\phi_{3i}$ para o tratamento $W_2$ com p-valor $> 0.34$. Os demais parâmetros apresentaram p-valor $< 0.001$. 
 
 
 O parâmetro $\phi_{2i}$ parece ser influenciado pelos tratamentos e seu valor foi estimado em $\sim$ 2.44kg para $W_1$, $\sim$ 2.44 + 0.94 = 3.38kg para $W_2$, e $\sim$ 2.44 + (-0.27) = 2.17kg para $W_3$. O ponto de inflexão, ou seja, o dia em que a taxa da $ET$ acumulada foi máxima, também parece ser influenciado pelos tratamentos. $W_1$ e $W_2$ não foram estatisticamente diferentes para o parâmetro $\phi_{3i}$, mas $W_3$, com estimativa de $\sim$ 14 dias, parece ser estatisticamente diferente de $W_1$ ($\sim$ 17 dias).
