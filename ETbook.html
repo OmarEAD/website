@@ -549,9 +549,101 @@ Na maioria das vezes considera-se <span class="math inline">\(\boldsymbol{\Lambd
 <h1><span class="header-section-number">6</span> Estrutura de covariância de <span class="math inline">\(\boldsymbol{\Lambda_i}\)</span></h1>
 <p>Os modelos de efeitos mistos permitem que as dependências entre as observações sejam especificadas nos parâmetros do modelo por meio dos efeitos aleatórios. Dito de outra maneira, as respostas das unidades experimentais de uma população tendem a seguir uma forma não linear de crescimento, porém, cada unidade experimental tem sua própria forma de crescer e o modelo de efeitos mistos permite a inclusão de coeficientes específicos para obter curvas de crescimento ajustadas que se alinham melhor com as respostas individuais destas unidades experimentais.</p>
 <p>Dessa forma, vemos que os modelos mistos permitem relevante flexibilidade para a especificação da estrutura de correlação dos efeitos aleatórios. Entretanto, a estrutura de dependência das observações dentro das unidades experimentais, <span class="math inline">\(\boldsymbol{\Lambda_i}\)</span>, até agora foram consideradas independentes, identicamente distribuídas com média zero e variância constante. Dependendo da escolha do modelo, as respostas de crescimento podem ser bem explicadas apenas com a inclusão de coeficientes específicos para as unidades experimentais. Porém, isto pode não ser suficiente e, neste caso, modelar a dependência residual dos dados se torna importante.</p>
+<p>Há casos em que a dependência nas observações não acomodadas pela função de crescimento não são bem compreendidas ou, algumas vezes, covariáveis adicionais que poderiam explicar estas dependências estão ausentes no modelo. Assim, um recurso importante para modelar esta dependência é especificar uma estrutura de covariância que permita correlações entre os resíduos nas diferentes ocasiões. Então, vamos relaxar a suposição de que os erros são independentes e permitir que eles tenham heterocedasticidade e/ou que sejam correlacionados dentro das unidades experimentais.</p>
+<p>Há uma série de estruturas de covariância para os resíduos e que estão disponíveis nos <em>softwares</em> para auxiliar na modelagem de dados longitudinais. Porém, em nosso texto, destacaremos apenas duas que consideramos mais importantes para estes estudos, a estrutura de covariância com variância heterogênea e a auto-regressiva de primeira ordem.</p>
+<div id="variância-heterogênea" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Variância heterogênea</h2>
+<p>Uma primeira estrutura de covariância que vamos considerar para <span class="math inline">\(\boldsymbol{\Lambda_i}\)</span> é a que admite heterogeneidade das <span class="math inline">\(n_i\)</span> variâncias residuais. Nesta estrutura, que tem <span class="math inline">\(n_i\)</span> parâmetros, assumimos que os resíduos associados aos valores observados nas <span class="math inline">\(n_i\)</span> ocasiões para a <span class="math inline">\(i\)</span>-ésima unidade experimental são independentes:</p>
+<p><span class="math display">\[\begin{align}
+\boldsymbol{\Lambda_i} = 
+\begin{bmatrix} 
+\sigma_1^2 &amp; 0 &amp; \cdots &amp; 0 \\ 
+0 &amp; \sigma_2^2 &amp; \cdots &amp; 0 \\ 
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots  \\
+0 &amp; 0 &amp; \cdots &amp; \sigma_{n_i}^2 
+\end{bmatrix} \, .
+\end{align}\]</span></p>
+<p>Outras variáveis, além do tempo, também podem ser consideradas com variâncias heterogêneas no modelo. Por exemplo, há casos em que é importante modelar a heterogeneidade dos tratamentos, e podemos fazer isso usando os modelos mistos.</p>
 </div>
-<div id="referências" class="section level1" number="7">
-<h1><span class="header-section-number">7</span> Referências</h1>
+<div id="auto-regressiva-de-primeira-ordem" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Auto-regressiva de primeira ordem</h2>
+<p>Outra estrutura de covariância para <span class="math inline">\(\boldsymbol{\Lambda_i}\)</span> bastante utilizada para dados longitudinais é a auto-regressiva de primeira ordem, também chamada de <span class="math inline">\(AR(1)\)</span>:</p>
+<p><span class="math display">\[\begin{align}
+\boldsymbol{\Lambda_i} = \sigma^2
+\begin{bmatrix}
+    1              &amp; \rho           &amp; \cdots &amp; \rho^{n_i - 1} \\
+    \rho           &amp; 1              &amp; \cdots &amp; \rho^{n_i - 2} \\
+    \vdots         &amp; \vdots         &amp; \ddots &amp; \vdots         \\
+    \rho^{n_i - 1} &amp; \rho^{n_i - 2} &amp; \cdots &amp; 1
+\end{bmatrix} \, .
+\end{align}\]</span></p>
+<p>Esta estrutura possui apenas dois parâmetros, o parâmetro de variância <span class="math inline">\(\sigma^2\)</span>, sempre positivo, e o parâmetro de covariância <span class="math inline">\(\rho\)</span>, o qual pode variar entre <span class="math inline">\(-1\)</span> e <span class="math inline">\(1\)</span>. Este tipo de estrutura permite que resíduos associados a observações em ocasiões próximas sejam mais correlacionadas que aqueles observados em ocasiões mais distantes. A <span class="math inline">\(AR(1)\)</span> é preferível para conjuntos de dados nas quais as observações longitudinais sejam igualmente espaçadas.</p>
+</div>
+</div>
+<div id="exemplo-com-dados-reais" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Exemplo com dados reais</h1>
+<p>Para exemplificar o que fizemos até agora, vamos trabalhar alguns dados reais da <span class="math inline">\(ET\)</span> de plantas de alface cultivadas em vasos. Um total de <span class="math inline">\(N=12\)</span> plantas foi inteiramente casualizadas em três níveis de água no solo. No primeiro tratamento, <span class="math inline">\(W_1\)</span>, o nível de água para as plantas foi mantido entre 50.0% e 75.0% da capacidade de retenção do substrato. Nos outros dois tratamentos, <span class="math inline">\(W_2\)</span> e <span class="math inline">\(W_3\)</span>, o nível de água no substrato foi mantido entre 50.0 e 87.5% e entre 50.0 e 100.0% respectivamente. Quando a capacidade de retenção do substrato atingia 50.0%, os vasos eram irrigados até o nível máximo referente a cada tratamento.</p>
+<p>Os gráficos de perfis da <span class="math inline">\(ET\)</span> acumulada para todos os vasos em cada tratamento podem ser vistos na Figura . Nota-se que a assintota inferior, quando <span class="math inline">\(t \to - \infty\)</span>, é aparentemente a mesma para todas as plantas, ou seja, os efeitos individuais e de tratamento parecem não ser importantes para este parâmetro.</p>
+<div class="figure" style="text-align: center"><span id="fig:grafperfisfinal"></span>
+<img src="FigurasETbook/grafperfisfinal-1.png" alt="Perfis de resposta da $ET$ acumulada pelas plantas de alface ao longo de 23 dias consecutivos para os níveis de água no solo $W_1$, $W_2$ e $W_3$." width="2400" />
+<p class="caption">
+Figure 7.1: Perfis de resposta da <span class="math inline">\(ET\)</span> acumulada pelas plantas de alface ao longo de 23 dias consecutivos para os níveis de água no solo <span class="math inline">\(W_1\)</span>, <span class="math inline">\(W_2\)</span> e <span class="math inline">\(W_3\)</span>.
+</p>
+</div>
+<p>Modelamos estes dados usando a Equação <a href="#eq:2">(5.1)</a> tendo o tratamento <span class="math inline">\(W_1\)</span> como referência. Os efeitos aleatórios foram adicionados aos parâmetros <span class="math inline">\(\phi_{2i}\)</span>, <span class="math inline">\(\phi_{3i}\)</span> e <span class="math inline">\(\phi_{4i}\)</span>, e os tratamentos foram importantes para explicar os parâmetros <span class="math inline">\(\phi_{2i}\)</span> e <span class="math inline">\(\phi_{3i}\)</span>. Além disso, consideramos heterogeneidade nos tratamentos e uma estrutura de correlação AR(1) para <span class="math inline">\(\boldsymbol{\Lambda_i}\)</span>. As estimativas dos parâmetros do modelo estão apresentadas na Tabela .</p>
+<table style="width:100%;">
+<colgroup>
+<col width="8%" />
+<col width="29%" />
+<col width="30%" />
+<col width="30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parâmetros</th>
+<th align="center"><span class="math inline">\(\widehat{\boldsymbol{\beta}}\)</span> (<span class="math inline">\(W_1\)</span>)</th>
+<th align="center"><span class="math inline">\(\widehat{\boldsymbol{\gamma}}\)</span> (<span class="math inline">\(W_2\)</span>)</th>
+<th align="center"><span class="math inline">\(\widehat{\boldsymbol{\delta}}\)</span> (<span class="math inline">\(W_3\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\phi_1\)</span></td>
+<td align="center">-0.133363</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\phi_2\)</span></td>
+<td align="center">2.439746</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\phi_3\)</span></td>
+<td align="center">16.648272</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\phi_4\)</span></td>
+<td align="center">5.765065</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p>O parâmetro <span class="math inline">\(\phi_{2i}\)</span> parece ser influenciado pelos tratamentos e seu valor foi estimado em <span class="math inline">\(\sim\)</span> 2.44kg para <span class="math inline">\(W_1\)</span>, <span class="math inline">\(\sim\)</span> 2.44 + 0.94 = 3.38kg para <span class="math inline">\(W_2\)</span>, e <span class="math inline">\(\sim\)</span> 2.44 + (-0.27) = 2.17kg para <span class="math inline">\(W_3\)</span>. O ponto de inflexão, ou seja, o dia em que a taxa da <span class="math inline">\(ET\)</span> acumulada foi máxima, também parece ser influenciado pelos tratamentos. <span class="math inline">\(W_1\)</span> e <span class="math inline">\(W_2\)</span> não foram estatisticamente diferentes para o parâmetro <span class="math inline">\(\phi_{3i}\)</span>, mas <span class="math inline">\(W_3\)</span>, com estimativa de <span class="math inline">\(\sim\)</span> 14 dias, parece ser estatisticamente diferente de <span class="math inline">\(W_1\)</span> (<span class="math inline">\(\sim\)</span> 17 dias).</p>
+<p>O primeiro gráfico apresentado na Figura <a href="#fig:perfilfinal">7.2</a> traz a média da <span class="math inline">\(ET\)</span> acumulada em cada dia pelas quatro plantas de cada tratamento. As linhas sólidas são os ajustes para os tratamentos feitos pela Equação <a href="#eq:2">(5.1)</a>. Os demais gráficos apresentam todos os valores observados para as 4 plantas em cada tratamento e as linhas sólidas indicam o modelo individual para cada planta.</p>
+<div class="figure" style="text-align: center"><span id="fig:perfilfinal"></span>
+<img src="FigurasETbook/perfilfinal-1.png" alt="Perfis de resposta da $ET$ acumulada pelas plantas de alface ao longo de 23 dias consecutivos para os níveis de água no solo $W_1$, $W_2$ e $W_3$." width="2400" />
+<p class="caption">
+Figure 7.2: Perfis de resposta da <span class="math inline">\(ET\)</span> acumulada pelas plantas de alface ao longo de 23 dias consecutivos para os níveis de água no solo <span class="math inline">\(W_1\)</span>, <span class="math inline">\(W_2\)</span> e <span class="math inline">\(W_3\)</span>.
+</p>
+</div>
+</div>
+<div id="referências" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Referências</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-brouwer1968simulation" class="csl-entry">
 Brouwer, R, and CT De Wit. 1968. <span>“A Simulation Model of Plant Growth with Special Attention to Root Growth and Its Consequences.”</span> IBS.

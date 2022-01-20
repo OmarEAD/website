@@ -364,6 +364,277 @@ Os modelos de efeitos mistos permitem que as dependências entre as observaçõe
 
 Dessa forma, vemos que os modelos mistos permitem relevante flexibilidade para a especificação da estrutura de correlação dos efeitos aleatórios. Entretanto, a estrutura de dependência das observações dentro das unidades experimentais, $\boldsymbol{\Lambda_i}$, até agora foram consideradas independentes, identicamente distribuídas com média zero e variância constante. Dependendo da escolha do modelo, as respostas de crescimento podem ser bem explicadas apenas com a inclusão de coeficientes específicos para as unidades experimentais. Porém, isto pode não ser suficiente e, neste caso, modelar a dependência residual dos dados se torna importante.
 
+Há casos em que a dependência nas observações não acomodadas pela função de crescimento não são bem compreendidas ou, algumas vezes, covariáveis adicionais que poderiam explicar estas dependências estão ausentes no modelo. Assim, um recurso importante para modelar esta dependência é especificar uma estrutura de covariância que permita correlações entre os resíduos nas diferentes ocasiões. Então, vamos relaxar a suposição de que os erros são independentes e permitir que eles tenham heterocedasticidade e/ou que sejam correlacionados dentro das unidades experimentais.
+
+Há uma série de estruturas de covariância para os resíduos e que estão disponíveis nos _softwares_ para auxiliar na modelagem de dados longitudinais. Porém, em nosso texto, destacaremos apenas duas que consideramos mais importantes para estes estudos, a estrutura de covariância com variância heterogênea e a auto-regressiva de primeira ordem. 
+
+## Variância heterogênea
+
+Uma primeira estrutura de covariância que vamos considerar para $\boldsymbol{\Lambda_i}$ é a que admite heterogeneidade das $n_i$ variâncias residuais. Nesta estrutura, que tem $n_i$ parâmetros, assumimos que os resíduos associados aos valores observados nas $n_i$ ocasiões para a $i$-ésima unidade experimental são independentes:
+
+\begin{align}
+\boldsymbol{\Lambda_i} = 
+\begin{bmatrix} 
+\sigma_1^2 & 0 & \cdots & 0 \\ 
+0 & \sigma_2^2 & \cdots & 0 \\ 
+\vdots & \vdots & \ddots & \vdots  \\
+0 & 0 & \cdots & \sigma_{n_i}^2 
+\end{bmatrix} \, .
+\end{align}
+
+Outras variáveis, além do tempo, também podem ser consideradas com variâncias heterogêneas no modelo. Por exemplo, há casos em que é importante modelar a heterogeneidade dos tratamentos, e podemos fazer isso usando os modelos mistos.
+
+## Auto-regressiva de primeira ordem
+
+Outra estrutura de covariância para $\boldsymbol{\Lambda_i}$ bastante utilizada para dados longitudinais é a auto-regressiva de primeira ordem, também chamada de $AR(1)$:
+
+\begin{align}
+\boldsymbol{\Lambda_i} = \sigma^2
+\begin{bmatrix}
+	1              & \rho           & \cdots & \rho^{n_i - 1} \\
+	\rho           & 1              & \cdots & \rho^{n_i - 2} \\
+	\vdots         & \vdots         & \ddots & \vdots         \\
+	\rho^{n_i - 1} & \rho^{n_i - 2} & \cdots & 1
+\end{bmatrix} \, .
+\end{align}
+
+
+Esta estrutura possui apenas dois parâmetros, o parâmetro de variância $\sigma^2$, sempre positivo, e o parâmetro de covariância $\rho$, o qual pode variar entre $-1$ e $1$. Este tipo de estrutura permite que resíduos associados a observações em ocasiões próximas sejam mais correlacionadas que aqueles observados em ocasiões mais distantes. A $AR(1)$ é preferível para conjuntos de dados nas quais as observações longitudinais sejam igualmente espaçadas.  
+
+# Exemplo com dados reais
+
+Para exemplificar o que fizemos até agora, vamos trabalhar alguns dados reais da $ET$ de plantas de alface cultivadas em vasos. Um total de $N=12$ plantas foi inteiramente casualizadas em três níveis de água no solo. No primeiro tratamento, $W_1$, o nível de água para as plantas foi mantido entre 50.0\% e 75.0\% da capacidade de retenção do substrato. Nos outros dois tratamentos, $W_2$ e $W_3$, o nível de água no substrato foi mantido entre 50.0 e 87.5\% e entre 50.0 e 100.0\% respectivamente. Quando a capacidade de retenção do substrato atingia 50.0\%, os vasos eram irrigados até o nível máximo referente a cada tratamento. 
+
+Os gráficos de perfis da $ET$ acumulada para todos os vasos em cada tratamento podem ser vistos na Figura \ref{fig:perfiltotal}. Nota-se que a assintota inferior, quando $t \to - \infty$,  é aparentemente a mesma para todas as plantas, ou seja, os efeitos individuais e de tratamento parecem não ser importantes para este parâmetro.
+
+```{r echo=FALSE, results='hide', fig.show='hide'}
+setwd('C:/Users/perei/Dropbox/LivroEvapotranspiração/ArquivosAlface')
+dados <- read.table("AlfaceTotal.txt",header=T)
+dados <- groupedData(acum~day|plant, dados)
+
+##########################################################
+###############    ARRUMANDO OS DADOS     ################
+###############     SELECIONANDO N=0      ################
+##########################################################
+
+dados<-subset(dados, dados$treat %in% c('T1', "T6", "T11", "T16")) 
+levels(dados$treat)
+dados$treat <- factor(ifelse(dados$treat=="T1",'W1',
+                             ifelse(dados$treat=="T6", 'W2',
+                                    ifelse(dados$treat=="T11", 'W3', 'W4'))))
+dados <- na.omit(dados)
+unique(dados$plant)
+anyNA(dados)
+colnames(dados)[8]<-'rain'
+
+# 33 plantas; 23 dias; 4 tratamentos (agua)
+# Observações: no dia 31/03, os valores meteorológicos são:
+# 31/03  classA: 407; wetbulb: 24; temp:	27,4; rain:	0
+
+length(unique(subset(dados,treat=='W1')$plant))
+length(unique(subset(dados,treat=='W2')$plant))
+length(unique(subset(dados,treat=='W3')$plant))
+length(unique(subset(dados,treat=='W4')$plant))
+#
+
+#=================================================================
+# novos dados: somente w1 e w3 ou w3 e w4
+#=================================================================
+#
+dd3 <- dados[,10]/1000
+dados$acum <- dd3
+head(dados)
+dET <- subset(dados, dados$treat %in% c('W2','W3','W4') )
+dET$treat <- relevel(dET$treat, ref = 'W2')
+#=================================================================
+# alguns graficos para escolha dos vasos (w3 e w4)
+#=================================================================
+#
+xyplot(acum~day|treat,groups = plant,dET,type='l')
+#
+dday <- subset(dET, day==23)
+dday$acum
+plant.w1 <- c(1,5,6,9) # acum no ultimo dia: c(2.485, 2.449, 2.432, 2.376)
+plant.w2 <- c(51,54,58,59)
+plant.w3 <- c(101,102,109,110) # acum no ultimo dia: c(2.485, 2.449, 2.432, 2.376)
+plant.w4 <- c(151,155,156,157)
+#
+dETn <- subset(dET,dET$plant %in% c(plant.w2,plant.w3,plant.w4))
+#
+xyplot(acum~day|treat,groups = plant,dETn,type='b')
+#=================================================================
+# nls e nlsList em kilogramas
+#=================================================================
+# A: assíntota a esquerda
+# B: assíntota a direita
+# C: ponto de inflexão
+# D: parâmetro de escala
+#
+modelo.nls <- nls( acum ~ SSfpl(day, A, B, C, D), data = dETn )
+modelo.lis <- nlsList( acum ~ SSfpl(day, A, B, C, D), data = dETn )
+m1 <- nlme(modelo.lis, random=A + B + C + D ~ 1,
+           control=nls.control(maxiter = 4000)
+           )
+
+#
+fixos <- fixef( m1)
+# A: assíntota a esquerda
+# B: assíntota a direita
+# C: ponto de inflexão
+# D: parâmetro de escala
+#
+# para w1 e w3
+mET <- nlme(acum ~ SSfpl(day, A, B, C, D),
+               data=dETn,
+               fixed = list(A~1, B~treat, C~treat, D~1),
+               random =  B + C + D ~ 1,
+               start = c(fixos[1],  fixos[2],0,0, fixos[3],0,0, fixos[4])
+               ,weights = varIdent(form = ~1 | treat) 
+               #,control=nls.control(maxiter = 4000,tol = 1e-02, minFactor = 1/1024)
+               ,corr = corAR1(0.5,form = ~ 1 | plant)
+)
+
+modelo <- mET
+summary(modelo)
+plot(mET, id = 0.05, adj = -1,  xlab=list(label="Fitted values",cex=1.5), col='black',
+     ylab=list(label="Standardized residuals",cex=1.5),mgp=c(1.5,0.5,0) )
+predito <- predict(modelo); observado <- dETn$acum
+plot(predito, observado, pch=20, cex.lab=1.3, xlab="Fitted values", 
+     ylab="Observed values",mgp=c(1.5,0.5,0)); abline(a=0, b=1, lwd=2)
+qqnorm(residuals(modelo), pch=20, cex.lab=1.3, main="",mgp=c(1.5,0.5,0)); qqline(residuals(modelo))
+
+```
+
+
+```{r grafperfisfinal,echo=F, fig.cap="Perfis de resposta da $ET$ acumulada pelas plantas de alface ao longo de 23 dias consecutivos para os níveis de água no solo $W_1$, $W_2$ e $W_3$."}
+xyplot(acum~day|factor(treat,labels=c('W1','W2','W3')),groups = plant,dETn,type='b',
+       xlab = 'Day', ylab = 'Accumulated ET (kg)', col = 'black',
+       par.settings = list(strip.background=list(col="gray")))
+```
+
+
+Modelamos estes dados usando a Equação \@ref(eq:2) tendo o tratamento $W_1$ como referência. Os efeitos aleatórios foram adicionados aos parâmetros $\phi_{2i}$, $\phi_{3i}$ e $\phi_{4i}$, e os tratamentos foram importantes para explicar os parâmetros $\phi_{2i}$ e $\phi_{3i}$. Além disso, consideramos heterogeneidade nos tratamentos e uma estrutura de correlação AR(1) para $\boldsymbol{\Lambda_i}$. As estimativas dos parâmetros do modelo estão apresentadas na Tabela \ref{tab:parametros}.
+
+
+| Parâmetros | $\widehat{\boldsymbol{\beta}}$ ($W_1$) | $\widehat{\boldsymbol{\gamma}}$ ($W_2$) | $\widehat{\boldsymbol{\delta}}$ ($W_3$) |
+|------------|:--------------------------------------:|:---------------------------------------:|:---------------------------------------:|
+| $\phi_1$   |                -0.133363               |                                         |                                         |
+| $\phi_2$   |                2.439746                |                                         |                                         |
+| $\phi_3$   |                16.648272               |                                         |                                         |
+| $\phi_4$   |                5.765065                |                                         |                                         |
+
+
+O parâmetro $\phi_{2i}$ parece ser influenciado pelos tratamentos e seu valor foi estimado em $\sim$ 2.44kg para $W_1$, $\sim$ 2.44 + 0.94 = 3.38kg para $W_2$, e $\sim$ 2.44 + (-0.27) = 2.17kg para $W_3$. O ponto de inflexão, ou seja, o dia em que a taxa da $ET$ acumulada foi máxima, também parece ser influenciado pelos tratamentos. $W_1$ e $W_2$ não foram estatisticamente diferentes para o parâmetro $\phi_{3i}$, mas $W_3$, com estimativa de $\sim$ 14 dias, parece ser estatisticamente diferente de $W_1$ ($\sim$ 17 dias).
+
+O primeiro gráfico apresentado na Figura \@ref(fig:perfilfinal) traz a média da $ET$ acumulada em cada dia pelas quatro plantas de cada tratamento. As linhas sólidas são os ajustes para os tratamentos feitos pela Equação \@ref(eq:2). Os demais gráficos apresentam todos os valores observados para as 4 plantas em cada tratamento e as linhas sólidas indicam o modelo individual para cada planta.
+
+```{r perfilfinal,echo=F, fig.cap="Perfis de resposta da $ET$ acumulada pelas plantas de alface ao longo de 23 dias consecutivos para os níveis de água no solo $W_1$, $W_2$ e $W_3$."}
+
+#=================================================================
+# Gráfico dos perfis marginais junto com os perfis médios
+#=================================================================
+#
+# tem que usar a versão 3.1.1 do R
+#perfil_marginal_1 <- subset(augPred(modelo, level=0), .type == "predicted" & .groups == 1, -c(.type,.groups))
+perfil_marginal_2 <- subset(augPred(modelo, level=0), .type == "predicted" & .groups == 51, -c(.type,.groups))
+perfil_marginal_3 <- subset(augPred(modelo, level=0), .type == "predicted" & .groups == 101, -c(.type,.groups))
+perfil_marginal_4 <- subset(augPred(modelo, level=0), .type == "predicted" & .groups == 151, -c(.type,.groups))
+
+dados_wide <- reshape(dETn[,-c(2,5:9,11:19)], timevar="day", 
+                      idvar=c("plant", "treat"), direction="wide")
+
+# dd1 <- dados[,-c(2,5:9,11:19)]
+# dd2 <- dd1[,4]/1000
+# dd1$acum <- dd2
+# head(dd1)
+# dados_wide <- reshape(dd1, timevar="day", 
+#                       idvar=c("plant", "treat"), direction="wide")
+
+#tratamento_1 <- subset(dados_wide, treat=="W1", -c(plant, treat))
+tratamento_2 <- subset(dados_wide, treat=="W2", -c(plant, treat))
+tratamento_3 <- subset(dados_wide, treat=="W3", -c(plant, treat))
+tratamento_4 <- subset(dados_wide, treat=="W4", -c(plant, treat))
+#tratamento_1_media <- apply(tratamento_1,2,mean)
+tratamento_2_media <- apply(tratamento_2,2,mean)
+tratamento_3_media <- apply(tratamento_3,2,mean)
+tratamento_4_media <- apply(tratamento_4,2,mean)
+
+#cores <- c("purple", "navy", "mediumblue", "cyan")
+cinza <- gray.colors(12)#; pie(rep(1, 12), col = cinza)
+cores <- c("black", cinza[3], cinza[7])
+
+
+
+#tratamento_1 <- subset(dados_wide, treat=="W1", -treat)
+tratamento_2 <- subset(dados_wide, treat=="W2", -treat)
+tratamento_3 <- subset(dados_wide, treat=="W3", -treat)
+tratamento_4 <- subset(dados_wide, treat=="W4", -treat)
+
+#perfis_condicionais_1 <- subset(augPred(modelo, level=1), .type == "predicted" & .groups %in% tratamento_1$plant, -.type)
+perfis_condicionais_2 <- subset(augPred(modelo, level=1), .type == "predicted" & .groups %in% tratamento_2$plant, -.type)
+perfis_condicionais_3 <- subset(augPred(modelo, level=1), .type == "predicted" & .groups %in% tratamento_3$plant, -.type)
+perfis_condicionais_4 <- subset(augPred(modelo, level=1), .type == "predicted" & .groups %in% tratamento_4$plant, -.type)
+
+grafico_condicionais <- function(perfis, plantas, cor) {
+  for (i in 1:length(unique(perfis$.groups))) {
+    aux <- subset(perfis, .groups==plantas[i])
+    with(aux, lines(day, acum, col=cor))  
+  }  
+}
+
+#pdf("Todos_perfis_old.pdf", width=10, height=5)
+par(mfrow=c(2,2))
+#todos os medios
+par(mar=c(1,2.5,1,0)+0.1)
+with(perfil_marginal_2, plot(day, acum, type="l", lwd=2, col=cores[1], xaxt = "n",
+                             xlab="Day", ylab="Accumulated ET (kg)",
+                             ylim=c(0,2.500),mgp=c(1.5,0.5,0)))
+#with(perfil_marginal_2, lines(day, acum, lwd=2, col=cores[2]))
+with(perfil_marginal_3, lines(day, acum, lwd=2, col=cores[2]))
+with(perfil_marginal_4, lines(day, acum, lwd=2, col=cores[3]))
+#points(1:23, tratamento_1_media, pch=20, col=cores[1])
+points(1:23, tratamento_2_media, pch=0, col=cores[1])
+points(1:23, tratamento_3_media, pch=18, col=cores[2])
+points(1:23, tratamento_4_media, pch=17, col=cores[3])
+legend("topleft", c(expression(italic(W[1])), expression(italic(W[2])),expression(italic(W[3]))), 
+       col=cores, lty=c(1,1,1), lwd=2, 
+       pch=c(0,18,17), bty="n", cex=1.2)
+
+#W2
+par(mar=c(1,2,1,1)+0.1)
+matplot(1:23, t(tratamento_2[2:24]), col=cores[1], pch=0, cex=1, xlab="",
+        ylab="", #main=expression(italic(W[2])),
+        ylim=c(0,2.500),xaxt = "n",yaxt = "n",mgp=c(1.5,0.5,0))
+grafico_condicionais(perfis_condicionais_2, tratamento_2$plant, cores[1])
+#with(perfil_marginal_2, lines(day, acum, lwd=3))
+legend("top", c(expression(italic(W[1]))), bty="n", cex=1.2)
+#W3
+par(mar=c(2.5,2.5,0,0)+0.1)
+matplot(1:23, t(tratamento_3[2:24]), col=cores[2], pch=18, cex=1, xlab="Day",
+        ylab="Accumulated ET (kg)", #main=expression(italic(W[3])),
+        ylim=c(0,2.500),mgp=c(1.5,0.5,0))
+grafico_condicionais(perfis_condicionais_3, tratamento_3$plant, cores[2])
+#with(perfil_marginal_3, lines(day, acum, lwd=3))
+legend("top", c(expression(italic(W[2]))), bty="n", cex=1.2)
+#W4
+par(mar=c(2.5,2,0,1)+0.1)
+matplot(1:23, t(tratamento_4[2:24]), col=cores[3], pch=17, cex=1, xlab="Day",
+        ylab="", #main=expression(italic(W[4])),
+        ylim=c(0,2.500),yaxt = "n",mgp=c(1.5,0.5,0))
+grafico_condicionais(perfis_condicionais_4, tratamento_4$plant, cores[3])
+#with(perfil_marginal_4, lines(day, acum, lwd=3))
+legend("top", c(expression(italic(W[3]))), bty="n", cex=1.2)
+#dev.off()
+
+par(mfrow=c(1,1))
+
+
+
+
+
+```
+
+
 
 
 # Referências
