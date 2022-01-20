@@ -16,7 +16,7 @@ navbar:
         - text: "Evapotranspiração"
           href: ETbook.html
         - text: "Teste"
-          href: teste.html
+          href: Teste.html
         - text: "Teste2"
           href: create_yml.html
     - text: "Testando"
