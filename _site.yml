@@ -13,7 +13,7 @@ navbar:
       href: index.html
     - text: "Dados longitudinais"
       menu:
-        - text: "Evapotranspiração"
+        - text: "Evapotranspiração 1"
           href: ETbook.html
         - text: "Set Build Options"
           href: build.html
