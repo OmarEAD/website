@@ -1,0 +1,142 @@
+---
+title: "Relação entre ações e antiações"
+author: "Omar Cléo"
+date: "`r format(Sys.time(),'%d %B %Y')`"
+#output: bookdown::html_document2
+output:
+  pdf_document
+#  bookdown::pdf_book:
+#    base_format: rticles::plos_article
+#
+#bibliography: bibliografia.bib
+---
+
+\renewcommand{\figurename}{Figura}
+\renewcommand{\tablename}{Tabela}
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      size = "footnotesize",
+                      comment = NA,
+                      warning = FALSE,
+                      message = FALSE,
+                      #out.width = "1\\linewidth",
+                      fig.align = "center",
+                      fig.width = 8, 
+                      fig.height = 4, 
+                      fig.show = "hold",
+                      fig.path = "FigurasBolsa/",
+                      fig.pos = "!htb",
+                      background = "#E6E6FA",
+                      dev = c("png",'pdf'),
+                      res=300,
+                      dpi = 300,
+                      cache = TRUE)
+```
+
+```{r library, results='hide', echo=FALSE}
+#library(readr)
+library(dplyr)
+library(tidyverse)
+library(tidyr)
+```
+
+```{r functions, results='hide', echo=FALSE}
+# A function to scale input to 0-1
+scale_01 <- function(x){
+  (x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE))
+}
+```
+
+```{r read-data, results='hide', echo=FALSE}
+ano <- rep(2003:2015,3)
+ativo <- rep(c('acoes','dolar','ouro'),each=13)
+rentab <- c(97.33, 17.81, 27.71, 32.93, 43.65,
+            -41.22, 82.66, 1.04, -18.11, 7.40,
+            -15.50, -2.91, -13.31, 
+            -18.31, -8.14, -11.96, -8.63, -16.69,
+            30.02, -24.69, -4.79, 12.27, 9.95,
+            15.31, 12.51, 49.04,
+            -0.77, -2.85, 2.93, 12.69, 11.26, 
+            32.13, -3.05, 32.26, 15.85, 15.26, 
+            -17.35, 12.04, 33.63)
+dados <- data.frame(ano,ativo,rentab)
+#
+widedata <- dados %>% 
+  spread(ativo,rentab)
+```
+
+```{r sites, results='hide', echo=FALSE}
+# https://bioconnector.github.io/workshops/r-dplyr-yeast.html
+# https://r4ds.had.co.nz/index.html
+# https://livro.curso-r.com/index.html
+# http://www.lampada.uerj.br/arquivosdb/_book/bioestatisticaBasica.html
+
+```
+
+# Protegendo o capital
+
+Uma forma extremamente interessante de investimento a longo prazo, em que espera-se alta rentabilidade com riscos controlados, é trabalhar o conceito de ações e antiações.
+
+Sabemos que uma ação representa a menor parcela negociável do capital de uma empresa. Os valores destas ações sofrem altas e baixas e há riscos de ganhos e perdas de capital. Como antiações podemos entender aquilo que nos proteje das quedas das ações. Os ativos que melhor se encaixam nesta classe são o dolar e o ouro. 
+
+A ideia é que quando as ações estão em alta as antiações podem estar em queda e vice-versa. Entretanto, a queda atinge valores de no máximo de 100\% enquanto que as altas são ilimitadas. O que normalmente ocorre são maiores altas com relação as quedas. 
+
+Mas qual a relação entre ações e antiações? 50\% de cada? 75\% de ações e 25\% de antiações? É sobre isto que vamos conversar aqui.
+
+
+# Sobre os dados
+
+O conjunto de dados que usaremos refere-se aos rendimentos anuais da $B3$ para três ativos: ações, dolar e ouro desde 2003 a 2015 e estão apresentados abaixo.
+
+```{r echo=FALSE}
+widedata
+```
+
+Como antiações usaremos os ativos dolar e ouro, sempre na mesma proporção. Por exemplo, se tivermos a relação $3:1$, ou seja, três partes de ações (75\%) para uma de antiações (25\%) usaremos 12.5\% de dolar e 12.5\% de ouro.
+
+O rendimento de cada ativo foi calculado usando a ideia de juros compostos.
+
+```{r echo=FALSE, results='hide'}
+x <- function(y) 1/(1+y)
+a <- seq(1,5,0.01)
+x(a)
+#
+ac.p <- 1 - x(a)
+dl.p <- x(a)/2
+ou.p <- x(a)/2
+ac.p + dl.p + ou.p
+
+aux <- c()
+for (i in 1:length(x(a))) {
+  rr <- (ac.p[i]*widedata[,2] +
+    dl.p[i]*widedata[,3] + 
+    ou.p[i]*widedata[,4])/100 + 1
+  rr.1 <- (prod(rr)-1)*100
+  aux <- c(aux,rr.1)
+}
+ddss <- data.frame(RelacaoAAA=a,rendimento=aux)
+#
+ac.p <- 1 - x(a)
+dl.p <- x(a)/2
+ou.p <- x(a)/2
+# ac.p + dl.p + ou.p = 1
+```
+
+As porporções estudadas foram deste $1:1$ até $5:1$, variando de 0.01. Como exemplo, as cinco primeiras relações foram $1.00:1$, $1.01:1$, $1.02:1$, $1.03:1$, $1.04:1$, $1.05:1$.
+
+Dessa forma, as  quantidades de ações para as cinco primeiras relações foram `r round(ac.p[1:5],4)`. E as de dolar e ouro foram `r round(dl.p[1:5],4)`. Com isto, os rendimentos para as cinco primeiras relações entre ação e antiação foram `r round(aux[1:5],4)`.
+
+Assim, obtivemos que o maior rendimento foi de `r round(max(ddss[,2]),4)`, ocorrido quando a relação entre ação e antiação foi de `r ddss[which.max(ddss[,2]),1]`.
+
+Por fim, os resultados podem ser vistos graficamente (a reta vertical é o ponto `r ddss[which.max(ddss[,2]),1]`). 
+
+```{r echo=FALSE}
+ddss %>% 
+  ggplot() +
+  aes(RelacaoAAA,rendimento) +
+  geom_point() +
+  geom_vline(xintercept = ddss[which.max(ddss[,2]),1]) +
+  labs(x = 'Relação ação antiacão',y='Rendimento')
+
+```
