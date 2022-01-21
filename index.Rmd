@@ -76,7 +76,7 @@ scale_01 <- function(x){
 
 ![](./Figuras/foto.jpg){width=80%} 
 
-<span style="color:darkblue;font-weight:900;font-size:40px"> 
+<span style="color:darkblue;font-weight:800;font-size:40px"> 
 Olá, aqui é o Omar!
 </span>
 
