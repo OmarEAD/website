@@ -19,10 +19,12 @@ navbar:
           href: Teste.html
         - text: "Teste2"
           href: create_yml.html
-    - text: "Testando"
+    - text: "Alguns Estudos"
       menu: 
-        - text: "Tables and Plots"
-          href: tables_plots.html
+        - text: "Investimentos"
+          menu:
+            - text: "Relação Ação e Antiação"
+              href: RelacaoAcaoAntiacao.html
         - text: "Include Images"
           href: images.html
         - text: "Embed a webpage"

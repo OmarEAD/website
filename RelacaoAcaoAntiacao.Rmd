@@ -1,18 +1,18 @@
 ---
-title: "Relação entre ações e antiações"
-author: "Omar Cléo"
-date: "`r format(Sys.time(),'%d %B %Y')`"
-#output: bookdown::html_document2
-output:
-  pdf_document
-#  bookdown::pdf_book:
-#    base_format: rticles::plos_article
-#
-#bibliography: bibliografia.bib
+title: "Bolsa de Valores - A relação entre ações e antiações[^1]"
+author: "Omar Cléo Neves Pereira"
+#date: "`r format(Sys.time(),'%d %B %Y')`"
+#output:
+#  bookdown::html_document2
+output: 
+  bookdown::html_document2:
+    css: style.css  
+#bibliography: bibliografiaETbook.bib
+#biblio-style: authoryear
 ---
 
-\renewcommand{\figurename}{Figura}
-\renewcommand{\tablename}{Tabela}
+<!-- \renewcommand{\figurename}{Figura} -->
+<!-- \renewcommand{\tablename}{Tabela} -->
 
 ```{r setup , include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, 
@@ -25,27 +25,21 @@ knitr::opts_chunk$set(echo = TRUE,
                       fig.width = 8, 
                       fig.height = 4, 
                       fig.show = "hold",
-                      fig.path = "FigurasBolsa/",
+                      fig.path = "FigurasAEAA/",
                       fig.pos = "!htb",
                       background = "#E6E6FA",
                       dev = c("png",'pdf'),
                       res=300,
                       dpi = 300,
-                      cache = TRUE)
+                      cache = F)
+
 ```
 
 ```{r library, results='hide', echo=FALSE}
 #library(readr)
 library(dplyr)
 library(tidyverse)
-library(tidyr)
-```
-
-```{r functions, results='hide', echo=FALSE}
-# A function to scale input to 0-1
-scale_01 <- function(x){
-  (x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE))
-}
+library(ggplot2)
 ```
 
 ```{r read-data, results='hide', echo=FALSE}
@@ -66,13 +60,12 @@ widedata <- dados %>%
   spread(ativo,rentab)
 ```
 
-```{r sites, results='hide', echo=FALSE}
-# https://bioconnector.github.io/workshops/r-dplyr-yeast.html
-# https://r4ds.had.co.nz/index.html
-# https://livro.curso-r.com/index.html
-# http://www.lampada.uerj.br/arquivosdb/_book/bioestatisticaBasica.html
+[^1]: Este artigo é um estudo sobre ações e antiações. Caso encontre erros, queira fazer comentários, ou troca uma ideia sobre o assunto, por favor, me escreva: omarcnpereiraead@gmail.com
 
-```
+> O conhecimento da evapotranspiração acumulada por plantas anuais ao longo do seu ciclo de vida pode ser uma ferramenta importante na tomada de decisão quando se considera a viabilidade econômica da cultura. Este conhecimento pode ajudar a entender o quanto as plantas, submetidas a um manejo específico, podem evapotranspirar ao final do ciclo. Esta informação auxilia na estimativa da quantidade de uma variável de produção, por exemplo a massa de matéria fresca, além de indicar um período mais interessante para a realização da sua colheita. O objetivo deste capítulo é, a partir da estimativa da evapotranspiração diária ao longo do ciclo, modelar a evapotranspiração acumulada durante um período da vida de plantas anuais. Para fazer isto, precisamos entender que o comportamento da variável resposta, ou seja, a evapotranspiração acumulada, ao longo do tempo não é linear, e ter em mente que as varías observações realizadas em uma mesma unidade experimental apresentam correlações e que estas correlações são mais intensas quanto mais próximas temporalmente são as medidas. Esta compreensão nos remete a análise de dados longitudinais a partir dos modelos não lineares de efeitos mistos.
+
+# Introdução
+
 
 # Protegendo o capital
 
