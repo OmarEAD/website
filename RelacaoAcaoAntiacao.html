@@ -417,21 +417,18 @@ div.tocify {
 <!-- \renewcommand{\figurename}{Figura} -->
 <!-- \renewcommand{\tablename}{Tabela} -->
 <blockquote>
-<p>O conhecimento da evapotranspiração acumulada por plantas anuais ao longo do seu ciclo de vida pode ser uma ferramenta importante na tomada de decisão quando se considera a viabilidade econômica da cultura. Este conhecimento pode ajudar a entender o quanto as plantas, submetidas a um manejo específico, podem evapotranspirar ao final do ciclo. Esta informação auxilia na estimativa da quantidade de uma variável de produção, por exemplo a massa de matéria fresca, além de indicar um período mais interessante para a realização da sua colheita. O objetivo deste capítulo é, a partir da estimativa da evapotranspiração diária ao longo do ciclo, modelar a evapotranspiração acumulada durante um período da vida de plantas anuais. Para fazer isto, precisamos entender que o comportamento da variável resposta, ou seja, a evapotranspiração acumulada, ao longo do tempo não é linear, e ter em mente que as varías observações realizadas em uma mesma unidade experimental apresentam correlações e que estas correlações são mais intensas quanto mais próximas temporalmente são as medidas. Esta compreensão nos remete a análise de dados longitudinais a partir dos modelos não lineares de efeitos mistos.</p>
+<p>Uma forma extremamente interessante de fazer investimentos a longo prazo, em que espera-se rentabilidade com riscos controlados, é trabalhar o conceito de ações e antiações. Neste artigo trago algumas ideias simples e de forma muito resumida sobre esse conceito.</p>
 </blockquote>
-<div id="introdução" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Introdução</h1>
+<div id="conceitos" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Conceitos</h1>
+<p>Uma <strong>ação</strong> representa a menor parcela negociável do capital de uma empresa. O valor de uma ação sofre altas e baixas e há riscos de ganhos e perdas de capital. Como <strong>antiações</strong> podemos entender aquilo que nos proteje das quedas das ações. Os ativos que melhor se encaixam nesta classe são o <em>dolar</em> e o <em>ouro</em>.</p>
+<p>Há uma intrínseca relação entre as ações e antiações. A ideia é que quando uma está em alta, a outra está em queda.</p>
+<p>A queda de um ativo pode atingir altos valores, chegando a 100%. Entretanto, a sua alta não apresenta limites, podendo atingir 100% ou mais.</p>
+<p>Para proteger o seu capital, um investidor pode ter em sua <em>carteira</em> os dois tipos de ativos. Mas qual a relação entre ações e antiações? 50% de cada? 75% de ações e 25% de antiações? É sobre isto que vamos conversar aqui.</p>
 </div>
-<div id="protegendo-o-capital" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Protegendo o capital</h1>
-<p>Uma forma extremamente interessante de investimento a longo prazo, em que espera-se alta rentabilidade com riscos controlados, é trabalhar o conceito de ações e antiações.</p>
-<p>Sabemos que uma ação representa a menor parcela negociável do capital de uma empresa. Os valores destas ações sofrem altas e baixas e há riscos de ganhos e perdas de capital. Como antiações podemos entender aquilo que nos proteje das quedas das ações. Os ativos que melhor se encaixam nesta classe são o dolar e o ouro.</p>
-<p>A ideia é que quando as ações estão em alta as antiações podem estar em queda e vice-versa. Entretanto, a queda atinge valores de no máximo de 100% enquanto que as altas são ilimitadas. O que normalmente ocorre são maiores altas com relação as quedas.</p>
-<p>Mas qual a relação entre ações e antiações? 50% de cada? 75% de ações e 25% de antiações? É sobre isto que vamos conversar aqui.</p>
-</div>
-<div id="sobre-os-dados" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Sobre os dados</h1>
-<p>O conjunto de dados que usaremos refere-se aos rendimentos anuais da <span class="math inline">\(B3\)</span> para três ativos: ações, dolar e ouro desde 2003 a 2015 e estão apresentados abaixo.</p>
+<div id="os-dados" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Os dados</h1>
+<p>De forma concisa, a rentabilidade é a taxa paga sobre o valor investido. O conjunto de dados que usaremos refere-se às rentabilidades anuais em porcentagem (%) da <span class="math inline">\(B3\)</span> para três ativos: ações, dólar e ouro desde 2003 a 2015 e estão apresentados abaixo.</p>
 <pre><code>    ano  acoes  dolar   ouro
 1  2003  97.33 -18.31  -0.77
 2  2004  17.81  -8.14  -2.85
