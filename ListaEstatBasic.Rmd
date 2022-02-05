@@ -1,0 +1,112 @@
+---
+title: "Estatística: lista de exercício"
+author: "Prof. Omar"
+#output: 
+#  pdf_document:
+#    extra_dependencies: ["flafter"]
+#output: pdf_document
+output: 
+  bookdown::html_document2:
+    css: style.css  
+#bibliography: bibliografiaETbook.bib
+#biblio-style: authoryear
+---
+
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      size = "footnotesize",
+                      comment = NA,
+                      warning = FALSE,
+                      message = FALSE,
+                      #out.width = "1\\linewidth",
+                      fig.align = "center",
+                      fig.width = 8, 
+                      fig.height = 4, 
+                      fig.show = "hold",
+                      fig.path = "Figuras1/",
+                      fig.pos = "!htb",
+                      fig.cap = TRUE,
+                      background = "#E6E6FA",
+                      dev = c("png",'pdf'),
+                      res=300,
+                      dpi = 300,
+                      cache = TRUE)
+```
+
+```{r library, results='hide'}
+library(tidyverse)
+library(tinytex)
+library(knitr)
+library(kableExtra)
+library(xtable)
+```
+
+```{r functions, echo=FALSE, results='hide'}
+# A function to scale input to 0-1
+scale_01 <- function(x){
+  (x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE))
+}
+```
+
+```{r read-data, echo=FALSE,results='hide'}
+# gapminder <- read_csv(here::here("data", "gapminder.csv"))
+```
+
+# Estatística descritiva
+
+
+* Alguns funcionários de uma empresa decidiram participar de uma pesquisa para avaliar o tempo gasto para irem de casa ao trabalho usando o transporte coletivo e o automóvel próprio. Se você fosse o responsável por essa pesquisa, como a realizaria? De forma concisa descreva detalhes da coleta de dados e possíveis problemas que poderiam ocorrer.
+
+
+* Considere o problema anterior. Suponha que você tenha coletado uma amostra do tempo (minutos) de translado de casa ao trabalho de 10 funcionários, ora indo de transporte coletivo, ora de carro próprio (Tabela \@ref(tab:transp)). Esse tipo de dados tem estrutura pareada (em breve estudaremos isto com detalhes).
+
+    * Calcule o tempo médio e o desvio padrão de cada tipo de locomoção.
+    * Em função dos resultados acima, qual meio de transporte deve ser preferido? Discuta.
+    * Compare a dispersão dos dois meios de transporte. Qual tem maior dispersão?
+
+```{r transp, echo=FALSE, fig.pos="!H",out.extra = "", results='asis'}
+set.seed(7)
+pp <- round(rnorm(10,mean=30,sd=5),0)
+qq <- round(rnorm(10,mean=20,sd=5),0)
+dd <- t(data.frame(Funcionario=1:10,
+                 TC=pp, AP=qq))
+dd %>% 
+  kable(caption = "Tempo gasto, em minutos, para 10 funcionários irem de casa até a empresa em que trabalham de duas maneiras, ou transporte coletivo (TC) ou automóvel próprio (AP).") %>% 
+  kable_styling(full_width = FALSE, latex_options = "HOLD_position")
+```
+
+
+* Uma pesquisa mostrou que o brasileiro gasta em média R\$234,19 por mês se alimentando fora de casa (dados fictícios). Os gastos para se alimentar fora de casa referentes a uma amostra de 30 adolescentes estão apresentados na Tabela \@ref(tab:adoles). 
+    * Faça uma tabela de distribuição de frequências
+    * Esboce um histograma
+    * Calcule a média, a mediana e a moda
+    * Se considerarmos os dados do item anterior, esses adolescentes gastam o mesmo que a média dos brasileiros que se alimentam fora?
+    * Calcule o primeiro e o terceiro quartis
+    * Calcule a amplitude e a amplitude interquartil
+    * Calcule a variância, o desvio-padrão e o coeficiente de variação
+
+```{r adoles, echo=FALSE, fig.pos="!H",out.extra = "", results='asis'}
+set.seed(7)
+dp <- round(rnorm(30,325,100),0)
+dp <- rpois(30,325)
+dp %>% matrix(nrow = 3) %>% 
+  kable(caption = "Gastos mensais de 30 adolescentes com alimentação fora de casa.") %>% 
+  kable_styling(full_width = FALSE, latex_options = "HOLD_position")
+```
+
+
+* Duas concessionárias tem suas receitas apresentadas na Tabela \@ref(tab:conces). Qual delas apresenta maior dispersão? Discuta os resultados.
+
+| Concessionária | Média (R\$) | Desvio (R\$) |
+|:--------------:|:---------:|:----------:|
+|        A       |  3280000  |   1500000  |
+|        B       |   630000  |   500000   |
+
+Table: (\#tab:conces) Receita das concecionárias A e B. 
+
+
+
+
+
+

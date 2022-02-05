@@ -21,18 +21,14 @@ navbar:
           href: create_yml.html
     - text: "Alguns Estudos"
       menu: 
-        - text: "Investimentos"
-          menu:
-            - text: "Relação Ação e Antiação"
-              href: RelacaoAcaoAntiacao.html
         - text: "Include Images"
           href: images.html
         - text: "Embed a webpage"
           href: embed.html
-    - text: "Mixed"      
+    - text: "Estatística Básica"      
       menu: 
-        - text: "Publishing"
-          href: publishing.html
+        - text: "Lista"
+          href: ListaEstatBasic.html
         - text: "Updating"
           href: updating.html
 output_dir: "."
