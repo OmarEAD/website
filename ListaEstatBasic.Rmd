@@ -54,7 +54,7 @@ scale_01 <- function(x){
 ```
 
 
-[^1]: Este artigo é uma lista de exercícios sobre __estatística básica__ . Caso encontre erros, queira fazer comentários, ou troca uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
+[^1]: Este artigo é uma lista de exercícios sobre __estatística básica__. Provavelmente, esta lista ganhará novos exercícios ao longo do tempo. Caso encontre erros, queira fazer comentários, ou troca uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
 
 # Estatística descritiva
 
