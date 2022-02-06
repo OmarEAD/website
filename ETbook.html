@@ -14,8 +14,8 @@
 
 <title>Modelando a evapotranspiração acumulada ao longo do tempo</title>
 
-<script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -364,44 +364,37 @@ div.tocify {
     <li>
       <a href="ETbook.html">Evapotranspiração</a>
     </li>
-    <li>
-      <a href="Teste.html">Teste</a>
-    </li>
-    <li>
-      <a href="create_yml.html">Teste2</a>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Alguns estudos
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">RMarkdown</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Referencias.html">Referências</a>
+        </li>
+      </ul>
     </li>
   </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Testando
+    Estatística Básica
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="tables_plots.html">Tables and Plots</a>
+      <a href="ListaEstatBasic.html">Lista</a>
     </li>
     <li>
-      <a href="images.html">Include Images</a>
-    </li>
-    <li>
-      <a href="embed.html">Embed a webpage</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Mixed
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="publishing.html">Publishing</a>
-    </li>
-    <li>
-      <a href="updating.html">Updating</a>
+      <a href="updating.html">Lista 2</a>
     </li>
   </ul>
 </li>
@@ -445,7 +438,7 @@ div.tocify {
 <div id="perfil-de-resposta" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Perfil de resposta</h1>
 <p>A Figura <a href="#fig:perfil1">2.1</a> apresenta a <span class="math inline">\(ET\)</span> acumulada de uma única planta de alface ao longo de 23 dias consecutivos, sendo o primeiro dia equivalente ao <span class="math inline">\(35^o\)</span> dia após a semeadura. Durante este período, mediu-se a <span class="math inline">\(ET\)</span> diária da planta. Assim, o primeiro dia no gráfico traz o valor da <span class="math inline">\(ET\)</span> das últimas 24 horas, o segundo dia refere-se as últimas 48 horas e assim sucessivamente. A <span class="math inline">\(ET\)</span> diária deve ser entendida como a taxa com que a <span class="math inline">\(ET\)</span> acumulada ocorre ao longo do tempo. Em termos matemáticos, a <span class="math inline">\(ET\)</span> diária pode ser entendida como uma aproximação da derivada (taxa) da <span class="math inline">\(ET\)</span> acumulada com relação ao tempo.</p>
-<div class="figure" style="text-align: center"><span id="fig:perfil1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:perfil1"></span>
 <img src="FigurasETbook2/perfil1-1.png" alt="Perfil de resposta da $ET$ acumulada por uma única planta de alface ao longo de 23 dias consecutivos." width="768" />
 <p class="caption">
 Figure 2.1: Perfil de resposta da <span class="math inline">\(ET\)</span> acumulada por uma única planta de alface ao longo de 23 dias consecutivos.
@@ -465,7 +458,7 @@ ET(t) = \phi_1 + \frac{\phi_2 - \phi_1}{1 + exp[(\phi_3 - t) / \phi_4 ]}
 \tag{3.1}
 \end{equation}\]</span></p>
 <p>em que <span class="math inline">\(ET(t)\)</span> é a <span class="math inline">\(ET\)</span> acumulada em função do tempo e <span class="math inline">\(\phi_{1-4}\)</span> são os parâmetros do modelo <a href="#eq:1">(3.1)</a>. <span class="math inline">\(\phi_1\)</span> é a assintota horizontal inferior que dá o valor da <span class="math inline">\(ET\)</span> acumulada quando <span class="math inline">\(t \to - \infty\)</span>. Biologicamente, este parâmetro não tem uma interpretação consistente, mas é importante no ajuste pois assegura que a <span class="math inline">\(ET\)</span> acumulada nos tempos próximos a zero sejam muito pequenas (<span class="citation">Pereira et al. (2019)</span>, <span class="citation">Pereira et al. (2018)</span>). <span class="math inline">\(\phi_2\)</span> é a assintota horizontal superior e dá o valor da <span class="math inline">\(ET\)</span> acumulada quando <span class="math inline">\(t \to \infty\)</span>. Este parâmetro pode ser interpretado como uma estimativa de máxima <span class="math inline">\(ET\)</span> acumulada que as plantas podem atingir ao final do seu ciclo de vida. <span class="math inline">\(\phi_3\)</span> é o ponto de inflexão da curva e indica o dia (tempo) em que a <span class="math inline">\(ET\)</span> diária atinge um máximo. O tempo correspondente a <span class="math inline">\(\phi_3\)</span> resulta numa <span class="math inline">\(ET\)</span> acumulada entre <span class="math inline">\(\phi_1\)</span> e <span class="math inline">\(\phi_2\)</span>. Mais precisamente, a <span class="math inline">\(ET\)</span> acumulada até o tempo <span class="math inline">\(\phi_3\)</span> é o valor médio das duas assíntotas, ou seja, (<span class="math inline">\(\phi_1\)</span> + <span class="math inline">\(\phi_2\)</span>)/2. <span class="math inline">\(\phi_4\)</span> é o parâmetro de escala. O dia (tempo) correspondente a <span class="math inline">\(\phi_3\)</span> + <span class="math inline">\(\phi_4\)</span> dá <span class="math inline">\(\sim\)</span> 0.75 (<span class="math inline">\(\phi_2\)</span> - <span class="math inline">\(\phi_1\)</span>) da <span class="math inline">\(ET\)</span> acumulada. Portanto, <span class="math inline">\(\phi_4\)</span> indica o quão rapidamente a <span class="math inline">\(ET\)</span> acumulada sai das proximidades de <span class="math inline">\(\phi_1\)</span> até valores próximos a <span class="math inline">\(\phi_2\)</span>. Quanto maior <span class="math inline">\(\phi_4\)</span>, mais lentamente isto ocorre.</p>
-<div class="figure" style="text-align: center"><span id="fig:parametros"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:parametros"></span>
 <img src="FigurasETbook2/parametros-1.png" alt="Representação gráfica dos parâmetros da $4PL$. Figura adaptada de @Pinheiro_livro." width="768" />
 <p class="caption">
 Figure 3.1: Representação gráfica dos parâmetros da <span class="math inline">\(4PL\)</span>. Figura adaptada de <span class="citation">J. C. Pinheiro and Bates (2000)</span>.
@@ -475,7 +468,7 @@ Figure 3.1: Representação gráfica dos parâmetros da <span class="math inline
 <p>Tanto o modelo polinomial de quinto grau quanto o modelo não linear <span class="math inline">\(4PL\)</span> se ajustaram muito bem aos dados. Entretanto, o modelo polinomial vai a zero após do <span class="math inline">\(30^o\)</span> dia, o que fisicamente é impossível. Além disso, este modelo apresenta cinco parâmetros sem qualquer explicação física e/ou biológica para o fenômeno que estamos estudando. O modelo não linear <span class="math inline">\(4PL\)</span> é uma função sempre crescente, sendo compatível com uma variável que é acumulada ao longo do tempo. Porém, este ajuste não permite o crescimento infinito da <span class="math inline">\(ET\)</span> acumulada quando o tempo se torna cada vez maior. Ele limita a <span class="math inline">\(ET\)</span> acumulada num valor que pode ser entendido como uma quantidade máxima que esta planta pode evapotranspirar ao longo do seu ciclo de vida.</p>
 <p>Vemos também que, a partir de <span class="math inline">\(\sim 20^o\)</span> dia, o acumulo de água evapotranspirada é cada vez menor. Isto indica que este dia é o ponto de inflexão do modelo não linear <span class="math inline">\(4PL\)</span>. Para dar um exemplo de uma aplicação prática do ponto de inflexão do modelo no manejo de plantas de ciclo anual, suponha que o produto comercial de uma determinada planta cultivada seja suas folhas. Sabe-se que as variáveis de produção apresentam uma correlação positiva com a quantidade total de água evapotranspirada ao longo do ciclo de vida da planta. Isto é, quanto maior o total de água evapotranspirada, maiores serão os valores das variáveis de produção (<span class="citation">Pereira et al. (2019)</span>, <span class="citation">Pereira et al. (2018)</span>). Dessa forma, o ponto de inflexão pode indicar a proximidade do dia da colheita. A partir deste ponto as taxas de <span class="math inline">\(ET\)</span> diminuem e, portanto, as plantas passam a acumular menores quantidades de matéria fresca ao longo do tempo. Assim, este ponto pode ser considerado quando se pensa em termos da viabilidade econômica da cultura.</p>
 <p>Outro ponto importante além da interpretabilidade dos parâmetros, é que o modelo não linear <span class="math inline">\(4PL\)</span> é mais parcimonioso quando comparado com o modelo linear. Em geral, os modelos não lineares utilizam um número de parâmetros menor que os lineares o que lhes confere maior parcimônia. Além disso, como podemos observar na Figura <a href="#fig:poli4pl">3.2</a>, em regiões fora do intervalo dos dados, o modelo não linear fornece previsões mais confiáveis para a variável resposta (<span class="citation">J. C. Pinheiro and Bates (2000)</span>).</p>
-<div class="figure" style="text-align: center"><span id="fig:poli4pl"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:poli4pl"></span>
 <img src="FigurasETbook2/poli4pl-1.png" alt="Perfil de resposta da $ET$ acumulada por uma única planta de alface ao longo de 23 dias consecutivos. O gráfico foi estendido até o $40^o$ dia para mostrar o comportamento de dois ajustes realizados para estes dados, um polinomial de quinto grau e o modelo não linear." width="768" />
 <p class="caption">
 Figure 3.2: Perfil de resposta da <span class="math inline">\(ET\)</span> acumulada por uma única planta de alface ao longo de 23 dias consecutivos. O gráfico foi estendido até o <span class="math inline">\(40^o\)</span> dia para mostrar o comportamento de dois ajustes realizados para estes dados, um polinomial de quinto grau e o modelo não linear.
@@ -585,7 +578,7 @@ Na maioria das vezes considera-se <span class="math inline">\(\boldsymbol{\Lambd
 <h1><span class="header-section-number">7</span> Exemplo com dados reais</h1>
 <p>Para exemplificar o que fizemos até agora, vamos trabalhar alguns dados reais da <span class="math inline">\(ET\)</span> de plantas de alface cultivadas em vasos. Um total de <span class="math inline">\(N=12\)</span> plantas foi inteiramente casualizadas em três níveis de água no solo. No primeiro tratamento, <span class="math inline">\(W_1\)</span>, o nível de água para as plantas foi mantido entre 50.0% e 75.0% da capacidade de retenção do substrato. Nos outros dois tratamentos, <span class="math inline">\(W_2\)</span> e <span class="math inline">\(W_3\)</span>, o nível de água no substrato foi mantido entre 50.0 e 87.5% e entre 50.0 e 100.0% respectivamente. Quando a capacidade de retenção do substrato atingia 50.0%, os vasos eram irrigados até o nível máximo referente a cada tratamento.</p>
 <p>Os gráficos de perfis da <span class="math inline">\(ET\)</span> acumulada para todos os vasos em cada tratamento podem ser vistos na Figura . Nota-se que a assintota inferior, quando <span class="math inline">\(t \to - \infty\)</span>, é aparentemente a mesma para todas as plantas, ou seja, os efeitos individuais e de tratamento parecem não ser importantes para este parâmetro.</p>
-<div class="figure" style="text-align: center"><span id="fig:grafperfisfinal"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:grafperfisfinal"></span>
 <img src="FigurasETbook2/grafperfisfinal-1.png" alt="Perfis de resposta da $ET$ acumulada pelas plantas de alface ao longo de 23 dias consecutivos para os níveis de água no solo $W_1$, $W_2$ e $W_3$." width="768" />
 <p class="caption">
 Figure 7.1: Perfis de resposta da <span class="math inline">\(ET\)</span> acumulada pelas plantas de alface ao longo de 23 dias consecutivos para os níveis de água no solo <span class="math inline">\(W_1\)</span>, <span class="math inline">\(W_2\)</span> e <span class="math inline">\(W_3\)</span>.
@@ -637,7 +630,7 @@ Figure 7.1: Perfis de resposta da <span class="math inline">\(ET\)</span> acumul
 </table>
 <p>O parâmetro <span class="math inline">\(\phi_{2i}\)</span> parece ser influenciado pelos tratamentos e seu valor foi estimado em <span class="math inline">\(\sim\)</span> 2.44kg para <span class="math inline">\(W_1\)</span>, <span class="math inline">\(\sim\)</span> 2.44 + 0.94 = 3.38kg para <span class="math inline">\(W_2\)</span>, e <span class="math inline">\(\sim\)</span> 2.44 + (-0.27) = 2.17kg para <span class="math inline">\(W_3\)</span>. O ponto de inflexão, ou seja, o dia em que a taxa da <span class="math inline">\(ET\)</span> acumulada foi máxima, também parece ser influenciado pelos tratamentos. <span class="math inline">\(W_1\)</span> e <span class="math inline">\(W_2\)</span> não foram estatisticamente diferentes para o parâmetro <span class="math inline">\(\phi_{3i}\)</span>, mas <span class="math inline">\(W_3\)</span>, com estimativa de <span class="math inline">\(\sim\)</span> 14 dias, parece ser estatisticamente diferente de <span class="math inline">\(W_1\)</span> (<span class="math inline">\(\sim\)</span> 17 dias).</p>
 <p>O primeiro gráfico apresentado na Figura <a href="#fig:perfilfinal">7.2</a> traz a média da <span class="math inline">\(ET\)</span> acumulada em cada dia pelas quatro plantas de cada tratamento. As linhas sólidas são os ajustes para os tratamentos feitos pela Equação <a href="#eq:2">(5.1)</a>. Os demais gráficos apresentam todos os valores observados para as 4 plantas em cada tratamento e as linhas sólidas indicam o modelo individual para cada planta.</p>
-<div class="figure" style="text-align: center"><span id="fig:perfilfinal"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:perfilfinal"></span>
 <img src="FigurasETbook2/perfilfinal-1.png" alt="Perfis de resposta da $ET$ acumulada pelas plantas de alface ao longo de 23 dias consecutivos para os níveis de água no solo $W_1$, $W_2$ e $W_3$." width="768" />
 <p class="caption">
 Figure 7.2: Perfis de resposta da <span class="math inline">\(ET\)</span> acumulada pelas plantas de alface ao longo de 23 dias consecutivos para os níveis de água no solo <span class="math inline">\(W_1\)</span>, <span class="math inline">\(W_2\)</span> e <span class="math inline">\(W_3\)</span>.
@@ -741,6 +734,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
