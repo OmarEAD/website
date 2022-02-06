@@ -104,9 +104,3 @@ dp %>% matrix(nrow = 3) %>%
 |        B       |   630000  |   500000   |
 
 Table: (\#tab:conces) Receita das concecionárias A e B. 
-
-
-
-
-
-

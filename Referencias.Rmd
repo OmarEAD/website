@@ -1,0 +1,175 @@
+---
+title: "Referências e citações"
+author: "Omar Cléo"
+#date: "`r format(Sys.time(),'%I:%M %p %d %B %Y')`"
+output: bookdown::html_document2
+bibliography: bibliografiaRef.bib
+---
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      size = "footnotesize",
+                      comment = NA,
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.align = "center",
+                      fig.width = 8, 
+                      fig.height = 4, 
+                      fig.show = "hold",
+                      fig.path = "Figuras/",
+                      fig.pos = "!htb",
+                      background = "#E6E6FA",
+                      dev = c("png",'pdf'),
+                      res=300,
+                      dpi = 300,
+                      cache = TRUE)
+
+
+```
+
+
+```{r library, echo=F, results='hide'}
+library(tidyverse)
+library(tinytex)
+library(knitr)
+library(kableExtra)
+library(xtable)
+```
+
+
+ 
+# Referências
+
+Agora estamos próximo do final da nossa análise de dados e precisamos citar os artigos e livros que usamos para apoiar nosso estudo.
+
+Citar suas referências em um documento rmarkdown é simples. Inicialmente você vai precisar criar um arquivo `.bib`. Um arquivo `.bib` armazena todas as referências do seu artigo e pode ser usado também no $\LaTeX$, uma outra linguagem de marcação (e que não vem ao caso agora). 
+
+Para citar o _software_ `R` no seu artigo, você pode usar o comando `citation()` no console do `R`.
+
+```{r}
+citation()
+```
+
+
+
+Então você deve copiar o seguinte:
+
+```
+@Manual{,
+    title = {R: A Language and Environment for Statistical Computing},
+    author = {{R Core Team}},
+    organization = {R Foundation for Statistical Computing},
+    address = {Vienna, Austria},
+    year = {2019},
+    url = {https://www.R-project.org/},
+  }
+```
+
+e salvar no seu arquivo `.bib`. Como outro exemplo, vamos citar o _package_ `nlme`:
+
+```{r}
+citation('nlme')
+```
+
+E copiamos para o arquivo `.bib` o seguinte:
+
+```
+@Manual{,
+    title = {{nlme}: Linear and Nonlinear Mixed Effects Models},
+    author = {Jose Pinheiro and Douglas Bates and Saikat DebRoy and Deepayan Sarkar and {R Core Team}},
+    year = {2020},
+    note = {R package version 3.1-147},
+    url = {https://CRAN.R-project.org/package=nlme},
+  }
+```
+
+Uma forma interessante de referenciar um artigo é usar o __Google Acadêmico__ (<https://scholar.google.com.br/scholar?q=>). Observa a Figura @\ref{fig:gacademico1} e veja onde está circulado em vermelho. 
+
+
+```{r gacademico1, echo=F, fig.align = 'center', out.width = "115%", fig.cap = "Recorte de uma busca no _Google Acadêmico_"}
+knitr::include_graphics(here::here( "Gacademico.png"))
+```
+
+Clicando ali, aparecerá uma quadro chamado __Citar__ (Figura \@ref(fig:gacademico2)).
+
+
+```{r gacademico2, echo=F, fig.align = 'center', out.width = "80%", fig.cap = "Recorte de uma busca no _Google Acadêmico_"}
+knitr::include_graphics(here::here( "Gacademico2.png"))
+```
+
+Então, clique em __BibTex__, circulado em vermelho (Figura \@ref(fig:gacademico2)). Aparecerá uma página com a citação no formato `.bib`. 
+
+```
+@article{verbeke1996linear,
+  title={A linear mixed-effects model with heterogeneity in the random-effects population},
+  author={Verbeke, Geert and Lesaffre, Emmanuel},
+  journal={Journal of the American Statistical Association},
+  volume={91},
+  number={433},
+  pages={217--221},
+  year={1996},
+  publisher={Taylor \& Francis}
+}
+```
+
+Basta copiar e colar no seu documento `.bib`.
+
+Depois de criado seu arquivo `.bib` com suas referências, você precisa chamá-lo no __YAML__ do seu documento na opção _bibliography_. Suponha que você tenha dado o nome a esse arquivo de __Referencias.bib__, o __YAML__ fica da seguinte forma:
+
+
+```
+---
+title: 
+author:
+output: html_document
+bibliography: Referencias.bib
+---
+```
+## Citação das referências
+
+Para citar uma referência no texto você precisa do comando `@` antes do nome do artigo ou livro. O nome da referência é você que escolhe. Observa que as referências do `R` e do _package_ `nlme` começam da seguinte forma: `@Manual{,`. Entre a __chave__ e a __vírgula__ você deve acrescentar um nome. Por exemplo, para o `R` podemos colocar `softwareR`. Neste caso, a citação no arquivo `.bib` fica:
+
+
+```
+@Manual{softwareR,
+    title = {R: A Language and Environment for Statistical Computing},
+    author = {{R Core Team}},
+    organization = {R Foundation for Statistical Computing},
+    address = {Vienna, Austria},
+    year = {2019},
+    url = {https://www.R-project.org/},
+  }
+```
+Para citá-lo no texto você deve digitar `(@softwareR)`:
+
+Esta análise estatística foi realizada por meio do _software_ `R` (@softwareR). 
+
+E quando compilar seu documento, o seu texto ficarà assim:
+
+Esta análise estatística foi realizada por meio do _software_ R (Core Team (2019)).
+
+E no final do seu documento aparecerá a citação:
+
+
+```
+R Core Team (2019). R: A language and environment for statistical computing. R
+  Foundation for Statistical Computing, Vienna, Austria. URL
+  https://www.R-project.org/.
+  
+
+```
+
+
+Para mais detalhes sobre estilos de citação, ver os sites <https://docs.citationstyles.org/en/1.0.1/primer.html> e <https://github.com/citation-style-language/styles>
+
+
+
+    
+    
+
+
+
+
+
+
+

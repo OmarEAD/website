@@ -19,16 +19,16 @@ navbar:
           href: Teste.html
         - text: "Teste2"
           href: create_yml.html
-    - text: "Alguns Estudos"
-      menu: 
-        - text: "Include Images"
-          href: images.html
-        - text: "Embed a webpage"
-          href: embed.html
+    - text: "Alguns estudos"
+      menu:
+        - text: "RMarkdown"
+          menu:
+            - text: "Referências"
+              href: Referencias.html
     - text: "Estatística Básica"      
       menu: 
         - text: "Lista"
           href: ListaEstatBasic.html
-        - text: "Updating"
+        - text: "Lista 2"
           href: updating.html
 output_dir: "."

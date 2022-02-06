@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Omar Cléo" />
 
 
-<title>OMAR CLÉO NEVES PEREIRA</title>
+<title>Referências e citações</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -60,8 +61,29 @@ if (window.hljs) {
 
 
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
 
 
 
@@ -401,25 +423,133 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">OMAR CLÉO NEVES PEREIRA</h1>
+<h1 class="title toc-ignore">Referências e citações</h1>
+<h4 class="author">Omar Cléo</h4>
 
 </div>
 
 
-<p><a href="https://linkedin.com/in/omar-cléo-neves-pereira"><img src="Figuras/linkedin.jpg" title="linkedin" style="width:5.0%" /></a>
-<a href="http://lattes.cnpq.br/9448206585707320"><img src="Figuras/lattes.png" title="lattes" style="width:5.0%" /></a>
-<a href="https://github.com/OmarEAD"><img src="Figuras/github.png" title="lattes" style="width:5.0%" /></a></p>
-<!-- Seja bem-vindo à minha página pessoal! -->
-<p><img src="Figuras/foto.jpg" style="width:80.0%" /></p>
-<p><span style="color:darkblue;font-weight:800;font-size:40px">
-Olá, aqui é o Omar!
-</span></p>
-<div id="sejam-bem-vindos" class="section level1 unnumbered">
-<h1>Sejam bem-vindos!</h1>
-<p>O desejo de trabalhar com agricultura surgiu desde criança, ao ver meu pai cultivando todos os dias em nossa horta caseira. Naquele pedacinho de terra, de aproximadamente de 25 metros quadrados, meu pai conseguia contribuir para a alimentação de nossa família, amigos e vizinhos. Isto foi muito motivador.</p>
-<p>A agricultura brasileira tem se superado todos os anos e hoje alimenta grande parte do planeta. Este sucesso foi possível devido ao comprometimento das pessoas envolvidas neste processo, as quais se aperfeiçoaram de forma inter e multidisciplinares. A tecnologia empregada por meu pai já não seria suficiente hoje, mas o espírito, para servir ao maior número de pessoas, é o mesmo.</p>
-<p>Minhas especialidades incluem a formação em Agronomia (graduação, mestrado e doutorado), Física (bacharelado e mestrado) e Bioestatística (pós-doutorado), áreas que também atuo como pesquisador e professor. Como resultado prático desta multidisciplinaridade, destaco o desenvolvimento de um equipamento para monitoramento da atividade iónica da solução do solo, patenteado pela Universidade Estadual de Maringá.</p>
-<p>Também tenho como especialidade a programação em R, Latex (knitr), Markdown, e em outras linguagens, com as quais é possível gerar relatórios dinâmicos, além de apresentações e textos. Destaco ainda, minha competência na análise e ciência de dados e estatística, e, claro, meu entusiasmo em sempre estar disposto a aprender novas habilidades. Neste contexto me coloco a disposição para me envolver e atuar em novos projetos e desafios.</p>
+<div id="referências" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Referências</h1>
+<p>Agora estamos próximo do final da nossa análise de dados e precisamos citar os artigos e livros que usamos para apoiar nosso estudo.</p>
+<p>Citar suas referências em um documento rmarkdown é simples. Inicialmente você vai precisar criar um arquivo <code>.bib</code>. Um arquivo <code>.bib</code> armazena todas as referências do seu artigo e pode ser usado também no <span class="math inline">\(\LaTeX\)</span>, uma outra linguagem de marcação (e que não vem ao caso agora).</p>
+<p>Para citar o <em>software</em> <code>R</code> no seu artigo, você pode usar o comando <code>citation()</code> no console do <code>R</code>.</p>
+<pre class="r"><code>citation()</code></pre>
+<pre><code>
+To cite R in publications use:
+
+  R Core Team (2021). R: A language and environment for statistical
+  computing. R Foundation for Statistical Computing, Vienna, Austria.
+  URL https://www.R-project.org/.
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {R: A Language and Environment for Statistical Computing},
+    author = {{R Core Team}},
+    organization = {R Foundation for Statistical Computing},
+    address = {Vienna, Austria},
+    year = {2021},
+    url = {https://www.R-project.org/},
+  }
+
+We have invested a lot of time and effort in creating R, please cite it
+when using it for data analysis. See also &#39;citation(&quot;pkgname&quot;)&#39; for
+citing R packages.</code></pre>
+<p>Então você deve copiar o seguinte:</p>
+<pre><code>@Manual{,
+    title = {R: A Language and Environment for Statistical Computing},
+    author = {{R Core Team}},
+    organization = {R Foundation for Statistical Computing},
+    address = {Vienna, Austria},
+    year = {2019},
+    url = {https://www.R-project.org/},
+  }</code></pre>
+<p>e salvar no seu arquivo <code>.bib</code>. Como outro exemplo, vamos citar o <em>package</em> <code>nlme</code>:</p>
+<pre class="r"><code>citation(&#39;nlme&#39;)</code></pre>
+<pre><code>
+Pinheiro J, Bates D, DebRoy S, Sarkar D, R Core Team (2021). _nlme:
+Linear and Nonlinear Mixed Effects Models_. R package version 3.1-152,
+&lt;URL: https://CRAN.R-project.org/package=nlme&gt;.
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {{nlme}: Linear and Nonlinear Mixed Effects Models},
+    author = {Jose Pinheiro and Douglas Bates and Saikat DebRoy and Deepayan Sarkar and {R Core Team}},
+    year = {2021},
+    note = {R package version 3.1-152},
+    url = {https://CRAN.R-project.org/package=nlme},
+  }</code></pre>
+<p>E copiamos para o arquivo <code>.bib</code> o seguinte:</p>
+<pre><code>@Manual{,
+    title = {{nlme}: Linear and Nonlinear Mixed Effects Models},
+    author = {Jose Pinheiro and Douglas Bates and Saikat DebRoy and Deepayan Sarkar and {R Core Team}},
+    year = {2020},
+    note = {R package version 3.1-147},
+    url = {https://CRAN.R-project.org/package=nlme},
+  }</code></pre>
+<p>Uma forma interessante de referenciar um artigo é usar o <strong>Google Acadêmico</strong> (<a href="https://scholar.google.com.br/scholar?q=" class="uri">https://scholar.google.com.br/scholar?q=</a>). Observa a Figura @ e veja onde está circulado em vermelho.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gacademico1"></span>
+<img src="Gacademico.PNG" alt="Recorte de uma busca no _Google Acadêmico_" width="115%" />
+<p class="caption">
+Figure 1.1: Recorte de uma busca no <em>Google Acadêmico</em>
+</p>
+</div>
+<p>Clicando ali, aparecerá uma quadro chamado <strong>Citar</strong> (Figura <a href="#fig:gacademico2">1.2</a>).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gacademico2"></span>
+<img src="Gacademico2.PNG" alt="Recorte de uma busca no _Google Acadêmico_" width="80%" />
+<p class="caption">
+Figure 1.2: Recorte de uma busca no <em>Google Acadêmico</em>
+</p>
+</div>
+<p>Então, clique em <strong>BibTex</strong>, circulado em vermelho (Figura <a href="#fig:gacademico2">1.2</a>). Aparecerá uma página com a citação no formato <code>.bib</code>.</p>
+<pre><code>@article{verbeke1996linear,
+  title={A linear mixed-effects model with heterogeneity in the random-effects population},
+  author={Verbeke, Geert and Lesaffre, Emmanuel},
+  journal={Journal of the American Statistical Association},
+  volume={91},
+  number={433},
+  pages={217--221},
+  year={1996},
+  publisher={Taylor \&amp; Francis}
+}</code></pre>
+<p>Basta copiar e colar no seu documento <code>.bib</code>.</p>
+<p>Depois de criado seu arquivo <code>.bib</code> com suas referências, você precisa chamá-lo no <strong>YAML</strong> do seu documento na opção <em>bibliography</em>. Suponha que você tenha dado o nome a esse arquivo de <strong>Referencias.bib</strong>, o <strong>YAML</strong> fica da seguinte forma:</p>
+<pre><code>---
+title: 
+author:
+output: html_document
+bibliography: Referencias.bib
+---</code></pre>
+<div id="citação-das-referências" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Citação das referências</h2>
+<p>Para citar uma referência no texto você precisa do comando <code>@</code> antes do nome do artigo ou livro. O nome da referência é você que escolhe. Observa que as referências do <code>R</code> e do <em>package</em> <code>nlme</code> começam da seguinte forma: <code>@Manual{,</code>. Entre a <strong>chave</strong> e a <strong>vírgula</strong> você deve acrescentar um nome. Por exemplo, para o <code>R</code> podemos colocar <code>softwareR</code>. Neste caso, a citação no arquivo <code>.bib</code> fica:</p>
+<pre><code>@Manual{softwareR,
+    title = {R: A Language and Environment for Statistical Computing},
+    author = {{R Core Team}},
+    organization = {R Foundation for Statistical Computing},
+    address = {Vienna, Austria},
+    year = {2019},
+    url = {https://www.R-project.org/},
+  }</code></pre>
+<p>Para citá-lo no texto você deve digitar <code>(@softwareR)</code>:</p>
+<p>Esta análise estatística foi realizada por meio do <em>software</em> <code>R</code> (<span class="citation">R Core Team (2019)</span>).</p>
+<p>E quando compilar seu documento, o seu texto ficarà assim:</p>
+<p>Esta análise estatística foi realizada por meio do <em>software</em> R (Core Team (2019)).</p>
+<p>E no final do seu documento aparecerá a citação:</p>
+<pre><code>R Core Team (2019). R: A language and environment for statistical computing. R
+  Foundation for Statistical Computing, Vienna, Austria. URL
+  https://www.R-project.org/.
+  
+</code></pre>
+<p>Para mais detalhes sobre estilos de citação, ver os sites <a href="https://docs.citationstyles.org/en/1.0.1/primer.html" class="uri">https://docs.citationstyles.org/en/1.0.1/primer.html</a> e <a href="https://github.com/citation-style-language/styles" class="uri">https://github.com/citation-style-language/styles</a></p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-softwareR" class="csl-entry">
+R Core Team. 2019. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+</div>
+</div>
 </div>
 
 
