@@ -28,5 +28,5 @@ navbar:
             - text: "Lista de exercícios"
               href: ListaEstatBasic.html
             - text: "Outros materiais"
-              href: EADPresEstBasA1.
+              href: EADPresEstBasA1.html
 output_dir: "."

@@ -1,24 +1,37 @@
 ---
-title: ESTATÍSTICA BÁSICA
-subtitle: Teoria e aplicações
-author: Dr. Omar Cléo Neves Pereira
+title: "Estatística Básica[^1]"
+author: "Prof. Omar"
 output: 
   bookdown::html_document2:
     css: style.css  
-
-#output:
-#    beamer_presentation:
-#        theme: "AnnArbor"
-#        colortheme: "dolphin"
-#        fonttheme: "structurebold"
-#        incremental: false
-#        css: style.css
-        #slide_level: 2
-#header-includes: 
-#- \definecolor{yourcolourname}{rgb}{1,0.5,0}
-#- \setbeamercolor{structure}{fg=yourcolourname}
-#- \setbeamercolor{frametitle}{fg=blue,bg=lightgray}
+#bibliography: bibliografiaETbook.bib
+#biblio-style: authoryear
 ---
+
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      size = "footnotesize",
+                      comment = NA,
+                      warning = FALSE,
+                      message = FALSE,
+                      #out.width = "1\\linewidth",
+                      fig.align = "center",
+                      fig.width = 8, 
+                      fig.height = 4, 
+                      fig.show = "hold",
+                      fig.path = "Figuras1/",
+                      fig.pos = "!htb",
+                      fig.cap = TRUE,
+                      background = "#E6E6FA",
+                      dev = c("png",'pdf'),
+                      res=300,
+                      dpi = 300,
+                      cache = TRUE)
+```
+
+
+[^1]: Este artigo é uma apresentação sobre __Histograma__. Os conjuntos de dados apresentados são meramente didáticos e não condizem com a realidade, em outras palavras, são fictícios. Se o conjunto de dados apresentado for real, isto será dito e a sua fonte também será mostrada. Caso encontre erros, queira fazer comentários, ou troca uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
 
 # Variáveis numéricas
 
