@@ -23,8 +23,6 @@ navbar:
               href: Referencias.html
     - text: "Estatística Básica"      
       menu: 
-        - text: "Lista"
+        - text: "Lista de exercícios"
           href: ListaEstatBasic.html
-        - text: "Lista 2"
-          href: updating.html
 output_dir: "."
