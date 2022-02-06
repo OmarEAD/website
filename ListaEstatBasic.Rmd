@@ -96,7 +96,7 @@ dp %>% matrix(nrow = 3) %>%
 ```
 
 
-* Duas concessionárias tem suas receitas apresentadas na Tabela \@ref(tab:conces). Qual delas apresenta maior dispersão? Discuta os resultados.
+* As receitas de duas concessionárias estão apresentadas na Tabela \@ref(tab:conces). Qual delas apresenta maior dispersão? Discuta os resultados.
 
 | Concessionária | Média (R\$) | Desvio (R\$) |
 |:--------------:|:---------:|:----------:|
