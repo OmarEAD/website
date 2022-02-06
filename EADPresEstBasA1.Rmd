@@ -1,5 +1,5 @@
 ---
-title: "Estatística Básica[^1]"
+title: "Estatística: lista de exercício[^1]"
 author: "Prof. Omar"
 output: 
   bookdown::html_document2:
@@ -28,6 +28,25 @@ knitr::opts_chunk$set(echo = FALSE,
                       res=300,
                       dpi = 300,
                       cache = TRUE)
+```
+
+```{r library, results='hide'}
+library(tidyverse)
+library(tinytex)
+library(knitr)
+library(kableExtra)
+library(xtable)
+```
+
+```{r functions, echo=FALSE, results='hide'}
+# A function to scale input to 0-1
+scale_01 <- function(x){
+  (x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE))
+}
+```
+
+```{r read-data, echo=FALSE,results='hide'}
+# gapminder <- read_csv(here::here("data", "gapminder.csv"))
 ```
 
 
