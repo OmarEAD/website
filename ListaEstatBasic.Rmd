@@ -77,13 +77,13 @@ dd %>%
 
 
 * Uma pesquisa mostrou que o brasileiro gasta em média R\$234,19 por mês se alimentando fora de casa (dados fictícios). Os gastos para se alimentar fora de casa referentes a uma amostra de 30 adolescentes estão apresentados na Tabela \@ref(tab:adoles). 
-    * Faça uma tabela de distribuição de frequências
-    * Esboce um histograma
-    * Calcule a média, a mediana e a moda
+    * Faça uma tabela de distribuição de frequências (use o bom senso).
+    * Esboce um histograma.
+    * Calcule a média, a mediana e a moda.
     * Se considerarmos os dados do item anterior, esses adolescentes gastam o mesmo que a média dos brasileiros que se alimentam fora?
-    * Calcule o primeiro e o terceiro quartis
-    * Calcule a amplitude e a amplitude interquartil
-    * Calcule a variância, o desvio-padrão e o coeficiente de variação
+    * Calcule o primeiro e o terceiro quartis.
+    * Calcule a amplitude e a amplitude interquartil.
+    * Calcule a variância, o desvio-padrão e o coeficiente de variação.
 
 ```{r adoles, echo=FALSE, fig.pos="!H",out.extra = "", results='asis'}
 set.seed(7)
