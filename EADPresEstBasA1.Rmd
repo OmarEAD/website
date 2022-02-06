@@ -1,0 +1,192 @@
+---
+title: ESTATÍSTICA BÁSICA
+subtitle: Teoria e aplicações
+author: Dr. Omar Cléo Neves Pereira
+output: 
+  bookdown::html_document2:
+    css: style.css  
+
+#output:
+#    beamer_presentation:
+#        theme: "AnnArbor"
+#        colortheme: "dolphin"
+#        fonttheme: "structurebold"
+#        incremental: false
+#        css: style.css
+        #slide_level: 2
+#header-includes: 
+#- \definecolor{yourcolourname}{rgb}{1,0.5,0}
+#- \setbeamercolor{structure}{fg=yourcolourname}
+#- \setbeamercolor{frametitle}{fg=blue,bg=lightgray}
+---
+
+# Variáveis numéricas
+
+## Histograma
+
+O Histograma é um gráfico de colunas justapostas em que cada coluna representa uma classe. Apresenta as seguintes características:
+
+- As barras (retângulos) tem área proporcional à frequência de cada classe.
+
+- A área total das barras é igual a um. 
+
+- A densidade de cada classe é calculada dividindo a frequência relativa ($Freq$) da classe ou proporção pela sua amplitude ($AC$, Amplitude da Classe),
+
+$$ Densidade = \frac{Freq}{AC} $$
+
+
+
+## Dados
+
+Table: Distribuição de frequência da altura dos universitários do sexo masculino.
+
+|     Altura (m)     | Frequência  | Frequência (\%) | Frequência Acumulada | Frequência Acumulada (\%) |
+|:------------------:|:-----------:|:---------------:|:--------------------:|:-------------------------:|
+| 1.50 $\vdash$ 1.55 |      2      |       0.72      |           2          |            0.72           |
+| 1.55 $\vdash$ 1.60 |      25     |       8.99      |          27          |            9.71           |
+| 1.60 $\vdash$ 1.65 |      60     |      21.58      |          87          |           31.29           |
+| 1.65 $\vdash$ 1.70 |      79     |      28.42      |          166         |           59.71           |
+| 1.70 $\vdash$ 1.75 |      55     |      19.78      |          221         |           79.49           |
+| 1.75 $\vdash$ 1.80 |      32     |      11.51      |          253         |           91.00           |
+| 1.80 $\vdash$ 1.85 |      11     |       3.96      |          264         |           94.96           |
+| 1.85 $\vdash$ 1.90 |      6      |       2.16      |          270         |           97.12           |
+| 1.90 $\vdash$ 1.95 |      5      |       1.80      |          275         |           98.92           |
+| 1.95 $\vdash$ 2.00 |      3      |       1.08      |          278         |           100.00          |
+
+
+
+## Dados (densidade)
+
+Table: Distribuição de frequência da altura dos universitários do sexo masculino.
+
+|     Altura (m)     | Frequência  | Freq. relativa | Frequência (\%) | Densidade |
+|:------------------:|:-----------:|:-------------------:|:---------------:|:---------:|
+| 1.50 $\vdash$ 1.55 |      2      |        0.0072       |       0.72      |   0.144   |
+| 1.55 $\vdash$ 1.60 |      25     |        0.0899       |       8.99      |   1.799   |
+| 1.60 $\vdash$ 1.65 |      60     |        0.2158       |      21.58      |   4.317   |
+| 1.65 $\vdash$ 1.70 |      79     |        0.2842       |      28.42      |   5.683   |
+| 1.70 $\vdash$ 1.75 |      55     |        0.1978       |      19.78      |   3.957   |
+| 1.75 $\vdash$ 1.80 |      32     |        0.1151       |      11.51      |   2.302   |
+| 1.80 $\vdash$ 1.85 |      11     |        0.0396       |       3.96      |   0.791   |
+| 1.85 $\vdash$ 1.90 |      6      |        0.0216       |       2.16      |   0.432   |
+| 1.90 $\vdash$ 1.95 |      5      |        0.0180       |       1.80      |   0.360   |
+| 1.95 $\vdash$ 2.00 |      3      |        0.0108       |       1.08      |   0.216   |
+
+## Frequência (pseudo histograma)
+
+```{r, histaltuniver, echo=FALSE, results='hide', fig.cap= 'Pseudo histograma das alturas dos estudantes universitários do sexo masculino.' , fig.height=5, fig.pos='H' }
+
+alt  <- seq(1.525,1.975,0.05)
+Freq <- c(2, 25, 60, 79, 55, 32, 11, 6, 5, 3)
+Altura <- rep(alt,Freq)
+mean(Altura)
+length(Altura)
+fff <- round((Freq/length(Altura))*100,2)
+#fff
+#
+par(mar=c(4, 4.5, 2, 1),cex.lab=1.4, cex.sub=1.4)
+hist(Altura, main = "", ylab = 'Frequência', ylim = c(0,80), xlab = 'Altura (m)', labels = T)
+
+```
+
+## Densidade (Histograma)
+
+```{r, histaltuniver3, echo=FALSE, results='hide', fig.cap= 'Histograma das alturas dos estudantes universitários do sexo masculino.' , fig.height=5, fig.pos='H' }
+
+alt  <- seq(1.525,1.975,0.05)
+Freq <- c(2, 25, 60, 79, 55, 32, 11, 6, 5, 3)
+Altura <- rep(alt,Freq)
+mean(Altura)
+length(Altura)
+fff <- round((Freq/length(Altura))*100,2)
+#fff
+#
+par(mar=c(4, 4.5, 2, 1),cex.lab=1.4, cex.sub=1.4)
+# density
+par(mar=c(4, 4.5, 2, 1),cex.lab=1.4, cex.sub=1.4)
+hist(Altura, main = "", 
+     ylab = 'Densidade', 
+     ylim = c(0,6), 
+     xlab = 'Altura (m)', 
+     labels = T,
+     probability = T)
+
+```
+
+## Simetria
+
+```{r simetria, fig.cap='Histogramas para três conjuntos de dados simulados com distribuição assimetria à direita, distribuição simétrica e distribuição assimetrica à esquerda.',fig.height=5 , fig.pos='H', echo=FALSE}
+
+par(mfrow=c(1,3))
+#par(mar=c(2.5, 2.5, 1.5, 0.5), mgp=c(1.5,0.5,0), las=0)
+set.seed(7)
+x4 <- rbeta(1000,2,7)
+hist(x4, main = 'Distribuição assimétrica à direita', 
+     xlab = 'Variável estudada', 
+     probability = T,
+     ylab = 'Densidade')
+#
+set.seed(7)
+x4 <- rbeta(1000,100,100)
+hist(x4, main = 'Distribuição simétrica', 
+     xlab = 'Variável estudada', 
+     probability = T,
+     ylab = 'Densidade')
+#
+set.seed(7)
+x4 <- rbeta(1000,7,2)
+hist(x4, main = 'Distribuição assimétrica à esquerda',
+     xlab = 'Variável estudada', 
+     probability = T,
+     ylab = 'Densidade')
+par(mfrow=c(1,1))
+```
+
+## Curva teórica (modelo probabilístico)
+
+```{r curvafreq, fig.cap='Histograma e curva teórica para um conjunto de dados simulados.', fig.height=5, echo=FALSE}
+par(mfrow=c(1,1))
+set.seed(7)
+x2 <- rnorm(1000,1.67,0.10)
+par(mar=c(2.5, 2.5, 0.5, 0.5), mgp=c(1.5,0.5,0),
+    las=0)
+hist(x2, freq = F, 
+     main='',xlab="Variável medida", 
+     ylab = "Densidade",probability = T)
+x3 <- seq(1.4,2.0,0.1)
+curve(dnorm(x, mean=1.67, sd=0.10), 
+      col="darkblue", lwd=2, add=TRUE, yaxt="n")
+```
+
+
+## Curtose
+
+```{r curtose, fig.cap='Curvas teóricas para conceituar a curtose.',fig.height=5, echo=FALSE}
+par(mfrow=c(1,3))
+par(mar=c(2.5, 2.5, 1.5, 0.5), mgp=c(1.5,0.5,0), las=0)
+#
+x <- seq(1.5,2.5,0.01)
+plot(dnorm(x, mean=2, sd=0.38),  main = 'Platicúrtica', ylab = 'Frequência', xlab = "Variável estudada",
+      col="darkblue", lwd=2, type = 'l', ylim = c(0,4), xlim = c(0,100))
+#
+plot(dnorm(x, mean=2, sd=0.2), main = 'Mesocúrtica', ylab = 'Frequência', xlab = "Variável estudada",
+      col="darkblue", lwd=2, type = 'l', ylim = c(0,4), xlim = c(0,100))
+#
+plot(dnorm(x, mean=2, sd=0.11), main = 'Leptocúrtica', ylab = 'Frequência', xlab = "Variável estudada",
+      col="darkblue", lwd=2, type = 'l', ylim = c(0,4), xlim = c(0,100))
+par(mfrow=c(1,1))
+```
+
+## Exemplo `R` (cars)
+
+Qual a proporção de carros que percorrem distâncias entre 30 e 65 ft?
+
+```{r echo=F, fig.height=5.5}
+data(cars)
+hist(cars$dist, probability = T,labels = T,
+     main = "",xlab = "Distância (ft)",
+     ylim = c(0,0.020))
+```
+
+
+

@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Dr. Omar Cléo Neves Pereira" />
 
 
-<title>OMAR CLÉO NEVES PEREIRA</title>
+<title>ESTATÍSTICA BÁSICA</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -400,25 +401,256 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">OMAR CLÉO NEVES PEREIRA</h1>
+<h1 class="title toc-ignore">ESTATÍSTICA BÁSICA</h1>
+<h3 class="subtitle">Teoria e aplicações</h3>
+<h4 class="author">Dr. Omar Cléo Neves Pereira</h4>
 
 </div>
 
 
-<p><a href="https://linkedin.com/in/omar-cléo-neves-pereira"><img src="Figuras/linkedin.jpg" title="linkedin" style="width:5.0%" /></a>
-<a href="http://lattes.cnpq.br/9448206585707320"><img src="Figuras/lattes.png" title="lattes" style="width:5.0%" /></a>
-<a href="https://github.com/OmarEAD"><img src="Figuras/github.png" title="lattes" style="width:5.0%" /></a></p>
-<!-- Seja bem-vindo à minha página pessoal! -->
-<p><img src="Figuras/foto.jpg" style="width:80.0%" /></p>
-<p><span style="color:darkblue;font-weight:800;font-size:40px">
-Olá, aqui é o Omar!
-</span></p>
-<div id="sejam-bem-vindos" class="section level1 unnumbered">
-<h1>Sejam bem-vindos!</h1>
-<p>O desejo de trabalhar com agricultura surgiu desde criança, ao ver meu pai cultivando todos os dias em nossa horta caseira. Naquele pedacinho de terra, de aproximadamente de 25 metros quadrados, meu pai conseguia contribuir para a alimentação de nossa família, amigos e vizinhos. Isto foi muito motivador.</p>
-<p>A agricultura brasileira tem se superado todos os anos e hoje alimenta grande parte do planeta. Este sucesso foi possível devido ao comprometimento das pessoas envolvidas neste processo, as quais se aperfeiçoaram de forma inter e multidisciplinares. A tecnologia empregada por meu pai já não seria suficiente hoje, mas o espírito, para servir ao maior número de pessoas, é o mesmo.</p>
-<p>Minhas especialidades incluem a formação em Agronomia (graduação, mestrado e doutorado), Física (bacharelado e mestrado) e Bioestatística (pós-doutorado), áreas que também atuo como pesquisador e professor. Como resultado prático desta multidisciplinaridade, destaco o desenvolvimento de um equipamento para monitoramento da atividade iónica da solução do solo, patenteado pela Universidade Estadual de Maringá.</p>
-<p>Também tenho como especialidade a programação em R, Latex (knitr), Markdown, e em outras linguagens, com as quais é possível gerar relatórios dinâmicos, além de apresentações e textos. Destaco ainda, minha competência na análise e ciência de dados e estatística, e, claro, meu entusiasmo em sempre estar disposto a aprender novas habilidades. Neste contexto me coloco a disposição para me envolver e atuar em novos projetos e desafios.</p>
+<div id="variáveis-numéricas" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Variáveis numéricas</h1>
+<div id="histograma" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Histograma</h2>
+<p>O Histograma é um gráfico de colunas justapostas em que cada coluna representa uma classe. Apresenta as seguintes características:</p>
+<ul>
+<li><p>As barras (retângulos) tem área proporcional à frequência de cada classe.</p></li>
+<li><p>A área total das barras é igual a um.</p></li>
+<li><p>A densidade de cada classe é calculada dividindo a frequência relativa (<span class="math inline">\(Freq\)</span>) da classe ou proporção pela sua amplitude (<span class="math inline">\(AC\)</span>, Amplitude da Classe),</p></li>
+</ul>
+<p><span class="math display">\[ Densidade = \frac{Freq}{AC} \]</span></p>
+</div>
+<div id="dados" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Dados</h2>
+<table>
+<caption>Distribuição de frequência da altura dos universitários do sexo masculino.</caption>
+<colgroup>
+<col width="20%" />
+<col width="13%" />
+<col width="17%" />
+<col width="22%" />
+<col width="27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Altura (m)</th>
+<th align="center">Frequência</th>
+<th align="center">Frequência (%)</th>
+<th align="center">Frequência Acumulada</th>
+<th align="center">Frequência Acumulada (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1.50 <span class="math inline">\(\vdash\)</span> 1.55</td>
+<td align="center">2</td>
+<td align="center">0.72</td>
+<td align="center">2</td>
+<td align="center">0.72</td>
+</tr>
+<tr class="even">
+<td align="center">1.55 <span class="math inline">\(\vdash\)</span> 1.60</td>
+<td align="center">25</td>
+<td align="center">8.99</td>
+<td align="center">27</td>
+<td align="center">9.71</td>
+</tr>
+<tr class="odd">
+<td align="center">1.60 <span class="math inline">\(\vdash\)</span> 1.65</td>
+<td align="center">60</td>
+<td align="center">21.58</td>
+<td align="center">87</td>
+<td align="center">31.29</td>
+</tr>
+<tr class="even">
+<td align="center">1.65 <span class="math inline">\(\vdash\)</span> 1.70</td>
+<td align="center">79</td>
+<td align="center">28.42</td>
+<td align="center">166</td>
+<td align="center">59.71</td>
+</tr>
+<tr class="odd">
+<td align="center">1.70 <span class="math inline">\(\vdash\)</span> 1.75</td>
+<td align="center">55</td>
+<td align="center">19.78</td>
+<td align="center">221</td>
+<td align="center">79.49</td>
+</tr>
+<tr class="even">
+<td align="center">1.75 <span class="math inline">\(\vdash\)</span> 1.80</td>
+<td align="center">32</td>
+<td align="center">11.51</td>
+<td align="center">253</td>
+<td align="center">91.00</td>
+</tr>
+<tr class="odd">
+<td align="center">1.80 <span class="math inline">\(\vdash\)</span> 1.85</td>
+<td align="center">11</td>
+<td align="center">3.96</td>
+<td align="center">264</td>
+<td align="center">94.96</td>
+</tr>
+<tr class="even">
+<td align="center">1.85 <span class="math inline">\(\vdash\)</span> 1.90</td>
+<td align="center">6</td>
+<td align="center">2.16</td>
+<td align="center">270</td>
+<td align="center">97.12</td>
+</tr>
+<tr class="odd">
+<td align="center">1.90 <span class="math inline">\(\vdash\)</span> 1.95</td>
+<td align="center">5</td>
+<td align="center">1.80</td>
+<td align="center">275</td>
+<td align="center">98.92</td>
+</tr>
+<tr class="even">
+<td align="center">1.95 <span class="math inline">\(\vdash\)</span> 2.00</td>
+<td align="center">3</td>
+<td align="center">1.08</td>
+<td align="center">278</td>
+<td align="center">100.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="dados-densidade" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Dados (densidade)</h2>
+<table>
+<caption>Distribuição de frequência da altura dos universitários do sexo masculino.</caption>
+<thead>
+<tr class="header">
+<th align="center">Altura (m)</th>
+<th align="center">Frequência</th>
+<th align="center">Freq. relativa</th>
+<th align="center">Frequência (%)</th>
+<th align="center">Densidade</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1.50 <span class="math inline">\(\vdash\)</span> 1.55</td>
+<td align="center">2</td>
+<td align="center">0.0072</td>
+<td align="center">0.72</td>
+<td align="center">0.144</td>
+</tr>
+<tr class="even">
+<td align="center">1.55 <span class="math inline">\(\vdash\)</span> 1.60</td>
+<td align="center">25</td>
+<td align="center">0.0899</td>
+<td align="center">8.99</td>
+<td align="center">1.799</td>
+</tr>
+<tr class="odd">
+<td align="center">1.60 <span class="math inline">\(\vdash\)</span> 1.65</td>
+<td align="center">60</td>
+<td align="center">0.2158</td>
+<td align="center">21.58</td>
+<td align="center">4.317</td>
+</tr>
+<tr class="even">
+<td align="center">1.65 <span class="math inline">\(\vdash\)</span> 1.70</td>
+<td align="center">79</td>
+<td align="center">0.2842</td>
+<td align="center">28.42</td>
+<td align="center">5.683</td>
+</tr>
+<tr class="odd">
+<td align="center">1.70 <span class="math inline">\(\vdash\)</span> 1.75</td>
+<td align="center">55</td>
+<td align="center">0.1978</td>
+<td align="center">19.78</td>
+<td align="center">3.957</td>
+</tr>
+<tr class="even">
+<td align="center">1.75 <span class="math inline">\(\vdash\)</span> 1.80</td>
+<td align="center">32</td>
+<td align="center">0.1151</td>
+<td align="center">11.51</td>
+<td align="center">2.302</td>
+</tr>
+<tr class="odd">
+<td align="center">1.80 <span class="math inline">\(\vdash\)</span> 1.85</td>
+<td align="center">11</td>
+<td align="center">0.0396</td>
+<td align="center">3.96</td>
+<td align="center">0.791</td>
+</tr>
+<tr class="even">
+<td align="center">1.85 <span class="math inline">\(\vdash\)</span> 1.90</td>
+<td align="center">6</td>
+<td align="center">0.0216</td>
+<td align="center">2.16</td>
+<td align="center">0.432</td>
+</tr>
+<tr class="odd">
+<td align="center">1.90 <span class="math inline">\(\vdash\)</span> 1.95</td>
+<td align="center">5</td>
+<td align="center">0.0180</td>
+<td align="center">1.80</td>
+<td align="center">0.360</td>
+</tr>
+<tr class="even">
+<td align="center">1.95 <span class="math inline">\(\vdash\)</span> 2.00</td>
+<td align="center">3</td>
+<td align="center">0.0108</td>
+<td align="center">1.08</td>
+<td align="center">0.216</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="frequência-pseudo-histograma" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Frequência (pseudo histograma)</h2>
+<div class="figure"><span style="display:block;" id="fig:histaltuniver"></span>
+<img src="EADPresEstBasA1_files/figure-html/histaltuniver-1.png" alt="Pseudo histograma das alturas dos estudantes universitários do sexo masculino." width="672" />
+<p class="caption">
+Figure 1.1: Pseudo histograma das alturas dos estudantes universitários do sexo masculino.
+</p>
+</div>
+</div>
+<div id="densidade-histograma" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Densidade (Histograma)</h2>
+<div class="figure"><span style="display:block;" id="fig:histaltuniver3"></span>
+<img src="EADPresEstBasA1_files/figure-html/histaltuniver3-1.png" alt="Histograma das alturas dos estudantes universitários do sexo masculino." width="672" />
+<p class="caption">
+Figure 1.2: Histograma das alturas dos estudantes universitários do sexo masculino.
+</p>
+</div>
+</div>
+<div id="simetria" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Simetria</h2>
+<div class="figure"><span style="display:block;" id="fig:simetria"></span>
+<img src="EADPresEstBasA1_files/figure-html/simetria-1.png" alt="Histogramas para três conjuntos de dados simulados com distribuição assimetria à direita, distribuição simétrica e distribuição assimetrica à esquerda." width="672" />
+<p class="caption">
+Figure 1.3: Histogramas para três conjuntos de dados simulados com distribuição assimetria à direita, distribuição simétrica e distribuição assimetrica à esquerda.
+</p>
+</div>
+</div>
+<div id="curva-teórica-modelo-probabilístico" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Curva teórica (modelo probabilístico)</h2>
+<div class="figure"><span style="display:block;" id="fig:curvafreq"></span>
+<img src="EADPresEstBasA1_files/figure-html/curvafreq-1.png" alt="Histograma e curva teórica para um conjunto de dados simulados." width="672" />
+<p class="caption">
+Figure 1.4: Histograma e curva teórica para um conjunto de dados simulados.
+</p>
+</div>
+</div>
+<div id="curtose" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> Curtose</h2>
+<div class="figure"><span style="display:block;" id="fig:curtose"></span>
+<img src="EADPresEstBasA1_files/figure-html/curtose-1.png" alt="Curvas teóricas para conceituar a curtose." width="672" />
+<p class="caption">
+Figure 1.5: Curvas teóricas para conceituar a curtose.
+</p>
+</div>
+</div>
+<div id="exemplo-r-cars" class="section level2" number="1.9">
+<h2><span class="header-section-number">1.9</span> Exemplo <code>R</code> (cars)</h2>
+<p>Qual a proporção de carros que percorrem distâncias entre 30 e 65 ft?</p>
+<p><img src="EADPresEstBasA1_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
 </div>
 
 

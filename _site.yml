@@ -21,8 +21,12 @@ navbar:
           menu:
             - text: "Referências"
               href: Referencias.html
-    - text: "Estatística Básica"      
-      menu: 
-        - text: "Lista de exercícios"
-          href: ListaEstatBasic.html
+    - text: "Alunos"
+      menu:
+        - text: "Estatística Básica"
+          menu:
+            - text: "Lista de exercícios"
+              href: ListaEstatBasic.html
+            - text: "Outros materiais"
+              href: EADPresEstBasA1.
 output_dir: "."
