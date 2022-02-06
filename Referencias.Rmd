@@ -1,8 +1,12 @@
 ---
 title: "Referências e citações[^1]"
 author: "Omar Cléo"
+output: 
+  bookdown::html_document2:
+    css: style.css  
+
 #date: "`r format(Sys.time(),'%I:%M %p %d %B %Y')`"
-output: bookdown::html_document2
+#output: bookdown::html_document2
 bibliography: bibliografiaRef.bib
 ---
 
