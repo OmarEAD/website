@@ -1,5 +1,5 @@
 ---
-title: "Referências e citações"
+title: "Referências e citações[^1]"
 author: "Omar Cléo"
 #date: "`r format(Sys.time(),'%I:%M %p %d %B %Y')`"
 output: bookdown::html_document2
@@ -37,6 +37,7 @@ library(xtable)
 ```
 
 
+[^1]: Este artigo é um resumo sobre __referências em RMarkdown__ . Caso encontre erros, queira fazer comentários, ou troca uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
  
 # Referências
 
