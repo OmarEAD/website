@@ -1,5 +1,5 @@
 ---
-title: "Estatística: lista de exercício"
+title: "Estatística: lista de exercício[^1]"
 author: "Prof. Omar"
 #output: 
 #  pdf_document:
@@ -52,6 +52,9 @@ scale_01 <- function(x){
 ```{r read-data, echo=FALSE,results='hide'}
 # gapminder <- read_csv(here::here("data", "gapminder.csv"))
 ```
+
+
+[^1]: Este artigo é uma lista de exercícios sobre __estatística básica__ . Caso encontre erros, queira fazer comentários, ou troca uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
 
 # Estatística descritiva
 
