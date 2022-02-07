@@ -31,4 +31,10 @@ navbar:
               href: ListaEstatBasic.html
             - text: "Outros materiais"
               href: EADPresEstBasA1.html
+    - text: "Destaques"
+      menu:
+        - text: "Patente"
+          menu:
+            - text: "Carta Patente"
+              href: Patente.html
 output_dir: "."

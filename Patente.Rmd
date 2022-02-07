@@ -1,6 +1,6 @@
 ---
 title: "Patente[^1]"
-author: "Omar Cléo"
+author: "Omar Cléo Neves Pereira e Altair Bertonha"
 output: 
   bookdown::html_document2:
     css: style.css  
@@ -27,21 +27,26 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 
 
-```{r library, echo=F, results='hide'}
-library(tidyverse)
-library(tinytex)
-library(knitr)
-library(kableExtra)
-library(xtable)
-```
+[^1]: Apresentação da Carta Patente referente ao desenvolvimento de um equipamento para monitoramento da atividade iônica da solução do solo. Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
 
-
-[^1]: Este artigo é sobre o __RMarkdown__. Não temos o propósido de esgotar toda demanda sobre o assunto, mas fazer algo introdutório. Pratique muito e você verá que essa _markup languege_ é muito simples e versátil. Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
-
-# Introdução
+# Carta Patente
 
 Carta Patente emitida pelo Instituto Nacional da Propriedade Industrial (INPI), referente à invenção intitulada "Equipamento para Monitoramento Iônico da Solução do Solo" (Processo nº. PI 0602031-3)
 
-![](./Figuras/CartaPatente.pdf){width=80%} 
+![](./Figuras/patente/CartaPatente1.jpg){width=100%} 
+![](./Figuras/patente/CartaPatente2.jpg){width=100%}
+
+![](./Figuras/patente/CartaPatente3.jpg){width=100%}
+
+![](./Figuras/patente/CartaPatente4.jpg){width=100%}
+
+![](./Figuras/patente/CartaPatente5.jpg){width=100%}
+
+![](./Figuras/patente/CartaPatente6.jpg){width=100%}
+
+![](./Figuras/patente/CartaPatente7.jpg){width=100%}
+
+![](./Figuras/patente/CartaPatente8.jpg){width=100%}
+
 
 
