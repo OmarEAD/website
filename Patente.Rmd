@@ -1,0 +1,47 @@
+---
+title: "Patente[^1]"
+author: "Omar Cléo"
+output: 
+  bookdown::html_document2:
+    css: style.css  
+---
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      size = "footnotesize",
+                      comment = NA,
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.align = "center",
+                      fig.width = 8, 
+                      fig.height = 4, 
+                      fig.show = "hold",
+                      fig.path = "Figuras/",
+                      fig.pos = "!htb",
+                      background = "#E6E6FA",
+                      dev = c("png",'pdf'),
+                      res=300,
+                      dpi = 300,
+                      cache = TRUE)
+
+```
+
+
+```{r library, echo=F, results='hide'}
+library(tidyverse)
+library(tinytex)
+library(knitr)
+library(kableExtra)
+library(xtable)
+```
+
+
+[^1]: Este artigo é sobre o __RMarkdown__. Não temos o propósido de esgotar toda demanda sobre o assunto, mas fazer algo introdutório. Pratique muito e você verá que essa _markup languege_ é muito simples e versátil. Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
+
+# Introdução
+
+Carta Patente emitida pelo Instituto Nacional da Propriedade Industrial (INPI), referente à invenção intitulada "Equipamento para Monitoramento Iônico da Solução do Solo" (Processo nº. PI 0602031-3)
+
+![](./Figuras/CartaPatente.pdf){width=80%} 
+
+
