@@ -1,0 +1,111 @@
+---
+title: "Lembranças[^1]"
+author: "Omar Cléo"
+output: 
+  bookdown::html_document2:
+    css: style.css  
+---
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      size = "footnotesize",
+                      comment = NA,
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.align = "center",
+                      fig.width = 8, 
+                      fig.height = 4, 
+                      fig.show = "hold",
+                      fig.path = "Figuras/",
+                      fig.pos = "!htb",
+                      background = "#E6E6FA",
+                      dev = c("png",'pdf'),
+                      res=300,
+                      dpi = 300,
+                      cache = TRUE)
+
+```
+
+
+[^1]: Algumas lembranças e lugares por onde passei. Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
+
+# Fotos
+
+## Bahia
+
+![Barra](./Figuras/Fotos/bahia1.jpg){width=100%} 
+
+![Barra](./Figuras/Fotos/bahia2.jpg){width=100%}
+
+![Pelourinho](./Figuras/Fotos/bahia3.jpg){width=100%}
+
+## Chile
+
+![Subindo os Andes](./Figuras/Fotos/chile1.jpg){width=100%} 
+
+![Andes](./Figuras/Fotos/chile2.jpg){width=100%} 
+
+![Andes](./Figuras/Fotos/chile3.jpg){width=100%} 
+
+![Andes](./Figuras/Fotos/chile4.jpg){width=100%} 
+
+![Valparaiso](./Figuras/Fotos/chile5.jpg){width=100%} 
+
+![Valparaiso](./Figuras/Fotos/chile6.jpg){width=100%} 
+
+![Valparaiso](./Figuras/Fotos/chile7.jpg){width=100%} 
+
+![Valparaiso](./Figuras/Fotos/chile8.jpg){width=100%} 
+
+![Valparaiso](./Figuras/Fotos/chile9.jpg){width=100%} 
+
+![Calle Pedro de Valdivia Santiago](./Figuras/Fotos/chile10.jpg){width=100%} 
+
+![Chopp merecido](./Figuras/Fotos/chile11.jpg){width=100%} 
+
+![Mais Chopp](./Figuras/Fotos/chile12.jpg){width=100%} 
+
+
+## Espanha
+
+
+![Santiago de Compostela](./Figuras/Fotos/santiago1.jpg){width=100%}
+
+![Santiago de Compostela](./Figuras/Fotos/santiago2.jpg){width=100%}
+
+![Santiago de Compostela](./Figuras/Fotos/santiago3.jpg){width=100%}
+
+
+## Foz do Iguaçu
+
+
+![Usina de Itaipu](./Figuras/Fotos/foz.jpg){width=100%}
+
+## Porto São José 
+
+![Porto](./Figuras/Fotos/porto1.jpg){width=100%}
+
+![Por do Sol](./Figuras/Fotos/porto2.jpg){width=100%}
+
+## Portugal
+
+![Lisboa](./Figuras/Fotos/portugal1.jpg){width=100%}
+
+<!-- ![Lisboa](./Figuras/Fotos/portugal2.jpg){alt="avatar" style="zoom:70%;transform:rotate(90deg)"} -->
+
+
+![Lisboa](./Figuras/Fotos/portugal2.jpg){width=100%}
+
+
+![Mealhada](./Figuras/Fotos/portugal5.jpg){style="zoom:100%;transform:rotate(180deg)"}
+
+
+![São Cipriano](./Figuras/Fotos/portugal6.jpg){width=100%}
+
+![São Cipriano](./Figuras/Fotos/portugal7.jpg){width=100%}
+
+## Roma
+
+![Coliseu](./Figuras/Fotos/roma2.jpg){width=100%}
+
+![Castelo Sant'Angelo](./Figuras/Fotos/roma3.jpg){width=100%}

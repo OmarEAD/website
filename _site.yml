@@ -37,4 +37,8 @@ navbar:
           menu:
             - text: "Carta Patente"
               href: Patente.html
+        - text: "Fotos"
+          menu:
+            - text: "Lembranças"
+              href: Fotos.html
 output_dir: "."
