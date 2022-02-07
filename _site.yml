@@ -19,6 +19,8 @@ navbar:
       menu:
         - text: "RMarkdown"
           menu:
+            - text: "Comandos básicos"
+              href: RMarkdownBas.html
             - text: "Referências"
               href: Referencias.html
     - text: "Alunos"

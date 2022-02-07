@@ -50,19 +50,15 @@ scale_01 <- function(x){
 ```
 
 
-[^1]: Este artigo é uma lista de exercícios sobre __estatística básica__. Provavelmente, esta lista ganhará novos exercícios ao longo do tempo. Os conjuntos de dados apresentados são meramente didáticos e não condizem com a realidade, em outras palavras, são fictícios. Se o conjunto de dados apresentado for real, isto será dito e a sua fonte também será mostrada. Caso encontre erros, queira fazer comentários, ou troca uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
+[^1]: Este artigo é uma lista de exercícios sobre __estatística básica__. Provavelmente, esta lista ganhará novos exercícios ao longo do tempo. Os conjuntos de dados apresentados são meramente didáticos e não condizem com a realidade, em outras palavras, são fictícios. Se o conjunto de dados apresentado for real, isto será dito e a sua fonte também será mostrada. Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
 
 # Estatística descritiva
 
 
-* Alguns funcionários de uma empresa decidiram participar de uma pesquisa para avaliar o tempo gasto para irem de casa ao trabalho usando o transporte coletivo e o automóvel próprio. Se você fosse o responsável por essa pesquisa, como a realizaria? De forma concisa descreva detalhes da coleta de dados e possíveis problemas que poderiam ocorrer.
+1. Alguns funcionários de uma empresa decidiram participar de uma pesquisa para avaliar o tempo gasto para irem de casa ao trabalho usando o transporte coletivo e o automóvel próprio. Se você fosse o responsável por essa pesquisa, como a realizaria? De forma concisa descreva detalhes da coleta de dados e possíveis problemas que poderiam ocorrer.
 
 
-* Considere o problema anterior. Suponha que você tenha coletado uma amostra do tempo (minutos) de translado de casa ao trabalho de 10 funcionários, ora indo de transporte coletivo, ora de carro próprio (Tabela \@ref(tab:transp)). Esse tipo de dados tem estrutura pareada (em breve estudaremos isto com detalhes).
-
-    * Calcule o tempo médio e o desvio padrão de cada tipo de locomoção.
-    * Em função dos resultados acima, qual meio de transporte deve ser preferido? Discuta.
-    * Compare a dispersão dos dois meios de transporte. Qual tem maior dispersão?
+2. Considere o problema anterior. Suponha que você tenha coletado uma amostra do tempo (minutos) de translado de casa ao trabalho de 10 funcionários, ora indo de transporte coletivo, ora de carro próprio (Tabela \@ref(tab:transp)). Esse tipo de dados tem estrutura pareada (em breve estudaremos isto com detalhes).
 
 ```{r transp, echo=FALSE, fig.pos="!H",out.extra = "", results='asis'}
 set.seed(7)
@@ -76,14 +72,12 @@ dd %>%
 ```
 
 
-* Uma pesquisa mostrou que o brasileiro gasta em média R\$234,19 por mês se alimentando fora de casa (dados fictícios). Os gastos para se alimentar fora de casa referentes a uma amostra de 30 adolescentes estão apresentados na Tabela \@ref(tab:adoles). 
-    * Faça uma tabela de distribuição de frequências (use o bom senso).
-    * Esboce um histograma.
-    * Calcule a média, a mediana e a moda.
-    * Se considerarmos os dados do item anterior, esses adolescentes gastam o mesmo que a média dos brasileiros que se alimentam fora?
-    * Calcule o primeiro e o terceiro quartis.
-    * Calcule a amplitude e a amplitude interquartil.
-    * Calcule a variância, o desvio-padrão e o coeficiente de variação.
+* Calcule o tempo médio e o desvio padrão de cada tipo de locomoção.
+* Em função dos resultados acima, qual meio de transporte deve ser preferido? Discuta.
+* Compare a dispersão dos dois meios de transporte. Qual tem maior dispersão?
+
+
+3. Uma pesquisa mostrou que o brasileiro gasta em média R\$234,19 por mês se alimentando fora de casa (dados fictícios). Os gastos para se alimentar fora de casa referentes a uma amostra de 30 adolescentes estão apresentados na Tabela \@ref(tab:adoles). 
 
 ```{r adoles, echo=FALSE, fig.pos="!H",out.extra = "", results='asis'}
 set.seed(7)
@@ -94,8 +88,15 @@ dp %>% matrix(nrow = 3) %>%
   kable_styling(full_width = FALSE, latex_options = "HOLD_position")
 ```
 
+* Faça uma tabela de distribuição de frequências (use o bom senso).
+* Esboce um histograma.
+* Calcule a média, a mediana e a moda.
+* Se considerarmos os dados do item anterior, esses adolescentes gastam o mesmo que a média dos brasileiros que se alimentam fora?
+* Calcule o primeiro e o terceiro quartis.
+* Calcule a amplitude e a amplitude interquartil.
+* Calcule a variância, o desvio-padrão e o coeficiente de variação.
 
-* As receitas de duas concessionárias estão apresentadas na Tabela \@ref(tab:conces). Qual delas apresenta maior dispersão? Discuta os resultados.
+4. As receitas de duas concessionárias estão apresentadas na Tabela \@ref(tab:conces). Qual delas apresenta maior dispersão? Discuta os resultados.
 
 | Concessionária | Média (R\$) | Desvio (R\$) |
 |:--------------:|:---------:|:----------:|

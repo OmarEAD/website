@@ -1,0 +1,343 @@
+---
+title: "RMarkdown Básico[^1]"
+author: "Omar Cléo"
+output: 
+  bookdown::html_document2:
+    css: style.css  
+
+#date: "`r format(Sys.time(),'%I:%M %p %d %B %Y')`"
+#output: bookdown::html_document2
+bibliography: bibliografiaMARK.bib
+---
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      size = "footnotesize",
+                      comment = NA,
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.align = "center",
+                      fig.width = 8, 
+                      fig.height = 4, 
+                      fig.show = "hold",
+                      fig.path = "Figuras/",
+                      fig.pos = "!htb",
+                      background = "#E6E6FA",
+                      dev = c("png",'pdf'),
+                      res=300,
+                      dpi = 300,
+                      cache = TRUE)
+
+
+```
+
+
+```{r library, echo=F, results='hide'}
+library(tidyverse)
+library(tinytex)
+library(knitr)
+library(kableExtra)
+library(xtable)
+```
+
+
+[^1]: Este artigo é sobre o __RMarkdown__. Não temos o propósido de esgotar toda demanda sobre o assunto, mas fazer algo introdutório. Pratique muito e você verá que essa _markup languege_ é muito simples e versátil. Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
+
+# Introdução
+
+Este artigo não mostrará os detalhes de instalação dos _softwares_ utilizados. Ele servirá para usuários que já conhecem o _markdown_ e o `R` mas que as vezes precisam se lembrar, por exemplo, como referenciar uma tabela ou figura no texto.
+
+# _Markdown_ e _R_
+
+Assim como HTML e $\LaTeX$, _markdown_ é uma [linguagem de marcação](https://pt.wikipedia.org/wiki/Linguagem_de_marca%C3%A7%C3%A3o) ( _markup language_ ). Desenvolvida por [John Gruber](https://en.wikipedia.org/wiki/John_Gruber) e [Aaron Swartz](https://en.wikipedia.org/wiki/Aaron_Swartz) em 2004, a linguagem _markdown_ tem como objetivo facilitar a formatação de conteúdos, sendo mais simples que a HTML. 
+
+O _RMarkdown_ junta a linguagem de programação `R` e a linguagem de marcação `markdown`. Isto facilita a mistura de códigos de texto e de progração em `R`.
+
+# Comentários
+
+Para comentar um dado trecho do texto é necessário selecionar o texto e em seguida digitar `Control` + `Shift` + `C`. O texto ficará assim:
+
+\<!-- texto comentado -->
+
+e estará comentado.
+
+# Códigos
+
+Para digitar códigos ao longo do texto é necessário colocá-los entre duas crases e o texto ficara com o seguinte aspecto:
+
+`Código digitado`
+
+Você pode escrever um texto em `verbatim` digitando
+
+\```
+
+Este texto será mostrado em verbatim
+
+\```
+
+produzirá
+
+```
+Este texto será mostrado em verbatim
+```
+
+Você pode produzir o mesmo efeito colocando quatro espaços antes do texto que deseja em `verbatim`.
+
+
+# Destacando um texto
+
+Usando um sinal de maior (\>) você destacará um texto, por exemplo
+
+\> Estes texto ficará em destaque
+
+produzirá
+
+> Estes texto ficará em destaque
+
+# Títulos
+
+Trabalhamos com o símbolo \#. Usaremos um \# antes do título, dois antes do subtítulo, e assim por diante, até seis níveis.
+
+\# Título
+
+\#\# Subtítulo
+
+# Formatação de texto
+
+## Itálico
+
+Escrevemos entre dois asteriscos (*) ou dois _underlines_ (_), um de cada lado.
+
+Por exemplo, \_itálico\_ ou \*itálico\* , ficará _itálico_.
+
+## Negrito
+
+Colocamos dois asteriscos (*) ou dois _underlines_ (_) de cada lado.
+
+Por exemplo, \_\_negrito\_\_ ou \*\*negrito\*\* , ficará __negrito__.
+
+> Você não deve deixar espaços entre o texto e os símbolos usados. Além disso, você pode juntar os dois tipos de formatação.
+
+# Listas
+
+## Com números
+
+Vamos enumerar algumas coisas. Observa a numeração da lista. Basta indicar o primeiro valor e as outras linhas que seguem receberão a numeração adequada. 
+
+1\. dddd
+
+3\. ffffffff
+
+2\. dfdfdfdfdfdfdfdf
+
+1\. ggggggggggggggggggg
+
+Observa o resultado final:
+
+
+1. dddd
+
+3. ffffffff
+
+2. dfdfdfdfdfdfdfdf
+
+1. ggggggggggggggggggg
+
+## Com marcadores
+
+Usamos um asterisco ou um traço (sinal de menos) no ínicio de cada linha. Antes do texto deve ter um espaço. Por exemplo,
+
+\* item 1
+
+\* item 2
+
+ficará
+
+* item 1
+* item 2
+
+Para fazer subitens, basta colocar mais que três espaços antes do asterisco.
+
+* item 1
+   * subitem 1
+
+
+# Símbolos sem efeito
+
+Basta digitar uma barra invertida ( \\ ) antes de um símbolo de formatação. Por exemplo, o símbolo \# que usamos para um título principal pode ser escrito sem efeito de formatação colocando uma barra invertida antes, ou seja, digitando \\#.
+ 
+# Equações
+
+Podemos fazer como no $\LaTeX$. Ao longo do texto usamos um \$ antes e outro depois de uma equação. Por exemplo \$E=mc^2\$ ficará $E=mc^2$.
+
+Para equações sem numeração podemos digitar
+
+\$ \$E=mc^2\$ \$
+
+e o resultado será
+
+$$E=mc^2$$
+Também podemos usar o comando `equation` da mesma forma que no $\LaTeX$. Entretanto, destaco que a forma de referenciar as equações é diferente do $\LaTeX$. O _label_ na equação deve estar entre parentes e dessa forma: `(\#eq1)`. Para referenciar a equação no texto usamos o argumento `(\@ref(eq1))`. Caso não coloque o _label_ na equação, ela não será numerada. Por exemplo, digitando
+
+
+`\begin{equation} `
+
+`f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}`
+
+  `(\#eq:binom)`
+  
+`\end{equation}` 
+
+o resultado será
+
+\begin{equation} 
+  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
+  (\#eq:binom)
+\end{equation} 
+
+Digitando `(\@ref(eq:binom))` ao longo do texto teremos (\@ref(eq:binom)), ou ainda, segundo a Equação (\@ref(eq:binom)).
+
+# Referenciando seção
+
+Basta digitar
+
+\# Titulo da seção {\#secao1}
+
+Para citar no texto é preciso digitar `\@ref(secao1)`.
+
+
+# Link
+
+Se você quer dizer, por exemplo, para ir ao site do Prof. Omar clique [aqui](https://omaread.github.io/Website/), você presisa digitar [ aqui ] (endereço eletrônico).
+
+<!-- ![Site Rmarkdown](https://rmd4sci.njtierney.com/using-rmarkdown.html) -->
+
+Você também pode digitar um link entre um sinal de maior (\<) e menor (\>). Por exemplo, 
+
+\<https://omaread.github.io/Website/>
+
+produzirá
+
+<https://omaread.github.io/Website/>
+
+# Gráficos
+
+## Inserindo um _chunk_
+
+Você pode inserir um novo _chunk_ com os comandos `control` + `alt` + `i`.
+
+## Adicionando um gráfico
+
+Você pode adicionar gráficos usando comandos do `R` em um _chunk_. 
+
+\```{r NomeDoChunk, fig.cap="Título do gráfico"}
+
+Aqui você deve digitar seu código `R` para fazer seu gráfico.
+
+\```
+
+Por exemplo,
+
+\```{r pressure, echo=FALSE, fig.cap="grafico de teste" }
+
+plot(pressure)
+
+\```
+
+produzirá o gráfico da Figura  \@ref(fig:pressure). O comando `echo = FALSE` não permite que o código seja mostrado.
+
+```{r pressure, echo=FALSE, fig.cap="grafico de teste" }
+plot(pressure)
+```
+
+
+## Citando o gráfico no texto
+
+Para chamar o gráfico da Figure \@ref(fig:pressure), basta digitar `\@ref(fig:pressure)` 
+
+# Imagens
+
+Você pode inserir uma imagem por meio de um endereço (link). Para isso use os símbolos \![Descrição\](endereço). Por exemplo,
+
+\![Github\](https://octodex.github.com/images/bannekat.png)
+
+produzirá
+
+![Github](https://octodex.github.com/images/bannekat.png) 
+
+# Tabelas
+
+Tabelas podem ser criadas facilmente. Por exemplo,
+
+\| Concessionária \| Média (R\$) \| Desvio (R\$) \|
+
+\|:--------------:\|:---------:\|:----------:\|
+
+\|        A       \|  3280000  \|   1500000  \|
+
+\|        B       \|   630000  \|   500000   \|
+
+Table: (\#tab:tabela1)  Esta tabela é para teste. 
+
+
+produzirá
+
+| Concessionária | Média (R\$) | Desvio (R\$) |
+|:--------------:|:---------:|:----------:|
+|        A       |  3280000  |   1500000  |
+|        B       |   630000  |   500000   |
+
+
+Table: (\#tab:tabela1)  Esta tabela é para teste.
+
+
+## Citando a tabela no texto
+
+Conforme a Tabela `\@ref(tab:tabela1)` produzirá: 
+
+Conforme a Tabela \@ref(tab:tabela1).
+
+## _Site_ para construção de tabelas
+
+Se quiser algo mais fácil, você pode digitar sua tabela no endereço
+
+<https://www.tablesgenerator.com/markdown_tables>
+
+e depois copiar o código no seu texto.
+
+## Outras tabelas
+
+Usando o `R` para criar uma tabela.
+
+\```{r transp, echo=FALSE, fig.pos="!H",out.extra = "", results='asis'}
+
+set.seed(7)
+
+pp <- round(rnorm(10,mean=30,sd=5),0)
+
+qq <- round(rnorm(10,mean=20,sd=5),0)
+
+dd <- t(data.frame(Funcionario=1:10,
+                 TC=pp, AP=qq))
+                 
+dd %>% 
+  kable(caption = "Tempo gasto, em minutos, para 10 funcionários irem de casa até a empresa em que trabalham de duas maneiras, ou transporte coletivo (TC) ou automóvel próprio (AP).") %>% 
+  kable_styling(full_width = FALSE, latex_options = "HOLD_position")
+  
+\```
+
+produzirá
+
+
+```{r transp, echo=FALSE, fig.pos="!H",out.extra = "", results='asis'}
+set.seed(7)
+pp <- round(rnorm(10,mean=30,sd=5),0)
+qq <- round(rnorm(10,mean=20,sd=5),0)
+dd <- t(data.frame(Funcionario=1:10,
+                 TC=pp, AP=qq))
+dd %>% 
+  kable(caption = "Tempo gasto, em minutos, para 10 funcionários irem de casa até a empresa em que trabalham de duas maneiras, ou transporte coletivo (TC) ou automóvel próprio (AP).") %>% 
+  kable_styling(full_width = FALSE, latex_options = "HOLD_position")
+```
+
+Você pode referenciar a Tabela \@ref(tab:transp) no texto com o comando `Tabela \@ref(tab:transp)`.
