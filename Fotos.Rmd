@@ -29,7 +29,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 [^1]: Algumas lembranças e lugares por onde passei. Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
 
-# Fotos
+# Lugares
 
 ## Bahia
 
@@ -75,6 +75,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ![Santiago de Compostela](./Figuras/Fotos/santiago3.jpg){width=100%}
 
+![Polvo no Mercadão de Santiago de Compostela, servido por brasileiros](./Figuras/Fotos/polvo.jpg){width=100%}
 
 ## Foz do Iguaçu
 
@@ -97,15 +98,36 @@ knitr::opts_chunk$set(echo = TRUE,
 ![Lisboa](./Figuras/Fotos/portugal2.jpg){width=100%}
 
 
-![Mealhada](./Figuras/Fotos/portugal5.jpg){width=100%}
+![Óbidos](./Figuras/Fotos/portugal3.jpg){width=100%}
+
+
+![Mealhada - Vinho Messias](./Figuras/Fotos/portugal4.jpg){width=100%}
+
+![Mealhada - Vinho Messias](./Figuras/Fotos/portugal5.jpg){width=100%}
 
 
 ![São Cipriano](./Figuras/Fotos/portugal6.jpg){width=100%}
 
 ![São Cipriano](./Figuras/Fotos/portugal7.jpg){width=100%}
 
+![Ovadas](./Figuras/Fotos/ovadas.jpg){width=100%}
+
 ## Roma
+
+
+![Coliseu](./Figuras/Fotos/roma1.jpg){width=100%}
 
 ![Coliseu](./Figuras/Fotos/roma2.jpg){width=100%}
 
 ![Castelo Sant'Angelo](./Figuras/Fotos/roma3.jpg){width=100%}
+
+
+![Coliseu](./Figuras/Fotos/roma4.jpg){width=100%}
+
+# Confraternização
+
+## Bioestatística
+
+![Churrasco na casa da Isolde](./Figuras/Fotos/isolde1.jpg){width=100%}
+
+![Churrasco da Bioestatística](./Figuras/Fotos/isolde2.jpg){width=100%}
