@@ -59,7 +59,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ![Valparaiso](./Figuras/Fotos/chile9.jpg){width=100%} 
 
-![Calle Pedro de Valdivia Santiago](./Figuras/Fotos/chile10.jpg){width=100%} 
+![Calle Pedro de Valdivia -  Santiago](./Figuras/Fotos/chile10.jpg){width=100%} 
 
 ![Chopp merecido](./Figuras/Fotos/chile11.jpg){width=100%} 
 
@@ -69,7 +69,7 @@ knitr::opts_chunk$set(echo = TRUE,
 ## Espanha
 
 
-![Santiago de Compostela](./Figuras/Fotos/santiago1.jpg){width=100%}
+![Catedral de Santiago de Compostela (em reforma)](./Figuras/Fotos/santiago1.jpg){width=100%}
 
 ![Santiago de Compostela](./Figuras/Fotos/santiago2.jpg){width=100%}
 
@@ -122,7 +122,7 @@ knitr::opts_chunk$set(echo = TRUE,
 ![Castelo Sant'Angelo](./Figuras/Fotos/roma3.jpg){width=100%}
 
 
-![Coliseu](./Figuras/Fotos/roma4.jpg){width=100%}
+![Roma](./Figuras/Fotos/roma4.jpg){width=100%}
 
 # Confraternização
 
