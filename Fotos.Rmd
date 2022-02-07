@@ -97,7 +97,7 @@ knitr::opts_chunk$set(echo = TRUE,
 ![Lisboa](./Figuras/Fotos/portugal2.jpg){width=100%}
 
 
-![Mealhada](./Figuras/Fotos/portugal5.jpg){style="zoom:100%;transform:rotate(180deg)"}
+![Mealhada](./Figuras/Fotos/portugal5.jpg){width=100%}
 
 
 ![São Cipriano](./Figuras/Fotos/portugal6.jpg){width=100%}
