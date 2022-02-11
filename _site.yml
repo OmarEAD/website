@@ -15,6 +15,8 @@ navbar:
       menu:
         - text: "Evapotranspiração"
           href: ETbook.html
+        - text: "Modelos Mistos"
+          href: Mixed.html
     - text: "Alguns estudos"
       menu:
         - text: "RMarkdown"
@@ -23,9 +25,9 @@ navbar:
               href: RMarkdownBas.html
             - text: "Referências"
               href: Referencias.html
-    - text: "Alunos"
+    - text: "Estatística Básica"
       menu:
-        - text: "Estatística Básica"
+        - text: "Alunos"
           menu:
             - text: "Lista de exercícios"
               href: ListaEstatBasic.html

@@ -190,8 +190,6 @@ curve(dnorm(x, mean=1.67, sd=0.10),
       col="darkblue", lwd=2, add=TRUE, yaxt="n")
 ```
 
-
-
 <!-- ## Curtose -->
 
 ```{r curtose, fig.show='hide',fig.cap='Curvas teóricas para conceituar a curtose.',fig.height=5, echo=FALSE}
