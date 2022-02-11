@@ -94,6 +94,7 @@ dp %>% matrix(nrow = 3) %>%
 * Se considerarmos os dados do item anterior, esses adolescentes gastam o mesmo que a média dos brasileiros que se alimentam fora?
 * Calcule o primeiro e o terceiro quartis.
 * Calcule a amplitude e a amplitude interquartil.
+* Construa um boxplot.
 * Calcule a variância, o desvio-padrão e o coeficiente de variação.
 
 4. As receitas de duas concessionárias estão apresentadas na Tabela \@ref(tab:conces). Qual delas apresenta maior dispersão? Discuta os resultados.
@@ -104,3 +105,41 @@ dp %>% matrix(nrow = 3) %>%
 |        B       |   630000  |   500000   |
 
 Table: (\#tab:conces) Receita das concecionárias A e B. 
+
+
+5. Na Tabela \@ref(tab:corr1) é apresentado seis observações das variáveis $X$ e $Y$.
+
+```{r corr1, echo=FALSE, fig.pos="!H",out.extra = "", results='asis'}
+set.seed(1)
+x <- round(rnorm(6,mean = 10,sd=4),0)
+y <- x + round(rnorm(6,mean = 0,sd=1),0)
+dd <- t(data.frame(X=x, Y=y))
+dd %>% 
+  kable(caption = "Seis observações das variáveis X e Y.") %>% 
+  kable_styling(full_width = FALSE, latex_options = "HOLD_position")
+```
+
+* Faça um diagrama de dispersão ($X$ no eixo horizontal).
+* Calcule a covariância da amostra.
+* Calcule e interprete a correlação da amostra.
+
+
+6. O diretor de uma escola quer saber se há associação entre a média escolar ($ME$) e o desempenho em um simulado ($SIM$). Na Tabela \@ref(tab:corr2) é apresentado uma amostra de seis alunos.
+
+```{r corr2, echo=FALSE, fig.pos="!H",out.extra = "", results='asis'}
+set.seed(1)
+x <- round(rnorm(6,mean = 6,sd=1.1),1)
+y <- x + round(rnorm(6,mean = 0,sd=0.5),1)
+dd <- t(data.frame(ME=x, SIM=y))
+dd %>% 
+  kable(caption = "Seis observações das variáveis ME e SIM.") %>% 
+  kable_styling(full_width = FALSE, latex_options = "HOLD_position")
+```
+
+* Faça um diagrama de dispersão ($ME$ no eixo horizontal).
+* Calcule a covariância da amostra.
+* Calcule e interprete a correlação da amostra.
+
+
+
+

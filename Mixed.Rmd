@@ -1,0 +1,62 @@
+---
+title: "Modelos mistos[^1]"
+author: "Prof. Omar"
+output: 
+  bookdown::html_document2:
+    css: style.css  
+#bibliography: bibliografiaETbook.bib
+#biblio-style: authoryear
+---
+
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      size = "footnotesize",
+                      comment = NA,
+                      warning = FALSE,
+                      message = FALSE,
+                      #out.width = "1\\linewidth",
+                      fig.align = "center",
+                      fig.width = 8, 
+                      fig.height = 4, 
+                      fig.show = "hold",
+                      fig.path = "Figuras1/",
+                      fig.pos = "!htb",
+                      fig.cap = TRUE,
+                      background = "#E6E6FA",
+                      dev = c("png",'pdf'),
+                      res=300,
+                      dpi = 300,
+                      cache = TRUE)
+```
+
+```{r library, results='hide'}
+library(tidyverse)
+library(tinytex)
+library(knitr)
+library(kableExtra)
+library(xtable)
+```
+
+```{r functions, echo=FALSE, results='hide'}
+# A function to scale input to 0-1
+scale_01 <- function(x){
+  (x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE))
+}
+```
+
+```{r read-data, echo=FALSE,results='hide'}
+# gapminder <- read_csv(here::here("data", "gapminder.csv"))
+```
+
+
+[^1]: Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
+
+# Estatística descritiva
+
+<!-- https://www.juliapilowsky.com/2018/10/19/a-practical-guide-to-mixed-models-in-r/ -->
+
+<!-- https://stats.oarc.ucla.edu/r/faq/how-can-i-visualize-longitudinal-data-in-ggplot2/ -->
+
+<!-- https://strengejacke.github.io/ggeffects/articles/introduction_plotmethod.html -->
+
