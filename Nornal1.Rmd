@@ -1,0 +1,124 @@
+---
+title: "Distribuição Normal[^1]"
+author: "Omar Cléo"
+output: 
+  bookdown::html_document2:
+    css: style.css  
+
+#date: "`r format(Sys.time(),'%I:%M %p %d %B %Y')`"
+#output: bookdown::html_document2
+bibliography: bibliografiaMARK.bib
+---
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      size = "footnotesize",
+                      comment = NA,
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.align = "center",
+                      fig.width = 8, 
+                      fig.height = 4, 
+                      fig.show = "hold",
+                      fig.path = "Figuras/",
+                      fig.pos = "!htb",
+                      background = "#E6E6FA",
+                      dev = c("png",'pdf'),
+                      res=300,
+                      dpi = 300,
+                      cache = TRUE)
+
+
+```
+
+
+```{r library, echo=F, results='hide'}
+library(tidyverse)
+library(tinytex)
+library(knitr)
+library(kableExtra)
+library(xtable)
+```
+
+
+[^1]: Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
+
+# Introdução
+
+A distribuição normal é uma das mais importantes distribuições contínuas de probabilidade e pode ser escrita como
+
+\begin{equation} 
+f(x)= \frac{1}{\sqrt{2 \pi \sigma}} e^{- \frac{(x - \mu)^{2}}{2 \sigma^{2}}}
+,
+(\#eq:qaussiana)
+\end{equation}
+
+em que $\mu$ e $\sigma$ são a média e a variância da distribuição. O objetivo deste artigo é apresentar uma demonstração dessa distribuição em _forma de sino_ a partir da exponenciação de um polinômio de segundo grau, ou seja, 
+
+\begin{equation}
+f(x)= exp \{ ax^{2} + bx + c \}
+(\#eq:polinomio)
+,
+\end{equation}
+
+em que $a$, $b$ e $c$ são constantes. 
+
+```{r}
+x <- seq(-2,2,0.01)
+a <- -2
+b <- 1
+c <- 1
+f <- exp(a*x^2 + b*x + c)
+plot(f)
+```
+
+
+Para que esta função tenha um máximo, faremos $a<0$. Assim $a=- \alpha$ com $\alpha > 0$. A constante $b$, a qual move o pico central da distribuição ao longo de $x$ e $c$ é escolhido para que
+
+\begin{equation}
+\int_{- \infty}^{+ \infty} f(x) \hspace{0.2cm} dx = 1
+.
+\end{equation}
+
+Começaremos agora um trabalho algébrico. Assim
+
+\begin{equation}
+f(x)= exp \{ -(\alpha x^{2} - bx) \} exp \{ {c} \}
+(\#eq:p1)
+,
+\end{equation}
+
+em que, completando quadrados na primeira exponencial da equação (\@ref(p1)), temos
+
+\begin{equation*}
+\alpha x^{2} - bx = \left( \sqrt{ \alpha } x - \frac{b}{2 \sqrt{ \alpha }} \right)^{2} - \left(\frac{b}{2 \sqrt{ \alpha}}\right)^{2}
+.
+\end{equation*}
+
+Dessa forma
+
+\begin{equation*}
+f(x)= exp \left\{ -\left( \sqrt{\alpha} x - \frac{b}{2 \sqrt{ \alpha }} \right)^{2}  \right\}  exp \left\{ c - \left( \frac{b}{2 \sqrt{ \alpha}} \right)^{2}  \right\}
+,
+\end{equation*}
+
+e, como $exp \left\{ c - \left( \frac{b}{2 \sqrt{ \alpha}} \right)^{2}  \right\}$ ? constante, faremos
+
+\begin{equation*}
+\beta = exp \left\{ c - \left( \frac{b}{2 \sqrt{ \alpha}} \right)^{2}  \right\}
+,
+\end{equation*}
+
+ficando com
+
+\begin{equation*}
+f(x) \hspace{0.2cm} = \hspace{0.2cm} \beta \hspace{0.2cm} exp \left\{ -\left( \sqrt{\alpha} x - \frac{b}{2 \sqrt{ \alpha }} \right)^{2}  \right\}
+.
+\end{equation*}
+
+
+
+
+
+
+
