@@ -43,6 +43,10 @@ navbar:
           menu:
             - text: "Carta Patente"
               href: Patente.html
+        - text: "Premiação"
+          menu:
+            - text: "Barcelona"
+              href: barcelona.html
         - text: "Fotos"
           menu:
             - text: "Lembranças"
