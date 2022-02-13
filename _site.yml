@@ -25,6 +25,10 @@ navbar:
               href: RMarkdownBas.html
             - text: "Referências"
               href: Referencias.html
+        - text: "Distribuição Normal"
+          menu:
+            - text: "Normal 1"
+              href: Normal1.html
     - text: "Estatística Básica"
       menu:
         - text: "Alunos"
