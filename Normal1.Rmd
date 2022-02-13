@@ -414,7 +414,7 @@ I_{C}  & = & \frac{1}{\sqrt{2 \pi \sigma^{2}}} \left[ - z \sigma^{2} e^{- \frac{
        & = & \frac{\sigma^{2}}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty} e^{-\frac{z^{2}}{2 \sigma^{2}}} \hspace{0.2cm} dz\\
         & = & \frac{\sigma^{2}}{\sqrt{2 \pi \sigma^{2}}} \sqrt{2 \pi \sigma^{2}}\\
         & = & \sigma^{2}
-,
+.
 \end{eqnarray*}
 
 <!-- conforme queríamos demonstrar. Observamos que, durante esta última passagem, usamos dois resultados desenvolvidos nos Apêndices \ref{inta} e \ref{intb}. -->
