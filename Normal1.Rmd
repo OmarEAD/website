@@ -53,7 +53,7 @@ f(x)= \frac{1}{\sqrt{2 \pi \sigma}} e^{- \frac{(x - \mu)^{2}}{2 \sigma^{2}}}
 (\#eq:gaussiana)
 \end{equation}
 
-em que $\mu$ e $\sigma$ são a média e a variância da distribuição. O objetivo deste artigo é apresentar uma demonstração dessa distribuição em _forma de sino_ a partir da exponenciação de um polinômio de segundo grau, ou seja, 
+em que $\mu$ e $\sigma$ são a média e a variância da distribuição. O objetivo deste artigo é apresentar uma demonstração dessa distribuição em _forma de sino_ a partir da exponenciação de um polinômio de segundo grau, isto é, 
 
 \begin{equation}
 f(x)= exp \{ ax^{2} + bx + c \}
