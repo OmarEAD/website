@@ -34,7 +34,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       cache = TRUE)
 ```
 
-```{r library, results='hide'}
+```{r library, echo=FALSE,results='hide'}
 library(tidyverse)
 library(tinytex)
 library(knitr)
@@ -244,23 +244,19 @@ dd <- data.frame(ME=x, SIM=y)
 * Faça um diagrama de dispersão ($ME$ no eixo horizontal).
 
 ```{r}
-plot(y~x)
+plot(ME~SIM,data = dd)
 ```
 
 * Calcule a covariância da amostra.
 
 ```{r}
-cov(x,y)
+cov(dd$ME,dd$SIM)
 ```
 
 * Calcule e interprete a correlação da amostra.
 
 ```{r}
-cor(x,y)
+cor(dd$ME,dd$SIM)
 # ou 
-cov(x,y)/(sd(x)*sd(y))
+cov(dd$ME,dd$SIM)/(sd(dd$ME)*sd(dd$SIM))
 ```
-
-
-
-
