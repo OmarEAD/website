@@ -4,13 +4,16 @@ author: "Prof. Omar"
 output: 
   bookdown::html_document2:
     css: style.css  
+    #rmdformats::theme:
+    #  flatly
+    #theme: sandstone
 #bibliography: bibliografiaETbook.bib
 #biblio-style: authoryear
 ---
 
 
 ```{r setup , include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, 
+knitr::opts_chunk$set(echo = TRUE, 
                       size = "footnotesize",
                       comment = NA,
                       warning = FALSE,
@@ -24,6 +27,7 @@ knitr::opts_chunk$set(echo = FALSE,
                       fig.pos = "!htb",
                       fig.cap = TRUE,
                       background = "#E6E6FA",
+                      #background = "black",
                       dev = c("png",'pdf'),
                       res=300,
                       dpi = 300,
@@ -66,15 +70,44 @@ pp <- round(rnorm(10,mean=30,sd=5),0)
 qq <- round(rnorm(10,mean=20,sd=5),0)
 dd <- t(data.frame(Funcionario=1:10,
                  TC=pp, AP=qq))
+dt <- as.data.frame(t(dd))
 dd %>% 
   kable(caption = "Tempo gasto, em minutos, para 10 funcionários irem de casa até a empresa em que trabalham de duas maneiras, ou transporte coletivo (TC) ou automóvel próprio (AP).") %>% 
   kable_styling(full_width = FALSE, latex_options = "HOLD_position")
 ```
 
+```{r}
+set.seed(7)
+pp <- round(rnorm(10,mean=30,sd=5),0)
+qq <- round(rnorm(10,mean=20,sd=5),0)
+dt <- data.frame(Funcionario=1:10,
+                 TC=pp, AP=qq)
+# Dados:
+dt
+```
 
 * Calcule o tempo médio e o desvio padrão de cada tipo de locomoção.
+
+```{r}
+# Média e desvio padrão de TC
+mean(dt[,2])
+sd(dt[,2])
+# Média e desvio padrão de AP
+mean(dt[,3])
+sd(dt[,3])
+```
+
+
 * Em função dos resultados acima, qual meio de transporte deve ser preferido? Discuta.
 * Compare a dispersão dos dois meios de transporte. Qual tem maior dispersão?
+
+```{r}
+#Coeficiente de Variação (%):
+#TC
+round((sd(dt[,2])/mean(dt[,2]))*100,2)
+#AP
+round((sd(dt[,3])/mean(dt[,3]))*100,2)
+```
 
 
 3. Uma pesquisa mostrou que o brasileiro gasta em média R\$234,19 por mês se alimentando fora de casa (dados fictícios). Os gastos para se alimentar fora de casa referentes a uma amostra de 30 adolescentes estão apresentados na Tabela \@ref(tab:adoles). 
@@ -88,14 +121,46 @@ dp %>% matrix(nrow = 3) %>%
   kable_styling(full_width = FALSE, latex_options = "HOLD_position")
 ```
 
+```{r}
+# Dados
+set.seed(7)
+dp <- rpois(30,325)
+dp
+```
+
 * Faça uma tabela de distribuição de frequências (use o bom senso).
 * Esboce um histograma.
+
+```{r}
+hist(dp)
+```
+
+
 * Calcule a média, a mediana e a moda.
+
+```{r}
+summary(dp)
+```
+
+
 * Se considerarmos os dados do item anterior, esses adolescentes gastam o mesmo que a média dos brasileiros que se alimentam fora?
 * Calcule o primeiro e o terceiro quartis.
 * Calcule a amplitude e a amplitude interquartil.
 * Construa um boxplot.
+
+```{r}
+boxplot(dp)
+```
+
+
 * Calcule a variância, o desvio-padrão e o coeficiente de variação.
+
+```{r}
+var(dp)
+sd(dp)
+(sd(dp)/mean(dp))*100
+```
+
 
 4. As receitas de duas concessionárias estão apresentadas na Tabela \@ref(tab:conces). Qual delas apresenta maior dispersão? Discuta os resultados.
 
@@ -105,6 +170,15 @@ dp %>% matrix(nrow = 3) %>%
 |        B       |   630000  |   500000   |
 
 Table: (\#tab:conces) Receita das concecionárias A e B. 
+
+```{r}
+# Coeficiente de variação
+# A:
+(1500000/3280000)*100
+#B
+(500000/630000)*100
+```
+
 
 
 5. Na Tabela \@ref(tab:corr1) é apresentado seis observações das variáveis $X$ e $Y$.
@@ -119,9 +193,32 @@ dd %>%
   kable_styling(full_width = FALSE, latex_options = "HOLD_position")
 ```
 
+```{r}
+set.seed(1)
+x <- round(rnorm(6,mean = 10,sd=4),0)
+y <- x + round(rnorm(6,mean = 0,sd=1),0)
+dd <- data.frame(X=x, Y=y)
+```
+
 * Faça um diagrama de dispersão ($X$ no eixo horizontal).
+
+```{r}
+plot(y~x)
+```
+
 * Calcule a covariância da amostra.
+
+```{r}
+cov(x,y)
+```
+
 * Calcule e interprete a correlação da amostra.
+
+```{r}
+cor(x,y)
+# ou 
+cov(x,y)/(sd(x)*sd(y))
+```
 
 
 6. O diretor de uma escola quer saber se há associação entre a média escolar ($ME$) e o desempenho em um simulado ($SIM$). Na Tabela \@ref(tab:corr2) é apresentado uma amostra de seis alunos.
@@ -136,9 +233,33 @@ dd %>%
   kable_styling(full_width = FALSE, latex_options = "HOLD_position")
 ```
 
+```{r}
+set.seed(1)
+x <- round(rnorm(6,mean = 6,sd=1.1),1)
+y <- x + round(rnorm(6,mean = 0,sd=0.5),1)
+dd <- data.frame(ME=x, SIM=y)
+```
+
+
 * Faça um diagrama de dispersão ($ME$ no eixo horizontal).
+
+```{r}
+plot(y~x)
+```
+
 * Calcule a covariância da amostra.
+
+```{r}
+cov(x,y)
+```
+
 * Calcule e interprete a correlação da amostra.
+
+```{r}
+cor(x,y)
+# ou 
+cov(x,y)/(sd(x)*sd(y))
+```
 
 
 
