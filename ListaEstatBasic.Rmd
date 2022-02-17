@@ -140,7 +140,7 @@ hist(dados, labels = T, main = "",
      probability = T, ylim = c(0,0.025))
 ```
 
-
+* Qual a proporção de elementos entre os valores 315 e 345?
 * Calcule a média, a mediana e a moda.
 
 ```{r}
