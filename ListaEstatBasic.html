@@ -574,13 +574,10 @@ AP
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>set.seed(7)
-pp &lt;- round(rnorm(10,mean=30,sd=5),0)
-qq &lt;- round(rnorm(10,mean=20,sd=5),0)
-dt &lt;- data.frame(Funcionario=1:10,
-                 TC=pp, AP=qq)
-# Dados:
-dt</code></pre>
+<pre class="r"><code>TC &lt;- c(41,24,27,28,25,25,34,29,31,41)
+AP &lt;- c(22,34,31,22,29,22,16,18,20,25)
+dados &lt;- data.frame(Funcionario=1:10,TC,AP)
+dados</code></pre>
 <pre><code>   Funcionario TC AP
 1            1 41 22
 2            2 24 34
@@ -596,14 +593,14 @@ dt</code></pre>
 <li>Calcule o tempo médio e o desvio padrão de cada tipo de locomoção.</li>
 </ul>
 <pre class="r"><code># Média e desvio padrão de TC
-mean(dt[,2])</code></pre>
+mean(dados[,2])</code></pre>
 <pre><code>[1] 30.5</code></pre>
-<pre class="r"><code>sd(dt[,2])</code></pre>
+<pre class="r"><code>sd(dados[,2])</code></pre>
 <pre><code>[1] 6.293736</code></pre>
 <pre class="r"><code># Média e desvio padrão de AP
-mean(dt[,3])</code></pre>
+mean(dados[,3])</code></pre>
 <pre><code>[1] 23.9</code></pre>
-<pre class="r"><code>sd(dt[,3])</code></pre>
+<pre class="r"><code>sd(dados[,3])</code></pre>
 <pre><code>[1] 5.801341</code></pre>
 <ul>
 <li>Em função dos resultados acima, qual meio de transporte deve ser preferido? Discuta.</li>
@@ -611,10 +608,10 @@ mean(dt[,3])</code></pre>
 </ul>
 <pre class="r"><code>#Coeficiente de Variação (%):
 #TC
-round((sd(dt[,2])/mean(dt[,2]))*100,2)</code></pre>
+round((sd(dados[,2])/mean(dados[,2]))*100,2)</code></pre>
 <pre><code>[1] 20.64</code></pre>
 <pre class="r"><code>#AP
-round((sd(dt[,3])/mean(dt[,3]))*100,2)</code></pre>
+round((sd(dados[,3])/mean(dados[,3]))*100,2)</code></pre>
 <pre><code>[1] 24.27</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Uma pesquisa mostrou que o brasileiro gasta em média R$234,19 por mês se alimentando fora de casa (dados fictícios). Os gastos para se alimentar fora de casa referentes a uma amostra de 30 adolescentes estão apresentados na Tabela <a href="#tab:adoles">1.2</a>.</li>
@@ -723,18 +720,26 @@ round((sd(dt[,3])/mean(dt[,3]))*100,2)</code></pre>
 </tbody>
 </table>
 <pre class="r"><code># Dados
-set.seed(7)
-dp &lt;- rpois(30,325)
-dp</code></pre>
-<pre><code> [1] 366 303 339 359 323 311 322 282 331 373 366 330 359 333 308 343 339 323 319
-[20] 348 299 358 335 330 319 320 325 334 332 324</code></pre>
+dados &lt;- c(309,324,305,312,281,341,355,296,
+           342,337,334,321,322,299,335,320,
+           338,330,323,330,332,342,346,317,
+           326,319,333,339,311,344)
+dados</code></pre>
+<pre><code> [1] 309 324 305 312 281 341 355 296 342 337 334 321 322 299 335 320 338 330 323
+[20] 330 332 342 346 317 326 319 333 339 311 344</code></pre>
 <ul>
 <li>Faça uma tabela de distribuição de frequências (use o bom senso).</li>
 <li>Esboce um histograma.</li>
 </ul>
-<pre class="r"><code>hist(dp)</code></pre>
+<pre class="r"><code># histograma de frequência absoluta
+hist(dados, labels = T, main = &quot;&quot;,
+     ylim =c(0,9))
+#
+# histograma com densidade
+hist(dados, labels = T, main = &quot;&quot;,
+     probability = T, ylim = c(0,0.025))</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
-<img src="Figuras1/unnamed-chunk-5-1.png" alt="TRUE" width="2400" />
+<img src="Figuras1/unnamed-chunk-5-1.png" alt="TRUE" width="2400" /><img src="Figuras1/unnamed-chunk-5-2.png" alt="TRUE" width="2400" />
 <p class="caption">
 Figure 1.1: TRUE
 </p>
@@ -742,16 +747,16 @@ Figure 1.1: TRUE
 <ul>
 <li>Calcule a média, a mediana e a moda.</li>
 </ul>
-<pre class="r"><code>summary(dp)</code></pre>
+<pre class="r"><code>summary(dados)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  282.0   320.5   330.5   331.8   342.0   373.0 </code></pre>
+  281.0   317.5   328.0   325.4   337.8   355.0 </code></pre>
 <ul>
 <li>Se considerarmos os dados do item anterior, esses adolescentes gastam o mesmo que a média dos brasileiros que se alimentam fora?</li>
 <li>Calcule o primeiro e o terceiro quartis.</li>
 <li>Calcule a amplitude e a amplitude interquartil.</li>
 <li>Construa um boxplot.</li>
 </ul>
-<pre class="r"><code>boxplot(dp)</code></pre>
+<pre class="r"><code>boxplot(dados)</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
 <img src="Figuras1/unnamed-chunk-7-1.png" alt="TRUE" width="2400" />
 <p class="caption">
@@ -761,12 +766,12 @@ Figure 1.2: TRUE
 <ul>
 <li>Calcule a variância, o desvio-padrão e o coeficiente de variação.</li>
 </ul>
-<pre class="r"><code>var(dp)</code></pre>
-<pre><code>[1] 445.7713</code></pre>
-<pre class="r"><code>sd(dp)</code></pre>
-<pre><code>[1] 21.1133</code></pre>
-<pre class="r"><code>(sd(dp)/mean(dp))*100</code></pre>
-<pre><code>[1] 6.363899</code></pre>
+<pre class="r"><code>var(dados)</code></pre>
+<pre><code>[1] 276.323</code></pre>
+<pre class="r"><code>sd(dados)</code></pre>
+<pre><code>[1] 16.62297</code></pre>
+<pre class="r"><code>(sd(dados)/mean(dados))*100</code></pre>
+<pre><code>[1] 5.107948</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>As receitas de duas concessionárias estão apresentadas na Tabela <a href="#tab:conces">1.3</a>. Qual delas apresenta maior dispersão? Discuta os resultados.</li>
 </ol>
@@ -855,14 +860,21 @@ Y
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>set.seed(1)
-x &lt;- round(rnorm(6,mean = 10,sd=4),0)
-y &lt;- x + round(rnorm(6,mean = 0,sd=1),0)
-dd &lt;- data.frame(X=x, Y=y)</code></pre>
+<pre class="r"><code>x &lt;- c(7,11,7,16,11,7)
+y &lt;- c(7,12,8,16,13,7)
+dados3 &lt;- data.frame(X=x, Y=y)
+dados3</code></pre>
+<pre><code>   X  Y
+1  7  7
+2 11 12
+3  7  8
+4 16 16
+5 11 13
+6  7  7</code></pre>
 <ul>
 <li>Faça um diagrama de dispersão (<span class="math inline">\(X\)</span> no eixo horizontal).</li>
 </ul>
-<pre class="r"><code>plot(y~x)</code></pre>
+<pre class="r"><code>plot(Y~X, dados3)</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
 <img src="Figuras1/unnamed-chunk-11-1.png" alt="TRUE" width="2400" />
 <p class="caption">
@@ -938,14 +950,21 @@ SIM
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>set.seed(1)
-x &lt;- round(rnorm(6,mean = 6,sd=1.1),1)
-y &lt;- x + round(rnorm(6,mean = 0,sd=0.5),1)
-dd &lt;- data.frame(ME=x, SIM=y)</code></pre>
+<pre class="r"><code>ME  &lt;- c(5.3,6.2,5.1,7.8,6.4,5.1)
+SIM &lt;- c(5.5,6.6,5.4,7.6,7.2,5.3)
+dados4 &lt;- data.frame(ME, SIM)
+dados4</code></pre>
+<pre><code>   ME SIM
+1 5.3 5.5
+2 6.2 6.6
+3 5.1 5.4
+4 7.8 7.6
+5 6.4 7.2
+6 5.1 5.3</code></pre>
 <ul>
 <li>Faça um diagrama de dispersão (<span class="math inline">\(ME\)</span> no eixo horizontal).</li>
 </ul>
-<pre class="r"><code>plot(ME~SIM,data = dd)</code></pre>
+<pre class="r"><code>plot(ME~SIM,data = dados4)</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-15"></span>
 <img src="Figuras1/unnamed-chunk-15-1.png" alt="TRUE" width="2400" />
 <p class="caption">
@@ -955,15 +974,15 @@ Figure 1.4: TRUE
 <ul>
 <li>Calcule a covariância da amostra.</li>
 </ul>
-<pre class="r"><code>cov(dd$ME,dd$SIM)</code></pre>
+<pre class="r"><code>cov(dados4$ME,dados4$SIM)</code></pre>
 <pre><code>[1] 1.005333</code></pre>
 <ul>
 <li>Calcule e interprete a correlação da amostra.</li>
 </ul>
-<pre class="r"><code>cor(dd$ME,dd$SIM)</code></pre>
+<pre class="r"><code>cor(dados4$ME,dados4$SIM)</code></pre>
 <pre><code>[1] 0.9511981</code></pre>
 <pre class="r"><code># ou 
-cov(dd$ME,dd$SIM)/(sd(dd$ME)*sd(dd$SIM))</code></pre>
+cov(dados4$ME,dados4$SIM)/(sd(dados4$ME)*sd(dados4$SIM))</code></pre>
 <pre><code>[1] 0.9511981</code></pre>
 </div>
 <div class="footnotes">

@@ -77,24 +77,21 @@ dd %>%
 ```
 
 ```{r}
-set.seed(7)
-pp <- round(rnorm(10,mean=30,sd=5),0)
-qq <- round(rnorm(10,mean=20,sd=5),0)
-dt <- data.frame(Funcionario=1:10,
-                 TC=pp, AP=qq)
-# Dados:
-dt
+TC <- c(41,24,27,28,25,25,34,29,31,41)
+AP <- c(22,34,31,22,29,22,16,18,20,25)
+dados <- data.frame(Funcionario=1:10,TC,AP)
+dados
 ```
 
 * Calcule o tempo médio e o desvio padrão de cada tipo de locomoção.
 
 ```{r}
 # Média e desvio padrão de TC
-mean(dt[,2])
-sd(dt[,2])
+mean(dados[,2])
+sd(dados[,2])
 # Média e desvio padrão de AP
-mean(dt[,3])
-sd(dt[,3])
+mean(dados[,3])
+sd(dados[,3])
 ```
 
 
@@ -104,9 +101,9 @@ sd(dt[,3])
 ```{r}
 #Coeficiente de Variação (%):
 #TC
-round((sd(dt[,2])/mean(dt[,2]))*100,2)
+round((sd(dados[,2])/mean(dados[,2]))*100,2)
 #AP
-round((sd(dt[,3])/mean(dt[,3]))*100,2)
+round((sd(dados[,3])/mean(dados[,3]))*100,2)
 ```
 
 
@@ -123,23 +120,31 @@ dp %>% matrix(nrow = 3) %>%
 
 ```{r}
 # Dados
-set.seed(7)
-dp <- rpois(30,325)
-dp
+dados <- c(309,324,305,312,281,341,355,296,
+           342,337,334,321,322,299,335,320,
+           338,330,323,330,332,342,346,317,
+           326,319,333,339,311,344)
+dados
 ```
 
 * Faça uma tabela de distribuição de frequências (use o bom senso).
 * Esboce um histograma.
 
 ```{r}
-hist(dp)
+# histograma de frequência absoluta
+hist(dados, labels = T, main = "",
+     ylim =c(0,9))
+#
+# histograma com densidade
+hist(dados, labels = T, main = "",
+     probability = T, ylim = c(0,0.025))
 ```
 
 
 * Calcule a média, a mediana e a moda.
 
 ```{r}
-summary(dp)
+summary(dados)
 ```
 
 
@@ -149,16 +154,16 @@ summary(dp)
 * Construa um boxplot.
 
 ```{r}
-boxplot(dp)
+boxplot(dados)
 ```
 
 
 * Calcule a variância, o desvio-padrão e o coeficiente de variação.
 
 ```{r}
-var(dp)
-sd(dp)
-(sd(dp)/mean(dp))*100
+var(dados)
+sd(dados)
+(sd(dados)/mean(dados))*100
 ```
 
 
@@ -194,16 +199,16 @@ dd %>%
 ```
 
 ```{r}
-set.seed(1)
-x <- round(rnorm(6,mean = 10,sd=4),0)
-y <- x + round(rnorm(6,mean = 0,sd=1),0)
-dd <- data.frame(X=x, Y=y)
+x <- c(7,11,7,16,11,7)
+y <- c(7,12,8,16,13,7)
+dados3 <- data.frame(X=x, Y=y)
+dados3
 ```
 
 * Faça um diagrama de dispersão ($X$ no eixo horizontal).
 
 ```{r}
-plot(y~x)
+plot(Y~X, dados3)
 ```
 
 * Calcule a covariância da amostra.
@@ -234,29 +239,29 @@ dd %>%
 ```
 
 ```{r}
-set.seed(1)
-x <- round(rnorm(6,mean = 6,sd=1.1),1)
-y <- x + round(rnorm(6,mean = 0,sd=0.5),1)
-dd <- data.frame(ME=x, SIM=y)
+ME  <- c(5.3,6.2,5.1,7.8,6.4,5.1)
+SIM	<- c(5.5,6.6,5.4,7.6,7.2,5.3)
+dados4 <- data.frame(ME, SIM)
+dados4
 ```
 
 
 * Faça um diagrama de dispersão ($ME$ no eixo horizontal).
 
 ```{r}
-plot(ME~SIM,data = dd)
+plot(ME~SIM,data = dados4)
 ```
 
 * Calcule a covariância da amostra.
 
 ```{r}
-cov(dd$ME,dd$SIM)
+cov(dados4$ME,dados4$SIM)
 ```
 
 * Calcule e interprete a correlação da amostra.
 
 ```{r}
-cor(dd$ME,dd$SIM)
+cor(dados4$ME,dados4$SIM)
 # ou 
-cov(dd$ME,dd$SIM)/(sd(dd$ME)*sd(dd$SIM))
+cov(dados4$ME,dados4$SIM)/(sd(dados4$ME)*sd(dados4$SIM))
 ```
