@@ -37,6 +37,8 @@ navbar:
               href: ListaEstatBasic.html
             - text: "Outros materiais"
               href: EADPresEstBasA1.html
+            - text: "Tabelas"
+              href: Tabelas.html
     - text: "Destaques"
       menu:
         - text: "Patente"

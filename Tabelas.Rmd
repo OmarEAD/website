@@ -1,0 +1,111 @@
+---
+title: "Estatística: Tabelas úteis[^1]"
+author: "Prof. Omar"
+output: 
+  bookdown::html_document2:
+    css: style.css  
+    #rmdformats::theme:
+    #  flatly
+    #theme: sandstone
+#bibliography: bibliografiaETbook.bib
+#biblio-style: authoryear
+---
+
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      size = "footnotesize",
+                      comment = NA,
+                      warning = FALSE,
+                      message = FALSE,
+                      #out.width = "1\\linewidth",
+                      fig.align = "center",
+                      fig.width = 8, 
+                      fig.height = 4, 
+                      fig.show = "hold",
+                      fig.path = "Figuras1/",
+                      fig.pos = "!htb",
+                      fig.cap = TRUE,
+                      background = "#E6E6FA",
+                      #background = "black",
+                      dev = c("png",'pdf'),
+                      res=300,
+                      dpi = 300,
+                      cache = TRUE)
+```
+
+```{r library, echo=FALSE,results='hide'}
+#library(tidyverse)
+#library(tinytex)
+library(knitr)
+library(kableExtra)
+library(xtable)
+```
+
+```{r functions, echo=FALSE, results='hide'}
+# A function to scale input to 0-1
+scale_01 <- function(x){
+  (x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE))
+}
+```
+
+```{r read-data, echo=FALSE,results='hide'}
+# gapminder <- read_csv(here::here("data", "gapminder.csv"))
+```
+
+
+[^1]: Este é um arquivo com tabelas úteis. Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
+
+# Normal Padrão
+
+```{r, echo=FALSE,results='hide'}
+options(digits = 4)
+z1 <- seq(0,3.99,0.01)
+qq <- round(pnorm(z1),4)
+round(qq[1],4)
+```
+
+| z   |   0.00   |   0.01   |   0.02   |   0.03   |   0.04   |   0.05   |   0.06   |   0.07   |   0.08   |   0.09   |
+|-----|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
+| 0.0 | `r qq[1]` |  `r qq[2]` |  `r qq[3]` |  `r qq[4]` |  `r qq[5]` |  `r qq[6]` |  `r qq[7]` |  `r qq[8]` |  `r qq[99]` | `r qq[10]` |
+0.1 |  `r qq[11]`  |  `r qq[12]`  |  `r qq[13]`  |  `r qq[14]`  |  `r qq[15]`  |  `r qq[16]`  |  `r qq[17]`  |  `r qq[18]`  |  `r qq[19]`  |  `r qq[20]`  
+0.2 |  `r qq[21]`  |  `r qq[22]`  |  `r qq[23]`  |  `r qq[24]`  |  `r qq[25]`  |  `r qq[26]`  |  `r qq[27]`  |  `r qq[28]`  |  `r qq[29]`  |  `r qq[30]`  
+0.3 |  `r qq[31]`  |  `r qq[32]`  |  `r qq[33]`  |  `r qq[34]`  |  `r qq[35]`  |  `r qq[36]`  |  `r qq[37]`  |  `r qq[38]`  |  `r qq[39]`  |  `r qq[40]`  
+0.4 |  `r qq[41]`  |  `r qq[42]`  |  `r qq[43]`  |  `r qq[44]`  |  `r qq[45]`  |  `r qq[46]`  |  `r qq[47]`  |  `r qq[48]`  |  `r qq[49]`  |  `r qq[50]`  
+0.5 |  `r qq[51]`  |  `r qq[52]`  |  `r qq[53]`  |  `r qq[54]`  |  `r qq[55]`  |  `r qq[56]`  |  `r qq[57]`  |  `r qq[58]`  |  `r qq[59]`  |  `r qq[60]`  
+0.6 |  `r qq[61]`  |  `r qq[62]`  |  `r qq[63]`  |  `r qq[64]`  |  `r qq[65]`  |  `r qq[66]`  |  `r qq[67]`  |  `r qq[68]`  |  `r qq[69]`  |  `r qq[70]`  
+0.7 |  `r qq[71]`  |  `r qq[72]`  |  `r qq[73]`  |  `r qq[74]`  |  `r qq[75]`  |  `r qq[76]`  |  `r qq[77]`  |  `r qq[78]`  |  `r qq[79]`  |  `r qq[80]`  
+0.8 |  `r qq[81]`  |  `r qq[82]`  |  `r qq[83]`  |  `r qq[84]`  |  `r qq[85]`  |  `r qq[86]`  |  `r qq[87]`  |  `r qq[88]`  |  `r qq[89]`  |  `r qq[90]`  
+0.9 |  `r qq[91]`  |  `r qq[92]`  |  `r qq[93]`  |  `r qq[94]`  |  `r qq[95]`  |  `r qq[96]`  |  `r qq[97]`  |  `r qq[98]`  |  `r qq[99]`  |  `r qq[100]`  
+1.0 |  `r qq[101]`  |  `r qq[102]`  |  `r qq[103]`  |  `r qq[104]`  |  `r qq[105]`  |  `r qq[106]`  |  `r qq[107]`  |  `r qq[108]`  |  `r qq[109]`  |  `r qq[110]`  
+1.1 |  `r qq[111]`  |  `r qq[112]`  |  `r qq[113]`  |  `r qq[114]`  |  `r qq[115]`  |  `r qq[116]`  |  `r qq[117]`  |  `r qq[118]`  |  `r qq[119]`  |  `r qq[120]`  
+1.2 |  `r qq[121]`  |  `r qq[122]`  |  `r qq[123]`  |  `r qq[124]`  |  `r qq[125]`  |  `r qq[126]`  |  `r qq[127]`  |  `r qq[128]`  |  `r qq[129]`  |  `r qq[130]`  
+1.3 |  `r qq[131]`  |  `r qq[132]`  |  `r qq[133]`  |  `r qq[134]`  |  `r qq[135]`  |  `r qq[136]`  |  `r qq[137]`  |  `r qq[138]`  |  `r qq[139]`  |  `r qq[140]`  
+1.4 |  `r qq[141]`  |  `r qq[142]`  |  `r qq[143]`  |  `r qq[144]`  |  `r qq[145]`  |  `r qq[146]`  |  `r qq[147]`  |  `r qq[148]`  |  `r qq[149]`  |  `r qq[150]`  
+1.5 |  `r qq[151]`  |  `r qq[152]`  |  `r qq[153]`  |  `r qq[154]`  |  `r qq[155]`  |  `r qq[156]`  |  `r qq[157]`  |  `r qq[158]`  |  `r qq[159]`  |  `r qq[160]`  
+1.6 |  `r qq[161]`  |  `r qq[162]`  |  `r qq[163]`  |  `r qq[164]`  |  `r qq[165]`  |  `r qq[166]`  |  `r qq[167]`  |  `r qq[168]`  |  `r qq[169]`  |  `r qq[170]`  
+1.7 |  `r qq[171]`  |  `r qq[172]`  |  `r qq[173]`  |  `r qq[174]`  |  `r qq[175]`  |  `r qq[176]`  |  `r qq[177]`  |  `r qq[178]`  |  `r qq[179]`  |  `r qq[180]`  
+1.8 |  `r qq[181]`  |  `r qq[182]`  |  `r qq[183]`  |  `r qq[184]`  |  `r qq[185]`  |  `r qq[186]`  |  `r qq[187]`  |  `r qq[188]`  |  `r qq[189]`  |  `r qq[190]`  
+1.9 |  `r qq[191]`  |  `r qq[192]`  |  `r qq[193]`  |  `r qq[194]`  |  `r qq[195]`  |  `r qq[196]`  |  `r qq[197]`  |  `r qq[198]`  |  `r qq[199]`  |  `r qq[200]`  
+2.0 |  `r qq[201]`  |  `r qq[202]`  |  `r qq[203]`  |  `r qq[204]`  |  `r qq[205]`  |  `r qq[206]`  |  `r qq[207]`  |  `r qq[208]`  |  `r qq[209]`  |  `r qq[210]`  
+2.1 |  `r qq[211]`  |  `r qq[212]`  |  `r qq[213]`  |  `r qq[214]`  |  `r qq[215]`  |  `r qq[216]`  |  `r qq[217]`  |  `r qq[218]`  |  `r qq[219]`  |  `r qq[220]`  
+2.2 |  `r qq[221]`  |  `r qq[222]`  |  `r qq[223]`  |  `r qq[224]`  |  `r qq[225]`  |  `r qq[226]`  |  `r qq[227]`  |  `r qq[228]`  |  `r qq[229]`  |  `r qq[230]`  
+2.3 |  `r qq[231]`  |  `r qq[232]`  |  `r qq[233]`  |  `r qq[234]`  |  `r qq[235]`  |  `r qq[236]`  |  `r qq[237]`  |  `r qq[238]`  |  `r qq[239]`  |  `r qq[240]`  
+2.4 |  `r qq[241]`  |  `r qq[242]`  |  `r qq[243]`  |  `r qq[244]`  |  `r qq[245]`  |  `r qq[246]`  |  `r qq[247]`  |  `r qq[248]`  |  `r qq[249]`  |  `r qq[250]`  
+2.5 |  `r qq[251]`  |  `r qq[252]`  |  `r qq[253]`  |  `r qq[254]`  |  `r qq[255]`  |  `r qq[256]`  |  `r qq[257]`  |  `r qq[258]`  |  `r qq[259]`  |  `r qq[260]`  
+2.6 |  `r qq[261]`  |  `r qq[262]`  |  `r qq[263]`  |  `r qq[264]`  |  `r qq[265]`  |  `r qq[266]`  |  `r qq[267]`  |  `r qq[268]`  |  `r qq[269]`  |  `r qq[270]`  
+2.7 |  `r qq[271]`  |  `r qq[272]`  |  `r qq[273]`  |  `r qq[274]`  |  `r qq[275]`  |  `r qq[276]`  |  `r qq[277]`  |  `r qq[278]`  |  `r qq[279]`  |  `r qq[280]`  
+2.8 |  `r qq[281]`  |  `r qq[282]`  |  `r qq[283]`  |  `r qq[284]`  |  `r qq[285]`  |  `r qq[286]`  |  `r qq[287]`  |  `r qq[288]`  |  `r qq[289]`  |  `r qq[290]`  
+2.9 |  `r qq[291]`  |  `r qq[292]`  |  `r qq[293]`  |  `r qq[294]`  |  `r qq[295]`  |  `r qq[296]`  |  `r qq[297]`  |  `r qq[298]`  |  `r qq[299]`  |  `r qq[300]`  
+3.0 |  `r qq[301]`  |  `r qq[302]`  |  `r qq[303]`  |  `r qq[304]`  |  `r qq[305]`  |  `r qq[306]`  |  `r qq[307]`  |  `r qq[308]`  |  `r qq[309]`  |  `r qq[310]`  
+3.1 |  `r qq[311]`  |  `r qq[312]`  |  `r qq[313]`  |  `r qq[314]`  |  `r qq[315]`  |  `r qq[316]`  |  `r qq[317]`  |  `r qq[318]`  |  `r qq[319]`  |  `r qq[310]`  
+3.2 |  `r qq[321]`  |  `r qq[322]`  |  `r qq[323]`  |  `r qq[324]`  |  `r qq[325]`  |  `r qq[326]`  |  `r qq[327]`  |  `r qq[328]`  |  `r qq[329]`  |  `r qq[330]`  
+3.3 |  `r qq[331]`  |  `r qq[332]`  |  `r qq[333]`  |  `r qq[334]`  |  `r qq[335]`  |  `r qq[336]`  |  `r qq[337]`  |  `r qq[338]`  |  `r qq[339]`  |  `r qq[340]`  
+3.4 |  `r qq[341]`  |  `r qq[342]`  |  `r qq[343]`  |  `r qq[344]`  |  `r qq[345]`  |  `r qq[346]`  |  `r qq[347]`  |  `r qq[348]`  |  `r qq[349]`  |  `r qq[350]`  
+3.5 |  `r qq[351]`  |  `r qq[352]`  |  `r qq[353]`  |  `r qq[354]`  |  `r qq[355]`  |  `r qq[356]`  |  `r qq[357]`  |  `r qq[358]`  |  `r qq[359]`  |  `r qq[360]`  
+3.6 |  `r qq[361]`  |  `r qq[362]`  |  `r qq[363]`  |  `r qq[364]`  |  `r qq[365]`  |  `r qq[366]`  |  `r qq[367]`  |  `r qq[368]`  |  `r qq[369]`  |  `r qq[370]`  
+3.7 |  `r qq[371]`  |  `r qq[372]`  |  `r qq[373]`  |  `r qq[374]`  |  `r qq[375]`  |  `r qq[376]`  |  `r qq[377]`  |  `r qq[378]`  |  `r qq[379]`  |  `r qq[380]`  
+3.8 |  `r qq[381]`  |  `r qq[382]`  |  `r qq[383]`  |  `r qq[384]`  |  `r qq[385]`  |  `r qq[386]`  |  `r qq[387]`  |  `r qq[388]`  |  `r qq[389]`  |  `r qq[390]`  
+3.9 |  `r qq[391]`  |  `r qq[392]`  |  `r qq[393]`  |  `r qq[394]`  |  `r qq[395]`  |  `r qq[396]`  |  `r qq[397]`  |  `r qq[398]`  |  `r qq[399]`  |  `r qq[400]`
+
+
