@@ -107,14 +107,14 @@ round((sd(dados[,3])/mean(dados[,3]))*100,2)
 ```
 
 
-3. Uma pesquisa mostrou que o brasileiro gasta em média R\$234,19 por mês se alimentando fora de casa (dados fictícios). Os gastos para se alimentar fora de casa referentes a uma amostra de 30 adolescentes estão apresentados na Tabela \@ref(tab:adoles). 
+3. Uma pesquisa mostrou que o brasileiro gasta em média R\$234,19 por mês se alimentando fora de casa (dados fictícios). Os gastos mensais para se alimentar fora de casa referentes a uma amostra de 30 adolescentes estão apresentados na Tabela \@ref(tab:adoles). 
 
 ```{r adoles, echo=FALSE, fig.pos="!H",out.extra = "", results='asis'}
 set.seed(7)
 dp <- round(rnorm(30,325,100),0)
 dp <- rpois(30,325)
 dp %>% matrix(nrow = 3) %>% 
-  kable(caption = "Gastos mensais de 30 adolescentes com alimentação fora de casa.") %>% 
+  kable(caption = "Gastos mensais de 30 adolescentes para se alimentarem fora de casa.") %>% 
   kable_styling(full_width = FALSE, latex_options = "HOLD_position")
 ```
 
@@ -130,13 +130,15 @@ dados
 * Faça uma tabela de distribuição de frequências (use o bom senso).
 * Esboce um histograma.
 
-```{r}
+```{r histograns, fig.cap="Histogramas (frequência e densidade) dos gastos mensais de 30 adolescentes para se alimentarem."}
 # histograma de frequência absoluta
 hist(dados, labels = T, main = "",
+     xlab = 'Gasto (R$)', ylab = 'Frequência',
      ylim =c(0,9))
 #
 # histograma com densidade
 hist(dados, labels = T, main = "",
+     xlab = 'Gasto (R$)', ylab = 'Densidade',
      probability = T, ylim = c(0,0.025))
 ```
 
@@ -153,8 +155,8 @@ summary(dados)
 * Calcule a amplitude e a amplitude interquartil.
 * Construa um boxplot.
 
-```{r}
-boxplot(dados)
+```{r box1, fig.cap="Boxplot dos gastos mensais de 30 adolescentes para se alimentarem."}
+boxplot(dados, ylab = "Gastos (R$)")
 ```
 
 
@@ -184,7 +186,7 @@ Table: (\#tab:conces) Receita das concecionárias A e B.
 (500000/630000)*100
 ```
 
-
+## Análise bivariada
 
 5. Na Tabela \@ref(tab:corr1) é apresentado seis observações das variáveis $X$ e $Y$.
 
@@ -265,3 +267,21 @@ cor(dados4$ME,dados4$SIM)
 # ou 
 cov(dados4$ME,dados4$SIM)/(sd(dados4$ME)*sd(dados4$SIM))
 ```
+
+7. __Tempo de caminhada $\times$ Gordura corporal.__ Dados de tempo semanal de caminhada (horas) e a gordura corporal (\%) de oito indivíduos do sexo masculino com idade acima de 60 anos são apresentados na Tabela \@ref(tab:corr3).
+
+```{r corr3, echo=FALSE, fig.pos="!H",out.extra = "", results='asis'}
+set.seed(1)
+x <- c(6,12,4,2,5,7,14,10)
+y <- c(22,11,23,25,21,19,9,12)
+dd <- t(data.frame(Tempo=x, Gordura =y))
+dd %>% 
+  kable(caption = "Tempo de caminhada (horas) e gordura corporal (%) de oito indivíduos.") %>% 
+  kable_styling(full_width = FALSE, latex_options = "HOLD_position")
+```
+
+* Faça um diagrama de dispersão (coloque o tempo no eixo horizontal).
+
+* Calcule a covariância da amostra.
+
+* Calcule e interprete a correlação da amostra.

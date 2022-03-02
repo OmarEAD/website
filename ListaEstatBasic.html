@@ -617,11 +617,11 @@ round((sd(dados[,2])/mean(dados[,2]))*100,2)</code></pre>
 round((sd(dados[,3])/mean(dados[,3]))*100,2)</code></pre>
 <pre><code>[1] 24.27</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>Uma pesquisa mostrou que o brasileiro gasta em média R$234,19 por mês se alimentando fora de casa (dados fictícios). Os gastos para se alimentar fora de casa referentes a uma amostra de 30 adolescentes estão apresentados na Tabela <a href="#tab:adoles">1.2</a>.</li>
+<li>Uma pesquisa mostrou que o brasileiro gasta em média R$234,19 por mês se alimentando fora de casa (dados fictícios). Os gastos mensais para se alimentar fora de casa referentes a uma amostra de 30 adolescentes estão apresentados na Tabela <a href="#tab:adoles">1.2</a>.</li>
 </ol>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:adoles">Table 1.2: </span>Gastos mensais de 30 adolescentes com alimentação fora de casa.
+<span id="tab:adoles">Table 1.2: </span>Gastos mensais de 30 adolescentes para se alimentarem fora de casa.
 </caption>
 <tbody>
 <tr>
@@ -736,15 +736,17 @@ dados</code></pre>
 </ul>
 <pre class="r"><code># histograma de frequência absoluta
 hist(dados, labels = T, main = &quot;&quot;,
+     xlab = &#39;Gasto (R$)&#39;, ylab = &#39;Frequência&#39;,
      ylim =c(0,9))
 #
 # histograma com densidade
 hist(dados, labels = T, main = &quot;&quot;,
+     xlab = &#39;Gasto (R$)&#39;, ylab = &#39;Densidade&#39;,
      probability = T, ylim = c(0,0.025))</code></pre>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
-<img src="Figuras1/unnamed-chunk-5-1.png" alt="TRUE" width="2400" /><img src="Figuras1/unnamed-chunk-5-2.png" alt="TRUE" width="2400" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:histograns"></span>
+<img src="Figuras1/histograns-1.png" alt="Histogramas (frequência e densidade) dos gastos mensais de 30 adolescentes para se alimentarem." width="2400" /><img src="Figuras1/histograns-2.png" alt="Histogramas (frequência e densidade) dos gastos mensais de 30 adolescentes para se alimentarem." width="2400" />
 <p class="caption">
-Figure 1.1: TRUE
+Figure 1.1: Histogramas (frequência e densidade) dos gastos mensais de 30 adolescentes para se alimentarem.
 </p>
 </div>
 <ul>
@@ -760,11 +762,11 @@ Figure 1.1: TRUE
 <li>Calcule a amplitude e a amplitude interquartil.</li>
 <li>Construa um boxplot.</li>
 </ul>
-<pre class="r"><code>boxplot(dados)</code></pre>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
-<img src="Figuras1/unnamed-chunk-7-1.png" alt="TRUE" width="2400" />
+<pre class="r"><code>boxplot(dados, ylab = &quot;Gastos (R$)&quot;)</code></pre>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:box1"></span>
+<img src="Figuras1/box1-1.png" alt="Boxplot dos gastos mensais de 30 adolescentes para se alimentarem." width="2400" />
 <p class="caption">
-Figure 1.2: TRUE
+Figure 1.2: Boxplot dos gastos mensais de 30 adolescentes para se alimentarem.
 </p>
 </div>
 <ul>
@@ -808,6 +810,8 @@ Figure 1.2: TRUE
 <pre class="r"><code>#B
 (500000/630000)*100</code></pre>
 <pre><code>[1] 79.36508</code></pre>
+<div id="análise-bivariada" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Análise bivariada</h2>
 <ol start="5" style="list-style-type: decimal">
 <li>Na Tabela <a href="#tab:corr1">1.4</a> é apresentado seis observações das variáveis <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>.</li>
 </ol>
@@ -879,8 +883,8 @@ dados3</code></pre>
 <li>Faça um diagrama de dispersão (<span class="math inline">\(X\)</span> no eixo horizontal).</li>
 </ul>
 <pre class="r"><code>plot(Y~X, dados3)</code></pre>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
-<img src="Figuras1/unnamed-chunk-11-1.png" alt="TRUE" width="2400" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
+<img src="Figuras1/unnamed-chunk-9-1.png" alt="TRUE" width="2400" />
 <p class="caption">
 Figure 1.3: TRUE
 </p>
@@ -969,8 +973,8 @@ dados4</code></pre>
 <li>Faça um diagrama de dispersão (<span class="math inline">\(ME\)</span> no eixo horizontal).</li>
 </ul>
 <pre class="r"><code>plot(ME~SIM,data = dados4)</code></pre>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-15"></span>
-<img src="Figuras1/unnamed-chunk-15-1.png" alt="TRUE" width="2400" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-13"></span>
+<img src="Figuras1/unnamed-chunk-13-1.png" alt="TRUE" width="2400" />
 <p class="caption">
 Figure 1.4: TRUE
 </p>
@@ -988,6 +992,80 @@ Figure 1.4: TRUE
 <pre class="r"><code># ou 
 cov(dados4$ME,dados4$SIM)/(sd(dados4$ME)*sd(dados4$SIM))</code></pre>
 <pre><code>[1] 0.9511981</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li><strong>Tempo de caminhada <span class="math inline">\(\times\)</span> Gordura corporal.</strong> Dados de tempo semanal de caminhada (horas) e a gordura corporal (%) de oito indivíduos do sexo masculino com idade acima de 60 anos são apresentados na Tabela <a href="#tab:corr3">1.6</a>.</li>
+</ol>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:corr3">Table 1.6: </span>Tempo de caminhada (horas) e gordura corporal (%) de oito indivíduos.
+</caption>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Tempo
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gordura
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>Faça um diagrama de dispersão (coloque o tempo no eixo horizontal).</p></li>
+<li><p>Calcule a covariância da amostra.</p></li>
+<li><p>Calcule e interprete a correlação da amostra.</p></li>
+</ul>
+</div>
 </div>
 <div class="footnotes">
 <hr />
