@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Omar Cléo" />
+
+
+<title>Distribuição Normal</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Omar Cléo</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Dados longitudinais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ETbook.html">Evapotranspiração</a>
+    </li>
+    <li>
+      <a href="Mixed.html">Modelos Mistos</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Alguns estudos
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">RMarkdown</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="RMarkdownBas.html">Comandos básicos</a>
+        </li>
+        <li>
+          <a href="Referencias.html">Referências</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Distribuição Normal</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Normal1.html">Normal 1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Estatística Básica
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Alunos</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="ListaEstatBasic.html">Lista de exercícios</a>
+        </li>
+        <li>
+          <a href="EADPresEstBasA1.html">Outros materiais</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Destaques
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Patente</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Patente.html">Carta Patente</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Premiação</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="barcelona.html">Barcelona</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Fotos</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Fotos.html">Lembranças</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Distribuição Normal<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h1>
+<h4 class="author">Omar Cléo</h4>
+
+</div>
+
+
+<div id="introdução" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Introdução</h1>
+<p>A distribuição normal é uma das mais importantes distribuições contínuas de probabilidade e pode ser escrita como</p>
+<p><span class="math display" id="eq:gaussiana">\[\begin{equation} 
+f(x)= \frac{1}{\sqrt{2 \pi \sigma}} e^{- \frac{(x - \mu)^{2}}{2 \sigma^{2}}}
+,
+\tag{1.1}
+\end{equation}\]</span></p>
+<p>em que <span class="math inline">\(\mu\)</span> e <span class="math inline">\(\sigma\)</span> são a média e a variância da distribuição. O objetivo deste artigo é apresentar uma demonstração dessa distribuição em <em>forma de sino</em> a partir da exponenciação de um polinômio de segundo grau, isto é,</p>
+<p><span class="math display" id="eq:polinomio">\[\begin{equation}
+f(x)= exp \{ ax^{2} + bx + c \}
+\tag{1.2}
+,
+\end{equation}\]</span></p>
+<p>em que <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> e <span class="math inline">\(c\)</span> são constantes. Por exemplo, podemos representar graficamente a exponenciação desse polinômio para <span class="math inline">\(a=-2\)</span>, <span class="math inline">\(b=0\)</span> e <span class="math inline">\(c=1\)</span>, ou seja,</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gauss"></span>
+<img src="Figuras/gauss-1.png" alt="Representação de uma curva em forma de sino (a área sob a curva não é um)." width="2400" />
+<p class="caption">
+Figure 1.1: Representação de uma curva em forma de sino (a área sob a curva não é um).
+</p>
+</div>
+<p>O gráfico apresentado na Figura <a href="#fig:gauss">1.1</a> não tem área sob a curva igual a um, mas tem o formado de sino equivalente à curva normal.</p>
+<p>Para que esta função tenha um máximo, faremos <span class="math inline">\(a&lt;0\)</span>. Assim <span class="math inline">\(a=- \alpha\)</span> com <span class="math inline">\(\alpha &gt; 0\)</span>. As constantes <span class="math inline">\(b\)</span>, a qual move o pico central da distribuição ao longo de <span class="math inline">\(x\)</span>, e <span class="math inline">\(c\)</span> são escolhidas a fim de que</p>
+<p><span class="math display" id="eq:normalizacao">\[\begin{equation}
+\int_{- \infty}^{+ \infty} f(x) \hspace{0.2cm} dx = 1
+\tag{1.3}
+.
+\end{equation}\]</span></p>
+</div>
+<div id="desenvolvimento" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Desenvolvimento</h1>
+<p>Começaremos agora um trabalho algébrico. Assim</p>
+<p><span class="math display" id="eq:p1">\[\begin{equation}
+f(x)= exp \{ -(\alpha x^{2} - bx) \} exp \{ {c} \}
+\tag{2.1}
+,
+\end{equation}\]</span></p>
+<p>em que, completando quadrados na primeira exponencial da Equação <a href="#eq:p1">(2.1)</a>, temos</p>
+<p><span class="math display">\[\begin{equation*}
+\alpha x^{2} - bx = \left( \sqrt{ \alpha } x - \frac{b}{2 \sqrt{ \alpha }} \right)^{2} - \left(\frac{b}{2 \sqrt{ \alpha}}\right)^{2}
+.
+\end{equation*}\]</span></p>
+<p>Dessa forma</p>
+<p><span class="math display">\[\begin{equation*}
+f(x)= exp \left\{ -\left( \sqrt{\alpha} x - \frac{b}{2 \sqrt{ \alpha }} \right)^{2}  \right\}  exp \left\{ c - \left( \frac{b}{2 \sqrt{ \alpha}} \right)^{2}  \right\}
+,
+\end{equation*}\]</span></p>
+<p>e, como <span class="math inline">\(exp \left\{ c - \left( \frac{b}{2 \sqrt{ \alpha}} \right)^{2} \right\}\)</span> é uma constante, faremos</p>
+<p><span class="math display">\[\begin{equation*}
+\beta = exp \left\{ c - \left( \frac{b}{2 \sqrt{ \alpha}} \right)^{2}  \right\}
+,
+\end{equation*}\]</span></p>
+<p>ficando com</p>
+<p><span class="math display">\[\begin{equation*}
+f(x) \hspace{0.2cm} = \hspace{0.2cm} \beta \hspace{0.2cm} exp \left\{ -\left( \sqrt{\alpha} x - \frac{b}{2 \sqrt{ \alpha }} \right)^{2}  \right\}
+.
+\end{equation*}\]</span></p>
+<p>Agora fazendo <span class="math inline">\(\theta= \left( \sqrt{\alpha}x -\frac{b}{2 \sqrt{ \alpha }} \right)^{2}\)</span>, temos</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\theta &amp; = &amp; \left( \sqrt{\alpha} x - \frac{b}{2 \sqrt{ \alpha }} \right)^{2}\nonumber\\
+       &amp; = &amp; \left( \frac{2 \alpha x - b}{2 \sqrt{ \alpha }} \right)^{2}\nonumber\\
+       &amp; = &amp; \frac{ \left( x - \frac{b}{ 2 \alpha} \right)^{2} }{ 4 \alpha }
+\end{eqnarray*}\]</span></p>
+<p>e com <span class="math inline">\(\mu = \frac{b}{2 \alpha}\)</span> e <span class="math inline">\(\sigma^{2} = \frac{1}{2 \alpha}\)</span> chegamos em</p>
+<p><span class="math display">\[\begin{equation*}
+\theta = \frac{ \left( x - \mu \right)^{2} }{ 2 \sigma^{2} }
+\end{equation*}\]</span></p>
+<p>e assim ficamos com</p>
+<p><span class="math display">\[\begin{equation*}
+f(x)\hspace{0.2cm}=\hspace{0.2cm} \beta \hspace{0.2cm} exp \left\{ -  \frac{ \left( x - \mu \right)^{2} }{ 2 \sigma^{2} } \right\}
+.
+\end{equation*}\]</span></p>
+<p>Agora precisamos que nossa <span class="math inline">\(f(x)\)</span> integrada nos intervalos de menos infinito a mais infinito seja igual a <span class="math inline">\(1\)</span>, conforme Equação <a href="#eq:normalizacao">(1.3)</a>, ou seja,</p>
+<p><span class="math display">\[\begin{equation*}
+\int_{- \infty}^{+ \infty} f(x) \hspace{0.2cm} dx = 1
+,
+\end{equation*}\]</span></p>
+<p>Vamos escrever <span class="math inline">\(I\)</span> como</p>
+<p><span class="math display">\[\begin{equation}\label{norm1}
+I = \int_{- \infty}^{+ \infty}  \beta \hspace{0.2cm} exp \left\{ -  \frac{ \left( x - \mu \right)^{2} }{ 2 \sigma^{2} } \right\} \hspace{0.2cm} dx
+,
+\end{equation}\]</span></p>
+<p>que deve ser igual a <span class="math inline">\(1\)</span>. Para resolvermos esta integral, faremos uma mudança de variável, ou seja,</p>
+<p><span class="math display" id="eq:mv1">\[\begin{equation}
+u \hspace{0.2cm} = \hspace{0.2cm} x \hspace{0.2cm} - \hspace{0.2cm} \mu
+\tag{2.2}
+\end{equation}\]</span></p>
+<p>assim</p>
+<p><span class="math display" id="eq:mv2">\[\begin{equation}
+du \hspace{0.2cm} = \hspace{0.2cm} dx \hspace{0.2cm} 
+\tag{2.3}
+,
+\end{equation}\]</span></p>
+<p>ficando com</p>
+<p><span class="math display">\[\begin{equation*}
+I = \beta  \int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{ - \frac{u^{2}}{ 2 \sigma^{2}} } \hspace{0.2cm} du \hspace{0.2cm}
+.
+\end{equation*}\]</span></p>
+<p>Como</p>
+<p><span class="math display">\[\begin{equation*}
+\int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{ - \gamma u^{2} } \hspace{0.2cm} du = \sqrt{ \frac{ \pi }{ \gamma } } \hspace{0.5cm} ,
+\end{equation*}\]</span></p>
+<p>(ver seção <a href="#inta">3</a>)) temos</p>
+<p><span class="math display">\[\begin{equation*}
+I \hspace{0.2cm} = \hspace{0.2cm} \beta \hspace{0.2cm} \sqrt{ 2 \sigma^{2} \pi }
+,
+\end{equation*}\]</span></p>
+<p>e como <span class="math inline">\(I\)</span> deve ser igual a <span class="math inline">\(1\)</span></p>
+<p><span class="math display">\[\begin{equation*}
+\beta \hspace{0.2cm} \sqrt{ 2 \sigma^{2} \pi } \hspace{0.2cm} = \hspace{0.2cm} 1
+,
+\end{equation*}\]</span></p>
+<p>de onde</p>
+<p><span class="math display">\[\begin{equation*}
+\beta \hspace{0.2cm} = \hspace{0.2cm} \frac{1}{ \sqrt{ 2 \sigma^{2} \pi }} \hspace{0.2cm}
+.
+\end{equation*}\]</span></p>
+<p>Dessa forma, temos abaixo a função densidade de probabilidade (<span class="math inline">\(fdp\)</span>), Equação <a href="#eq:gaussiana">(1.1)</a>, a qual queríamos demonstrar, ou seja,</p>
+<p><span class="math display">\[\begin{equation*}
+f(x)= \frac{1}{\sqrt{2 \pi \sigma}} e^{- \frac{(x - \mu)^{2}}{2 \sigma^{2}}}\hspace{0.2cm}
+.
+\end{equation*}\]</span></p>
+<p>Agora, resta ainda calcular a esperança e a variância desta <span class="math inline">\(fdp\)</span>, a fim de mostrar que</p>
+<p><span class="math display">\[\begin{equation}\label{media1}
+\mu \hspace{0.2cm}  = \hspace{0.2cm}   E(X) \hspace{0.2cm}  = \hspace{0.2cm} \int_{- \infty}^{+ \infty}   \hspace{0.2cm}  x \hspace{0.2cm}  f(x) \hspace{0.2cm}  dx \hspace{0.2cm}
+\end{equation}\]</span></p>
+<p>e que</p>
+<p><span class="math display">\[\begin{equation}\label{variancia}
+\sigma^{2} \hspace{0.2cm}  = \hspace{0.2cm}   Var(X) \hspace{0.2cm}  = \hspace{0.2cm} E [ ( X - \mu )^{2} ]      \hspace{0.2cm}  = \hspace{0.2cm}  \int_{- \infty}^{+ \infty}   \hspace{0.2cm}  ( X - \mu )^{2} \hspace{0.2cm}  f(x) \hspace{0.2cm}  dx \hspace{0.2cm}.
+\end{equation}\]</span></p>
+<p>Começando, então, pela definição da esperança matemática <span class="math inline">\(E(X)\)</span> para a nossa <span class="math inline">\(fdp\)</span> temos</p>
+<p><span class="math display">\[\begin{eqnarray*}
+E(X) &amp; = &amp; \int_{- \infty}^{+ \infty}   \hspace{0.2cm}  x \hspace{0.2cm}  f(x) \hspace{0.2cm}  dx\nonumber\\
+     &amp; = &amp; \int_{- \infty}^{+ \infty}   \hspace{0.2cm}  \frac{x}{\sqrt{2 \pi \sigma^{2}}} e^{- \frac{(x - \mu)^{2}}{2 \sigma^{2}}}\hspace{0.2cm} du\nonumber\\
+     &amp; = &amp; \frac{1}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty}   \hspace{0.2cm} x   e^{- \frac{(x - \mu)^{2}}{2 \sigma^{2}}} \hspace{0.2cm}  du\hspace{0.2cm}
+.
+\end{eqnarray*}\]</span></p>
+<p>Para resolvermos esta integral, faremos uma mudança de variável para <span class="math inline">\(x\)</span>, conforme Equações <a href="#eq:mv1">(2.2)</a> e <a href="#eq:mv2">(2.3)</a>), ficando com</p>
+<p><span class="math display">\[\begin{eqnarray*}
+E(X) &amp; = &amp; \frac{1}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty}   \hspace{0.2cm}(u + \mu) \hspace{0.2cm} e^{- \frac{(u)^{2}}{2 \sigma^{2}}}\hspace{0.2cm}  \hspace{0.2cm}  du \hspace{0.2cm}\nonumber\\
+     &amp; = &amp; \frac{1}{\sqrt{2 \pi \sigma^{2}}} \left[  \int_{- \infty}^{+ \infty}   \hspace{0.1cm} u \hspace{0.1cm} e^{- \frac{(u)^{2}}{2 \sigma^{2}}}\hspace{0.1cm}  \hspace{0.1cm}  du \hspace{0.1cm}  + \hspace{0.1cm} \int_{- \infty}^{+ \infty}   \hspace{0.1cm} \mu \hspace{0.1cm} e^{- \frac{(u)^{2}}{2 \sigma^{2}}}\hspace{0.1cm}  \hspace{0.1cm}  du       \right]\nonumber\\
+\end{eqnarray*}\]</span></p>
+<p>em que a primeira integral do lado direito da igualdade acima é igual a zero (ver seção <a href="#intb">4</a>).</p>
+<p>Então,</p>
+<p><span class="math display">\[\begin{equation*}
+E(X) \hspace{0.2cm}  = \hspace{0.2cm}\frac{\mu}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty}   \hspace{0.2cm}  e^{- \frac{(u)^{2}}{2 \sigma^{2}}} \hspace{0.2cm} du\hspace{0.2cm} \hspace{0.2cm}.
+\end{equation*}\]</span></p>
+<p>conforme seção <a href="#inta">3</a>. Dessa forma, temos que</p>
+<p><span class="math display">\[\begin{equation*}
+E(X) \hspace{0.2cm}  = \hspace{0.2cm}\frac{\mu}{\sqrt{2 \pi \sigma^{2}}} \hspace{0.2cm} \sqrt{2 \pi \sigma^{2}} \hspace{0.2cm} = \hspace{0.2cm} \mu
+\hspace{0.2cm},
+\end{equation*}\]</span></p>
+<p>que é a média <span class="math inline">\(\mu\)</span>, ou seja, vemos que a esperança da <span class="math inline">\(fdp\)</span> estudada é</p>
+<p><span class="math display">\[\begin{equation}\label{media5}
+E(X) \hspace{0.2cm}  = \hspace{0.2cm} \mu
+\hspace{0.2cm},
+\end{equation}\]</span></p>
+<p>conforme queríamos demonstrar.</p>
+<p>Continuemos, agora, com o cálculo da variância <span class="math inline">\(Var (X)\)</span> da nossa <span class="math inline">\(fdp\)</span>. Pela definição temos que
+<span class="math display">\[\begin{eqnarray*}
+Var(X) &amp;  = &amp; E [ ( X - \mu )^{2} ]\nonumber\\
+       &amp;  = &amp;   \int_{- \infty}^{+ \infty}   \hspace{0.2cm}  ( x - \mu )^{2} \hspace{0.2cm}  f(x) \hspace{0.2cm}  dx \hspace{0.2cm}\nonumber\\
+       &amp;  = &amp;  \frac{1}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty}   \hspace{0.2cm}(x - \mu)^{2} \hspace{0.2cm} e^{- \frac{(x - \mu)^{2}}{2 \sigma^{2}}}\hspace{0.2cm}  \hspace{0.2cm}  dx \hspace{0.2cm}
+,
+\end{eqnarray*}\]</span></p>
+<p>e fazendo a substituição da variável <span class="math inline">\(x\)</span> conforme Equações (<a href="#eq:mv1">(2.2)</a>) e (<a href="#eq:mv2">(2.3)</a>), ficamos com</p>
+<p><span class="math display">\[\begin{equation*}
+Var(X) \hspace{0.2cm}  = \hspace{0.2cm} \frac{1}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty}   \hspace{0.2cm}(u)^{2} \hspace{0.2cm} e^{- \frac{(u)^{2}}{2 \sigma^{2}}}\hspace{0.2cm}  \hspace{0.2cm}  du
+\hspace{0.2cm},
+\end{equation*}\]</span></p>
+<p>que pode ser resolvida por partes, conforme seção <a href="#intc">5</a>, para tornar-se</p>
+<p><span class="math display">\[\begin{equation}\label{var3}
+Var(X) \hspace{0.2cm}  = \hspace{0.2cm} \sigma^{2}
+\hspace{0.2cm},
+\end{equation}\]</span></p>
+<p>que é a variância da <span class="math inline">\(fdp\)</span> estudada, conforme queríamos demonstar.</p>
+</div>
+<div id="inta" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Integral A</h1>
+<p>Queremos mostrar que a integral</p>
+<p><span class="math display">\[\begin{equation}\label{int1}
+I_{A} =  \int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{- \lambda x^{2}}\hspace{0.2cm}  \hspace{0.2cm}  dx
+\hspace{0.2cm},
+\end{equation}\]</span></p>
+<p>que é conhecida como gaussiana, é igual a <span class="math inline">\(\sqrt{\frac{\pi}{\lambda}}\)</span>. Esta integral também pode ser escrita como</p>
+<p><span class="math display">\[\begin{equation*}
+I_{A} =  \int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{- \lambda y^{2}}\hspace{0.2cm}  \hspace{0.2cm}  dy
+\hspace{0.2cm},
+\end{equation*}\]</span></p>
+<p>em que a variável <span class="math inline">\(x\)</span> foi substituida por <span class="math inline">\(y\)</span>. Isto é possível, pois <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> são variáveis mudas, ou seja, o valor de <span class="math inline">\(I_{A}\)</span> não depende destas variáveis. Assim, podemos fazer <span class="math inline">\(I_{A}^{2}\)</span> para termos</p>
+<p><span class="math display">\[\begin{eqnarray*}
+I_{A}^{2} &amp; = &amp; \int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{- \lambda x^{2}}\hspace{0.2cm}  \hspace{0.2cm}  dx  \hspace{0.3cm}    \int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{- \lambda y^{2}}\hspace{0.2cm}  \hspace{0.2cm}  dy
+\hspace{0.2cm}\\
+    &amp;=&amp; \int_{- \infty}^{+ \infty}   \hspace{0.2cm} \int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{- \lambda (x^{2} + y^{2})}\hspace{0.2cm}dx \hspace{0.2cm} dy \hspace{0.2cm}
+.
+\end{eqnarray*}\]</span></p>
+<p>Agora, é preciso fazermos uma transformação de coordenadas, indo do sistema de coordenadas retangulares para o sistema de coordenadas polares. Um ponto <span class="math inline">\(P\)</span> do plano é representado por <span class="math inline">\(P(x, y)\)</span> num sistema de coordenadas retangulares ou por <span class="math inline">\(P(r, \theta)\)</span> num sistema de coordenadas polares. Quando conhecemos <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> podemos escrever <span class="math inline">\(r\)</span> como <span class="math inline">\(r^{2}=x^{2} +y^{2}\)</span> e fazermos o elemento de área <span class="math inline">\(da = dx dy\)</span> ser <span class="math inline">\(da = r dr d\theta\)</span>. Desta forma, quando os limites de integração <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> variarem de <span class="math inline">\(- \infty\)</span> a <span class="math inline">\(+ \infty\)</span> temos que <span class="math inline">\(r\)</span> deve ir de <span class="math inline">\(0\)</span> a <span class="math inline">\(+ \infty\)</span> e <span class="math inline">\(\theta\)</span> de <span class="math inline">\(0\)</span> a <span class="math inline">\(2 \pi\)</span>. Assim, a integral</p>
+<p><span class="math display">\[\begin{equation*}
+I_{A}^{2} =  \int_{- \infty}^{+ \infty}   \hspace{0.2cm} \int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{- \lambda (x^{2} + y^{2})}\hspace{0.2cm}dx \hspace{0.2cm} dy \hspace{0.2cm}
+\end{equation*}\]</span></p>
+<p>aqui, representada no sistema de coordenadas retangulares, é transformada em</p>
+<p><span class="math display">\[\begin{equation*}
+I_{A}^{2} =  \int_{0}^{2 \pi}   \hspace{0.2cm} \int_{0}^{+ \infty}   \hspace{0.2cm} r e^{- \lambda r^{2}}\hspace{0.2cm}dr \hspace{0.2cm} d\theta \hspace{0.2cm}
+\end{equation*}\]</span></p>
+<p>que é sua representação em coordenadas polares. Então</p>
+<p><span class="math display">\[\begin{eqnarray*}
+I_{A}^{2} &amp; = &amp; \int_{0}^{2 \pi}  d\theta \hspace{0.2cm} \int_{0}^{+ \infty}   \hspace{0.2cm} r e^{- \lambda r^{2}}\hspace{0.2cm}dr \hspace{0.2cm}\\
+    &amp; = &amp; 2 \pi \hspace{0.2cm} \int_{0}^{+ \infty}   \hspace{0.2cm} r e^{- \lambda r^{2}}\hspace{0.2cm}dr \hspace{0.2cm}
+.
+\end{eqnarray*}\]</span></p>
+<p>Para resolvermos a integral em <span class="math inline">\(r\)</span> fazemos <span class="math inline">\(u = r^{2}\)</span> e <span class="math inline">\(du = 2 r dr\)</span>. Assim</p>
+<p><span class="math display">\[\begin{eqnarray*}
+I_{A}^{2} &amp; = &amp; 2 \pi \hspace{0.2cm} \int_{0}^{+ \infty}   \hspace{0.2cm} \frac{1}{2}\hspace{0.2cm}  e^{- \lambda u}\hspace{0.2cm}du \hspace{0.2cm}\\
+    &amp; = &amp; \left[ - \frac{\pi}{\lambda} \hspace{0.2cm} e^{- \lambda u}\hspace{0.2cm} \right]_{0}^{+ \infty}\\
+    &amp; = &amp; - \frac{\pi}{\lambda} \left( \frac{1}{e^{+ \infty}} - \frac{1}{e^{\lambda (0)}} \right)\\
+    &amp; = &amp; - \frac{\pi}{\lambda} \left( 0 - 1 \right)\\
+    &amp; = &amp; \frac{\pi}{\lambda}
+\end{eqnarray*}\]</span></p>
+<p>e finalmente, aplicando a raiz quadrada em ambos os lados da igualdade,</p>
+<p><span class="math display">\[\begin{equation}\label{int6}
+I_{A} = \sqrt{\frac{\pi}{\lambda}}
+\end{equation}\]</span></p>
+<p>conforme queríamos demonstrar.</p>
+</div>
+<div id="intb" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Integral B</h1>
+<p>Outro resultado que queremos demonstrar é</p>
+<p><span class="math display">\[\begin{equation}\label{intb1}
+I_{B} =  \int_{- \infty}^{+ \infty}   \hspace{0.2cm} x \hspace{0.2cm} e^{- \beta x^{2}}\hspace{0.2cm}  \hspace{0.2cm}  dx = 0
+\hspace{0.2cm},
+\end{equation}\]</span></p>
+<p>Para isto, faremos a substituição <span class="math inline">\(u = \beta x^{2}\)</span> e <span class="math inline">\(du = 2 \beta x dx\)</span>. Assim</p>
+<p><span class="math display">\[\begin{eqnarray*}
+I_{B} &amp; = &amp;  \int_{- \infty}^{+ \infty}   \hspace{0.2cm} \frac{1}{2 \beta} \hspace{0.2cm} e^{-u}\hspace{0.2cm}  \hspace{0.2cm}  du\\
+      &amp; = &amp; \frac{1}{2 \beta} \int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{-u}\hspace{0.2cm} \hspace{0.2cm} du\\
+      &amp; = &amp; \frac{1}{2 \beta} \left[ - e^{-u}  \right]_{- \infty}^{+ \infty}\\
+      &amp; = &amp; \frac{1}{2 \beta} \left( - \frac{1}{e^{+ \infty}} + \frac{1}{e^{- \infty}}  \right)\\
+      &amp; = &amp; \frac{1}{2 \beta} \left( -0 + 0 \right)\\
+      &amp; = &amp; 0
+\end{eqnarray*}\]</span></p>
+<p>conforme queríamos demonstrar.</p>
+</div>
+<div id="intc" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Integral C</h1>
+<p>Supondo</p>
+<p><span class="math display" id="eq:intc1">\[\begin{equation}
+I_{C} \hspace{0.2cm}  = \hspace{0.2cm} \frac{1}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty}   \hspace{0.2cm}(z)^{2} \hspace{0.2cm} e^{- \frac{(z)^{2}}{2 \sigma^{2}}}\hspace{0.2cm}  \hspace{0.2cm}  dz
+\hspace{0.2cm},
+\tag{5.1}
+\end{equation}\]</span></p>
+<p>queremos demonstrar que <span class="math inline">\(I_{C} = \sigma^{2}\)</span>. Resolveremos esta integral por partes, ou seja, usando a definição</p>
+<p><span class="math display" id="eq:intc2">\[\begin{equation}
+\int u dv = uv - \int v du
+\tag{5.2}
+\end{equation}\]</span></p>
+<p>e fazendo</p>
+<p><span class="math display">\[\begin{equation*}
+I_{C} \hspace{0.2cm}  = \hspace{0.2cm} \frac{1}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty}   \hspace{0.2cm} \underbrace{z}_{u}         \underbrace{ z \hspace{0.2cm} e^{- \frac{(z)^{2}}{2 \sigma^{2}}}\hspace{0.2cm}  \hspace{0.2cm}  dz}_{dv}
+\hspace{0.2cm},
+\end{equation*}\]</span></p>
+<p>temos, com isso, que <span class="math inline">\(u=z\)</span>, <span class="math inline">\(du=dz\)</span>, <span class="math inline">\(dv= z \hspace{0.2cm} e^{- \frac{(z)^{2}}{2 \sigma^{2}}} dz\)</span> e então <span class="math inline">\(v= \int z e^{-\frac{z^{2}}{2 \sigma^{2}}} dz\)</span>. Esta última integral, para encontrarmos <span class="math inline">\(v\)</span>, pode ser resolvida com <span class="math inline">\(t=\frac{z^{2}}{2 \sigma^{2}}\)</span> e <span class="math inline">\(dt= \frac{z}{\sigma^{2}} dz\)</span>. Assim, fazendo estas substituições,</p>
+<p><span class="math display">\[\begin{eqnarray*}
+v &amp; = &amp; \sigma^{2} \int e^{-t} dt\\
+  &amp; = &amp; - \sigma^{2}  e^{-t}
+,
+\end{eqnarray*}\]</span></p>
+<p>e como fizemos <span class="math inline">\(t=\frac{z^{2}}{2 \sigma^{2}}\)</span>, <span class="math inline">\(v\)</span> finalmente fica <span class="math inline">\(v= - \sigma^{2} e^{-\frac{z^{2}}{2 \sigma^{2}}}\)</span>. Com isto,</p>
+<p><span class="math display">\[\begin{eqnarray*}
+I_{C}  &amp; = &amp; \frac{1}{\sqrt{2 \pi \sigma^{2}}} \left[ - z \sigma^{2} e^{- \frac{z^{2}}{2 \sigma^{2}}}   \right]_{-\infty}^{+\infty} - \int_{- \infty}^{+ \infty} \left( - \sigma^{2} e^{-\frac{z^{2}}{2 \sigma^{2}}}   \right) dz\\
+       &amp; = &amp; \frac{\sigma^{2}}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty} e^{-\frac{z^{2}}{2 \sigma^{2}}} \hspace{0.2cm} dz\\
+        &amp; = &amp; \frac{\sigma^{2}}{\sqrt{2 \pi \sigma^{2}}} \sqrt{2 \pi \sigma^{2}}\\
+        &amp; = &amp; \sigma^{2}
+.
+\end{eqnarray*}\]</span></p>
+<!-- conforme queríamos demonstrar. Observamos que, durante esta última passagem, usamos dois resultados desenvolvidos nos Apêndices \ref{inta} e \ref{intb}. -->
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: <a href="mailto:omarcnpereiraead@gmail.com" class="email">omarcnpereiraead@gmail.com</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

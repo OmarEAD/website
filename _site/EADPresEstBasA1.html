@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Prof. Omar" />
+
+
+<title>Estatística: lista de exercício</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Omar Cléo</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Dados longitudinais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ETbook.html">Evapotranspiração</a>
+    </li>
+    <li>
+      <a href="Mixed.html">Modelos Mistos</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Alguns estudos
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">RMarkdown</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="RMarkdownBas.html">Comandos básicos</a>
+        </li>
+        <li>
+          <a href="Referencias.html">Referências</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Distribuição Normal</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Normal1.html">Normal 1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Estatística Básica
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Alunos</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="ListaEstatBasic.html">Lista de exercícios</a>
+        </li>
+        <li>
+          <a href="EADPresEstBasA1.html">Outros materiais</a>
+        </li>
+        <li>
+          <a href="Tabelas.html">Tabelas</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Destaques
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Patente</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Patente.html">Carta Patente</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Premiação</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="barcelona.html">Barcelona</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Fotos</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Fotos.html">Lembranças</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Estatística: lista de exercício<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h1>
+<h4 class="author">Prof. Omar</h4>
+
+</div>
+
+
+<div id="variáveis-numéricas" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Variáveis numéricas</h1>
+<div id="histograma" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Histograma</h2>
+<p>O Histograma é um gráfico de colunas justapostas em que cada coluna representa uma classe. Apresenta as seguintes características:</p>
+<ul>
+<li><p>As barras (retângulos) tem área proporcional à frequência de cada classe.</p></li>
+<li><p>A área total das barras é igual a um.</p></li>
+<li><p>A densidade de cada classe é calculada dividindo a frequência relativa (<span class="math inline">\(Freq\)</span>) da classe ou proporção pela sua amplitude (<span class="math inline">\(AC\)</span>, Amplitude da Classe),</p></li>
+</ul>
+<p><span class="math display">\[ Densidade = \frac{Freq}{AC} \]</span></p>
+</div>
+<div id="dados" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Dados</h2>
+<table>
+<caption>Distribuição de frequência da altura dos universitários do sexo masculino.</caption>
+<colgroup>
+<col width="20%" />
+<col width="13%" />
+<col width="17%" />
+<col width="22%" />
+<col width="27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Altura (m)</th>
+<th align="center">Frequência</th>
+<th align="center">Frequência (%)</th>
+<th align="center">Frequência Acumulada</th>
+<th align="center">Frequência Acumulada (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1.50 <span class="math inline">\(\vdash\)</span> 1.55</td>
+<td align="center">2</td>
+<td align="center">0.72</td>
+<td align="center">2</td>
+<td align="center">0.72</td>
+</tr>
+<tr class="even">
+<td align="center">1.55 <span class="math inline">\(\vdash\)</span> 1.60</td>
+<td align="center">25</td>
+<td align="center">8.99</td>
+<td align="center">27</td>
+<td align="center">9.71</td>
+</tr>
+<tr class="odd">
+<td align="center">1.60 <span class="math inline">\(\vdash\)</span> 1.65</td>
+<td align="center">60</td>
+<td align="center">21.58</td>
+<td align="center">87</td>
+<td align="center">31.29</td>
+</tr>
+<tr class="even">
+<td align="center">1.65 <span class="math inline">\(\vdash\)</span> 1.70</td>
+<td align="center">79</td>
+<td align="center">28.42</td>
+<td align="center">166</td>
+<td align="center">59.71</td>
+</tr>
+<tr class="odd">
+<td align="center">1.70 <span class="math inline">\(\vdash\)</span> 1.75</td>
+<td align="center">55</td>
+<td align="center">19.78</td>
+<td align="center">221</td>
+<td align="center">79.49</td>
+</tr>
+<tr class="even">
+<td align="center">1.75 <span class="math inline">\(\vdash\)</span> 1.80</td>
+<td align="center">32</td>
+<td align="center">11.51</td>
+<td align="center">253</td>
+<td align="center">91.00</td>
+</tr>
+<tr class="odd">
+<td align="center">1.80 <span class="math inline">\(\vdash\)</span> 1.85</td>
+<td align="center">11</td>
+<td align="center">3.96</td>
+<td align="center">264</td>
+<td align="center">94.96</td>
+</tr>
+<tr class="even">
+<td align="center">1.85 <span class="math inline">\(\vdash\)</span> 1.90</td>
+<td align="center">6</td>
+<td align="center">2.16</td>
+<td align="center">270</td>
+<td align="center">97.12</td>
+</tr>
+<tr class="odd">
+<td align="center">1.90 <span class="math inline">\(\vdash\)</span> 1.95</td>
+<td align="center">5</td>
+<td align="center">1.80</td>
+<td align="center">275</td>
+<td align="center">98.92</td>
+</tr>
+<tr class="even">
+<td align="center">1.95 <span class="math inline">\(\vdash\)</span> 2.00</td>
+<td align="center">3</td>
+<td align="center">1.08</td>
+<td align="center">278</td>
+<td align="center">100.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="dados-densidade" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Dados (densidade)</h2>
+<table>
+<caption>Distribuição de frequência da altura dos universitários do sexo masculino.</caption>
+<thead>
+<tr class="header">
+<th align="center">Altura (m)</th>
+<th align="center">Frequência</th>
+<th align="center">Freq. relativa</th>
+<th align="center">Frequência (%)</th>
+<th align="center">Densidade</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1.50 <span class="math inline">\(\vdash\)</span> 1.55</td>
+<td align="center">2</td>
+<td align="center">0.0072</td>
+<td align="center">0.72</td>
+<td align="center">0.144</td>
+</tr>
+<tr class="even">
+<td align="center">1.55 <span class="math inline">\(\vdash\)</span> 1.60</td>
+<td align="center">25</td>
+<td align="center">0.0899</td>
+<td align="center">8.99</td>
+<td align="center">1.799</td>
+</tr>
+<tr class="odd">
+<td align="center">1.60 <span class="math inline">\(\vdash\)</span> 1.65</td>
+<td align="center">60</td>
+<td align="center">0.2158</td>
+<td align="center">21.58</td>
+<td align="center">4.317</td>
+</tr>
+<tr class="even">
+<td align="center">1.65 <span class="math inline">\(\vdash\)</span> 1.70</td>
+<td align="center">79</td>
+<td align="center">0.2842</td>
+<td align="center">28.42</td>
+<td align="center">5.683</td>
+</tr>
+<tr class="odd">
+<td align="center">1.70 <span class="math inline">\(\vdash\)</span> 1.75</td>
+<td align="center">55</td>
+<td align="center">0.1978</td>
+<td align="center">19.78</td>
+<td align="center">3.957</td>
+</tr>
+<tr class="even">
+<td align="center">1.75 <span class="math inline">\(\vdash\)</span> 1.80</td>
+<td align="center">32</td>
+<td align="center">0.1151</td>
+<td align="center">11.51</td>
+<td align="center">2.302</td>
+</tr>
+<tr class="odd">
+<td align="center">1.80 <span class="math inline">\(\vdash\)</span> 1.85</td>
+<td align="center">11</td>
+<td align="center">0.0396</td>
+<td align="center">3.96</td>
+<td align="center">0.791</td>
+</tr>
+<tr class="even">
+<td align="center">1.85 <span class="math inline">\(\vdash\)</span> 1.90</td>
+<td align="center">6</td>
+<td align="center">0.0216</td>
+<td align="center">2.16</td>
+<td align="center">0.432</td>
+</tr>
+<tr class="odd">
+<td align="center">1.90 <span class="math inline">\(\vdash\)</span> 1.95</td>
+<td align="center">5</td>
+<td align="center">0.0180</td>
+<td align="center">1.80</td>
+<td align="center">0.360</td>
+</tr>
+<tr class="even">
+<td align="center">1.95 <span class="math inline">\(\vdash\)</span> 2.00</td>
+<td align="center">3</td>
+<td align="center">0.0108</td>
+<td align="center">1.08</td>
+<td align="center">0.216</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="frequência-pseudo-histograma" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Frequência (pseudo histograma)</h2>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:histaltuniver"></span>
+<img src="Figuras1/histaltuniver-1.png" alt="Pseudo histograma das alturas dos estudantes universitários do sexo masculino." width="2400" />
+<p class="caption">
+Figure 1.1: Pseudo histograma das alturas dos estudantes universitários do sexo masculino.
+</p>
+</div>
+</div>
+<div id="densidade-histograma" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Densidade (Histograma)</h2>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:histaltuniver3"></span>
+<img src="Figuras1/histaltuniver3-1.png" alt="Histograma das alturas dos estudantes universitários do sexo masculino." width="2400" />
+<p class="caption">
+Figure 1.2: Histograma das alturas dos estudantes universitários do sexo masculino.
+</p>
+</div>
+</div>
+<div id="simetria" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Simetria</h2>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:simetria"></span>
+<img src="Figuras1/simetria-1.png" alt="Histogramas para três conjuntos de dados simulados com distribuição assimetria à direita, distribuição simétrica e distribuição assimetrica à esquerda." width="2400" />
+<p class="caption">
+Figure 1.3: Histogramas para três conjuntos de dados simulados com distribuição assimetria à direita, distribuição simétrica e distribuição assimetrica à esquerda.
+</p>
+</div>
+</div>
+<div id="curva-teórica-modelo-probabilístico" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Curva teórica (modelo probabilístico)</h2>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:curvafreq"></span>
+<img src="Figuras1/curvafreq-1.png" alt="Histograma e curva teórica para um conjunto de dados simulados." width="2400" />
+<p class="caption">
+Figure 1.4: Histograma e curva teórica para um conjunto de dados simulados.
+</p>
+</div>
+<!-- ## Curtose -->
+</div>
+<div id="exemplo-r-cars" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> Exemplo <code>R</code> (cars)</h2>
+<p>Qual a proporção de carros que percorrem distâncias entre 30 e 65 ft?</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
+<img src="Figuras1/unnamed-chunk-1-1.png" alt="TRUE" width="2400" />
+<p class="caption">
+Figure 1.5: TRUE
+</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Este artigo é uma apresentação sobre <strong>Histograma</strong>. Os conjuntos de dados apresentados são meramente didáticos e não condizem com a realidade, em outras palavras, são fictícios. Se o conjunto de dados apresentado for real, isto será dito e a sua fonte também será mostrada. Caso encontre erros, queira fazer comentários, ou troca uma ideia sobre o artigo, por favor, me escreva: <a href="mailto:omarcnpereiraead@gmail.com" class="email">omarcnpereiraead@gmail.com</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

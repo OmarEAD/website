@@ -232,18 +232,19 @@ cov(x,y)/(sd(x)*sd(y))
 
 ```{r corr2, echo=FALSE, fig.pos="!H",out.extra = "", results='asis'}
 set.seed(1)
+Aluno <- round(1:6,0)
 x <- round(rnorm(6,mean = 6,sd=1.1),1)
 y <- x + round(rnorm(6,mean = 0,sd=0.5),1)
-dd <- t(data.frame(ME=x, SIM=y))
+dd <- t(data.frame(Aluno, ME=x, SIM=y))
 dd %>% 
   kable(caption = "Seis observações das variáveis ME e SIM.") %>% 
   kable_styling(full_width = FALSE, latex_options = "HOLD_position")
 ```
 
 ```{r}
-ME  <- c(5.3,6.2,5.1,7.8,6.4,5.1)
-SIM	<- c(5.5,6.6,5.4,7.6,7.2,5.3)
-dados4 <- data.frame(ME, SIM)
+ME     <- c(5.3,6.2,5.1,7.8,6.4,5.1)
+SIM	   <- c(5.5,6.6,5.4,7.6,7.2,5.3)
+dados4 <- data.frame(Aluno=1:6,ME, SIM)
 dados4
 ```
 
@@ -274,7 +275,7 @@ cov(dados4$ME,dados4$SIM)/(sd(dados4$ME)*sd(dados4$SIM))
 set.seed(1)
 x <- c(6,12,4,2,5,7,14,10)
 y <- c(22,11,23,25,21,19,9,12)
-dd <- t(data.frame(Tempo=x, Gordura =y))
+dd <- t(data.frame(Indivíduo=1:8, Tempo=x, Gordura =y))
 dd %>% 
   kable(caption = "Tempo de caminhada (horas) e gordura corporal (%) de oito indivíduos.") %>% 
   kable_styling(full_width = FALSE, latex_options = "HOLD_position")

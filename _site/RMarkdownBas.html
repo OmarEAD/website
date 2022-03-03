@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Omar Cléo" />
+
+
+<title>RMarkdown Básico</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Omar Cléo</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Dados longitudinais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ETbook.html">Evapotranspiração</a>
+    </li>
+    <li>
+      <a href="Mixed.html">Modelos Mistos</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Alguns estudos
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">RMarkdown</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="RMarkdownBas.html">Comandos básicos</a>
+        </li>
+        <li>
+          <a href="Referencias.html">Referências</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Distribuição Normal</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Normal1.html">Normal 1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Estatística Básica
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Alunos</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="ListaEstatBasic.html">Lista de exercícios</a>
+        </li>
+        <li>
+          <a href="EADPresEstBasA1.html">Outros materiais</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Destaques
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Patente</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Patente.html">Carta Patente</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Premiação</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="barcelona.html">Barcelona</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Fotos</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Fotos.html">Lembranças</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">RMarkdown Básico<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h1>
+<h4 class="author">Omar Cléo</h4>
+
+</div>
+
+
+<div id="introdução" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Introdução</h1>
+<p>Este artigo não mostrará os detalhes de instalação dos <em>softwares</em> utilizados. Ele servirá para usuários que já conhecem o <em>markdown</em> e o <code>R</code> mas que as vezes precisam se lembrar, por exemplo, como referenciar uma tabela ou figura no texto.</p>
+</div>
+<div id="markdown-e-r" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> <em>Markdown</em> e <em>R</em></h1>
+<p>Assim como HTML e <span class="math inline">\(\LaTeX\)</span>, <em>markdown</em> é uma <a href="https://pt.wikipedia.org/wiki/Linguagem_de_marca%C3%A7%C3%A3o">linguagem de marcação</a> ( <em>markup language</em> ). Desenvolvida por <a href="https://en.wikipedia.org/wiki/John_Gruber">John Gruber</a> e <a href="https://en.wikipedia.org/wiki/Aaron_Swartz">Aaron Swartz</a> em 2004, a linguagem <em>markdown</em> tem como objetivo facilitar a formatação de conteúdos, sendo mais simples que a HTML.</p>
+<p>O <em>RMarkdown</em> junta a linguagem de programação <code>R</code> e a linguagem de marcação <code>markdown</code>. Isto facilita a mistura de códigos de texto e de progração em <code>R</code>.</p>
+</div>
+<div id="comentários" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Comentários</h1>
+<p>Para comentar um dado trecho do texto é necessário selecionar o texto e em seguida digitar <code>Control</code> + <code>Shift</code> + <code>C</code>. O texto ficará assim:</p>
+<p>&lt;!– texto comentado –&gt;</p>
+<p>e estará comentado.</p>
+</div>
+<div id="códigos" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Códigos</h1>
+<p>Para digitar códigos ao longo do texto é necessário colocá-los entre duas crases e o texto ficara com o seguinte aspecto:</p>
+<p><code>Código digitado</code></p>
+<p>Você pode escrever um texto em <code>verbatim</code> digitando</p>
+<p>```</p>
+<p>Este texto será mostrado em verbatim</p>
+<p>```</p>
+<p>produzirá</p>
+<pre><code>Este texto será mostrado em verbatim</code></pre>
+<p>Você pode produzir o mesmo efeito colocando quatro espaços antes do texto que deseja em <code>verbatim</code>.</p>
+</div>
+<div id="destacando-um-texto" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Destacando um texto</h1>
+<p>Usando um sinal de maior (&gt;) você destacará um texto, por exemplo</p>
+<p>&gt; Estes texto ficará em destaque</p>
+<p>produzirá</p>
+<blockquote>
+<p>Estes texto ficará em destaque</p>
+</blockquote>
+</div>
+<div id="títulos" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Títulos</h1>
+<p>Trabalhamos com o símbolo #. Usaremos um # antes do título, dois antes do subtítulo, e assim por diante, até seis níveis.</p>
+<p># Título</p>
+<p>## Subtítulo</p>
+</div>
+<div id="formatação-de-texto" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Formatação de texto</h1>
+<div id="itálico" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Itálico</h2>
+<p>Escrevemos entre dois asteriscos (*) ou dois <em>underlines</em> (_), um de cada lado.</p>
+<p>Por exemplo, _itálico_ ou *itálico* , ficará <em>itálico</em>.</p>
+</div>
+<div id="negrito" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Negrito</h2>
+<p>Colocamos dois asteriscos (*) ou dois <em>underlines</em> (_) de cada lado.</p>
+<p>Por exemplo, __negrito__ ou **negrito** , ficará <strong>negrito</strong>.</p>
+<blockquote>
+<p>Você não deve deixar espaços entre o texto e os símbolos usados. Além disso, você pode juntar os dois tipos de formatação.</p>
+</blockquote>
+</div>
+</div>
+<div id="listas" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Listas</h1>
+<div id="com-números" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Com números</h2>
+<p>Vamos enumerar algumas coisas. Observa a numeração da lista. Basta indicar o primeiro valor e as outras linhas que seguem receberão a numeração adequada.</p>
+<p>1. dddd</p>
+<p>3. ffffffff</p>
+<p>2. dfdfdfdfdfdfdfdf</p>
+<p>1. ggggggggggggggggggg</p>
+<p>Observa o resultado final:</p>
+<ol style="list-style-type: decimal">
+<li><p>dddd</p></li>
+<li><p>ffffffff</p></li>
+<li><p>dfdfdfdfdfdfdfdf</p></li>
+<li><p>ggggggggggggggggggg</p></li>
+</ol>
+</div>
+<div id="com-marcadores" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Com marcadores</h2>
+<p>Usamos um asterisco ou um traço (sinal de menos) no ínicio de cada linha. Antes do texto deve ter um espaço. Por exemplo,</p>
+<p>* item 1</p>
+<p>* item 2</p>
+<p>ficará</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<p>Para fazer subitens, basta colocar mais que três espaços antes do asterisco.</p>
+<ul>
+<li>item 1
+<ul>
+<li>subitem 1</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="símbolos-sem-efeito" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Símbolos sem efeito</h1>
+<p>Basta digitar uma barra invertida ( \ ) antes de um símbolo de formatação. Por exemplo, o símbolo # que usamos para um título principal pode ser escrito sem efeito de formatação colocando uma barra invertida antes, ou seja, digitando \#.</p>
+</div>
+<div id="equações" class="section level1" number="10">
+<h1><span class="header-section-number">10</span> Equações</h1>
+<p>Podemos fazer como no <span class="math inline">\(\LaTeX\)</span>. Ao longo do texto usamos um $ antes e outro depois de uma equação. Por exemplo $E=mc^2$ ficará <span class="math inline">\(E=mc^2\)</span>.</p>
+<p>Para equações sem numeração podemos digitar</p>
+<p>$ $E=mc^2$ $</p>
+<p>e o resultado será</p>
+<p><span class="math display">\[E=mc^2\]</span>
+Também podemos usar o comando <code>equation</code> da mesma forma que no <span class="math inline">\(\LaTeX\)</span>. Entretanto, destaco que a forma de referenciar as equações é diferente do <span class="math inline">\(\LaTeX\)</span>. O <em>label</em> na equação deve estar entre parentes e dessa forma: <code>(\#eq1)</code>. Para referenciar a equação no texto usamos o argumento <code>(\@ref(eq1))</code>. Caso não coloque o <em>label</em> na equação, ela não será numerada. Por exemplo, digitando</p>
+<p><code>\begin{equation}</code></p>
+<p><code>f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}</code></p>
+<p><code>(\#eq:binom)</code></p>
+<p><code>\end{equation}</code></p>
+<p>o resultado será</p>
+<p><span class="math display" id="eq:binom">\[\begin{equation} 
+  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
+  \tag{10.1}
+\end{equation}\]</span></p>
+<p>Digitando <code>(\@ref(eq:binom))</code> ao longo do texto teremos (<a href="#eq:binom">(10.1)</a>), ou ainda, segundo a Equação (<a href="#eq:binom">(10.1)</a>).</p>
+</div>
+<div id="referenciando-seção" class="section level1" number="11">
+<h1><span class="header-section-number">11</span> Referenciando seção</h1>
+<p>Basta digitar</p>
+<p># Titulo da seção {#secao1}</p>
+<p>Para citar no texto é preciso digitar <code>\@ref(secao1)</code>.</p>
+</div>
+<div id="link" class="section level1" number="12">
+<h1><span class="header-section-number">12</span> Link</h1>
+<p>Se você quer dizer, por exemplo, para ir ao site do Prof. Omar clique <a href="https://omaread.github.io/Website/">aqui</a>, você presisa digitar [ aqui ] (endereço eletrônico).</p>
+<!-- ![Site Rmarkdown](https://rmd4sci.njtierney.com/using-rmarkdown.html) -->
+<p>Você também pode digitar um link entre um sinal de maior (&lt;) e menor (&gt;). Por exemplo,</p>
+<p>&lt;<a href="https://omaread.github.io/Website/" class="uri">https://omaread.github.io/Website/</a>&gt;</p>
+<p>produzirá</p>
+<p><a href="https://omaread.github.io/Website/" class="uri">https://omaread.github.io/Website/</a></p>
+</div>
+<div id="gráficos" class="section level1" number="13">
+<h1><span class="header-section-number">13</span> Gráficos</h1>
+<div id="inserindo-um-chunk" class="section level2" number="13.1">
+<h2><span class="header-section-number">13.1</span> Inserindo um <em>chunk</em></h2>
+<p>Você pode inserir um novo <em>chunk</em> com os comandos <code>control</code> + <code>alt</code> + <code>i</code>.</p>
+</div>
+<div id="adicionando-um-gráfico" class="section level2" number="13.2">
+<h2><span class="header-section-number">13.2</span> Adicionando um gráfico</h2>
+<p>Você pode adicionar gráficos usando comandos do <code>R</code> em um <em>chunk</em>.</p>
+<p>```{r NomeDoChunk, fig.cap=“Título do gráfico”}</p>
+<p>Aqui você deve digitar seu código <code>R</code> para fazer seu gráfico.</p>
+<p>```</p>
+<p>Por exemplo,</p>
+<p>```{r pressure, echo=FALSE, fig.cap=“grafico de teste” }</p>
+<p>plot(pressure)</p>
+<p>```</p>
+<p>produzirá o gráfico da Figura <a href="#fig:pressure">13.1</a>. O comando <code>echo = FALSE</code> não permite que o código seja mostrado.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:pressure"></span>
+<img src="Figuras/pressure-1.png" alt="grafico de teste" width="2400" />
+<p class="caption">
+Figure 13.1: grafico de teste
+</p>
+</div>
+</div>
+<div id="citando-o-gráfico-no-texto" class="section level2" number="13.3">
+<h2><span class="header-section-number">13.3</span> Citando o gráfico no texto</h2>
+<p>Para chamar o gráfico da Figure <a href="#fig:pressure">13.1</a>, basta digitar <code>\@ref(fig:pressure)</code></p>
+</div>
+</div>
+<div id="imagens" class="section level1" number="14">
+<h1><span class="header-section-number">14</span> Imagens</h1>
+<p>Você pode inserir uma imagem por meio de um endereço (link). Para isso use os símbolos ![Descrição](endereço). Por exemplo,</p>
+<p>![Github](<a href="https://octodex.github.com/images/bannekat.png" class="uri">https://octodex.github.com/images/bannekat.png</a>)</p>
+<p>produzirá</p>
+<div class="figure">
+<img src="https://octodex.github.com/images/bannekat.png" alt="" />
+<p class="caption">Github</p>
+</div>
+</div>
+<div id="tabelas" class="section level1" number="15">
+<h1><span class="header-section-number">15</span> Tabelas</h1>
+<p>Tabelas podem ser criadas facilmente. Por exemplo,</p>
+<p>| Concessionária | Média (R$) | Desvio (R$) |</p>
+<p>|:————–:|:———:|:———-:|</p>
+<p>| A | 3280000 | 1500000 |</p>
+<p>| B | 630000 | 500000 |</p>
+<p>Table: (#tab:tabela1) Esta tabela é para teste.</p>
+<p>produzirá</p>
+<table>
+<caption><span id="tab:tabela1">Table 15.1: </span> Esta tabela é para teste.</caption>
+<thead>
+<tr class="header">
+<th align="center">Concessionária</th>
+<th align="center">Média (R$)</th>
+<th align="center">Desvio (R$)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">A</td>
+<td align="center">3280000</td>
+<td align="center">1500000</td>
+</tr>
+<tr class="even">
+<td align="center">B</td>
+<td align="center">630000</td>
+<td align="center">500000</td>
+</tr>
+</tbody>
+</table>
+<div id="citando-a-tabela-no-texto" class="section level2" number="15.1">
+<h2><span class="header-section-number">15.1</span> Citando a tabela no texto</h2>
+<p>Conforme a Tabela <code>\@ref(tab:tabela1)</code> produzirá:</p>
+<p>Conforme a Tabela <a href="#tab:tabela1">15.1</a>.</p>
+</div>
+<div id="site-para-construção-de-tabelas" class="section level2" number="15.2">
+<h2><span class="header-section-number">15.2</span> <em>Site</em> para construção de tabelas</h2>
+<p>Se quiser algo mais fácil, você pode digitar sua tabela no endereço</p>
+<p><a href="https://www.tablesgenerator.com/markdown_tables" class="uri">https://www.tablesgenerator.com/markdown_tables</a></p>
+<p>e depois copiar o código no seu texto.</p>
+</div>
+<div id="outras-tabelas" class="section level2" number="15.3">
+<h2><span class="header-section-number">15.3</span> Outras tabelas</h2>
+<p>Usando o <code>R</code> para criar uma tabela.</p>
+<p>```{r transp, echo=FALSE, fig.pos=“!H,”out.extra = "", results=‘asis’}</p>
+<p>set.seed(7)</p>
+<p>pp &lt;- round(rnorm(10,mean=30,sd=5),0)</p>
+<p>qq &lt;- round(rnorm(10,mean=20,sd=5),0)</p>
+<p>dd &lt;- t(data.frame(Funcionario=1:10,
+TC=pp, AP=qq))</p>
+<p>dd %&gt;%
+kable(caption = “Tempo gasto, em minutos, para 10 funcionários irem de casa até a empresa em que trabalham de duas maneiras, ou transporte coletivo (TC) ou automóvel próprio (AP).”) %&gt;%
+kable_styling(full_width = FALSE, latex_options = “HOLD_position”)</p>
+<p>```</p>
+<p>produzirá</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:transp">Table 15.2: </span>Tempo gasto, em minutos, para 10 funcionários irem de casa até a empresa em que trabalham de duas maneiras, ou transporte coletivo (TC) ou automóvel próprio (AP).
+</caption>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Funcionario
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TC
+</td>
+<td style="text-align:right;">
+41
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+41
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AP
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+</tbody>
+</table>
+<p>Você pode referenciar a Tabela <a href="#tab:transp">15.2</a> no texto com o comando <code>Tabela \@ref(tab:transp)</code>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Este artigo é sobre o <strong>RMarkdown</strong>. Não temos o propósido de esgotar toda demanda sobre o assunto, mas fazer algo introdutório. Pratique muito e você verá que essa <em>markup languege</em> é muito simples e versátil. Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: <a href="mailto:omarcnpereiraead@gmail.com" class="email">omarcnpereiraead@gmail.com</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

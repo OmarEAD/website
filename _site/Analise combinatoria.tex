@@ -1,0 +1,273 @@
+\documentclass[a4paper,11pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage[brazil]{babel}
+
+\begin{document}
+
+\hyphenation{con-sis-te co-nhe-ci-men-to cons-ti-tui pre-en-chi-do e-le-men-to e-le-men-tos di-fe-ren-te}
+
+
+\begin{titlepage}
+\begin{center}
+{\LARGE MATEMÁTICA \\}
+\vspace{8cm}
+{\Huge \sc ANÁLISE COMBINATÓRIA\\}
+\vspace{8cm}
+{\sf \LARGE OMAR C. N. PEREIRA\\}
+{\sf \LARGE 12/02/2010\\}
+\end{center}
+\end{titlepage}
+
+
+\tableofcontents
+\newpage
+
+
+
+\chapter{Análise Combinatória}
+
+Aqui será descrito um resumo dos principais resultados da análise combinatória, dado a sua importância no cálculo da probabilidade de um evento. \\
+
+De forma geral, os agrupamentos podem ser formados usando-se todos os elementos de um conjunto ou apenas parte deles. Usando todos os elementos, temos o caso de uma permutação. Caso contrário, ou seja, quando usamos apenas parte dos elementos de um conjunto, devemos saber se a ordem destes elementos no agrupamento é importante ou não. Se for importante, estamos tratando de um arranjo, se não, trata-se de uma combinação.\\
+
+Além disso, devemos ter em mente dois tipos de conjuntos, um com elementos todos distintos e outro com elementos repetidos. Discutiremos os conceitos de permutação, arranjo e combinação para cada caso. Antes de discutirmos com mais detalhes estas idéias, conceituaremos o princípio fundamental de contagem.\\
+
+
+
+\section{Princípio fundamental de Contagem}
+
+
+Para entendermos intuitivamente o princípio fundamental de contagem, admita que, para estudar Física e Matemática, você necessita comprar um livro para cada disciplina. A livraria escolhida oferece como opção dois livros de Matemática e três de Física. Representando por $M_{1}$  e $M_{2}$ os livros de Matemática e por $F_{1}$, $F_{2}$ e $F_{3}$ os livros de Física monta-se a seguinte tabela.\\
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|ccc}
+  & $F_{1}$ & $F_{2}$ & $F_{3}$ \\
+  \hline
+  $M_{1}$ & $M_{1}$$F_{1}$ & $M_{1}$$F_{2}$ & $M_{1}$$F_{3}$ \\
+  $M_{2}$ & $M_{2}$$F_{1}$ & $M_{2}$$F_{2}$ & $M_{2}$$F_{3}$ \\
+  \end{tabular}
+\end{table}
+
+Dessa forma, conclui-se que você possui seis possibilidades de compra, $M_{1}$$F_{1}$, $M_{1}$$F_{2}$, $M_{1}$$F_{3}$, $M_{2}$$F_{1}$, $M_{2}$$F_{2}$ e $M_{2}$$F_{3}$, ou seja, o produto da quantidade de livros de Matemática (dois livros) pela quantidade de livros de Física (três livros), $2\cdot3=6$. \\
+
+Podemos generalizar o resultado acima da seguinte forma:\\
+
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|ccccc}
+  & $b_{1}$ & $b_{2}$ & $b_{3}$&...& $b_{n}$ \\
+  \hline
+  $a_{1}$ & $a_{1}$$b_{1}$ & $a_{1}$$b_{2}$ & $a_{1}$$b_{3}$ & \ldots & $a_{1}$$b_{n}$ \\
+  $a_{2}$ & $a_{2}$$b_{1}$ & $a_{2}$$b_{2}$ & $a_{2}$$b_{3}$ & \ldots & $a_{2}$$b_{n}$ \\
+  $a_{3}$ & $a_{3}$$b_{1}$ & $a_{3}$$b_{2}$ & $a_{3}$$b_{3}$ & \ldots & $a_{3}$$b_{n}$ \\
+  \vdots  & \vdots    & \vdots   & \vdots    & \ldots &   \vdots  \\
+
+  $a_{m}$ & $a_{m}$$b_{1}$ & $a_{m}$$b_{2}$ & $a_{m}$$b_{3}$ & \ldots & $a_{m}$$b_{n}$ \\
+  \end{tabular}\\
+\end{table}
+
+
+Então, dados os conjuntos A=\{$a_{1}$, $a_{2}$, $a_{3}$, \ldots, $a_{m}$\} e B=\{$b_{1}$, $b_{2}$, $b_{3}$, \ldots, $b_{n}$\} com m e n elementos, o número de agrupamentos de dois elementos, tais que o primeiro elemento pertença a A e o segundo a B, é dado por $m$$\cdot$$n$.\\
+
+O resultado acima vale para um número r de conjuntos. Por exemplo, suponha que uma indústria automobilística fabrique veículos com três estilos de carroceria, quatro tipos de motores e oito cores diferentes. Sejam $C=\{c_{1}\,,\, c_{2}\,,\, c_{3}\}$ o conjunto de tipos de carrocerias, M=\{$m_{1}$, $m_{2}$, $m_{3}$, $m_{4}$\} o conjunto de motores, e Q=\{$q_{1}$, $q_{2}$, $q_{3}$, $q_{4}$, $q_{5}$, $q_{6}$, $q_{7}$, $q_{8}$\} o conjunto das cores oferecidas. Vê-se que o número de agrupamentos possíveis é igual ao produto $c_{i}$ $\cdot$ $m_{j}$ $\cdot$ $q_{k}$  com $c_{i} \in C$, $m_{j} \in M$, $q_{k} \in Q$, neste caso, $3 \cdot 4 \cdot 8 = 96$.\\
+
+Assim, enunciamos o princípio fundamental de contagem:\\
+
+
+Dados os conjuntos não vazios $A_1,\ A_2,\ A_3,\ \ldots,\ A_r$, o número de agrupamentos de r elementos do tipo $a_1,\ a_2,\ a_3,\ \ldots,\ a_r$ tal que $a_1 \in A_1,\ a_2 \in A_2,\ a_3 \in A3,\ \ldots,\ a_r \in A_r$,\ é dado pelo produto $n(A_1)\cdot n(A_2)\cdot n(A_3)\cdot\ldots\cdot n(A_r)$,\ em que  $n(A_i)$ indica o número de elementos do conjunto $A_{i}$.\\
+
+
+
+\section{Permutação}
+
+Este é o caso em que os agrupamentos formados utilizam-se de todos os elementos de um conjunto, seja este formado por elementos distintos ou não. Dentro deste tópico veremos os conceitos de Permutação Simples, Permutação com Repetição e Permutação Cíclica.\\
+
+\subsection{Permutação Simples}
+
+Quando temos um conjunto com todos os elementos distintos e o agrupamento formado utiliza-se de todos esses elementos, então tem-se um caso de permutação simples.\\
+
+Como exemplo, imagine que quatro partículas, A, B, C e D, devam ser agrupadas, uma a uma, em quatro posições distintas $P_1$, $P_2$, $P_3$ e $P_4$.
+A primeira posição pode ser ocupada por qualquer uma das quatro partículas, isto é, há quatro modos de preencher a primeira posição. Após a primeira partícula ser alocada, haverá três modos de preencher a segunda posição. Prosseguindo, há dois modos de preencher a terceira posição, e finalmente, um modo de preencher a ultima. Como existem quatro possibilidades para a primeira posição, três para a segunda, duas para a terceira e uma para a quarta, pelo princípio fundamental de contagem têm-se que o número de permutações possíveis é 4 $\cdot$ 3 $\cdot$ 2 $\cdot$ 1 = 4!.\\
+
+Em geral, o número de permutações, P, de \emph{n} objetos diferentes é\\
+
+\begin{equation}
+\centering
+P\hspace{0.05cm}=\hspace{0.05cm}\emph{n}\cdot(\emph{n}-1)\cdot(\emph{n}-2)\cdot \hspace{0.05cm} \ldots \hspace{0.05cm} \cdot1=\emph{n}!
+\end{equation}\\
+
+\subsection{Permutação com Repetição}
+
+Admita, por exemplo, que queremos conhecer o número de anagramas da palavra ASA. Se todas as letras fossem diferentes, teríamos o caso de uma permutação simples e o resultado seria 3!\hspace{0.05cm}=\hspace{0.05cm}6. No entanto, a letra A aparece duas vezes e quando trocamos um A pelo outro, a palavra não muda. Têm-se assim, ASA, AAS e SAA, ou seja, três anagramas. Admitindo-se que há P anagramas, pelo princípio fundamental de contagem, multiplicando-se P pelo número de permutações entre as letras A, 2!, devemos obter o número de modos de agrupar as três letras, A, S e A, se elas fossem distinguíveis, isto é, 3!. Então, 2!P\hspace{0.05cm}=\hspace{0.05cm}3! e P\hspace{0.05cm}=\hspace{0.05cm}$3! \hspace{0.05cm} / \hspace{0.05cm} 2!$ .\\
+
+Em geral, o número de permutações de \emph{n} objetos distribuídos em grupos, dos quais $\emph{$n_1$}$, $\emph{$n_2$}$, $\ldots$ , $\emph{$n_k$}$ são iguais entre si, é \\
+
+
+
+\begin{equation}\label{pr}
+\centering
+P_R \hspace{0.05cm} = \hspace{0.05cm} \frac{\emph{n}!}{\emph{$n_1$}! \hspace{0.05cm} \cdot \hspace{0.05cm} \emph{$n_2$}! \hspace{0.05cm} \cdot \hspace{0.05cm} \ldots \hspace{0.05cm} \cdot \hspace{0.05cm} \emph{$n_k$}}
+\end{equation}\\
+
+em que $\emph{$n_1$}$ + $\emph{$n_2$}$ + $\ldots$ + $\emph{$n_k$}$ = $\emph{n}$ .\\
+
+Como exemplo do uso da Eq.~(\ref{pr}), considere o número de permutações das letras da palavra ESTATISTICA. Tem-se que\\
+
+
+$P_R \hspace{0.05cm} = \hspace{0.05cm} \displaystyle\frac{\emph{12} \hspace{0.1cm}!}{\emph{$3$}! \hspace{0.05cm} \cdot \hspace{0.05cm} \emph{$3$}! \hspace{0.05cm} \cdot \hspace{0.05cm} \emph{$2$}! \hspace{0.05cm} \cdot \hspace{0.05cm} \emph{$2$}! \hspace{0.05cm} \cdot \hspace{0.05cm}\emph{$1$}! \hspace{0.05cm} \cdot \hspace{0.05cm} \emph{$1$}!}$ \\
+
+visto que há 3\hspace{0.05cm}S, 3\hspace{0.05cm}T, 2\hspace{0.05cm}A, 2\hspace{0.05cm}I, 1\hspace{0.05cm}C e 1\hspace{0.05cm}E\hspace{0.05cm}.\\
+
+
+\subsection{Permutação Cíclica}
+
+Considere um conjunto de quatro pessoas que deverão sentar-se, junto a uma mesa. Queremos saber, quantas possibilidades existem, para que a ação ocorra, sem que haja repetição das posições. Se considerássemos todas as permutações simples possíveis, teríamos vinte e quatro grupos, ou seja, \{ABCD, ABDC, ACBD, ACDB, ADBC, ADCB, BACD, BADC, BCAD, BCDA, BDAC, BDCA, CABD, CADB, CBAD, CBDA, CDAB, CDBA, DABC, DACB, DBAC, DBCA, DCAB, DCBA\}. No entanto, em uma mesa circular tem-se que:\\
+
+ABCD = BCDA = CDAB = DABC
+
+ABDC = BDCA = DCAB = CABD
+
+ACBD = CBDA = BDAC = DACB
+
+ACDB = CDBA = DBAC = BACD
+
+ADBC = DBCA = BCAD = CADB
+
+ADCB = DCBA = CBAD = BADC\\
+
+
+Portanto, existem somente seis grupos distintos que são \{ABCD, ABDC, ACBD, ACDB, ADBC, ADCB\}.\\
+
+Isto pode ser encontrado usando\\
+
+
+\begin{equation}
+\centering
+P_C\hspace{0.05cm}=\hspace{0.05cm}(\emph{n}-1)!
+\end{equation}\\
+
+que no nosso exemplo, com \emph{n}\hspace{0.05cm}=\hspace{0.05cm}4, temos\\
+
+$P_C=(\emph{4}-1)!=(\emph{3})!=6$.\\
+
+
+\section{Arranjo}
+
+O arranjo é o caso em que os agrupamentos formados não utilizam todos os elementos de um conjunto e, além disso, estes agrupamentos distinguem-se também pela ordem em que os elementos aparecem. Aqui será visto Arranjo Simples, Arranjo com Repetição e Arranjo Condicional.\\
+
+
+\subsection{Arranjo Simples}
+
+Considere que dez pessoas desejam sentar-se em um banco com apenas quatro lugares. Então, o primeiro lugar poderá ser preenchido de dez maneiras diferentes. Após o primeiro lugar ser preenchido, haverá nove maneiras de preencher o segundo lugar, oito de preencher o terceiro e sete de preencher o quarto. Portanto, pelo príncipio fundamental de contagem, o número de arranjos de dez pessoas, tomados quatro a quatro será igual a $10 \cdot 9 \cdot 8 \cdot 7 = 5 \hspace{0.05cm} 040$. Em geral, o número de arranjos de \emph{n} elementos tomados \emph{r} a \emph{r} é representado por $A{{{^\emph{r}}}\atop{\emph{n}}}$ e dado por \\
+
+
+\begin{equation}
+\centering
+A{{{^\emph{r}}}\atop{\emph{n}}} = \emph{n} \cdot (\emph{n} - 1) \cdot (\emph{n} - 2) \cdot \hspace{0.05cm} \ldots \hspace{0.05cm} \cdot (\emph{n} - \emph{r} + 1) = \ \frac{\emph{n}!}{(\emph{n}-\emph{r})!}
+\end{equation}\\
+
+
+Note que quando \emph{r}\hspace{0.05cm}=\hspace{0.05cm}\emph{n}, ou seja, o número de arranjos de \emph{n} objetos tomados \emph{n} a \emph{n}, $A{{{^\emph{n}}}\atop{\emph{n}}}$=\emph{n}!, recaindo em uma permutação simples.\\
+
+Suponha agora, que pretende-se saber quantas comissões de três elementos é possível formar a partir de um grupo de cinco indivíduos, \{A, B, C, D, E\}, compostas de um presidente, um tesoureiro e um secretário. Vê-se aqui, o interesse, não só nos elementos componentes, mas também pelos cargos que vão ocupar. Uma comissão em que o elemento A é o presidente, B o tesoureiro e C o secretário, é diferente da comissão composta pelos mesmos indivíduos, porém em que B é o presidente, A é o tesoureiro e C o secretário. Temos então, um problema de Arranjo Simples de cinco elementos três a três,\\
+
+$A{{{^\emph{3}}}\atop{\emph{5}}} = \displaystyle\frac{\emph{5}!}{(\emph{5}-\emph{3})!} = 60$\\
+
+
+Como outro exemplo, seja o conjunto \{A, B, C, D\} e queremos arranjar seus quatro elementos dois a dois. Então, o número de agrupamentos possíveis é\\
+
+$A{{{^\emph{2}}}\atop{\emph{4}}} = \displaystyle\frac{\emph{4}!}{(\emph{4}-\emph{2})!} = 12$\\
+
+
+que são AB, AC, AD, BA, BC, BD, CA, CB, CD, DA, DB e DC.\\
+
+
+
+
+\subsection{Arranjo com Repetição}
+
+Neste caso, os elementos podem aparecer repetidos nos agrupamentos de \emph{r} elementos. Para exemplificar, tomemos o conjunto \{A, B, C, D\}, e novamente queremos arranjar seus elementos dois a dois, mas neste caso queremos também incluir agrupamentos com elementos repetidos. Então, devemos acrescentar ao resultado do último exemplo do tópico anterior os agrupamentos AA, BB, CC e DD, totalizando 16 agrupamentos. Isto é obtido usando\\
+
+
+\begin{equation}
+\centering
+A_R{{{^\emph{r}}}\atop{\emph{n}}} = \hspace{0.1cm}  \emph{n}^\emph{r}
+\end{equation}\\
+
+que no caso de nosso exemplo\\
+
+$\displaystyle A_R{{{^\emph{2}}}\atop{\emph{4}}} = \displaystyle\emph{4}^\emph{2} =\hspace{0.1cm} 16$ .\\
+
+
+\subsection{Arranjo Condicional}
+
+Todos os elementos aparecem em cada grupo de \emph{r} elementos, mas existe uma condição que deve ser satisfeita acerca de alguns elementos.\\
+
+Para exemplificar, suponha que queremos formar, a partir do conjunto \{A, B, C, D, E, F, G\}, grupos de quatro elementos que comecem com dois elementos do subconjunto \{A, B, C\}. Com as letras A, B e C tomadas dois a dois (arranjo simples), temos seis grupos que são AB, BA, AC, CA, BC e CB, e com as letras D, E, F e G tomadas dois a dois (também um arranjo simples) temos doze grupos, DE, DF, DG, ED, EF, EG, FD, FE, FG, GD, GE e GF. Pelo princípio fundamental de contagem temos $6\cdot12=72$ grupos.\\
+
+Com o total de elementos do conjunto, \emph{n}, tomados \emph{r} a \emph{r} e o total de elementos do subconjunto, \emph{n*}, tomados \emph{r*} a \emph{r*} temos então\\
+
+
+
+\begin{equation}
+\centering
+A_C \hspace{0.1cm} = \hspace{0.1cm} A{{{^\emph{r*}}}\atop{\emph{n*}}} \hspace{0.2cm}\cdot \hspace{0.2cm} A{{{^{\displaystyle{\emph{r}-\emph{r*}}}}}\atop{\emph{n}-\emph{n*}}} \hspace{0.1cm} = \hspace{0.1cm} \frac{\emph{n*} \hspace{0.1cm}!} {(\emph{n*} - \emph{r*}\hspace{0.1cm})!} \hspace{0.1cm}\cdot \hspace{0.1cm} \frac{(\emph{n} - \emph{n*} \hspace{0.1cm} )!}{((\emph{n} - \emph{n*}) - (\emph{r} - \emph{r*}))!}
+\end{equation}\\
+
+que, no caso do nosso exemplo fica\\
+
+$A_C \hspace{0.1cm} = \hspace{0.1cm} \displaystyle A{{{^\emph{2}}}\atop{\emph{3}}} \hspace{0.2cm}\cdot \hspace{0.2cm} \displaystyle A{{{^{\displaystyle{\emph{4} - \emph{2}}}}}\atop{\emph{7}-\emph{3}}} \hspace{0.1cm} = \hspace{0.1cm} \displaystyle \frac{\emph{3} \hspace{0.1cm}!} {(\emph{3} - \emph{2}\hspace{0.1cm})!} \hspace{0.1cm}\cdot \hspace{0.1cm} \displaystyle \frac{(\emph{7} - \emph{3} \hspace{0.1cm} )!}{((\emph{7} - \emph{3}) - (\emph{4} - \emph{2}))!} \hspace{0.1cm} = \hspace{0.1cm} 72$ .\\
+
+
+\section{Combinação}
+
+ Este é o caso de agrupamentos que se diferem apenas pelos elementos componentes, não interessando a ordem em que aparecem. Aqui será visto Combinação Simples e Combinação com Repetição.\\
+
+
+
+\subsection{Combinação Simples}
+
+Na Combinação Simples, os elementos dentro dos agrupamentos são todos distintos.\\
+
+Seja \{A, B, C, D, E\} o conjunto de cinco alunos de graduação em Física a partir do qual queremos montar uma comissão de três alunos. Como uma comissão se difere de outra somente quando pelo menos um aluno for diferente, vemos, por exemplo, que os agrupamentos (A, B, C), (A, C, B), (B, A, C), (B, C, A), (C, A, B) e (C, B, A) formam uma única comissão. Admitindo-se que podemos formar C comissões, então, multiplicando-se C pelo número de permutações entre os três elementos dessa comissão, 3!, obteremos o número de arranjos de cinco elementos tomados três a três, $A{{{^\emph{3}}}\atop{\emph{5}}}$. Assim, 3!C\hspace{0.05cm}=\hspace{0.05cm}$A{{{^\emph{3}}}\atop{\emph{5}}}$, então C\hspace{0.05cm}=\hspace{0.05cm}$A{{{^\emph{3}}}\atop{\emph{5}}} \hspace{0.05cm} / \hspace{0.05cm} 3!$ = $(5 \cdot 4 \cdot 3) / (3 \cdot 2 \cdot 1)$ = 10. Em geral, o número de agrupamentos de \emph{r} objetos de um total de \emph{n}, denominado número de Combinações de \emph{n} objetos, tomadas \emph{r} de cada vez, é representado por $C{{{^\emph{r}}}\atop{\emph{n}}}$ e dado por\\
+
+
+\begin{equation}
+\label{eq1}
+\centering
+C{{{^\emph{r}}}\atop{\emph{n}}} = \ \frac{\emph{n}\hspace{0.05cm}!}{\emph{r}\hspace{0.05cm}! \hspace{0.05cm}(\emph{n}-\emph{r})\hspace{0.05cm}!}
+\end{equation}\\
+
+Como outro exemplo, seja o conjunto \{A, B, C, D\}, obtemos com a Combinação Simples destes quatro elementos tomados dois a dois, os agrupamentos AB, AC, AD, BC, BD e CD, visto que AB=BA, AC=CA, AD=DA, BC=CB, BD=DB e CD=DC; ou seja, o número de agrupamentos é dado por\\
+
+$C{{{^\emph{2}}}\atop{\emph{4}}} = \displaystyle \frac{\emph{4}\hspace{0.05cm}!}{\emph{2}\hspace{0.05cm}! \hspace{0.05cm}(\emph{4}-\emph{2})\hspace{0.05cm}!} = 6$\\
+
+
+\subsection{Combinação com Repetição}
+
+Neste caso, os elementos podem aparecer repetidos nos agrupamentos.\\
+
+Como exemplo, seja o conjunto \{A, B, C, D\}. Os agrupamentos formados a partir de uma Combinação com Repetição, $C_R$, destes quatro elementos dois a dois são AA, AB, AC, AD, BB, BC, BD, CC, CD e DD, em que, incluiu-se do último exemplo de Combinação Simples, os agrupamentos com elementos repetidos, AA, BB, CC e DD. Isto é dado pela equação\\
+
+
+\begin{equation}
+\label{eq1}
+\centering
+C_R{{{^\emph{r}}}\atop{\emph{n}}} = \ \frac{(\emph{n} + \emph{r} - 1)\hspace{0.05cm}!}{\emph{r}\hspace{0.05cm}! \hspace{0.05cm}(\emph{n}-\emph{r})\hspace{0.05cm}!}
+\end{equation}\\
+
+No nosso exemplo\\
+
+$C_R{{{^\emph{2}}}\atop{\emph{4}}} = \displaystyle\frac{(\emph{4} + \emph{2} - 1)\hspace{0.05cm}!}{\emph{2}\hspace{0.05cm}! \hspace{0.05cm}(\emph{4}-\emph{2})\hspace{0.05cm}!} = 10$\\
+
+
+
+
+
+
+
+
+\end{document}

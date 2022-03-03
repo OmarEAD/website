@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Omar Cléo" />
+
+
+<title>Referências e citações</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Omar Cléo</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Dados longitudinais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ETbook.html">Evapotranspiração</a>
+    </li>
+    <li>
+      <a href="Mixed.html">Modelos Mistos</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Alguns estudos
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">RMarkdown</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="RMarkdownBas.html">Comandos básicos</a>
+        </li>
+        <li>
+          <a href="Referencias.html">Referências</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Distribuição Normal</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Normal1.html">Normal 1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Estatística Básica
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Alunos</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="ListaEstatBasic.html">Lista de exercícios</a>
+        </li>
+        <li>
+          <a href="EADPresEstBasA1.html">Outros materiais</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Destaques
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Patente</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Patente.html">Carta Patente</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Premiação</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="barcelona.html">Barcelona</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Fotos</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Fotos.html">Lembranças</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Referências e citações<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h1>
+<h4 class="author">Omar Cléo</h4>
+
+</div>
+
+
+<div id="referências" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Referências</h1>
+<p>Agora estamos próximo do final da nossa análise de dados e precisamos citar os artigos e livros que usamos para apoiar nosso estudo.</p>
+<p>Citar suas referências em um documento rmarkdown é simples. Inicialmente você vai precisar criar um arquivo <code>.bib</code>. Um arquivo <code>.bib</code> armazena todas as referências do seu artigo e pode ser usado também no <span class="math inline">\(\LaTeX\)</span>, uma outra linguagem de marcação (e que não vem ao caso agora).</p>
+<p>Para citar o <em>software</em> <code>R</code> no seu artigo, você pode usar o comando <code>citation()</code> no console do <code>R</code>.</p>
+<pre class="r"><code>citation()</code></pre>
+<pre><code>
+To cite R in publications use:
+
+  R Core Team (2021). R: A language and environment for statistical
+  computing. R Foundation for Statistical Computing, Vienna, Austria.
+  URL https://www.R-project.org/.
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {R: A Language and Environment for Statistical Computing},
+    author = {{R Core Team}},
+    organization = {R Foundation for Statistical Computing},
+    address = {Vienna, Austria},
+    year = {2021},
+    url = {https://www.R-project.org/},
+  }
+
+We have invested a lot of time and effort in creating R, please cite it
+when using it for data analysis. See also &#39;citation(&quot;pkgname&quot;)&#39; for
+citing R packages.</code></pre>
+<p>Então você deve copiar o seguinte:</p>
+<pre><code>@Manual{,
+    title = {R: A Language and Environment for Statistical Computing},
+    author = {{R Core Team}},
+    organization = {R Foundation for Statistical Computing},
+    address = {Vienna, Austria},
+    year = {2019},
+    url = {https://www.R-project.org/},
+  }</code></pre>
+<p>e salvar no seu arquivo <code>.bib</code>. Como outro exemplo, vamos citar o <em>package</em> <code>nlme</code>:</p>
+<pre class="r"><code>citation(&#39;nlme&#39;)</code></pre>
+<pre><code>
+Pinheiro J, Bates D, DebRoy S, Sarkar D, R Core Team (2021). _nlme:
+Linear and Nonlinear Mixed Effects Models_. R package version 3.1-152,
+&lt;URL: https://CRAN.R-project.org/package=nlme&gt;.
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {{nlme}: Linear and Nonlinear Mixed Effects Models},
+    author = {Jose Pinheiro and Douglas Bates and Saikat DebRoy and Deepayan Sarkar and {R Core Team}},
+    year = {2021},
+    note = {R package version 3.1-152},
+    url = {https://CRAN.R-project.org/package=nlme},
+  }</code></pre>
+<p>E copiamos para o arquivo <code>.bib</code> o seguinte:</p>
+<pre><code>@Manual{,
+    title = {{nlme}: Linear and Nonlinear Mixed Effects Models},
+    author = {Jose Pinheiro and Douglas Bates and Saikat DebRoy and Deepayan Sarkar and {R Core Team}},
+    year = {2020},
+    note = {R package version 3.1-147},
+    url = {https://CRAN.R-project.org/package=nlme},
+  }</code></pre>
+<p>Uma forma interessante de referenciar um artigo é usar o <strong>Google Acadêmico</strong> (<a href="https://scholar.google.com.br/scholar?q=" class="uri">https://scholar.google.com.br/scholar?q=</a>). Observa a Figura @ e veja onde está circulado em vermelho.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gacademico1"></span>
+<img src="Gacademico.PNG" alt="Recorte de uma busca no _Google Acadêmico_" width="115%" />
+<p class="caption">
+Figure 1.1: Recorte de uma busca no <em>Google Acadêmico</em>
+</p>
+</div>
+<p>Clicando ali, aparecerá uma quadro chamado <strong>Citar</strong> (Figura <a href="#fig:gacademico2">1.2</a>).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gacademico2"></span>
+<img src="Gacademico2.PNG" alt="Recorte de uma busca no _Google Acadêmico_" width="80%" />
+<p class="caption">
+Figure 1.2: Recorte de uma busca no <em>Google Acadêmico</em>
+</p>
+</div>
+<p>Então, clique em <strong>BibTex</strong>, circulado em vermelho (Figura <a href="#fig:gacademico2">1.2</a>). Aparecerá uma página com a citação no formato <code>.bib</code>.</p>
+<pre><code>@article{verbeke1996linear,
+  title={A linear mixed-effects model with heterogeneity in the random-effects population},
+  author={Verbeke, Geert and Lesaffre, Emmanuel},
+  journal={Journal of the American Statistical Association},
+  volume={91},
+  number={433},
+  pages={217--221},
+  year={1996},
+  publisher={Taylor \&amp; Francis}
+}</code></pre>
+<p>Basta copiar e colar no seu documento <code>.bib</code>.</p>
+<p>Depois de criado seu arquivo <code>.bib</code> com suas referências, você precisa chamá-lo no <strong>YAML</strong> do seu documento na opção <em>bibliography</em>. Suponha que você tenha dado o nome a esse arquivo de <strong>Referencias.bib</strong>, o <strong>YAML</strong> fica da seguinte forma:</p>
+<pre><code>---
+title: 
+author:
+output: html_document
+bibliography: Referencias.bib
+---</code></pre>
+<div id="citação-das-referências" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Citação das referências</h2>
+<p>Para citar uma referência no texto você precisa do comando <code>@</code> antes do nome do artigo ou livro. O nome da referência é você que escolhe. Observa que as referências do <code>R</code> e do <em>package</em> <code>nlme</code> começam da seguinte forma: <code>@Manual{,</code>. Entre a <strong>chave</strong> e a <strong>vírgula</strong> você deve acrescentar um nome. Por exemplo, para o <code>R</code> podemos colocar <code>softwareR</code>. Neste caso, a citação no arquivo <code>.bib</code> fica:</p>
+<pre><code>@Manual{softwareR,
+    title = {R: A Language and Environment for Statistical Computing},
+    author = {{R Core Team}},
+    organization = {R Foundation for Statistical Computing},
+    address = {Vienna, Austria},
+    year = {2019},
+    url = {https://www.R-project.org/},
+  }</code></pre>
+<p>Para citá-lo no texto você deve digitar <code>(@softwareR)</code>:</p>
+<p>Esta análise estatística foi realizada por meio do <em>software</em> <code>R</code> (<span class="citation">R Core Team (2019)</span>).</p>
+<p>E quando compilar seu documento, o seu texto ficarà assim:</p>
+<p>Esta análise estatística foi realizada por meio do <em>software</em> R (Core Team (2019)).</p>
+<p>E no final do seu documento aparecerá a citação:</p>
+<pre><code>R Core Team (2019). R: A language and environment for statistical computing. R
+  Foundation for Statistical Computing, Vienna, Austria. URL
+  https://www.R-project.org/.
+  
+</code></pre>
+<p>Para mais detalhes sobre estilos de citação, ver os sites <a href="https://docs.citationstyles.org/en/1.0.1/primer.html" class="uri">https://docs.citationstyles.org/en/1.0.1/primer.html</a> e <a href="https://github.com/citation-style-language/styles" class="uri">https://github.com/citation-style-language/styles</a></p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-softwareR" class="csl-entry">
+R Core Team. 2019. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Este artigo é um resumo sobre <strong>referências em RMarkdown</strong> . Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: <a href="mailto:omarcnpereiraead@gmail.com" class="email">omarcnpereiraead@gmail.com</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

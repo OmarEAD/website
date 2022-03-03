@@ -64,7 +64,6 @@ if (window.hljs) {
 
 
 
-<link rel="stylesheet" href="style.css" type="text/css" />
 
 
 
@@ -459,15 +458,15 @@ div.tocify {
 </div>
 
 
-<div id="estatística-descritiva" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Estatística descritiva</h1>
+<div id="estatística-descritiva" class="section level1">
+<h1>Estatística descritiva</h1>
 <ol style="list-style-type: decimal">
 <li><p>Alguns funcionários de uma empresa decidiram participar de uma pesquisa para avaliar o tempo gasto para irem de casa ao trabalho usando o transporte coletivo e o automóvel próprio. Se você fosse o responsável por essa pesquisa, como a realizaria? De forma concisa descreva detalhes da coleta de dados e possíveis problemas que poderiam ocorrer.</p></li>
-<li><p>Considere o problema anterior. Suponha que você tenha coletado uma amostra do tempo (minutos) de translado de casa ao trabalho de 10 funcionários, ora indo de transporte coletivo, ora de carro próprio (Tabela <a href="#tab:transp">1.1</a>). Esse tipo de dados tem estrutura pareada (em breve estudaremos isto com detalhes).</p></li>
+<li><p>Considere o problema anterior. Suponha que você tenha coletado uma amostra do tempo (minutos) de translado de casa ao trabalho de 10 funcionários, ora indo de transporte coletivo, ora de carro próprio (Tabela @ref(tab:transp)). Esse tipo de dados tem estrutura pareada (em breve estudaremos isto com detalhes).</p></li>
 </ol>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:transp">Table 1.1: </span>Tempo gasto, em minutos, para 10 funcionários irem de casa até a empresa em que trabalham de duas maneiras, ou transporte coletivo (TC) ou automóvel próprio (AP).
+(#tab:transp)Tempo gasto, em minutos, para 10 funcionários irem de casa até a empresa em que trabalham de duas maneiras, ou transporte coletivo (TC) ou automóvel próprio (AP).
 </caption>
 <tbody>
 <tr>
@@ -617,11 +616,11 @@ round((sd(dados[,2])/mean(dados[,2]))*100,2)</code></pre>
 round((sd(dados[,3])/mean(dados[,3]))*100,2)</code></pre>
 <pre><code>[1] 24.27</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>Uma pesquisa mostrou que o brasileiro gasta em média R$234,19 por mês se alimentando fora de casa (dados fictícios). Os gastos mensais para se alimentar fora de casa referentes a uma amostra de 30 adolescentes estão apresentados na Tabela <a href="#tab:adoles">1.2</a>.</li>
+<li>Uma pesquisa mostrou que o brasileiro gasta em média R$234,19 por mês se alimentando fora de casa (dados fictícios). Os gastos mensais para se alimentar fora de casa referentes a uma amostra de 30 adolescentes estão apresentados na Tabela @ref(tab:adoles).</li>
 </ol>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:adoles">Table 1.2: </span>Gastos mensais de 30 adolescentes para se alimentarem fora de casa.
+(#tab:adoles)Gastos mensais de 30 adolescentes para se alimentarem fora de casa.
 </caption>
 <tbody>
 <tr>
@@ -743,10 +742,10 @@ hist(dados, labels = T, main = &quot;&quot;,
 hist(dados, labels = T, main = &quot;&quot;,
      xlab = &#39;Gasto (R$)&#39;, ylab = &#39;Densidade&#39;,
      probability = T, ylim = c(0,0.025))</code></pre>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:histograns"></span>
+<div class="figure" style="text-align: center">
 <img src="Figuras1/histograns-1.png" alt="Histogramas (frequência e densidade) dos gastos mensais de 30 adolescentes para se alimentarem." width="2400" /><img src="Figuras1/histograns-2.png" alt="Histogramas (frequência e densidade) dos gastos mensais de 30 adolescentes para se alimentarem." width="2400" />
 <p class="caption">
-Figure 1.1: Histogramas (frequência e densidade) dos gastos mensais de 30 adolescentes para se alimentarem.
+(#fig:histograns)Histogramas (frequência e densidade) dos gastos mensais de 30 adolescentes para se alimentarem.
 </p>
 </div>
 <ul>
@@ -763,10 +762,10 @@ Figure 1.1: Histogramas (frequência e densidade) dos gastos mensais de 30 adole
 <li>Construa um boxplot.</li>
 </ul>
 <pre class="r"><code>boxplot(dados, ylab = &quot;Gastos (R$)&quot;)</code></pre>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:box1"></span>
+<div class="figure" style="text-align: center">
 <img src="Figuras1/box1-1.png" alt="Boxplot dos gastos mensais de 30 adolescentes para se alimentarem." width="2400" />
 <p class="caption">
-Figure 1.2: Boxplot dos gastos mensais de 30 adolescentes para se alimentarem.
+(#fig:box1)Boxplot dos gastos mensais de 30 adolescentes para se alimentarem.
 </p>
 </div>
 <ul>
@@ -779,10 +778,10 @@ Figure 1.2: Boxplot dos gastos mensais de 30 adolescentes para se alimentarem.
 <pre class="r"><code>(sd(dados)/mean(dados))*100</code></pre>
 <pre><code>[1] 5.107948</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>As receitas de duas concessionárias estão apresentadas na Tabela <a href="#tab:conces">1.3</a>. Qual delas apresenta maior dispersão? Discuta os resultados.</li>
+<li>As receitas de duas concessionárias estão apresentadas na Tabela @ref(tab:conces). Qual delas apresenta maior dispersão? Discuta os resultados.</li>
 </ol>
 <table>
-<caption><span id="tab:conces">Table 1.3: </span> Receita das concecionárias A e B.</caption>
+<caption>(#tab:conces) Receita das concecionárias A e B.</caption>
 <thead>
 <tr class="header">
 <th align="center">Concessionária</th>
@@ -810,14 +809,14 @@ Figure 1.2: Boxplot dos gastos mensais de 30 adolescentes para se alimentarem.
 <pre class="r"><code>#B
 (500000/630000)*100</code></pre>
 <pre><code>[1] 79.36508</code></pre>
-<div id="análise-bivariada" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Análise bivariada</h2>
+<div id="análise-bivariada" class="section level2">
+<h2>Análise bivariada</h2>
 <ol start="5" style="list-style-type: decimal">
-<li>Na Tabela <a href="#tab:corr1">1.4</a> é apresentado seis observações das variáveis <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>.</li>
+<li>Na Tabela @ref(tab:corr1) é apresentado seis observações das variáveis <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span>.</li>
 </ol>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:corr1">Table 1.4: </span>Seis observações das variáveis X e Y.
+(#tab:corr1)Seis observações das variáveis X e Y.
 </caption>
 <tbody>
 <tr>
@@ -883,10 +882,10 @@ dados3</code></pre>
 <li>Faça um diagrama de dispersão (<span class="math inline">\(X\)</span> no eixo horizontal).</li>
 </ul>
 <pre class="r"><code>plot(Y~X, dados3)</code></pre>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
+<div class="figure" style="text-align: center">
 <img src="Figuras1/unnamed-chunk-9-1.png" alt="TRUE" width="2400" />
 <p class="caption">
-Figure 1.3: TRUE
+(#fig:unnamed-chunk-9)TRUE
 </p>
 </div>
 <ul>
@@ -903,36 +902,13 @@ Figure 1.3: TRUE
 cov(x,y)/(sd(x)*sd(y))</code></pre>
 <pre><code>[1] 0.9757751</code></pre>
 <ol start="6" style="list-style-type: decimal">
-<li>O diretor de uma escola quer saber se há associação entre a média escolar (<span class="math inline">\(ME\)</span>) e o desempenho em um simulado (<span class="math inline">\(SIM\)</span>). Na Tabela <a href="#tab:corr2">1.5</a> é apresentado uma amostra de seis alunos.</li>
+<li>O diretor de uma escola quer saber se há associação entre a média escolar (<span class="math inline">\(ME\)</span>) e o desempenho em um simulado (<span class="math inline">\(SIM\)</span>). Na Tabela @ref(tab:corr2) é apresentado uma amostra de seis alunos.</li>
 </ol>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:corr2">Table 1.5: </span>Seis observações das variáveis ME e SIM.
+(#tab:corr2)Seis observações das variáveis ME e SIM.
 </caption>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Aluno
-</td>
-<td style="text-align:right;">
-1.0
-</td>
-<td style="text-align:right;">
-2.0
-</td>
-<td style="text-align:right;">
-3.0
-</td>
-<td style="text-align:right;">
-4.0
-</td>
-<td style="text-align:right;">
-5.0
-</td>
-<td style="text-align:right;">
-6.0
-</td>
-</tr>
 <tr>
 <td style="text-align:left;">
 ME
@@ -981,25 +957,25 @@ SIM
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>ME     &lt;- c(5.3,6.2,5.1,7.8,6.4,5.1)
-SIM    &lt;- c(5.5,6.6,5.4,7.6,7.2,5.3)
-dados4 &lt;- data.frame(Aluno=1:6,ME, SIM)
+<pre class="r"><code>ME  &lt;- c(5.3,6.2,5.1,7.8,6.4,5.1)
+SIM &lt;- c(5.5,6.6,5.4,7.6,7.2,5.3)
+dados4 &lt;- data.frame(ME, SIM)
 dados4</code></pre>
-<pre><code>  Aluno  ME SIM
-1     1 5.3 5.5
-2     2 6.2 6.6
-3     3 5.1 5.4
-4     4 7.8 7.6
-5     5 6.4 7.2
-6     6 5.1 5.3</code></pre>
+<pre><code>   ME SIM
+1 5.3 5.5
+2 6.2 6.6
+3 5.1 5.4
+4 7.8 7.6
+5 6.4 7.2
+6 5.1 5.3</code></pre>
 <ul>
 <li>Faça um diagrama de dispersão (<span class="math inline">\(ME\)</span> no eixo horizontal).</li>
 </ul>
 <pre class="r"><code>plot(ME~SIM,data = dados4)</code></pre>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-13"></span>
+<div class="figure" style="text-align: center">
 <img src="Figuras1/unnamed-chunk-13-1.png" alt="TRUE" width="2400" />
 <p class="caption">
-Figure 1.4: TRUE
+(#fig:unnamed-chunk-13)TRUE
 </p>
 </div>
 <ul>
@@ -1016,7 +992,7 @@ Figure 1.4: TRUE
 cov(dados4$ME,dados4$SIM)/(sd(dados4$ME)*sd(dados4$SIM))</code></pre>
 <pre><code>[1] 0.9511981</code></pre>
 <ol start="7" style="list-style-type: decimal">
-<li><strong>Tempo de caminhada <span class="math inline">\(\times\)</span> Gordura corporal.</strong> Dados de tempo semanal de caminhada (horas) e a gordura corporal (%) de oito indivíduos do sexo masculino com idade acima de 60 anos são apresentados na Tabela <a href="#tab:corr3"><strong>??</strong></a>.</li>
+<li><strong>Tempo de caminhada <span class="math inline">\(\times\)</span> Gordura corporal.</strong> Dados de tempo semanal de caminhada (horas) e a gordura corporal (%) de oito indivíduos do sexo masculino com idade acima de 60 anos são apresentados na Tabela @ref(tab:corr3).</li>
 </ol>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>

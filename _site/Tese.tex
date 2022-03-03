@@ -1,0 +1,688 @@
+\documentclass[a4paper,12pt]{report}%%[draft] for document proof
+\usepackage[brazil]{babel}  % Headers in portuguese
+\usepackage[T1]{fontenc}    % Typeset accentuated letters like ã,é,ç,...
+\hyphenation{exis-ten-tes a-pre-sen-ta-da in-fe-rio-res de-vi-do a-pre-sen-tam e-ner-gé-ti-co e-ner-gé-ti-cos tem-pe-ra-tu-ras tem-pe-ra-tu-ra co-nhe-ci-do pla-ne-ta ca-rac-te-rís-ti-ca so-li-di-fi-ca re-gis-tran-do a-pro-xi-ma-da in-te-ra-jam fa-lha fa-lhas su-ge-rin-do a-pre-sen-ta mo-de-los cen-tí-me-tros rea-li-za-do li-ne-ar ori-gi-nal a-pro-xi-man-do pro-ba-bi-li-da-des ca-rac-te-ri-za-do co-nhe-ci-do ca-rac-te-ris-ti-ca pe-rio-di-ci-da-de de-fi-ni-mos de-ta-lhar nor-ma-li-za-da va-lo-res ve-ri-fi-car in-tui-to di-fe-ren-tes e-xi-bem ca-rac-te-ri-za ne-nhu-ma}
+\usepackage{latexsym}                   % Extra symbols
+\usepackage{amsmath,amssymb,amsfonts}   % AMSmath resources
+\usepackage[dvips]{graphicx}            % Images inclusion
+\usepackage{color}              % Color resources (text and figures)
+\usepackage{indentfirst}        % Indent first paragraph of chapters
+\usepackage{times}
+\usepackage{lastpage}           % page N of M pages
+\usepackage{setspace}           % Line spacing
+\onehalfspacing                 % singlespacing; doublespacing
+\addtolength{\textwidth}{40pt}  % Enlarges text width
+\addtolength{\textheight}{38pt} % Enlarges text height
+\setlength{\parindent}{28.5pt}  % Sets value of paragraph indent.
+\usepackage[indent,normalsize,bf]{caption2}%  New layout for
+\setlength{\captionindent}{1.5em}          %  Figure and Table
+\setcaptionmargin{1.5em}                   %  captions
+\usepackage{fancyhdr}           % Pages layout (header and footer)
+\pagestyle{fancy}               %
+\fancyhf{}                      %
+\renewcommand{\chaptermark}[1]{ % Chapter name in the head of each page
+\markboth{\MakeUppercase{\chaptername\ \thechapter.\ #1}}{}}
+\lhead{\fancyplain{}{\slshape \leftmark}}
+\rhead{\rmfamily \thepage/\pageref{LastPage}}  % Page N of M
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\usepackage[Lenny]{fncychap}    % First page layout of chapters
+\newcommand{\C}{\c{c}}      % cedilha
+\newcommand{\I}{\'{\i}}     % accentuated i = í
+\newcommand{\bds}[1]{\boldsymbol{#1}}   % bolded math symbols
+\DeclareMathOperator{\sen}{sen}         % seno function
+\newcommand{\ix}{\mathrm{i}}            % imaginary i
+
+\usepackage{graphicx}
+
+\usepackage[dvips]{graphicx}
+
+%*************************************************************************
+
+\begin{document}
+
+\DeclareGraphicsExtensions{.jpg,.pdf,.mps,.png}
+
+\hyphenation{con-sis-te co-nhe-ci-men-to cons-ti-tui pre-en-chi-do e-le-men-to e-le-men-tos di-fe-ren-te des-cre-ve Fi-gu-ra Fi-gu-ras li-be-ra-da}
+
+
+
+\pagenumbering{roman}  % Page numbering in low roman letters .
+\begin{titlepage}
+\textcolor{blue}{\rule{.87\textwidth}{1pt}}
+\begin{center}{\LARGE \textsc{Universidade Estadual de Maringá\\[1ex]
+                               Monografia de Pós-Graduação}}
+
+\vspace{4cm} {\huge \textbf{Omar Cléo Neves Pereira}}
+
+\vspace{2cm} {\Large \textbf{ESTATÍSTICA APLICADA AO ESTUDO DA DINÂMICA DE CHUVAS NO NOROESTE DO PARANÁ}}%
+
+\vspace{3cm} \hfill
+
+\hspace{2em}
+
+\vspace{2cm} \textsf{\Large Maringá\\ [1ex] 2013}
+\end{center}
+
+\vspace{2ex} \textcolor{blue}{\rule{.87\textwidth}{1pt}}
+\end{titlepage}
+
+%*************************************************************************
+
+\begin{titlepage}
+\textcolor{blue}{\rule{.87\textwidth}{1pt}}
+\begin{center}{\LARGE \textsc{Universidade Estadual de Maringá\\[1ex]
+                               Monografia de Pós-Graduação}}
+
+\vspace{2cm} {\huge \textbf{Omar Cléo Neves Pereira}}
+
+\vspace{1cm} {\Large \textbf{ESTATÍSTICA APLICADA AO ESTUDO DA DINÂMICA DE CHUVAS NO NOROESTE DO PARANÁ}}
+
+\vspace{2cm} \hfill
+\begin{minipage}{10.0em}
+{\small \textit{Monografia apresentada à pós-graduação em Estatística da Universidade Estadual de Maringá como requisito parcial para obtenção do título de Pós-graduado.}}
+\end{minipage}
+\hspace{2em}
+\\
+\vspace{1cm}
+\begin{flushleft}
+\textbf{Orientador:} Prof. Dr. Eraldo Schunk Silva\\[1ex]
+
+\end{flushleft}
+
+\vspace{1cm} \textsf{\Large Maringá\\ [1ex] 2013}
+\end{center}
+
+\vspace{2ex} \textcolor{blue}{\rule{.87\textwidth}{1pt}}
+\end{titlepage}
+
+%*************************************************************************
+
+\newpage
+\thispagestyle{empty}
+\hspace{3em}
+\vspace{5cm}
+\begin{minipage}{10.0em}
+\vspace{4cm}
+{\small \textit{À Thaís, Anaih e Raul,  \vspace{1cm}
+\\ \vspace{1cm} \hspace{2em}  OFEREÇO.}}
+\end{minipage}
+\hspace{7em}
+
+\vspace{1cm}
+\hspace{20em}
+\begin{minipage}{10.0em}
+{\small \textit{Ao Meu pai \vspace{1cm}  (in memorian), \vspace{1cm} \hspace{2em} DEDICO.}}
+\end{minipage}
+\hspace{2em}
+
+
+\newpage
+\thispagestyle{empty}
+
+\begin{center}
+{\LARGE {\bf Agradecimentos}}
+\end{center}
+\vspace{1cm}
+
+À inteligência suprema, causa primária de todas as coisas.
+
+\vspace{1cm}
+À Universidade Estadual de Maringá e ao Programa de Pós-Graduação em Estatística pela oportunidade.
+
+\vspace{1cm}
+Ao professor e orientador Eraldo Schunk Silva,
+pela orientação deste trabalho.
+
+
+\vspace{1cm}
+Aos professores, funcionários e alunos da UEM que contribuíram nesta etapa.
+
+
+\vspace{1cm}
+À família pelo apoio.
+
+\vspace{1cm}
+Enfim, a todos que, direta ou indiretamente, cooperaram para a realização deste trabalho.
+
+
+\tableofcontents
+\newpage
+
+
+
+%%*************************************************************************
+\singlespacing \chapter*{} \centerline{\LARGE
+\textbf{Resumo}\addcontentsline{toc}{chapter}{Resumo}}
+\vspace{2cm} \noindent
+
+Neste trabalho,
+\\
+\\
+\\
+\\
+
+
+
+
+
+
+
+%%*************************************************************************
+\singlespacing \chapter*{} \centerline{\LARGE
+\textbf{Abstract}\addcontentsline{toc}{chapter}{Abstract}}
+\vspace{2cm} \noindent
+
+
+
+In this work,
+\\
+\\
+\\
+\\
+
+
+\newpage
+
+\pagestyle{fancy}       % Page layout
+\onehalfspacing         % Line spacing
+\pagenumbering{arabic}  % Page numbering in arabic numbers
+
+
+\chapter{Introdução}
+
+
+Estatística é...
+
+
+
+
+
+
+\chapter{Conceitos e Métodos}
+
+Neste capítulo trataremos a respeito de...
+
+\section{Distribuição de probabilidades}
+
+
+Em síntese, nosso trabalho consiste em analisar séries temporais ou conjuntos de observações feitas sequencialmente no tempo a fim de compreender, na medida do possível, a dinâmica do sistema físico que a gerou.
+
+\subsection{Distribuição Gaussiana}
+
+O propósito aqui é chegarmos na função densidade de probabilidade normal
+\\
+\begin{equation}\label{gaussiana}
+f(x)= \frac{1}{\sqrt{2 \pi \sigma}} e^{- \frac{(x - \mu)^{2}}{2 \sigma^{2}}}
+,
+\end{equation}
+\\
+em que $\mu$ e $\sigma$ são a média e a variância, a partir da exponenciação de um polinômio de segundo grau
+\\
+\begin{equation}\label{polinomio}
+f(x)= exp \{ ax^{2} + bx + c \}
+,
+\end{equation}
+\\
+em que $a$, $b$ e $c$ são constantes. Para que esta função tenha um máximo, faremos $a<0$. Assim $a=- \alpha$ com $\alpha > 0$. A constante $b$ move o pico central ao longo de $x$ e $c$ é escolhido para que
+\\
+\begin{equation}\label{normalizaçao}
+\int_{- \infty}^{+ \infty} f(x) \hspace{0.2cm} dx = 1
+.
+\end{equation}
+\\
+
+Começaremos agora um trabalho algébrico. Assim
+\\
+\begin{equation}\label{p1}
+f(x)= exp \{ -(\alpha x^{2} - bx) \} exp \{ {c} \}
+,
+\end{equation}
+\\
+em que, completando quadrados na primeira exponencial da equação \ref{p1}, temos
+\\
+\begin{equation*}
+\alpha x^{2} - bx = \left( \sqrt{ \alpha } x - \frac{b}{2 \sqrt{ \alpha }} \right)^{2} - \left(\frac{b}{2 \sqrt{ \alpha}}\right)^{2}
+.
+\end{equation*}
+\\
+
+Dessa forma
+\\
+\begin{equation*}
+f(x)= exp \left\{ -\left( \sqrt{\alpha} x - \frac{b}{2 \sqrt{ \alpha }} \right)^{2}  \right\}  exp \left\{ c - \left( \frac{b}{2 \sqrt{ \alpha}} \right)^{2}  \right\}
+,
+\end{equation*}
+\\
+e, como $exp \left\{ c - \left( \frac{b}{2 \sqrt{ \alpha}} \right)^{2}  \right\}$ é constante, faremos
+\\
+\begin{equation*}
+\beta = exp \left\{ c - \left( \frac{b}{2 \sqrt{ \alpha}} \right)^{2}  \right\}
+,
+\end{equation*}
+\\
+ficando com
+\\
+\begin{equation*}
+f(x) \hspace{0.2cm} = \hspace{0.2cm} \beta \hspace{0.2cm} exp \left\{ -\left( \sqrt{\alpha} x - \frac{b}{2 \sqrt{ \alpha }} \right)^{2}  \right\}
+.
+\end{equation*}
+\\
+
+
+Agora fazendo $ \theta  =  \left( \sqrt{\alpha} x - \frac{b}{2 \sqrt{ \alpha }} \right)^{2} $, temos
+\\
+\begin{eqnarray*}
+\theta & = & \left( \sqrt{\alpha} x - \frac{b}{2 \sqrt{ \alpha }} \right)^{2}\nonumber\\
+       & = & \left( \frac{2 \alpha x - b}{2 \sqrt{ \alpha }} \right)^{2}\nonumber\\
+       & = & \frac{ \left( x - \frac{b}{ 2 \alpha} \right)^{2} }{ 4 \alpha }
+\end{eqnarray*}
+\\
+e com $ \mu = \frac{b}{2 \alpha} $ e $ \sigma^{2} = \frac{1}{2 \alpha} $ chegamos em
+\\
+\begin{equation*}
+\theta = \frac{ \left( x - \mu \right)^{2} }{ 2 \sigma^{2} }
+\end{equation*}
+\\
+e, assim ficamos com
+\\
+\begin{equation*}
+f(x)\hspace{0.2cm}=\hspace{0.2cm} \beta \hspace{0.2cm} exp \left\{ -  \frac{ \left( x - \mu \right)^{2} }{ 2 \sigma^{2} } \right\}
+.
+\end{equation*}
+\\
+
+Agora precisamos que nossa $f(x)$ integrada nos intervalos de menos infinito a mais infinito seja igual a $1$, conforme equação \ref{normalizaçao}
+\\
+\begin{equation*}
+\int_{- \infty}^{+ \infty} f(x) \hspace{0.2cm} dx = 1
+,
+\end{equation*}
+\\
+então, escrevemos $I$ como
+\\
+\begin{equation}\label{norm1}
+I = \int_{- \infty}^{+ \infty}  \beta \hspace{0.2cm} exp \left\{ -  \frac{ \left( x - \mu \right)^{2} }{ 2 \sigma^{2} } \right\} \hspace{0.2cm} dx
+,
+\end{equation}
+\\
+que deve ser igual a $1$. Para resolvermos esta integral, faremos uma mudança de variável, ou seja,
+\\
+\begin{equation}\label{mv1}
+u \hspace{0.2cm} = \hspace{0.2cm} x \hspace{0.2cm} - \hspace{0.2cm} \mu
+\end{equation}
+\\
+assim
+\\
+\begin{equation}\label{mv2}
+du \hspace{0.2cm} = \hspace{0.2cm} dx \hspace{0.2cm}
+,
+\end{equation}
+\\
+ficando com
+\\
+\begin{equation*}
+I = \beta  \int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{ - \frac{u^{2}}{ 2 \sigma^{2}} } \hspace{0.2cm} du \hspace{0.2cm}
+.
+\end{equation*}
+\\
+
+Como
+\\
+\begin{equation*}
+\int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{ - \gamma u^{2} } \hspace{0.2cm} du = \sqrt{ \frac{ \pi }{ \gamma } } \hspace{0.5cm} \footnote{ Apêndice \ref{inta} }
+,
+\end{equation*}
+\\
+temos
+\\
+\begin{equation*}
+I \hspace{0.2cm} = \hspace{0.2cm} \beta \hspace{0.2cm} \sqrt{ 2 \sigma^{2} \pi }
+,
+\end{equation*}
+\\
+e como $I$ deve ser igual a $1$
+\\
+\begin{equation*}
+\beta \hspace{0.2cm} \sqrt{ 2 \sigma^{2} \pi } \hspace{0.2cm} = \hspace{0.2cm} 1
+,
+\end{equation*}
+\\
+de onde
+\\
+\begin{equation*}
+\beta \hspace{0.2cm} = \hspace{0.2cm} \frac{1}{ \sqrt{ 2 \sigma^{2} \pi }} \hspace{0.2cm}
+.
+\end{equation*}
+\\
+
+Dessa forma, temos abaixo a função densidade de probabilidade ($fdp$), Equação \ref{gaussiana}, a qual queríamos demonstrar,
+\\
+\begin{equation*}
+f(x)= \frac{1}{\sqrt{2 \pi \sigma}} e^{- \frac{(x - \mu)^{2}}{2 \sigma^{2}}}\hspace{0.2cm}
+.
+\end{equation*}
+\\
+
+Agora, resta-nos calcular a esperança e a variância desta $fdp$, a fim de mostrar que
+\\
+\begin{equation}\label{media1}
+\mu \hspace{0.2cm}  = \hspace{0.2cm}   E(X) \hspace{0.2cm}  = \hspace{0.2cm} \int_{- \infty}^{+ \infty}   \hspace{0.2cm}  x \hspace{0.2cm}  f(x) \hspace{0.2cm}  dx \hspace{0.2cm}
+\end{equation}
+\\
+e que
+\\
+\begin{equation}\label{variancia}
+\sigma^{2} \hspace{0.2cm}  = \hspace{0.2cm}   Var(X) \hspace{0.2cm}  = \hspace{0.2cm} E [ ( X - \mu )^{2} ]      \hspace{0.2cm}  = \hspace{0.2cm}  \int_{- \infty}^{+ \infty}   \hspace{0.2cm}  ( X - \mu )^{2} \hspace{0.2cm}  f(x) \hspace{0.2cm}  dx \hspace{0.2cm}.
+\end{equation}
+\\
+
+Começando, então, pela definição da esperança matemática $E(X)$ para a nossa $fdp$ temos
+\\
+\begin{eqnarray*}
+E(X) & = & \int_{- \infty}^{+ \infty}   \hspace{0.2cm}  x \hspace{0.2cm}  f(x) \hspace{0.2cm}  dx\nonumber\\
+     & = & \int_{- \infty}^{+ \infty}   \hspace{0.2cm}  \frac{x}{\sqrt{2 \pi \sigma^{2}}} e^{- \frac{(x - \mu)^{2}}{2 \sigma^{2}}}\hspace{0.2cm} du\nonumber\\
+     & = & \frac{1}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty}   \hspace{0.2cm} x   e^{- \frac{(x - \mu)^{2}}{2 \sigma^{2}}} \hspace{0.2cm}  du\hspace{0.2cm}
+.
+\end{eqnarray*}
+\\
+
+Para resolvermos esta integral, faremos uma mudança de variável para $x$, conforme Equações \ref{mv1} e \ref{mv2}, ficando com
+\\
+\begin{eqnarray*}
+E(X) & = & \frac{1}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty}   \hspace{0.2cm}(u + \mu) \hspace{0.2cm} e^{- \frac{(u)^{2}}{2 \sigma^{2}}}\hspace{0.2cm}  \hspace{0.2cm}  du \hspace{0.2cm}\nonumber\\
+     & = & \frac{1}{\sqrt{2 \pi \sigma^{2}}} \left[  \int_{- \infty}^{+ \infty}   \hspace{0.1cm} u \hspace{0.1cm} e^{- \frac{(u)^{2}}{2 \sigma^{2}}}\hspace{0.1cm}  \hspace{0.1cm}  du \hspace{0.1cm}  + \hspace{0.1cm} \int_{- \infty}^{+ \infty}   \hspace{0.1cm} \mu \hspace{0.1cm} e^{- \frac{(u)^{2}}{2 \sigma^{2}}}\hspace{0.1cm}  \hspace{0.1cm}  du       \right]\nonumber\\
+\end{eqnarray*}
+\\
+em que a primeira integral do lado direito da igualdade na Equação \ref{media3} é igual a zero\footnote{ Apêndice \ref{intb}}. Então,
+\\
+\begin{equation*}
+E(X) \hspace{0.2cm}  = \hspace{0.2cm}\frac{\mu}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty}   \hspace{0.2cm}  e^{- \frac{(u)^{2}}{2 \sigma^{2}}} \hspace{0.2cm} du\hspace{0.2cm} \footnote{Apêndice \ref{inta}}
+\hspace{0.2cm}.
+\end{equation*}
+\\
+Dessa forma, temos que
+\\
+\begin{equation*}
+E(X) \hspace{0.2cm}  = \hspace{0.2cm}\frac{\mu}{\sqrt{2 \pi \sigma^{2}}} \hspace{0.2cm} \sqrt{2 \pi \sigma^{2}} \hspace{0.2cm} = \hspace{0.2cm} \mu
+\hspace{0.2cm},
+\end{equation*}
+\\
+que é a média $\mu$, ou seja, vemos que a esperança da $fdp$ estudada é
+\\
+\begin{equation}\label{media5}
+E(X) \hspace{0.2cm}  = \hspace{0.2cm} \mu
+\hspace{0.2cm},
+\end{equation}
+\\
+conforme queríamos demonstrar.
+Continuemos, agora, com o cálculo da variância $Var (X)$ da nossa $fdp$. Pela definição temos que
+\begin{eqnarray*}
+Var(X) &  = & E [ ( X - \mu )^{2} ]\nonumber\\
+       &  = &   \int_{- \infty}^{+ \infty}   \hspace{0.2cm}  ( x - \mu )^{2} \hspace{0.2cm}  f(x) \hspace{0.2cm}  dx \hspace{0.2cm}\nonumber\\
+       &  = &  \frac{1}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty}   \hspace{0.2cm}(x - \mu)^{2} \hspace{0.2cm} e^{- \frac{(x - \mu)^{2}}{2 \sigma^{2}}}\hspace{0.2cm}  \hspace{0.2cm}  dx \hspace{0.2cm}
+,
+\end{eqnarray*}
+\\
+e fazendo a substituição da variável $x$ conforme Equações \ref{mv1} e \ref{mv2}, ficamos com
+\\
+\begin{equation*}
+Var(X) \hspace{0.2cm}  = \hspace{0.2cm} \frac{1}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty}   \hspace{0.2cm}(u)^{2} \hspace{0.2cm} e^{- \frac{(u)^{2}}{2 \sigma^{2}}}\hspace{0.2cm}  \hspace{0.2cm}  du
+\hspace{0.2cm},
+\end{equation*}
+\\
+que pode ser resolvida por partes\footnote{ Apêndice \ref{intc}} para tornar-se
+\\
+\begin{equation}\label{var3}
+Var(X) \hspace{0.2cm}  = \hspace{0.2cm} \sigma^{2}
+\hspace{0.2cm},
+\end{equation}
+\\
+que é a variância da $fdp$ estudada, conforme queríamos demonstar.
+
+
+
+\subsection{Outras distribuições}
+
+Em nosso trabalho, usamos também as distribuições...
+
+\section{Correlações entre chuva e posição}
+
+As correlações...
+
+
+
+\subsection{Geoestatística}
+
+Algumas variáveis aleatórias podem ou não estar distribuídas ao acaso em relação à sua disposição espacial. Podemos estudar duas variáveis aleatórias, por exemplo $x$ e $y$, com alguma relação de dependência, a partir da covariância ($C$) definida como
+\begin{equation}\label{covariancia}
+C= \frac{1}{n-1} \left[ \sum_{i=1}^{n} \left( x_{i} - \overline{x}   \right)   \left( y_{i} - \overline{y}  \right)      \right]
+\end{equation}
+que ainda pode ser indexado pelas variâncias e ai temos o coeficiente de correlação $r$
+\begin{equation}\label{coefcorrel}
+r= \frac{C(x, y)}{s_{x} s_{y}}
+\end{equation}
+
+Em geoestatística, comparamos a variável com ela mesma, porém em posições diferentes. Assim temos a autocorrelação
+\begin{equation}
+C(j) = \frac{1}{n-1-j} \left[ \sum_{i=1}^{n-j} \left( x_{i} - \overline{x}   \right)   \left( x_{i+jh} - \overline{x}  \right)      \right]
+.
+\end{equation}
+Dessa forma, a Equação \ref{coefcorrel} transforma-se em
+\begin{equation}\label{coefcorrel}
+r(j)= \frac{C(j)}{s^{2}}
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+\chapter{Chuvas no Noroeste do Paraná}
+
+
+
+
+
+\chapter{Conclusão}
+
+
+Neste trabalho estudamos fenômenos físicos
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{thebibliography}{99}\addcontentsline{toc}{chapter}{Bibliografia}%
+
+\bibitem{felicidade} D. Kahneman, A. Daton, Hihg income improves evaluation of life but not emocional well-being, {\it Psychological and Cognitive Sciences  $Early Edition$, $1$, ($2010$)}.
+
+\bibitem{hoffmann} R. Hoffmann, Estatística para economistas {\it ($3$. ed. Pioneira, $1998$)}.
+
+\bibitem{spiegel} M. R. Spiegel, Estatística {\it (McGraw-Hill, $1993$)}.
+
+
+
+
+
+
+
+\end{thebibliography}
+%---------------------------------------------------------------------------
+%   Bibliography using BibTeX and .bib file
+%\nocite{*}  % It does all bibitem to appear in the bibliography page
+%\bibliography{mythesis}   % \addcontentsline{toc}{chapter}{Bibliografia}
+%\bibliographystyle{unsrt}
+%*************************************************************************
+
+
+
+
+
+
+
+
+\appendix
+
+\chapter{Integrais \label{integral}}
+
+\section{Integral A \label{inta}}
+
+
+Queremos mostrar que a integral
+\\
+\begin{equation}\label{int1}
+I_{A} =  \int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{- \lambda x^{2}}\hspace{0.2cm}  \hspace{0.2cm}  dx
+\hspace{0.2cm},
+\end{equation}
+\\
+que é conhecida como gaussiana, é igual a $\sqrt{\frac{\pi}{\lambda}}$. Esta integral também pode ser escrita como
+\\
+\begin{equation*}
+I_{A} =  \int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{- \lambda y^{2}}\hspace{0.2cm}  \hspace{0.2cm}  dy
+\hspace{0.2cm},
+\end{equation*}
+\\
+em que a variável $x$ foi substituida por $y$. Isto é possível, pois $x$ e $y$ são variáveis mudas, ou seja, o valor de $I_{A}$ não depende destas variáveis. Assim, podemos fazer $I_{A}^{2}$ para termos
+\\
+\begin{eqnarray*}
+I_{A}^{2} & = & \int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{- \lambda x^{2}}\hspace{0.2cm}  \hspace{0.2cm}  dx  \hspace{0.3cm}    \int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{- \lambda y^{2}}\hspace{0.2cm}  \hspace{0.2cm}  dy
+\hspace{0.2cm}\\
+    &=& \int_{- \infty}^{+ \infty}   \hspace{0.2cm} \int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{- \lambda (x^{2} + y^{2})}\hspace{0.2cm}dx \hspace{0.2cm} dy \hspace{0.2cm}
+.
+\end{eqnarray*}
+\\
+
+Agora, é preciso fazermos uma transformação de coordenadas, indo do sistema de coordenadas retangulares para o sistema de coordenadas polares. Um ponto $P$ do plano é representado por $P(x, y)$ num sistema de coordenadas retangulares ou por $P(r, \theta)$ num sistema de coordenadas polares. Quando conhecemos $x$ e $y$ podemos escrever $r$ como $r^{2}=x^{2} +y^{2}$ e fazermos o elemento de área $da = dx dy$ ser $da = r dr d\theta$. Desta forma, quando os limites de integração $x$ e $y$ variarem de $- \infty$ a $+ \infty$ temos que $r$ deve ir de $0$ a $+ \infty$ e $\theta$ de $0$ a $2 \pi$. Assim, a integral
+\\
+\begin{equation*}
+I_{A}^{2} =  \int_{- \infty}^{+ \infty}   \hspace{0.2cm} \int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{- \lambda (x^{2} + y^{2})}\hspace{0.2cm}dx \hspace{0.2cm} dy \hspace{0.2cm}
+\end{equation*}
+\\
+aqui, representada no sistema de coordenadas retangulares, é transformada em
+\\
+\begin{equation*}
+I_{A}^{2} =  \int_{0}^{2 \pi}   \hspace{0.2cm} \int_{0}^{+ \infty}   \hspace{0.2cm} r e^{- \lambda r^{2}}\hspace{0.2cm}dr \hspace{0.2cm} d\theta \hspace{0.2cm}
+\end{equation*}
+\\
+que é sua representação em coordenadas polares. Então
+\\
+\begin{eqnarray*}
+I_{A}^{2} & = & \int_{0}^{2 \pi}  d\theta \hspace{0.2cm} \int_{0}^{+ \infty}   \hspace{0.2cm} r e^{- \lambda r^{2}}\hspace{0.2cm}dr \hspace{0.2cm}\\
+    & = & 2 \pi \hspace{0.2cm} \int_{0}^{+ \infty}   \hspace{0.2cm} r e^{- \lambda r^{2}}\hspace{0.2cm}dr \hspace{0.2cm}
+.
+\end{eqnarray*}
+\\
+
+Para resolvermos a integral em $r$ fazemos $u = r^{2}$ e $du = 2 r dr$. Assim
+\\
+\begin{eqnarray*}
+I_{A}^{2} & = & 2 \pi \hspace{0.2cm} \int_{0}^{+ \infty}   \hspace{0.2cm} \frac{1}{2}\hspace{0.2cm}  e^{- \lambda u}\hspace{0.2cm}du \hspace{0.2cm}\\
+    & = & \left[ - \frac{\pi}{\lambda} \hspace{0.2cm} e^{- \lambda u}\hspace{0.2cm} \right]_{0}^{+ \infty}\\
+    & = & - \frac{\pi}{\lambda} \left( \frac{1}{e^{+ \infty}} - \frac{1}{e^{\lambda (0)}} \right)\\
+    & = & - \frac{\pi}{\lambda} \left( 0 - 1 \right)\\
+    & = & \frac{\pi}{\lambda}
+\end{eqnarray*}
+\\
+e finalmente, aplicando a raiz quadrada em ambos os lados da igualdade,
+\\
+\begin{equation}\label{int6}
+I_{A} = \sqrt{\frac{\pi}{\lambda}}
+\end{equation}
+\\
+conforme queríamos demonstrar.
+
+
+
+
+
+
+\section{Integral B \label{intb}}
+
+Outro resultado que queremos demonstrar é
+\\
+\begin{equation}\label{intb1}
+I_{B} =  \int_{- \infty}^{+ \infty}   \hspace{0.2cm} x \hspace{0.2cm} e^{- \beta x^{2}}\hspace{0.2cm}  \hspace{0.2cm}  dx = 0
+\hspace{0.2cm},
+\end{equation}
+\\
+
+Para isto, faremos a substituição $u = \beta x^{2}$ e $du = 2 \beta x dx$. Assim
+\\
+\begin{eqnarray*}
+I_{B} & = &  \int_{- \infty}^{+ \infty}   \hspace{0.2cm} \frac{1}{2 \beta} \hspace{0.2cm} e^{-u}\hspace{0.2cm}  \hspace{0.2cm}  du\\
+      & = & \frac{1}{2 \beta} \int_{- \infty}^{+ \infty}   \hspace{0.2cm} e^{-u}\hspace{0.2cm} \hspace{0.2cm} du\\
+      & = & \frac{1}{2 \beta} \left[ - e^{-u}  \right]_{- \infty}^{+ \infty}\\
+      & = & \frac{1}{2 \beta} \left( - \frac{1}{e^{+ \infty}} + \frac{1}{e^{- \infty}}  \right)\\
+      & = & \frac{1}{2 \beta} \left( -0 + 0 \right)\\
+      & = & 0
+\end{eqnarray*}
+\\
+conforme queríamos demonstrar.
+
+
+
+\section{Integral C \label{intc}}
+
+Supondo
+\\
+\begin{equation}\label{intc1}
+I_{C} \hspace{0.2cm}  = \hspace{0.2cm} \frac{1}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty}   \hspace{0.2cm}(z)^{2} \hspace{0.2cm} e^{- \frac{(z)^{2}}{2 \sigma^{2}}}\hspace{0.2cm}  \hspace{0.2cm}  dz
+\hspace{0.2cm},
+\end{equation}
+\\
+queremos demonstrar que $I_{C} = \sigma^{2} $. Resolveremos esta integral por partes, ou seja, usando a definição
+\\
+\begin{equation}\label{intc2}
+\int u dv = uv - \int v du
+\end{equation}
+\\
+e fazendo
+\\
+\begin{equation*}
+I_{C} \hspace{0.2cm}  = \hspace{0.2cm} \frac{1}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty}   \hspace{0.2cm} \underbrace{z}_{u}         \underbrace{ z \hspace{0.2cm} e^{- \frac{(z)^{2}}{2 \sigma^{2}}}\hspace{0.2cm}  \hspace{0.2cm}  dz}_{dv}
+\hspace{0.2cm},
+\end{equation*}
+\\
+temos, com isso, que $u=z$, $du=dz$, $dv= z \hspace{0.2cm} e^{- \frac{(z)^{2}}{2 \sigma^{2}}}  dz $ e então $v= \int z e^{-\frac{z^{2}}{2 \sigma^{2}}} dz $. Esta última integral, para encontrarmos $v$, pode ser resolvida com $t=\frac{z^{2}}{2 \sigma^{2}}$ e $dt= \frac{z}{\sigma^{2}} dz$. Assim, fazendo estas substituições,
+\\
+\begin{eqnarray*}
+v & = & \sigma^{2} \int e^{-t} dt\\
+  & = & - \sigma^{2}  e^{-t}
+,
+\end{eqnarray*}
+\\
+e como fizemos $t=\frac{z^{2}}{2 \sigma^{2}}$, $v$ finalmente fica $v= - \sigma^{2} e^{-\frac{z^{2}}{2 \sigma^{2}}}$. Com isto,
+\\
+\begin{eqnarray*}
+I_{C}  & = & \frac{1}{\sqrt{2 \pi \sigma^{2}}} \left[ - z \sigma^{2} e^{- \frac{z^{2}}{2 \sigma^{2}}}   \right]_{-\infty}^{+\infty} - \int_{- \infty}^{+ \infty} \left( - \sigma^{2} e^{-\frac{z^{2}}{2 \sigma^{2}}}   \right) dz\\
+       & = & \frac{\sigma^{2}}{\sqrt{2 \pi \sigma^{2}}} \int_{- \infty}^{+ \infty} e^{-\frac{z^{2}}{2 \sigma^{2}}} \hspace{0.2cm} dz\\
+        & = & \frac{\sigma^{2}}{\sqrt{2 \pi \sigma^{2}}} \sqrt{2 \pi \sigma^{2}}\\
+        & = & \sigma^{2}
+,
+\end{eqnarray*}
+\\
+conforme queríamos demonstrar. Observamos que, durante esta última passagem, usamos dois resultados desenvolvidos nos Apêndices \ref{inta} e \ref{intb}.
+
+
+
+
+
+
+
+
+
+\end{document}

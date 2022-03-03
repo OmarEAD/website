@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Prof. Omar" />
+
+
+<title>Estatística: Tabelas úteis</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Omar Cléo</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Dados longitudinais
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ETbook.html">Evapotranspiração</a>
+    </li>
+    <li>
+      <a href="Mixed.html">Modelos Mistos</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Alguns estudos
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">RMarkdown</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="RMarkdownBas.html">Comandos básicos</a>
+        </li>
+        <li>
+          <a href="Referencias.html">Referências</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Distribuição Normal</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Normal1.html">Normal 1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Estatística Básica
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Alunos</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="ListaEstatBasic.html">Lista de exercícios</a>
+        </li>
+        <li>
+          <a href="EADPresEstBasA1.html">Outros materiais</a>
+        </li>
+        <li>
+          <a href="Tabelas.html">Tabelas</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Destaques
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Patente</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Patente.html">Carta Patente</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Premiação</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="barcelona.html">Barcelona</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Fotos</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Fotos.html">Lembranças</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Estatística: Tabelas úteis<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h1>
+<h4 class="author">Prof. Omar</h4>
+
+</div>
+
+
+<div id="normal-padrão" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Normal Padrão</h1>
+<table>
+<thead>
+<tr class="header">
+<th>z</th>
+<th align="center">0.00</th>
+<th align="center">0.01</th>
+<th align="center">0.02</th>
+<th align="center">0.03</th>
+<th align="center">0.04</th>
+<th align="center">0.05</th>
+<th align="center">0.06</th>
+<th align="center">0.07</th>
+<th align="center">0.08</th>
+<th align="center">0.09</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.0</td>
+<td align="center">0.5</td>
+<td align="center">0.504</td>
+<td align="center">0.508</td>
+<td align="center">0.512</td>
+<td align="center">0.516</td>
+<td align="center">0.5199</td>
+<td align="center">0.5239</td>
+<td align="center">0.5279</td>
+<td align="center">0.8365</td>
+<td align="center">0.5359</td>
+</tr>
+<tr class="even">
+<td>0.1</td>
+<td align="center">0.5398</td>
+<td align="center">0.5438</td>
+<td align="center">0.5478</td>
+<td align="center">0.5517</td>
+<td align="center">0.5557</td>
+<td align="center">0.5596</td>
+<td align="center">0.5636</td>
+<td align="center">0.5675</td>
+<td align="center">0.5714</td>
+<td align="center">0.5753</td>
+</tr>
+<tr class="odd">
+<td>0.2</td>
+<td align="center">0.5793</td>
+<td align="center">0.5832</td>
+<td align="center">0.5871</td>
+<td align="center">0.591</td>
+<td align="center">0.5948</td>
+<td align="center">0.5987</td>
+<td align="center">0.6026</td>
+<td align="center">0.6064</td>
+<td align="center">0.6103</td>
+<td align="center">0.6141</td>
+</tr>
+<tr class="even">
+<td>0.3</td>
+<td align="center">0.6179</td>
+<td align="center">0.6217</td>
+<td align="center">0.6255</td>
+<td align="center">0.6293</td>
+<td align="center">0.6331</td>
+<td align="center">0.6368</td>
+<td align="center">0.6406</td>
+<td align="center">0.6443</td>
+<td align="center">0.648</td>
+<td align="center">0.6517</td>
+</tr>
+<tr class="odd">
+<td>0.4</td>
+<td align="center">0.6554</td>
+<td align="center">0.6591</td>
+<td align="center">0.6628</td>
+<td align="center">0.6664</td>
+<td align="center">0.67</td>
+<td align="center">0.6736</td>
+<td align="center">0.6772</td>
+<td align="center">0.6808</td>
+<td align="center">0.6844</td>
+<td align="center">0.6879</td>
+</tr>
+<tr class="even">
+<td>0.5</td>
+<td align="center">0.6915</td>
+<td align="center">0.695</td>
+<td align="center">0.6985</td>
+<td align="center">0.7019</td>
+<td align="center">0.7054</td>
+<td align="center">0.7088</td>
+<td align="center">0.7123</td>
+<td align="center">0.7157</td>
+<td align="center">0.719</td>
+<td align="center">0.7224</td>
+</tr>
+<tr class="odd">
+<td>0.6</td>
+<td align="center">0.7257</td>
+<td align="center">0.7291</td>
+<td align="center">0.7324</td>
+<td align="center">0.7357</td>
+<td align="center">0.7389</td>
+<td align="center">0.7422</td>
+<td align="center">0.7454</td>
+<td align="center">0.7486</td>
+<td align="center">0.7517</td>
+<td align="center">0.7549</td>
+</tr>
+<tr class="even">
+<td>0.7</td>
+<td align="center">0.758</td>
+<td align="center">0.7611</td>
+<td align="center">0.7642</td>
+<td align="center">0.7673</td>
+<td align="center">0.7704</td>
+<td align="center">0.7734</td>
+<td align="center">0.7764</td>
+<td align="center">0.7794</td>
+<td align="center">0.7823</td>
+<td align="center">0.7852</td>
+</tr>
+<tr class="odd">
+<td>0.8</td>
+<td align="center">0.7881</td>
+<td align="center">0.791</td>
+<td align="center">0.7939</td>
+<td align="center">0.7967</td>
+<td align="center">0.7995</td>
+<td align="center">0.8023</td>
+<td align="center">0.8051</td>
+<td align="center">0.8078</td>
+<td align="center">0.8106</td>
+<td align="center">0.8133</td>
+</tr>
+<tr class="even">
+<td>0.9</td>
+<td align="center">0.8159</td>
+<td align="center">0.8186</td>
+<td align="center">0.8212</td>
+<td align="center">0.8238</td>
+<td align="center">0.8264</td>
+<td align="center">0.8289</td>
+<td align="center">0.8315</td>
+<td align="center">0.834</td>
+<td align="center">0.8365</td>
+<td align="center">0.8389</td>
+</tr>
+<tr class="odd">
+<td>1.0</td>
+<td align="center">0.8413</td>
+<td align="center">0.8438</td>
+<td align="center">0.8461</td>
+<td align="center">0.8485</td>
+<td align="center">0.8508</td>
+<td align="center">0.8531</td>
+<td align="center">0.8554</td>
+<td align="center">0.8577</td>
+<td align="center">0.8599</td>
+<td align="center">0.8621</td>
+</tr>
+<tr class="even">
+<td>1.1</td>
+<td align="center">0.8643</td>
+<td align="center">0.8665</td>
+<td align="center">0.8686</td>
+<td align="center">0.8708</td>
+<td align="center">0.8729</td>
+<td align="center">0.8749</td>
+<td align="center">0.877</td>
+<td align="center">0.879</td>
+<td align="center">0.881</td>
+<td align="center">0.883</td>
+</tr>
+<tr class="odd">
+<td>1.2</td>
+<td align="center">0.8849</td>
+<td align="center">0.8869</td>
+<td align="center">0.8888</td>
+<td align="center">0.8907</td>
+<td align="center">0.8925</td>
+<td align="center">0.8944</td>
+<td align="center">0.8962</td>
+<td align="center">0.898</td>
+<td align="center">0.8997</td>
+<td align="center">0.9015</td>
+</tr>
+<tr class="even">
+<td>1.3</td>
+<td align="center">0.9032</td>
+<td align="center">0.9049</td>
+<td align="center">0.9066</td>
+<td align="center">0.9082</td>
+<td align="center">0.9099</td>
+<td align="center">0.9115</td>
+<td align="center">0.9131</td>
+<td align="center">0.9147</td>
+<td align="center">0.9162</td>
+<td align="center">0.9177</td>
+</tr>
+<tr class="odd">
+<td>1.4</td>
+<td align="center">0.9192</td>
+<td align="center">0.9207</td>
+<td align="center">0.9222</td>
+<td align="center">0.9236</td>
+<td align="center">0.9251</td>
+<td align="center">0.9265</td>
+<td align="center">0.9279</td>
+<td align="center">0.9292</td>
+<td align="center">0.9306</td>
+<td align="center">0.9319</td>
+</tr>
+<tr class="even">
+<td>1.5</td>
+<td align="center">0.9332</td>
+<td align="center">0.9345</td>
+<td align="center">0.9357</td>
+<td align="center">0.937</td>
+<td align="center">0.9382</td>
+<td align="center">0.9394</td>
+<td align="center">0.9406</td>
+<td align="center">0.9418</td>
+<td align="center">0.9429</td>
+<td align="center">0.9441</td>
+</tr>
+<tr class="odd">
+<td>1.6</td>
+<td align="center">0.9452</td>
+<td align="center">0.9463</td>
+<td align="center">0.9474</td>
+<td align="center">0.9484</td>
+<td align="center">0.9495</td>
+<td align="center">0.9505</td>
+<td align="center">0.9515</td>
+<td align="center">0.9525</td>
+<td align="center">0.9535</td>
+<td align="center">0.9545</td>
+</tr>
+<tr class="even">
+<td>1.7</td>
+<td align="center">0.9554</td>
+<td align="center">0.9564</td>
+<td align="center">0.9573</td>
+<td align="center">0.9582</td>
+<td align="center">0.9591</td>
+<td align="center">0.9599</td>
+<td align="center">0.9608</td>
+<td align="center">0.9616</td>
+<td align="center">0.9625</td>
+<td align="center">0.9633</td>
+</tr>
+<tr class="odd">
+<td>1.8</td>
+<td align="center">0.9641</td>
+<td align="center">0.9649</td>
+<td align="center">0.9656</td>
+<td align="center">0.9664</td>
+<td align="center">0.9671</td>
+<td align="center">0.9678</td>
+<td align="center">0.9686</td>
+<td align="center">0.9693</td>
+<td align="center">0.9699</td>
+<td align="center">0.9706</td>
+</tr>
+<tr class="even">
+<td>1.9</td>
+<td align="center">0.9713</td>
+<td align="center">0.9719</td>
+<td align="center">0.9726</td>
+<td align="center">0.9732</td>
+<td align="center">0.9738</td>
+<td align="center">0.9744</td>
+<td align="center">0.975</td>
+<td align="center">0.9756</td>
+<td align="center">0.9761</td>
+<td align="center">0.9767</td>
+</tr>
+<tr class="odd">
+<td>2.0</td>
+<td align="center">0.9772</td>
+<td align="center">0.9778</td>
+<td align="center">0.9783</td>
+<td align="center">0.9788</td>
+<td align="center">0.9793</td>
+<td align="center">0.9798</td>
+<td align="center">0.9803</td>
+<td align="center">0.9808</td>
+<td align="center">0.9812</td>
+<td align="center">0.9817</td>
+</tr>
+<tr class="even">
+<td>2.1</td>
+<td align="center">0.9821</td>
+<td align="center">0.9826</td>
+<td align="center">0.983</td>
+<td align="center">0.9834</td>
+<td align="center">0.9838</td>
+<td align="center">0.9842</td>
+<td align="center">0.9846</td>
+<td align="center">0.985</td>
+<td align="center">0.9854</td>
+<td align="center">0.9857</td>
+</tr>
+<tr class="odd">
+<td>2.2</td>
+<td align="center">0.9861</td>
+<td align="center">0.9864</td>
+<td align="center">0.9868</td>
+<td align="center">0.9871</td>
+<td align="center">0.9875</td>
+<td align="center">0.9878</td>
+<td align="center">0.9881</td>
+<td align="center">0.9884</td>
+<td align="center">0.9887</td>
+<td align="center">0.989</td>
+</tr>
+<tr class="even">
+<td>2.3</td>
+<td align="center">0.9893</td>
+<td align="center">0.9896</td>
+<td align="center">0.9898</td>
+<td align="center">0.9901</td>
+<td align="center">0.9904</td>
+<td align="center">0.9906</td>
+<td align="center">0.9909</td>
+<td align="center">0.9911</td>
+<td align="center">0.9913</td>
+<td align="center">0.9916</td>
+</tr>
+<tr class="odd">
+<td>2.4</td>
+<td align="center">0.9918</td>
+<td align="center">0.992</td>
+<td align="center">0.9922</td>
+<td align="center">0.9925</td>
+<td align="center">0.9927</td>
+<td align="center">0.9929</td>
+<td align="center">0.9931</td>
+<td align="center">0.9932</td>
+<td align="center">0.9934</td>
+<td align="center">0.9936</td>
+</tr>
+<tr class="even">
+<td>2.5</td>
+<td align="center">0.9938</td>
+<td align="center">0.994</td>
+<td align="center">0.9941</td>
+<td align="center">0.9943</td>
+<td align="center">0.9945</td>
+<td align="center">0.9946</td>
+<td align="center">0.9948</td>
+<td align="center">0.9949</td>
+<td align="center">0.9951</td>
+<td align="center">0.9952</td>
+</tr>
+<tr class="odd">
+<td>2.6</td>
+<td align="center">0.9953</td>
+<td align="center">0.9955</td>
+<td align="center">0.9956</td>
+<td align="center">0.9957</td>
+<td align="center">0.9959</td>
+<td align="center">0.996</td>
+<td align="center">0.9961</td>
+<td align="center">0.9962</td>
+<td align="center">0.9963</td>
+<td align="center">0.9964</td>
+</tr>
+<tr class="even">
+<td>2.7</td>
+<td align="center">0.9965</td>
+<td align="center">0.9966</td>
+<td align="center">0.9967</td>
+<td align="center">0.9968</td>
+<td align="center">0.9969</td>
+<td align="center">0.997</td>
+<td align="center">0.9971</td>
+<td align="center">0.9972</td>
+<td align="center">0.9973</td>
+<td align="center">0.9974</td>
+</tr>
+<tr class="odd">
+<td>2.8</td>
+<td align="center">0.9974</td>
+<td align="center">0.9975</td>
+<td align="center">0.9976</td>
+<td align="center">0.9977</td>
+<td align="center">0.9977</td>
+<td align="center">0.9978</td>
+<td align="center">0.9979</td>
+<td align="center">0.9979</td>
+<td align="center">0.998</td>
+<td align="center">0.9981</td>
+</tr>
+<tr class="even">
+<td>2.9</td>
+<td align="center">0.9981</td>
+<td align="center">0.9982</td>
+<td align="center">0.9982</td>
+<td align="center">0.9983</td>
+<td align="center">0.9984</td>
+<td align="center">0.9984</td>
+<td align="center">0.9985</td>
+<td align="center">0.9985</td>
+<td align="center">0.9986</td>
+<td align="center">0.9986</td>
+</tr>
+<tr class="odd">
+<td>3.0</td>
+<td align="center">0.9987</td>
+<td align="center">0.9987</td>
+<td align="center">0.9987</td>
+<td align="center">0.9988</td>
+<td align="center">0.9988</td>
+<td align="center">0.9989</td>
+<td align="center">0.9989</td>
+<td align="center">0.9989</td>
+<td align="center">0.999</td>
+<td align="center">0.999</td>
+</tr>
+<tr class="even">
+<td>3.1</td>
+<td align="center">0.999</td>
+<td align="center">0.9991</td>
+<td align="center">0.9991</td>
+<td align="center">0.9991</td>
+<td align="center">0.9992</td>
+<td align="center">0.9992</td>
+<td align="center">0.9992</td>
+<td align="center">0.9992</td>
+<td align="center">0.9993</td>
+<td align="center">0.999</td>
+</tr>
+<tr class="odd">
+<td>3.2</td>
+<td align="center">0.9993</td>
+<td align="center">0.9993</td>
+<td align="center">0.9994</td>
+<td align="center">0.9994</td>
+<td align="center">0.9994</td>
+<td align="center">0.9994</td>
+<td align="center">0.9994</td>
+<td align="center">0.9995</td>
+<td align="center">0.9995</td>
+<td align="center">0.9995</td>
+</tr>
+<tr class="even">
+<td>3.3</td>
+<td align="center">0.9995</td>
+<td align="center">0.9995</td>
+<td align="center">0.9995</td>
+<td align="center">0.9996</td>
+<td align="center">0.9996</td>
+<td align="center">0.9996</td>
+<td align="center">0.9996</td>
+<td align="center">0.9996</td>
+<td align="center">0.9996</td>
+<td align="center">0.9997</td>
+</tr>
+<tr class="odd">
+<td>3.4</td>
+<td align="center">0.9997</td>
+<td align="center">0.9997</td>
+<td align="center">0.9997</td>
+<td align="center">0.9997</td>
+<td align="center">0.9997</td>
+<td align="center">0.9997</td>
+<td align="center">0.9997</td>
+<td align="center">0.9997</td>
+<td align="center">0.9997</td>
+<td align="center">0.9998</td>
+</tr>
+<tr class="even">
+<td>3.5</td>
+<td align="center">0.9998</td>
+<td align="center">0.9998</td>
+<td align="center">0.9998</td>
+<td align="center">0.9998</td>
+<td align="center">0.9998</td>
+<td align="center">0.9998</td>
+<td align="center">0.9998</td>
+<td align="center">0.9998</td>
+<td align="center">0.9998</td>
+<td align="center">0.9998</td>
+</tr>
+<tr class="odd">
+<td>3.6</td>
+<td align="center">0.9998</td>
+<td align="center">0.9998</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+</tr>
+<tr class="even">
+<td>3.7</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+</tr>
+<tr class="odd">
+<td>3.8</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+<td align="center">0.9999</td>
+</tr>
+<tr class="even">
+<td>3.9</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Este é um arquivo com tabelas úteis. Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: <a href="mailto:omarcnpereiraead@gmail.com" class="email">omarcnpereiraead@gmail.com</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
