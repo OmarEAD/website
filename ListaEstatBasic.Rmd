@@ -286,3 +286,46 @@ dd %>%
 * Calcule a covariância da amostra.
 
 * Calcule e interprete a correlação da amostra.
+
+# Noções de Probabilidades
+
+1. Determine a probabilidade de aparecer um quatro pelo menos uma vez em dois lançamentos de um dado honesto.
+
+2. Suponha duas extrações em uma urna onde há 3 bolas verdes e 4 bolas amarelas. Construa um diagrama em árvore e escreva as probabilidades para os casos:
+
+* Sem reposição
+
+* Com reposição
+
+3. Os fornecedores $A_1$, $A_2$ e $A_3$ são responsáveis 40\%, 35\% e 25\% dos componentes eletrônicos vendidos por uma loja. Sabe-se que os componentes fabricados por esses fornecedores tem uma taxa de defeitos de 2\%, 3\% e 4\%.
+
+* Qual a probabilidade da loja vender um componente eletrônico com defeito?
+
+* Qual a probabilidade de um componente eletrônico defeituoso que foi vendido pela loja ser do fornecedor $A_1$? 
+
+4. Os centros cirúrgicos $A_1$, $A_2$ e $A_3$ são responsáveis por 38\%, 34\% e 28\% das cirurgias em um Hospital. Esses centros cirúrgicos apresentam 0.5\%, 0.7\% e 1.2\% de infecção hospitalar.
+
+* Qual a probabilidade de um paciente internado nesse Hospital ter infecção hospitalar?
+
+* Qual a probabilidade de um paciente com infecção hospitalar ter realizado cirurgia no centro $A_1$?
+
+5. Suponha que você está criando um teste diagnóstico para uma dada doença. Então, seleciona 500 indivíduos, 250 doentes e 250 não doentes pelo padrão-ouro e aplica o teste. Os resultados podem ser vistos na Tabela \@ref(tab:teste1).
+
+|   Teste  | Doentes | Não doentes |
+|:--------:|:-------:|:-----------:|
+| Positivo |   241   |      25     |
+| Negativo |    9    |     225     |
+|   Total  |   250   |     250     |
+|          |         |             |
+
+Table: (\#tab:teste1) Padrão-ouro para a sensibilidade e especificidade do teste diagnóstico.
+
+* Qual a sensibilidade do teste?
+* Qual a especificidade do teste?
+* Supondo que essa doença atinge 0.5\% da população, qual o Valor Preditivo Positivo (VPP) e o Valor Preditivo Negativo (VPN)?
+* Agora suponha que 15\% da população tem essa doença, qual o Valor Preditivo Positivo (VPP) e o Valor Preditivo Negativo (VPN)?
+
+
+
+
+

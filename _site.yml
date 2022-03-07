@@ -29,9 +29,9 @@ navbar:
           menu:
             - text: "Normal 1"
               href: Normal1.html
-    - text: "Estatística Básica"
+    - text: "Estatística"
       menu:
-        - text: "Alunos"
+        - text: "Básica"
           menu:
             - text: "Lista de exercícios"
               href: ListaEstatBasic.html
