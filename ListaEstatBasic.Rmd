@@ -325,7 +325,12 @@ Table: (\#tab:teste1) Padrão-ouro para a sensibilidade e especificidade do test
 * Supondo que essa doença atinge 0.5\% da população, qual o Valor Preditivo Positivo (VPP) e o Valor Preditivo Negativo (VPN)?
 * Agora suponha que 15\% da população tem essa doença, qual o Valor Preditivo Positivo (VPP) e o Valor Preditivo Negativo (VPN)?
 
+6. Suponha que você irá fazer um teste com quatro questões. Em cada questão há cinco alternativas, das quais apenas uma está correta. Qual a probabilidade de acertar as quatro questões no "chute"?
 
+7. A probabilidade de um atirador acertar um alvo é de 40\%. Suponha que o atirador disparou quinze vezes. Qual a probabilidade de:
+
+* Acertar exatamente cinco vezes o alvo?
+* Acertar o alvo pelo menos três vezes (pelo menos três vezes quer dizer três, quatro, cinco, $\cdots$ ou 15 vezes). Sugestão: $P(X \geq 3)$ = $1 - P(X<3)$ = $1 - \{P(X=0) + P(X=1) + P(X=2) \}$ 
 
 
 

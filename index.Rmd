@@ -74,7 +74,8 @@ scale_01 <- function(x){
 
 <!-- Seja bem-vindo à minha página pessoal! -->
 
-![](./Figuras/foto.jpg){width=80%} 
+<!-- ![](./Figuras/foto.jpg){width=80%}  -->
+![](./Figuras/Fotos/chile4.jpg){width=100%} 
 
 <span style="color:darkblue;font-weight:800;font-size:40px"> 
 Olá, aqui é o Omar!
