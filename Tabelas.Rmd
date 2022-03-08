@@ -109,4 +109,4 @@ round(qq[1],4)
 3.9 |  `r qq[391]`  |  `r qq[392]`  |  `r qq[393]`  |  `r qq[394]`  |  `r qq[395]`  |  `r qq[396]`  |  `r qq[397]`  |  `r qq[398]`  |  `r qq[399]`  |  `r qq[400]`
 
 
-Se preferir, pode baixar a Tabela  [aqui](https://github.com/OmarEAD/Website/blob/main/TabelaNormalPadrao/TNormPad.pdf).
+Se preferir, pode baixar a Tabela  [aqui](https://github.com/OmarEAD/Website/blob/main/TabelasPDF/TNormPad.pdf).
