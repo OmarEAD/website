@@ -29,6 +29,8 @@ navbar:
           menu:
             - text: "Normal 1"
               href: Normal1.html
+        - text: "Lei de Benford"
+          href: Benford.html
     - text: "Estatística"
       menu:
         - text: "Básica"

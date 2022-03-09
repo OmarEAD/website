@@ -1,0 +1,235 @@
+---
+title: "Lei de Benford[^1]"
+author: "Prof. Omar"
+output: 
+  bookdown::html_document2:
+    css: style.css  
+    #rmdformats::theme:
+    #  flatly
+    #theme: sandstone
+#bibliography: bibliografiaETbook.bib
+#biblio-style: authoryear
+---
+
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      size = "footnotesize",
+                      comment = NA,
+                      warning = FALSE,
+                      message = FALSE,
+                      #out.width = "1\\linewidth",
+                      fig.align = "center",
+                      fig.width = 8, 
+                      fig.height = 4, 
+                      fig.show = "hold",
+                      fig.path = "Figuras1/",
+                      fig.pos = "!htb",
+                      fig.cap = TRUE,
+                      background = "#E6E6FA",
+                      #background = "black",
+                      dev = c("png",'pdf'),
+                      res=300,
+                      dpi = 300,
+                      cache = TRUE)
+```
+
+```{r library, echo=FALSE,results='hide'}
+#library(tidyverse)
+#library(tinytex)
+library(knitr)
+library(kableExtra)
+library(xtable)
+library(ggplot2)
+```
+
+
+[^1]: Este é um arquivo com tabelas úteis. Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
+
+
+# O que é a lei de Benford
+
+A lei de Benford também é conhecida como a lei do primeiro dígito. A partir dos dados de uma variável podemos extrair todos os seus primeiros dígitos significativos. Por exemplo, o primeiro dígito significativo de $\pi$ é 3, e de 0.065 é 6. Então, podemos calcular a frequência dos dígitos de 1 a 9.
+
+Seja o conjunto de dados com 10 valores abaixo:
+
+```{r}
+set.seed(1)
+x <- rnorm(10,500,200)
+x
+```
+
+Os primeiros dígitos desses valores são 3, 5, 3, 8, 5, 3, 5, 6, 6 e 4, e a frequência com que eles apareceram no conjunto de dados foi:
+
+```{r}
+x1 <- c(3, 5, 3, 8, 5, 3, 5, 6, 6, 4)
+table(x1)
+```
+
+Ou seja, os valores 4 e 8 apareceram uma única vez, o 6 duas vezes, e os 3 e 5 ocorreram três vezes.
+
+Será que existe algum padrão na distribuição das frequências dos primeiros dígitos de um conjunto de dados que ocorre naturalmente? Podemos pensar que todos os dígitos, de 1 a 9 deveriam ter a mesma frequência. Mas essa homogeneidade esperada não ocorre e, além disso, parece existir um padrão. Muitos conjuntos de dados, inclusive dados contábeis e econômicos, mostram que o dígito 1 é aquele que mais aparece. em torno de 30\%.
+
+A Lei de Benford diz que a frequência relativa dos primeiros dígitos significativos deve ser conforme mostrado na Tabela \@ref(tab:ben1)
+
+```{r echo=FALSE, results='hide'}
+w <- 1:9
+round(log10(1+1/w),4)
+```
+
+|       Valores       | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+|:-------------------:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| Frequência  | `r round(log10(1+1/w),4)[1]` | `r round(log10(1+1/w),4)[2]` | `r round(log10(1+1/w),4)[3]` | `r round(log10(1+1/w),4)[4]` | `r round(log10(1+1/w),4)[5]` | `r round(log10(1+1/w),4)[6]` | `r round(log10(1+1/w),4)[7]` | `r round(log10(1+1/w),4)[8]` | `r round(log10(1+1/w),4)[9]` |
+
+Table: (#tab:ben1) Frequência da Lei de Benford.
+
+
+Podemos representar a Tabela \@ref(tab:ben1) como um gráfico de barras (Figura \@ref(fig:freqben1)).
+
+```{r freqben1, echo=F, fig.cap="As frequências da lei de Benford."}
+w  <- 1:9
+f  <- round(log10(1+1/w)*100,2)
+d1 <- data.frame(w,f) 
+p <- ggplot(d1,aes(x=factor(w), y=f)) +
+  geom_bar(stat = 'identity', 
+           colour='black',fill='lightgray') +
+  xlab('Dígitos') +
+  ylab('Frequência (%)') + 
+  geom_text(aes(label=f), vjust=-0.3, colour='black', size=3.5)
+p
+```
+
+As probabilidades da Tabela \@ref(tab:ben1) e da Figura \@ref(fig:freqben1) para o primeiro dígito $d$ ($d \in \{1, \cdots, 9 \}$), as quais satisfazem a lei de Benford são dadas por
+
+$$ P(d) = log_{10} \left( 1 + \frac{1}{d} \right) $$
+
+```{r}
+w <- 1:9
+round(log10(1+1/w),4)
+```
+
+# Uma breve explicação
+
+A primeira ideia é que os dados que se adequam à lei de Benford tem __crescimento exponencial__, ou seja, algo do tipo
+
+\begin{equation}
+f(t) = t_0 (1 + r)^t
+(\#eq:cresc)
+\end{equation}
+
+em que, por exemplo, $t$ é o tempo, $t_0$ é o valor de $f(t)$ no tempo 0, e $r$ é a taxa de crescimento.
+
+## Juros compostos
+
+Como um exemplo, vamos trabalhar a ideia de juros compostos, em que o juro incide sobre o capital inicial e sobre os juros acumulados. A expressão para o cálculo de juros compostos tem a mesma estrutura da Equação \@ref(eq:cresc), ou seja,
+
+$$ M = C (1 + i)^t $$
+em que $M$ é o montante no instante $t$, $C$ é o capital inicial quando $t=0$, e $i$ é a taxa de juros fixa. Observe os dados abaixo. Eles foram obtidos usando um capital inicial de R$100,00 com uma taxa de crescimento de 2.5\% por período. Observa que, inicialmente, o primeiro dígito significativo igual a 1 aparece nos 28 primeiros valores. Depois, o crescimento é mais rápido e o sistema apresenta 16 valores com o primeiro dígito significativo igual a 2. O crescimento se acentua e o dígito 3 aparece nos próximos 12 valores. Como o capital cresce cada vez mais rápido, os próximos dígitos aparecem cada vez menos. Veja o dígito 9, ele aparece apenas 5 vezes. Logo após, o dígito 1 aparece novamente por mais 28 períodos.
+
+```{r}
+# Juros compostos
+c <- 100
+i <- 0.025
+t <- 1:190
+m <- c*(1+i)^t
+m
+```
+
+Vamos agora extrair os primeiros dígitos significativos do nosso conjunto de dados. 
+
+```{r}
+dddd <- as.data.frame(m)
+aux1 <- c()
+for (i in 1:dim(dddd)[1]) {
+  n <- as.integer(dddd[i,1])
+  aux2 <- c()
+  while (n > 0) {
+    r = n %% 10
+    aux2 <- c(aux2,r)
+    n = n %/% 10
+  }
+  ll <- aux2[length(aux2)]
+  aux1 <- c(aux1,ll)
+}
+```
+
+Observamos a distribuição de frequências destes valores abaixo.
+
+```{r}
+#
+tt <- table(aux1)
+round(tt/sum(tt),4)
+```
+
+Podemos comparar os dados teóricos apresentados na Tabela \@ref(tab:ben1) e na Figura \@ref(fig:freqben1) com os dos juros compostos. Isto pode ser visto na Tabela \@ref(tab:ben2).
+
+
+|       Valores       | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+|:-------------------:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| Teórico  | `r round(log10(1+1/w),4)[1]` | `r round(log10(1+1/w),4)[2]` | `r round(log10(1+1/w),4)[3]` | `r round(log10(1+1/w),4)[4]` | `r round(log10(1+1/w),4)[5]` | `r round(log10(1+1/w),4)[6]` | `r round(log10(1+1/w),4)[7]` | `r round(log10(1+1/w),4)[8]` | `r round(log10(1+1/w),4)[9]` |
+| Exemplo  | `r round(tt/sum(tt),4)[1]` | `r round(tt/sum(tt),4)[2]` | `r round(tt/sum(tt),4)[3]` | `r round(tt/sum(tt),4)[4]` | `r round(tt/sum(tt),4)[5]` | `r round(tt/sum(tt),4)[6]` | `r round(tt/sum(tt),4)[7]` | `r round(tt/sum(tt),4)[8]` | `r round(tt/sum(tt),4)[9]` |
+
+Table: (#tab:ben2) Comparação das frequências teórica da lei de Benford e dos dados de juros compostos.
+
+## Multiplicação de valores (fraudes contábeis)
+
+Dados contábeis e econômicos geralmente são o resultado da multiplicação de vários números. Quando temos esse caso, esses dados se aproximam da distribuição de Benford. Este é o caso em que essa distribuição é usada para identificar fraudes. Se alguém alterar os dados contábeis de um conjunto de dados por meio de fraudes, esse erro poderá se apresentar quando compararmos a frequência dos primeiros dígitos com a distribuição de Benford. 
+
+Por exemplo, vamos gerar dados a partir de três distribuições de probabilidades, uma normal (N(200,25)), outra qui-quadrado ($\chi^2(5)$) e uma uniforme (U(0,1)).
+
+```{r}
+set.seed(1)
+dn <- rnorm(10000,200,5)
+dp <- rchisq(10000,5)
+du <- runif(10000,0,1)
+dt <- dn*dp*du
+#
+dddd <- as.data.frame(dt)
+aux1 <- c()
+for (i in 1:dim(dddd)[1]) {
+  n <- as.integer(dddd[i,1])
+  aux2 <- c()
+  while (n > 0) {
+    r = n %% 10
+    aux2 <- c(aux2,r)
+    n = n %/% 10
+  }
+  ll <- aux2[length(aux2)]
+  aux1 <- c(aux1,ll)
+}
+ddt <- aux1
+#
+ttt  <- table(ddt)
+reat <- round(ttt/sum(ttt),4)
+#
+x2  <- seq(1,9,0.1)
+teo2 <- round(log10(1+1/x2),4)
+```
+
+
+
+```{r echo=F}
+plot(teo2~x2,type='l',ylim = c(0,0.33))
+lines(reat, type = 'p')
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Prof. Omar" />
 
 
-<title>OMAR CLÉO NEVES PEREIRA</title>
+<title>Lei de Benford</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -372,9 +373,6 @@ div.tocify {
         </li>
       </ul>
     </li>
-    <li>
-      <a href="Benford.html">Lei de Benford</a>
-    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -453,26 +451,234 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">OMAR CLÉO NEVES PEREIRA</h1>
+<h1 class="title toc-ignore">Lei de Benford<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h1>
+<h4 class="author">Prof. Omar</h4>
 
 </div>
 
 
-<p><a href="https://linkedin.com/in/omar-cléo-neves-pereira"><img src="Figuras/linkedin.jpg" title="linkedin" style="width:5.0%" /></a>
-<a href="http://lattes.cnpq.br/9448206585707320"><img src="Figuras/lattes.png" title="lattes" style="width:5.0%" /></a>
-<a href="https://github.com/OmarEAD"><img src="Figuras/github.png" title="lattes" style="width:5.0%" /></a></p>
-<!-- Seja bem-vindo à minha página pessoal! -->
-<!-- ![](./Figuras/foto.jpg){width=80%}  -->
-<p><img src="Figuras/Fotos/chile4.jpg" style="width:100.0%" /></p>
-<p><span style="color:darkblue;font-weight:800;font-size:40px">
-Olá, aqui é o Omar!
-</span></p>
-<div id="sejam-bem-vindos" class="section level1 unnumbered">
-<h1>Sejam bem-vindos!</h1>
-<p>O desejo de trabalhar com agricultura surgiu desde criança, ao ver meu pai cultivando todos os dias em nossa horta caseira. Naquele pedacinho de terra, de aproximadamente de 25 metros quadrados, meu pai conseguia contribuir para a alimentação de nossa família, amigos e vizinhos. Isto foi muito motivador.</p>
-<p>A agricultura brasileira tem se superado todos os anos e hoje alimenta grande parte do planeta. Este sucesso foi possível devido ao comprometimento das pessoas envolvidas neste processo, as quais se aperfeiçoaram de forma inter e multidisciplinares. A tecnologia empregada por meu pai já não seria suficiente hoje, mas o espírito, para servir ao maior número de pessoas, é o mesmo.</p>
-<p>Minhas especialidades incluem a formação em Agronomia (graduação, mestrado e doutorado), Física (bacharelado e mestrado) e Bioestatística (pós-doutorado), áreas que também atuo como pesquisador e professor. Como resultado prático desta multidisciplinaridade, destaco o desenvolvimento de um equipamento para monitoramento da atividade iónica da solução do solo, patenteado pela Universidade Estadual de Maringá.</p>
-<p>Também tenho como especialidade a programação em R, Latex (knitr), Markdown, e em outras linguagens, com as quais é possível gerar relatórios dinâmicos, além de apresentações e textos. Destaco ainda, minha competência na análise e ciência de dados e estatística, e, claro, meu entusiasmo em sempre estar disposto a aprender novas habilidades. Neste contexto me coloco a disposição para me envolver e atuar em novos projetos e desafios.</p>
+<div id="o-que-é-a-lei-de-benford" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> O que é a lei de Benford</h1>
+<p>A lei de Benford também é conhecida como a lei do primeiro dígito. A partir dos dados de uma variável podemos extrair todos os seus primeiros dígitos significativos. Por exemplo, o primeiro dígito significativo de <span class="math inline">\(\pi\)</span> é 3, e de 0.065 é 6. Então, podemos calcular a frequência dos dígitos de 1 a 9.</p>
+<p>Seja o conjunto de dados com 10 valores abaixo:</p>
+<pre class="r"><code>set.seed(1)
+x &lt;- rnorm(10,500,200)
+x</code></pre>
+<pre><code> [1] 374.7092 536.7287 332.8743 819.0562 565.9016 335.9063 597.4858 647.6649
+ [9] 615.1563 438.9223</code></pre>
+<p>Os primeiros dígitos desses valores são 3, 5, 3, 8, 5, 3, 5, 6, 6 e 4, e a frequência com que eles apareceram no conjunto de dados foi:</p>
+<pre class="r"><code>x1 &lt;- c(3, 5, 3, 8, 5, 3, 5, 6, 6, 4)
+table(x1)</code></pre>
+<pre><code>x1
+3 4 5 6 8 
+3 1 3 2 1 </code></pre>
+<p>Ou seja, os valores 4 e 8 apareceram uma única vez, o 6 duas vezes, e os 3 e 5 ocorreram três vezes.</p>
+<p>Será que existe algum padrão na distribuição das frequências dos primeiros dígitos de um conjunto de dados que ocorre naturalmente? Podemos pensar que todos os dígitos, de 1 a 9 deveriam ter a mesma frequência. Mas essa homogeneidade esperada não ocorre e, além disso, parece existir um padrão. Muitos conjuntos de dados, inclusive dados contábeis e econômicos, mostram que o dígito 1 é aquele que mais aparece. em torno de 30%.</p>
+<p>A Lei de Benford diz que a frequência relativa dos primeiros dígitos significativos deve ser conforme mostrado na Tabela <a href="#tab:ben1">1.1</a></p>
+<table>
+<caption><span id="tab:ben1">Table 1.1: </span> Frequência da Lei de Benford.</caption>
+<thead>
+<tr class="header">
+<th align="center">Valores</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">7</th>
+<th align="center">8</th>
+<th align="center">9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Frequência</td>
+<td align="center">0.301</td>
+<td align="center">0.1761</td>
+<td align="center">0.1249</td>
+<td align="center">0.0969</td>
+<td align="center">0.0792</td>
+<td align="center">0.0669</td>
+<td align="center">0.058</td>
+<td align="center">0.0512</td>
+<td align="center">0.0458</td>
+</tr>
+</tbody>
+</table>
+<p>Podemos representar a Tabela <a href="#tab:ben1">1.1</a> como um gráfico de barras (Figura <a href="#fig:freqben1">1.1</a>).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:freqben1"></span>
+<img src="Figuras1/freqben1-1.png" alt="As frequências da lei de Benford." width="2400" />
+<p class="caption">
+Figure 1.1: As frequências da lei de Benford.
+</p>
+</div>
+<p>As probabilidades da Tabela <a href="#tab:ben1">1.1</a> e da Figura <a href="#fig:freqben1">1.1</a> para o primeiro dígito <span class="math inline">\(d\)</span> (<span class="math inline">\(d \in \{1, \cdots, 9 \}\)</span>), as quais satisfazem a lei de Benford são dadas por</p>
+<p><span class="math display">\[ P(d) = log_{10} \left( 1 + \frac{1}{d} \right) \]</span></p>
+<pre class="r"><code>w &lt;- 1:9
+round(log10(1+1/w),4)</code></pre>
+<pre><code>[1] 0.3010 0.1761 0.1249 0.0969 0.0792 0.0669 0.0580 0.0512 0.0458</code></pre>
+</div>
+<div id="uma-breve-explicação" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Uma breve explicação</h1>
+<p>A primeira ideia é que os dados que se adequam à lei de Benford tem <strong>crescimento exponencial</strong>, ou seja, algo do tipo</p>
+<p><span class="math display" id="eq:cresc">\[\begin{equation}
+f(t) = t_0 (1 + r)^t
+\tag{2.1}
+\end{equation}\]</span></p>
+<p>em que, por exemplo, <span class="math inline">\(t\)</span> é o tempo, <span class="math inline">\(t_0\)</span> é o valor de <span class="math inline">\(f(t)\)</span> no tempo 0, e <span class="math inline">\(r\)</span> é a taxa de crescimento.</p>
+<div id="juros-compostos" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Juros compostos</h2>
+<p>Como um exemplo, vamos trabalhar a ideia de juros compostos, em que o juro incide sobre o capital inicial e sobre os juros acumulados. A expressão para o cálculo de juros compostos tem a mesma estrutura da Equação <a href="#eq:cresc">(2.1)</a>, ou seja,</p>
+<p><span class="math display">\[ M = C (1 + i)^t \]</span>
+em que <span class="math inline">\(M\)</span> é o montante no instante <span class="math inline">\(t\)</span>, <span class="math inline">\(C\)</span> é o capital inicial quando <span class="math inline">\(t=0\)</span>, e <span class="math inline">\(i\)</span> é a taxa de juros fixa. Observe os dados abaixo. Eles foram obtidos usando um capital inicial de R$100,00 com uma taxa de crescimento de 2.5% por período. Observa que, inicialmente, o primeiro dígito significativo igual a 1 aparece nos 28 primeiros valores. Depois, o crescimento é mais rápido e o sistema apresenta 16 valores com o primeiro dígito significativo igual a 2. O crescimento se acentua e o dígito 3 aparece nos próximos 12 valores. Como o capital cresce cada vez mais rápido, os próximos dígitos aparecem cada vez menos. Veja o dígito 9, ele aparece apenas 5 vezes. Logo após, o dígito 1 aparece novamente por mais 28 períodos.</p>
+<pre class="r"><code># Juros compostos
+c &lt;- 100
+i &lt;- 0.025
+t &lt;- 1:190
+m &lt;- c*(1+i)^t
+m</code></pre>
+<pre><code>  [1]   102.5000   105.0625   107.6891   110.3813   113.1408   115.9693
+  [7]   118.8686   121.8403   124.8863   128.0085   131.2087   134.4889
+ [13]   137.8511   141.2974   144.8298   148.4506   152.1618   155.9659
+ [19]   159.8650   163.8616   167.9582   172.1571   176.4611   180.8726
+ [25]   185.3944   190.0293   194.7800   199.6495   204.6407   209.7568
+ [31]   215.0007   220.3757   225.8851   231.5322   237.3205   243.2535
+ [37]   249.3349   255.5682   261.9574   268.5064   275.2190   282.0995
+ [43]   289.1520   296.3808   303.7903   311.3851   319.1697   327.1490
+ [49]   335.3277   343.7109   352.3036   361.1112   370.1390   379.3925
+ [55]   388.8773   398.5992   408.5642   418.7783   429.2478   439.9790
+ [61]   450.9784   462.2529   473.8092   485.6545   497.7958   510.2407
+ [67]   522.9967   536.0717   549.4734   563.2103   577.2905   591.7228
+ [73]   606.5159   621.6788   637.2207   653.1513   669.4800   686.2170
+ [79]   703.3725   720.9568   738.9807   757.4552   776.3916   795.8014
+ [85]   815.6964   836.0888   856.9911   878.4158   900.3762   922.8856
+ [91]   945.9578   969.6067   993.8469  1018.6931  1044.1604  1070.2644
+ [97]  1097.0210  1124.4465  1152.5577  1181.3716  1210.9059  1241.1786
+[103]  1272.2080  1304.0132  1336.6136  1370.0289  1404.2796  1439.3866
+[109]  1475.3713  1512.2556  1550.0620  1588.8135  1628.5338  1669.2472
+[115]  1710.9784  1753.7528  1797.5967  1842.5366  1888.6000  1935.8150
+[121]  1984.2104  2033.8156  2084.6610  2136.7775  2190.1970  2244.9519
+[127]  2301.0757  2358.6026  2417.5676  2478.0068  2539.9570  2603.4559
+[133]  2668.5423  2735.2559  2803.6373  2873.7282  2945.5714  3019.2107
+[139]  3094.6910  3172.0583  3251.3597  3332.6437  3415.9598  3501.3588
+[145]  3588.8928  3678.6151  3770.5805  3864.8450  3961.4661  4060.5027
+[151]  4162.0153  4266.0657  4372.7173  4482.0353  4594.0862  4708.9383
+[157]  4826.6618  4947.3283  5071.0115  5197.7868  5327.7315  5460.9248
+[163]  5597.4479  5737.3841  5880.8187  6027.8392  6178.5351  6332.9985
+[169]  6491.3235  6653.6066  6819.9467  6990.4454  7165.2065  7344.3367
+[175]  7527.9451  7716.1437  7909.0473  8106.7735  8309.4428  8517.1789
+[181]  8730.1084  8948.3611  9172.0701  9401.3719  9636.4062  9877.3163
+[187] 10124.2492 10377.3555 10636.7894 10902.7091</code></pre>
+<p>Vamos agora extrair os primeiros dígitos significativos do nosso conjunto de dados.</p>
+<pre class="r"><code>dddd &lt;- as.data.frame(m)
+aux1 &lt;- c()
+for (i in 1:dim(dddd)[1]) {
+  n &lt;- as.integer(dddd[i,1])
+  aux2 &lt;- c()
+  while (n &gt; 0) {
+    r = n %% 10
+    aux2 &lt;- c(aux2,r)
+    n = n %/% 10
+  }
+  ll &lt;- aux2[length(aux2)]
+  aux1 &lt;- c(aux1,ll)
+}</code></pre>
+<p>Observamos a distribuição de frequências destes valores abaixo.</p>
+<pre class="r"><code>#
+tt &lt;- table(aux1)
+round(tt/sum(tt),4)</code></pre>
+<pre><code>aux1
+     1      2      3      4      5      6      7      8      9 
+0.3158 0.1684 0.1263 0.0947 0.0737 0.0684 0.0579 0.0474 0.0474 </code></pre>
+<p>Podemos comparar os dados teóricos apresentados na Tabela <a href="#tab:ben1">1.1</a> e na Figura <a href="#fig:freqben1">1.1</a> com os dos juros compostos. Isto pode ser visto na Tabela <a href="#tab:ben2">2.1</a>.</p>
+<table>
+<caption><span id="tab:ben2">Table 2.1: </span> Comparação das frequências teórica da lei de Benford e dos dados de juros compostos.</caption>
+<thead>
+<tr class="header">
+<th align="center">Valores</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">7</th>
+<th align="center">8</th>
+<th align="center">9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Teórico</td>
+<td align="center">0.301</td>
+<td align="center">0.1761</td>
+<td align="center">0.1249</td>
+<td align="center">0.0969</td>
+<td align="center">0.0792</td>
+<td align="center">0.0669</td>
+<td align="center">0.058</td>
+<td align="center">0.0512</td>
+<td align="center">0.0458</td>
+</tr>
+<tr class="even">
+<td align="center">Exemplo</td>
+<td align="center">0.3158</td>
+<td align="center">0.1684</td>
+<td align="center">0.1263</td>
+<td align="center">0.0947</td>
+<td align="center">0.0737</td>
+<td align="center">0.0684</td>
+<td align="center">0.0579</td>
+<td align="center">0.0474</td>
+<td align="center">0.0474</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="multiplicação-de-valores-fraudes-contábeis" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Multiplicação de valores (fraudes contábeis)</h2>
+<p>Dados contábeis e econômicos geralmente são o resultado da multiplicação de vários números. Quando temos esse caso, esses dados se aproximam da distribuição de Benford. Este é o caso em que essa distribuição é usada para identificar fraudes. Se alguém alterar os dados contábeis de um conjunto de dados por meio de fraudes, esse erro poderá se apresentar quando compararmos a frequência dos primeiros dígitos com a distribuição de Benford.</p>
+<p>Por exemplo, vamos gerar dados a partir de três distribuições de probabilidades, uma normal (N(200,25)), outra qui-quadrado (<span class="math inline">\(\chi^2(5)\)</span>) e uma uniforme (U(0,1)).</p>
+<pre class="r"><code>set.seed(1)
+dn &lt;- rnorm(10000,200,5)
+dp &lt;- rchisq(10000,5)
+du &lt;- runif(10000,0,1)
+dt &lt;- dn*dp*du
+#
+dddd &lt;- as.data.frame(dt)
+aux1 &lt;- c()
+for (i in 1:dim(dddd)[1]) {
+  n &lt;- as.integer(dddd[i,1])
+  aux2 &lt;- c()
+  while (n &gt; 0) {
+    r = n %% 10
+    aux2 &lt;- c(aux2,r)
+    n = n %/% 10
+  }
+  ll &lt;- aux2[length(aux2)]
+  aux1 &lt;- c(aux1,ll)
+}
+ddt &lt;- aux1
+#
+ttt  &lt;- table(ddt)
+reat &lt;- round(ttt/sum(ttt),4)
+#
+x2  &lt;- seq(1,9,0.1)
+teo2 &lt;- round(log10(1+1/x2),4)</code></pre>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
+<img src="Figuras1/unnamed-chunk-9-1.png" alt="TRUE" width="2400" />
+<p class="caption">
+Figure 2.1: TRUE
+</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Este é um arquivo com tabelas úteis. Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: <a href="mailto:omarcnpereiraead@gmail.com" class="email">omarcnpereiraead@gmail.com</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
 
 
