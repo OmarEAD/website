@@ -1,0 +1,110 @@
+---
+title: "Distribuição t de Student"
+author: "Prof. Omar"
+output: pdf_document
+---
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      size = "footnotesize",
+                      comment = NA,
+                      warning = FALSE,
+                      message = FALSE,
+                      #out.width = "1\\linewidth",
+                      fig.align = "center",
+                      fig.width = 8, 
+                      fig.height = 4, 
+                      fig.show = "hold",
+                      fig.path = "Figuras1/",
+                      fig.pos = "!htb",
+                      fig.cap = TRUE,
+                      background = "#E6E6FA",
+                      #background = "black",
+                      dev = c("png",'pdf'),
+                      res=300,
+                      dpi = 300,
+                      cache = TRUE)
+```
+
+```{r library, echo=FALSE,results='hide'}
+#library(tidyverse)
+#library(tinytex)
+library(knitr)
+library(kableExtra)
+library(xtable)
+```
+
+```{r functions, echo=FALSE, results='hide'}
+# A function to scale input to 0-1
+scale_01 <- function(x){
+  (x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE))
+}
+```
+
+```{r read-data, echo=FALSE,results='hide'}
+# gapminder <- read_csv(here::here("data", "gapminder.csv"))
+```
+
+\begin{center}
+Os valores tabelados correspondem aos pontos $x$ tais que $P(t_{g.l.} \leq x)$
+\end{center}
+
+```{r, echo=FALSE,results='hide'}
+options(digits = 4)
+z1 <- seq(0,3.99,0.01)
+qq <- round(pnorm(z1),4)
+round(qq[1],4)
+
+af1 <- c(0.900,0.950,0.975,0.995)
+gl1 <- c(1:30,40,60,120,20000)
+tt1 <- data.frame(gl=rep(gl1,each=length(af1)),
+                 af=rep(af1,length(gl1))
+                 )
+tt <- round(qt(tt1$af,tt1$gl),3)
+```
+
+
+
+| g.l.   |   0.900   |   0.950   |   0.975   |   0.995   |
+|-----|:--------:|:--------:|:--------:|:--------:|
+| 1 |  `r tt[1]` |  `r tt[2]` |  `r tt[3]` | `r tt[4]` |
+| 2 |  `r tt[5]`  |  `r tt[6]`  |  `r tt[7]`  |  `r tt[8]`  
+| 3 |  `r tt[9]`  |  `r tt[10]`  |  `r tt[11]`  |  `r tt[12]`
+| 4 |  `r tt[13]`  |  `r tt[14]`  |  `r tt[15]`  |  `r tt[16]`
+| 5 |  `r tt[17]`  |  `r tt[18]`  |  `r tt[19]`  |  `r tt[20]`
+| 6 |  `r tt[21]`  |  `r tt[22]`  |  `r tt[23]`  |  `r tt[24]`
+| 7 |  `r tt[25]`  |  `r tt[26]`  |  `r tt[27]`  |  `r tt[28]`
+| 8 |  `r tt[29]`  |  `r tt[30]`  |  `r tt[31]`  |  `r tt[32]`
+| 9 |  `r tt[33]`  |  `r tt[34]`  |  `r tt[35]`  |  `r tt[36]`
+| 10 |  `r tt[37]`  |  `r tt[38]`  |  `r tt[39]`  |  `r tt[40]`
+| 11 |  `r tt[41]`  |  `r tt[42]`  |  `r tt[43]`  |  `r tt[44]`
+| 12 |  `r tt[45]`  |  `r tt[46]`  |  `r tt[47]`  |  `r tt[48]`
+| 13 |  `r tt[49]`  |  `r tt[50]`  |  `r tt[51]`  |  `r tt[52]`
+| 14 |  `r tt[53]`  |  `r tt[54]`  |  `r tt[55]`  |  `r tt[56]`
+| 15 |  `r tt[57]`  |  `r tt[58]`  |  `r tt[59]`  |  `r tt[60]`
+| 16 |  `r tt[61]`  |  `r tt[62]`  |  `r tt[63]`  |  `r tt[64]`
+| 17 |  `r tt[65]`  |  `r tt[66]`  |  `r tt[67]`  |  `r tt[68]`
+| 18 |  `r tt[69]`  |  `r tt[70]`  |  `r tt[71]`  |  `r tt[72]`
+| 19 |  `r tt[73]`  |  `r tt[74]`  |  `r tt[75]`  |  `r tt[76]`
+| 20 |  `r tt[77]`  |  `r tt[78]`  |  `r tt[79]`  |  `r tt[80]`
+| 21 |  `r tt[81]`  |  `r tt[82]`  |  `r tt[83]`  |  `r tt[84]`
+| 22 |  `r tt[85]`  |  `r tt[86]`  |  `r tt[87]`  |  `r tt[88]`
+| 23 |  `r tt[89]`  |  `r tt[90]`  |  `r tt[91]`  |  `r tt[92]`
+| 24 |  `r tt[93]`  |  `r tt[94]`  |  `r tt[95]`  |  `r tt[96]`
+| 25 |  `r tt[97]`  |  `r tt[98]`  |  `r tt[99]`  |  `r tt[100]`
+| 26 |  `r tt[101]`  |  `r tt[102]`  |  `r tt[103]`  |  `r tt[104]`
+| 27 |  `r tt[105]`  |  `r tt[106]`  |  `r tt[107]`  |  `r tt[108]`
+| 28 |  `r tt[109]`  |  `r tt[110]`  |  `r tt[111]`  |  `r tt[112]`
+| 29 |  `r tt[113]`  |  `r tt[114]`  |  `r tt[115]`  |  `r tt[116]`
+| 30 |  `r tt[117]`  |  `r tt[118]`  |  `r tt[119]`  |  `r tt[120]`
+| 40 |  `r tt[121]`  |  `r tt[122]`  |  `r tt[123]`  |  `r tt[124]`
+| 60 |  `r tt[125]`  |  `r tt[126]`  |  `r tt[127]`  |  `r tt[128]`
+| 120 |  `r tt[129]`  |  `r tt[130]`  |  `r tt[131]`  |  `r tt[132]`
+| $\infty$ |  `r tt[133]`  |  `r tt[134]`  |  `r tt[135]`  |  `r tt[136]`
+
+
+
+
+
+
+
