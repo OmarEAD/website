@@ -109,11 +109,14 @@ round(qq[1],4)
 3.9 |  `r qq[391]`  |  `r qq[392]`  |  `r qq[393]`  |  `r qq[394]`  |  `r qq[395]`  |  `r qq[396]`  |  `r qq[397]`  |  `r qq[398]`  |  `r qq[399]`  |  `r qq[400]`
 
 
-Se preferir, pode baixar a Tabela da distribuição Normal Padrão  [aqui](https://github.com/OmarEAD/Website/blob/main/TabelasPDF/TNormPad.pdf)
+Se preferir, pode baixar a Tabela da distribuição Normal Padrão  [aqui](https://github.com/OmarEAD/Website/blob/main/TabelasPDF/TNormPad.pdf).
 
 
 # Distribuição $t$ de Student
 
+<!-- \begin{center} -->
+Os valores tabelados correspondem aos pontos $x$ tais que $P(t_{g.l.} \leq x)$.
+<!-- \end{center} -->
 
 ```{r, echo=FALSE,results='hide'}
 af1 <- c(0.900,0.950,0.975,0.995)
@@ -165,7 +168,7 @@ tt <- round(qt(tt1$af,tt1$gl),3)
 
 
 
-Se preferir, pode baixar a Tabela da distribuição $t$ de Student  [aqui](https://github.com/OmarEAD/Website/blob/main/TabelasPDF/tStudent.pdf)
+Se preferir, pode baixar a Tabela da distribuição $t$ de Student  [aqui](https://github.com/OmarEAD/Website/blob/main/TabelasPDF/tStudent.pdf).
 
 
 
