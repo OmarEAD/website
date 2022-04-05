@@ -1,0 +1,97 @@
+---
+title: "Distribuição Qui-Quadrado"
+author: "Prof. Omar"
+output: pdf_document
+---
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      size = "footnotesize",
+                      comment = NA,
+                      warning = FALSE,
+                      message = FALSE,
+                      #out.width = "1\\linewidth",
+                      fig.align = "center",
+                      fig.width = 8, 
+                      fig.height = 4, 
+                      fig.show = "hold",
+                      fig.path = "Figuras1/",
+                      fig.pos = "!htb",
+                      fig.cap = TRUE,
+                      background = "#E6E6FA",
+                      #background = "black",
+                      dev = c("png",'pdf'),
+                      res=300,
+                      dpi = 300,
+                      cache = TRUE)
+```
+
+```{r library, echo=FALSE,results='hide'}
+#library(tidyverse)
+#library(tinytex)
+library(knitr)
+library(kableExtra)
+library(xtable)
+```
+
+
+\begin{center}
+Os valores tabelados correspondem aos pontos $x$ tais que $P(\chi^2_{g.l.} \leq x)$.
+\end{center}
+
+```{r, echo=FALSE,results='hide'}
+af2 <- c(0.005, 0.010, 0.025, 0.050, 0.100, 0.250, 0.500, 0.750, 0.900, 0.950, 0.975, 0.990, 0.995)
+gl2 <- c(1:30,40,50,60,70,80,90,100)
+ch2 <- data.frame(gl=rep(gl2,each=length(af2)),
+                 af=rep(af2,length(gl2))
+                 )
+ch <- round(qchisq(ch2$af,ch2$gl),3)
+```
+
+| g.l.   |   0.005   |   0.010   |   0.025   |   0.050   |   0.100   |   0.250   |   0.500   |   0.750   |   0.900   |   0.950   |   0.975   |   0.990   |   0.995   |
+|-----|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
+| 1 | `r ch[1]` |  `r ch[2]` |  `r ch[3]` |  `r ch[4]` |  `r ch[5]` |  `r ch[6]` |  `r ch[7]` |  `r ch[8]` |  `r ch[9]` |  `r ch[10]` |  `r ch[11]` |  `r ch[12]` | `r ch[13]` |
+2 |  `r ch[14]`  |  `r ch[15]`  |  `r ch[16]`  |  `r ch[17]`  |  `r ch[18]` |  `r ch[19]` |  `r ch[20]` |  `r ch[21]`  |  `r ch[22]`  |  `r ch[23]`  |  `r ch[24]`  |  `r ch[25]`  |  `r ch[26]`  
+3 |  `r ch[27]`  |  `r ch[28]`  |  `r ch[29]`  |  `r ch[30]`  |  `r ch[31]` |  `r ch[32]` |  `r ch[33]` |  `r ch[34]`  |  `r ch[35]`  |  `r ch[36]`  |  `r ch[37]`  |  `r ch[38]`  |  `r ch[39]`  
+4 |  `r ch[40]`  |  `r ch[41]` |  `r ch[42]` |  `r ch[43]` |  `r ch[44]`  |  `r ch[45]`  |  `r ch[46]`  |  `r ch[47]`  |  `r ch[48]`  |  `r ch[49]` |  `r ch[50]` |  `r ch[51]`  |  `r ch[52]`
+5 |  `r ch[53]`  |  `r ch[54]`  |  `r ch[55]`  |  `r ch[56]`  |  `r ch[57]`  |  `r ch[58]` |  `r ch[59]` |  `r ch[60]` |  `r ch[61]`  |  `r ch[62]`  |  `r ch[63]`  |  `r ch[64]`  |  `r ch[65]`  
+6 |  `r ch[66]`  |  `r ch[67]`  |  `r ch[68]`  |  `r ch[69]`  |  `r ch[70]`  |  `r ch[71]` |  `r ch[72]` |  `r ch[73]` |  `r ch[74]`  |  `r ch[75]`  |  `r ch[76]`  |  `r ch[77]`  |  `r ch[78]`  
+7 |  `r ch[79]`  |  `r ch[80]` |  `r ch[81]` |  `r ch[82]` |  `r ch[83]` |  `r ch[84]`  |  `r ch[85]`  |  `r ch[86]`  |  `r ch[87]`  |  `r ch[88]`  |  `r ch[89]` |  `r ch[90]` |  `r ch[91]`  
+8 |  `r ch[92]`  |  `r ch[93]`  |  `r ch[94]`  |  `r ch[95]`  |  `r ch[96]`  |  `r ch[97]` |  `r ch[98]` |  `r ch[99]` |  `r ch[100]`  |  `r ch[101]`  |  `r ch[102]`  |  `r ch[103]`  |  `r ch[104]`  
+9 |  `r ch[105]`  |  `r ch[106]`  |  `r ch[107]`  |  `r ch[108]`  |  `r ch[109]`  |  `r ch[110]` |  `r ch[111]` |  `r ch[112]` |  `r ch[113]`  |  `r ch[114]`  |  `r ch[115]`  |  `r ch[116]`  |  `r ch[117]`  
+10 |  `r ch[118]`  |  `r ch[119]` |  `r ch[120]` |  `r ch[121]` |  `r ch[122]` |  `r ch[123]`  |  `r ch[124]`  |  `r ch[125]`  |  `r ch[126]`  |  `r ch[127]`  |  `r ch[128]` |  `r ch[129]` |  `r ch[130]`
+11 | `r ch[131]` |  `r ch[132]` |  `r ch[133]` |  `r ch[134]` |  `r ch[135]` |  `r ch[136]` |  `r ch[137]` |  `r ch[138]` |  `r ch[139]` |  `r ch[140]` |  `r ch[141]` |  `r ch[142]` | `r ch[143]` |
+12 |  `r ch[144]`  |  `r ch[145]`  |  `r ch[146]`  |  `r ch[147]`  |  `r ch[148]` |  `r ch[149]` |  `r ch[150]` |  `r ch[151]`  |  `r ch[152]`  |  `r ch[153]`  |  `r ch[154]`  |  `r ch[155]`  |  `r ch[156]`  
+13 |  `r ch[157]`  |  `r ch[158]`  |  `r ch[159]`  |  `r ch[160]`  |  `r ch[161]` |  `r ch[162]` |  `r ch[163]` |  `r ch[164]`  |  `r ch[165]`  |  `r ch[166]`  |  `r ch[167]`  |  `r ch[168]`  |  `r ch[169]`  
+14 |  `r ch[170]`  |  `r ch[171]` |  `r ch[172]` |  `r ch[173]` |  `r ch[174]`  |  `r ch[175]`  |  `r ch[176]`  |  `r ch[177]`  |  `r ch[178]`  |  `r ch[179]` |  `r ch[180]` |  `r ch[181]`  |  `r ch[182]`
+15 |  `r ch[183]`  |  `r ch[184]`  |  `r ch[185]`  |  `r ch[186]`  |  `r ch[187]`  |  `r ch[188]` |  `r ch[189]` |  `r ch[190]` |  `r ch[191]`  |  `r ch[192]`  |  `r ch[193]`  |  `r ch[194]`  |  `r ch[195]`  
+16 |  `r ch[196]`  |  `r ch[197]`  |  `r ch[198]`  |  `r ch[199]`  |  `r ch[200]`  |  `r ch[201]` |  `r ch[202]` |  `r ch[203]` |  `r ch[204]`  |  `r ch[205]`  |  `r ch[206]`  |  `r ch[207]`  |  `r ch[208]` 
+17 |  `r ch[209]`  |  `r ch[210]` |  `r ch[211]` |  `r ch[212]` |  `r ch[213]` |  `r ch[214]`  |  `r ch[215]`  |  `r ch[216]`  |  `r ch[217]`  |  `r ch[218]`  |  `r ch[219]` |  `r ch[220]` |  `r ch[221]`  
+18 |  `r ch[222]`  |  `r ch[223]`  |  `r ch[224]`  |  `r ch[225]`  |  `r ch[226]`  |  `r ch[227]` |  `r ch[228]` |  `r ch[229]` |  `r ch[230]`  |  `r ch[231]`  |  `r ch[232]`  |  `r ch[233]`  |  `r ch[234]`  
+19 |  `r ch[235]`  |  `r ch[236]`  |  `r ch[237]`  |  `r ch[238]`  |  `r ch[239]`  |  `r ch[240]` |  `r ch[241]` |  `r ch[242]` |  `r ch[243]`  |  `r ch[244]`  |  `r ch[245]`  |  `r ch[246]`  |  `r ch[247]`  
+20 |  `r ch[248]`  |  `r ch[249]` |  `r ch[250]` |  `r ch[251]` |  `r ch[252]` |  `r ch[253]`  |  `r ch[254]`  |  `r ch[255]`  |  `r ch[256]`  |  `r ch[257]`  |  `r ch[258]` |  `r ch[259]` |  `r ch[260]`
+21 | `r ch[261]` |  `r ch[262]` |  `r ch[263]` |  `r ch[264]` |  `r ch[265]` |  `r ch[266]` |  `r ch[267]` |  `r ch[268]` |  `r ch[269]` |  `r ch[270]` |  `r ch[271]` |  `r ch[272]` | `r ch[273]` |
+22 |  `r ch[274]`  |  `r ch[275]`  |  `r ch[276]`  |  `r ch[277]`  |  `r ch[278]` |  `r ch[279]` |  `r ch[280]` |  `r ch[281]`  |  `r ch[282]`  |  `r ch[283]`  |  `r ch[284]`  |  `r ch[285]`  |  `r ch[286]`  
+23 |  `r ch[287]`  |  `r ch[288]`  |  `r ch[289]`  |  `r ch[290]`  |  `r ch[291]` |  `r ch[292]` |  `r ch[293]` |  `r ch[294]`  |  `r ch[295]`  |  `r ch[296]`  |  `r ch[297]`  |  `r ch[298]`  |  `r ch[299]`  
+24 |  `r ch[300]` |  `r ch[301]` |  `r ch[302]` |  `r ch[303]` |  `r ch[304]`  |  `r ch[305]`  |  `r ch[306]`  |  `r ch[307]`  |  `r ch[308]`  |  `r ch[309]` |  `r ch[310]` |  `r ch[311]`  |  `r ch[312]`  
+25 |  `r ch[313]`  |  `r ch[314]`  |  `r ch[315]`  |  `r ch[316]`  |  `r ch[317]` |  `r ch[318]` |  `r ch[319]` |  `r ch[320]`  |  `r ch[321]`  |  `r ch[322]`  |  `r ch[323]`  |  `r ch[324]`  |  `r ch[325]` 
+26 |  `r ch[326]`  |  `r ch[327]`  |  `r ch[328]`  |  `r ch[329]`  |  `r ch[330]` |  `r ch[331]` |  `r ch[332]` |  `r ch[333]`  |  `r ch[334]`  |  `r ch[335]`  |  `r ch[336]`  |  `r ch[337]`  |  `r ch[338]`  
+27 |  `r ch[339]` |  `r ch[340]` |  `r ch[341]` |  `r ch[342]` |  `r ch[343]`  |  `r ch[344]`  |  `r ch[345]`  |  `r ch[346]`  |  `r ch[347]`  |  `r ch[348]` |  `r ch[349]`  |  `r ch[350]`  |  `r ch[351]`   
+28 |  `r ch[352]` |  `r ch[353]` |  `r ch[354]` |  `r ch[355]` |  `r ch[356]` |  `r ch[357]` |  `r ch[358]` |  `r ch[359]` |  `r ch[360]` |  `r ch[361]` |  `r ch[362]` | `r ch[363]` |  `r ch[364]`  
+29 |  `r ch[365]`  |  `r ch[366]`  |  `r ch[367]`  |  `r ch[368]` |  `r ch[369]` |  `r ch[370]` |  `r ch[371]`  |  `r ch[372]`  |  `r ch[373]`  |  `r ch[374]`  |  `r ch[375]`  |  `r ch[376]`  |  `r ch[377]`  
+30 |  `r ch[378]`  |  `r ch[379]`  |  `r ch[380]`  |  `r ch[381]` |  `r ch[382]` |  `r ch[383]` |  `r ch[384]`  |  `r ch[385]`  |  `r ch[386]`  |  `r ch[387]`  |  `r ch[388]`  |  `r ch[389]`  |  `r ch[390]`  
+40 |  `r ch[391]` |  `r ch[392]` |  `r ch[393]` |  `r ch[394]`  |  `r ch[395]`  |  `r ch[396]`  |  `r ch[397]`  |  `r ch[398]`  |  `r ch[399]` |  `r ch[400]` |  `r ch[401]`  |  `r ch[402]` |  `r ch[403]` 
+50 |  `r ch[404]`  |  `r ch[405]`  |  `r ch[406]`  |  `r ch[407]`  |  `r ch[408]` |  `r ch[409]` |  `r ch[410]` |  `r ch[411]`  |  `r ch[412]`  |  `r ch[413]`  |  `r ch[414]`  |  `r ch[415]`  |  `r ch[416]` 
+60 |  `r ch[417]`  |  `r ch[418]`  |  `r ch[419]`  |  `r ch[420]`  |  `r ch[421]` |  `r ch[422]` |  `r ch[423]` |  `r ch[424]`  |  `r ch[425]`  |  `r ch[426]`  |  `r ch[427]`  |  `r ch[428]`  |  `r ch[429]`  
+70 |  `r ch[430]` |  `r ch[431]` |  `r ch[432]` |  `r ch[433]` |  `r ch[434]`  |  `r ch[435]`  |  `r ch[436]`  |  `r ch[437]`  |  `r ch[438]`  |  `r ch[439]` |  `r ch[440]` |  `r ch[441]`  |  `r ch[442]`  
+80 |  `r ch[443]`  |  `r ch[444]`  |  `r ch[445]`  |  `r ch[446]`  |  `r ch[447]` |  `r ch[448]` |  `r ch[449]` |  `r ch[450]`  |  `r ch[451]`  |  `r ch[452]`  |  `r ch[453]`  |  `r ch[454]`  |  `r ch[455]` 
+90 |  `r ch[456]`  |  `r ch[457]`  |  `r ch[458]`  |  `r ch[459]`  |  `r ch[460]` |  `r ch[461]` |  `r ch[462]` |  `r ch[463]`  |  `r ch[464]`  |  `r ch[465]`  |  `r ch[466]`  |  `r ch[467]`  |  `r ch[468]`  
+100 |  `r ch[469]` |  `r ch[470]` |  `r ch[471]` |  `r ch[472]` |  `r ch[473]`  |  `r ch[474]`  |  `r ch[475]`  |  `r ch[476]`  |  `r ch[477]`  |  `r ch[478]` |  `r ch[479]`  |  `r ch[480]`  |  `r ch[481]`   
+
+
+
+
+
+
+
+
