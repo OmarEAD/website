@@ -17,6 +17,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       fig.show = "hold",
                       fig.path = "Figuras1/",
                       fig.pos = "!htb",
+                      #fig.pos = "H",
                       fig.cap = TRUE,
                       background = "#E6E6FA",
                       #background = "black",
@@ -27,11 +28,41 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 
 ```{r library, echo=FALSE,results='hide'}
-#library(tidyverse)
+library(tidyverse)
 #library(tinytex)
 library(knitr)
 library(kableExtra)
 library(xtable)
+```
+
+
+```{r nz, echo=FALSE, fig.height=0.7, fig.width=3.2, fig.cap= ""}
+ggplot(data.frame(x = c(-3, 3)), aes(x)) +
+  stat_function(fun = dnorm,
+                geom = "line",
+                xlim = c(-3, 3)) +
+  stat_function(fun = dnorm,
+                geom = "area",
+                fill = "gray",
+                xlim = c(-3, 1)) +
+  xlim(-3, 3) +
+  geom_segment(aes(x = 1, y = 0, 
+                   xend = 1, yend = dnorm(1)),
+               size = 0.5) +
+   theme_void() +
+  annotate("text",label="z",x=1,y=0.0,
+           hjust=-0.3,vjust=-0.1,
+           size = 5) +
+  annotate("text",label="Z",x=3,y=0.0,
+           hjust=-0.05,vjust=-0.1,
+           size = 6) +
+  annotate("text",label="P(Z<z)",x=-0.8,y=0.18,hjust=0,vjust=0.5,
+           size = 6)
+  #geom_vline(aes(xintercept=1,label = 'tere'))
+
+#geom_vline(data = events, aes(xintercept = as.numeric(time)))  +
+ # geom_text(data = events, aes(x = as.numeric(time), y = 0, label = text))
+
 ```
 
 
@@ -87,10 +118,6 @@ ch <- round(qchisq(ch2$af,ch2$gl),3)
 80 |  `r ch[443]`  |  `r ch[444]`  |  `r ch[445]`  |  `r ch[446]`  |  `r ch[447]` |  `r ch[448]` |  `r ch[449]` |  `r ch[450]`  |  `r ch[451]`  |  `r ch[452]`  |  `r ch[453]`  |  `r ch[454]`  |  `r ch[455]` 
 90 |  `r ch[456]`  |  `r ch[457]`  |  `r ch[458]`  |  `r ch[459]`  |  `r ch[460]` |  `r ch[461]` |  `r ch[462]` |  `r ch[463]`  |  `r ch[464]`  |  `r ch[465]`  |  `r ch[466]`  |  `r ch[467]`  |  `r ch[468]`  
 100 |  `r ch[469]` |  `r ch[470]` |  `r ch[471]` |  `r ch[472]` |  `r ch[473]`  |  `r ch[474]`  |  `r ch[475]`  |  `r ch[476]`  |  `r ch[477]`  |  `r ch[478]` |  `r ch[479]`  |  `r ch[480]`  |  `r ch[481]`   
-
-
-
-
 
 
 

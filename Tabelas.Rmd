@@ -35,28 +35,48 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 
 ```{r library, echo=FALSE,results='hide'}
-#library(tidyverse)
+library(tidyverse)
 #library(tinytex)
 library(knitr)
 library(kableExtra)
 library(xtable)
 ```
 
-```{r functions, echo=FALSE, results='hide'}
-# A function to scale input to 0-1
-scale_01 <- function(x){
-  (x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE))
-}
-```
-
-```{r read-data, echo=FALSE,results='hide'}
-# gapminder <- read_csv(here::here("data", "gapminder.csv"))
-```
-
-
 [^1]: Este é um arquivo com tabelas úteis. Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
 
 # Distribuição Normal Padrão
+
+
+```{r nz, echo=FALSE, fig.height=2, fig.width=3.2, fig.cap= ""}
+ggplot(data.frame(x = c(-3, 3)), aes(x)) +
+  stat_function(fun = dnorm,
+                geom = "line",
+                xlim = c(-3, 3)) +
+  stat_function(fun = dnorm,
+                geom = "area",
+                fill = "gray",
+                xlim = c(-3, 1)) +
+  xlim(-3, 3) +
+  geom_segment(aes(x = 1, y = 0, 
+                   xend = 1, yend = dnorm(1)),
+               size = 0.5) +
+   theme_void() +
+  annotate("text",label="z",x=1,y=0.0,
+           hjust=-0.3,vjust=-0.1,
+           size = 4) +
+  annotate("text",label="Z",x=3,y=0.0,
+           hjust=-0.08,vjust=-0.1,
+           size = 5) +
+  annotate("text",label="P(Z<z)",x=-0.8,y=0.18,hjust=0,vjust=0.5,
+           size = 5)
+  #geom_vline(aes(xintercept=1,label = 'tere'))
+
+#geom_vline(data = events, aes(xintercept = as.numeric(time)))  +
+ # geom_text(data = events, aes(x = as.numeric(time), y = 0, label = text))
+
+```
+
+
 
 ```{r, echo=FALSE,results='hide'}
 options(digits = 4)
@@ -115,8 +135,37 @@ Se preferir, pode baixar a Tabela da distribuição Normal Padrão  [aqui](https
 # Distribuição $t$ de Student
 
 <!-- \begin{center} -->
-Os valores tabelados correspondem aos pontos $x$ tais que $P(t_{g.l.} \leq x)$.
+<!-- Os valores tabelados correspondem aos pontos $x$ tais que $P(t_{g.l.} \leq x)$. -->
 <!-- \end{center} -->
+
+
+
+```{r nt, echo=FALSE, fig.height=1, fig.width=4.5, fig.cap= ""}
+ggplot(data.frame(x = c(-3, 3)), aes(x)) +
+  stat_function(fun = dnorm,
+                geom = "line",
+                xlim = c(-3, 3)) +
+  stat_function(fun = dnorm,
+                geom = "area",
+                fill = "gray",
+                xlim = c(-3, 1)) +
+  xlim(-3, 3) +
+  geom_segment(aes(x = 1, y = 0, 
+                   xend = 1, yend = dnorm(1)),
+               size = 0.5) +
+   theme_void() +
+  annotate("text",label=  bquote(t['(g.l.,' ~1-alpha/2 *')'])  
+             ,x=0.82,y=0.0,
+           hjust=-0.3,vjust=0.4,
+           size = 3) +
+  annotate("text",label="t",x=3,y=0.0,
+           hjust=-0.3,vjust=0.3,
+           size = 5) +
+  annotate("text",label=bquote('P(t<'~ t['(g.l.,' ~1-alpha/2 *')'] *')'),x=-1,y=0.18,hjust=0,vjust=0.5,
+           size = 5)
+```
+
+
 
 ```{r, echo=FALSE,results='hide'}
 af1 <- c(0.900,0.950,0.975,0.995)

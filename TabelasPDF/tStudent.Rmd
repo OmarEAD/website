@@ -27,27 +27,43 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 
 ```{r library, echo=FALSE,results='hide'}
-#library(tidyverse)
+library(tidyverse)
 #library(tinytex)
 library(knitr)
 library(kableExtra)
 library(xtable)
 ```
 
-```{r functions, echo=FALSE, results='hide'}
-# A function to scale input to 0-1
-scale_01 <- function(x){
-  (x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE))
-}
+
+```{r nt, echo=FALSE, fig.height=1, fig.width=4.5, fig.cap= ""}
+ggplot(data.frame(x = c(-3, 3)), aes(x)) +
+  stat_function(fun = dnorm,
+                geom = "line",
+                xlim = c(-3, 3)) +
+  stat_function(fun = dnorm,
+                geom = "area",
+                fill = "gray",
+                xlim = c(-3, 1)) +
+  xlim(-3, 3) +
+  geom_segment(aes(x = 1, y = 0, 
+                   xend = 1, yend = dnorm(1)),
+               size = 0.5) +
+   theme_void() +
+  annotate("text",label=  bquote(t['(g.l.,' ~1-alpha/2 *')'])  
+             ,x=0.82,y=0.0,
+           hjust=-0.3,vjust=0.4,
+           size = 3) +
+  annotate("text",label="t",x=3,y=0.0,
+           hjust=-0.3,vjust=0.3,
+           size = 5) +
+  annotate("text",label=bquote('P(t<'~ t['(g.l.,' ~1-alpha/2 *')'] *')'),x=-1,y=0.18,hjust=0,vjust=0.5,
+           size = 5)
 ```
 
-```{r read-data, echo=FALSE,results='hide'}
-# gapminder <- read_csv(here::here("data", "gapminder.csv"))
-```
 
-\begin{center}
-Os valores tabelados correspondem aos pontos $x$ tais que $P(t_{g.l.} \leq x)$
-\end{center}
+<!-- \begin{center} -->
+<!-- Os valores tabelados correspondem aos pontos $x$ tais que $P(t_{g.l.} \leq x)$ -->
+<!-- \end{center} -->
 
 ```{r, echo=FALSE,results='hide'}
 options(digits = 4)

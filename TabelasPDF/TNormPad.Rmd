@@ -27,22 +27,41 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 
 ```{r library, echo=FALSE,results='hide'}
-#library(tidyverse)
+library(tidyverse)
 #library(tinytex)
 library(knitr)
 library(kableExtra)
 library(xtable)
 ```
 
-```{r functions, echo=FALSE, results='hide'}
-# A function to scale input to 0-1
-scale_01 <- function(x){
-  (x - min(x, na.rm = TRUE)) / diff(range(x, na.rm = TRUE))
-}
-```
 
-```{r read-data, echo=FALSE,results='hide'}
-# gapminder <- read_csv(here::here("data", "gapminder.csv"))
+```{r nz, echo=FALSE, fig.height=0.7, fig.width=3.2, fig.cap= ""}
+ggplot(data.frame(x = c(-3, 3)), aes(x)) +
+  stat_function(fun = dnorm,
+                geom = "line",
+                xlim = c(-3, 3)) +
+  stat_function(fun = dnorm,
+                geom = "area",
+                fill = "gray",
+                xlim = c(-3, 1)) +
+  xlim(-3, 3) +
+  geom_segment(aes(x = 1, y = 0, 
+                   xend = 1, yend = dnorm(1)),
+               size = 0.5) +
+   theme_void() +
+  annotate("text",label="z",x=1,y=0.0,
+           hjust=-0.3,vjust=-0.1,
+           size = 5) +
+  annotate("text",label="Z",x=3,y=0.0,
+           hjust=-0.05,vjust=-0.1,
+           size = 6) +
+  annotate("text",label="P(Z<z)",x=-0.8,y=0.18,hjust=0,vjust=0.5,
+           size = 6)
+  #geom_vline(aes(xintercept=1,label = 'tere'))
+
+#geom_vline(data = events, aes(xintercept = as.numeric(time)))  +
+ # geom_text(data = events, aes(x = as.numeric(time), y = 0, label = text))
+
 ```
 
 
@@ -91,9 +110,9 @@ round(qq[1],4)
 3.3 |  `r qq[331]`  |  `r qq[332]`  |  `r qq[333]`  |  `r qq[334]`  |  `r qq[335]`  |  `r qq[336]`  |  `r qq[337]`  |  `r qq[338]`  |  `r qq[339]`  |  `r qq[340]`  
 3.4 |  `r qq[341]`  |  `r qq[342]`  |  `r qq[343]`  |  `r qq[344]`  |  `r qq[345]`  |  `r qq[346]`  |  `r qq[347]`  |  `r qq[348]`  |  `r qq[349]`  |  `r qq[350]`  
 3.5 |  `r qq[351]`  |  `r qq[352]`  |  `r qq[353]`  |  `r qq[354]`  |  `r qq[355]`  |  `r qq[356]`  |  `r qq[357]`  |  `r qq[358]`  |  `r qq[359]`  |  `r qq[360]`  
-3.6 |  `r qq[361]`  |  `r qq[362]`  |  `r qq[363]`  |  `r qq[364]`  |  `r qq[365]`  |  `r qq[366]`  |  `r qq[367]`  |  `r qq[368]`  |  `r qq[369]`  |  `r qq[370]`  
-3.7 |  `r qq[371]`  |  `r qq[372]`  |  `r qq[373]`  |  `r qq[374]`  |  `r qq[375]`  |  `r qq[376]`  |  `r qq[377]`  |  `r qq[378]`  |  `r qq[379]`  |  `r qq[380]`  
-3.8 |  `r qq[381]`  |  `r qq[382]`  |  `r qq[383]`  |  `r qq[384]`  |  `r qq[385]`  |  `r qq[386]`  |  `r qq[387]`  |  `r qq[388]`  |  `r qq[389]`  |  `r qq[390]`  
-3.9 |  `r qq[391]`  |  `r qq[392]`  |  `r qq[393]`  |  `r qq[394]`  |  `r qq[395]`  |  `r qq[396]`  |  `r qq[397]`  |  `r qq[398]`  |  `r qq[399]`  |  `r qq[400]`
+<!-- 3.6 |  `r qq[361]`  |  `r qq[362]`  |  `r qq[363]`  |  `r qq[364]`  |  `r qq[365]`  |  `r qq[366]`  |  `r qq[367]`  |  `r qq[368]`  |  `r qq[369]`  |  `r qq[370]`   -->
+<!-- 3.7 |  `r qq[371]`  |  `r qq[372]`  |  `r qq[373]`  |  `r qq[374]`  |  `r qq[375]`  |  `r qq[376]`  |  `r qq[377]`  |  `r qq[378]`  |  `r qq[379]`  |  `r qq[380]`   -->
+<!-- 3.8 |  `r qq[381]`  |  `r qq[382]`  |  `r qq[383]`  |  `r qq[384]`  |  `r qq[385]`  |  `r qq[386]`  |  `r qq[387]`  |  `r qq[388]`  |  `r qq[389]`  |  `r qq[390]`   -->
+<!-- 3.9 |  `r qq[391]`  |  `r qq[392]`  |  `r qq[393]`  |  `r qq[394]`  |  `r qq[395]`  |  `r qq[396]`  |  `r qq[397]`  |  `r qq[398]`  |  `r qq[399]`  |  `r qq[400]` -->
 
 
