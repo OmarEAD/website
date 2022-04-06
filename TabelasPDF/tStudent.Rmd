@@ -44,7 +44,6 @@ ggplot(data.frame(x = c(-3, 3)), aes(x)) +
                 geom = "area",
                 fill = "gray",
                 xlim = c(-3, 1)) +
-  xlim(-3, 3) +
   geom_segment(aes(x = 1, y = 0, 
                    xend = 1, yend = dnorm(1)),
                size = 0.5) +

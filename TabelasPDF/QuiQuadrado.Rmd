@@ -36,39 +36,35 @@ library(xtable)
 ```
 
 
-```{r nz, echo=FALSE, fig.height=0.7, fig.width=3.2, fig.cap= ""}
-ggplot(data.frame(x = c(-3, 3)), aes(x)) +
-  stat_function(fun = dnorm,
+```{r nz, echo=FALSE, fig.height=1.5, fig.width=4, fig.cap= ""}
+xd <- 17
+ggplot(data.frame(x = c(0, 30)), aes(x)) +
+  stat_function(fun = dchisq, args = c(df=10),
                 geom = "line",
-                xlim = c(-3, 3)) +
-  stat_function(fun = dnorm,
+                xlim = c(0, 30)) +
+  stat_function(fun = dchisq, args = c(df=10),
                 geom = "area",
                 fill = "gray",
-                xlim = c(-3, 1)) +
-  xlim(-3, 3) +
-  geom_segment(aes(x = 1, y = 0, 
-                   xend = 1, yend = dnorm(1)),
+                xlim = c(0, xd)) +
+  geom_segment(aes(x = xd, y = 0, 
+                   xend = xd, yend = dchisq(xd,10)),
                size = 0.5) +
    theme_void() +
-  annotate("text",label="z",x=1,y=0.0,
-           hjust=-0.3,vjust=-0.1,
+  annotate("text",label=  bquote(chi[(g.l.)]^2)  
+             ,x=xd,y=0.0,
+           hjust=-0.3,vjust=0.4,
+           size = 3) +
+  annotate("text",label=bquote(~chi^2),x=29,y=0.0,
+           hjust=-0.3,vjust=0.3,
            size = 5) +
-  annotate("text",label="Z",x=3,y=0.0,
-           hjust=-0.05,vjust=-0.1,
-           size = 6) +
-  annotate("text",label="P(Z<z)",x=-0.8,y=0.18,hjust=0,vjust=0.5,
-           size = 6)
-  #geom_vline(aes(xintercept=1,label = 'tere'))
-
-#geom_vline(data = events, aes(xintercept = as.numeric(time)))  +
- # geom_text(data = events, aes(x = as.numeric(time), y = 0, label = text))
-
+  annotate("text",label=bquote('P(' ~chi^2 < chi['g.l.']^2 *')'),x=5,y=0.04,hjust=0,vjust=0.5,
+           size = 5)
 ```
 
 
-\begin{center}
-Os valores tabelados correspondem aos pontos $x$ tais que $P(\chi^2_{g.l.} \leq x)$.
-\end{center}
+<!-- \begin{center} -->
+<!-- Os valores tabelados correspondem aos pontos $x$ tais que $P(\chi^2_{g.l.} \leq x)$. -->
+<!-- \end{center} -->
 
 ```{r, echo=FALSE,results='hide'}
 af2 <- c(0.005, 0.010, 0.025, 0.050, 0.100, 0.250, 0.500, 0.750, 0.900, 0.950, 0.975, 0.990, 0.995)
