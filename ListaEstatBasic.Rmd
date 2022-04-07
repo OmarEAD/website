@@ -335,6 +335,29 @@ Table: (\#tab:teste1) Padrão-ouro para a sensibilidade e especificidade do test
 * Acertar exatamente cinco vezes o alvo?
 * Acertar o alvo pelo menos três vezes (pelo menos três vezes quer dizer três, quatro, cinco, $\cdots$ ou 15 vezes). Sugestão: $P(X \geq 3)$ = $1 - P(X<3)$ = $1 - \{P(X=0) + P(X=1) + P(X=2) \}$ 
 
+# Intervalo de confiança
+
+1. Para estimar a média da massa dos universitários do sexo masculino da universidade em que estuda, você coletou uma amostra de 200 indivíduos e obteve $\bar{x}=78.9kg$. A população tem distribuição normal com $\sigma = 15kg$. Construa um intervalo de confiança para a média populacional com nível de confiança igual a 95\%.
+
+2. A concentração de oxigênio dissolvido na água ($COD$) é um importante parâmetro para caracterizar a qualidade das águas de córregos e rios. Querendo conhecer a COD num dado córrego, você coletou uma amostra com os seguintes valores em $mg \cdot L^{-1}$: \{ 5.64, 4.87, 5.99, 4.66, 6.02, 4.49, 5.55 \}. Supondo que a $COD$ na água tenha distribuição normal, construa um intervalo de confiança para a média com 95\% de confiança.
+
+
+
+3. Você deseja estimar a prevalência de uma dada doença na cidade onde mora. Para isso, coletou uma amostra de 2000 indivíduos dessa população, dos quais 195 tinham a doença. Construa um intervalo com 95\% de confiança para a prevalência da população:
+
+* Intervalo de confiança de Wald
+* Intervalo de confiança conservador
+
+4. Sua equipe é contratada para fazer uma pesquisa de intensão de votos para o candidato $A$. Qual o tamanho da amostra para que a margem de erro seja de no máximo 2\% na construção de um intervalo de confiança com $\alpha = 0.05$? Suponha uma amostragem aleatória simples e adote o método conservador.
+
+5. O perímetro do tronco a $1m$ de altura pode ser usado para identificar o desenvolvimento de algumas espécies de árvores. Você deseja estimar a proporção de árvores adultas de uma dada espécie numa reserva. Dessa espécie, árvores com perímetro acima de $80cm$ são consideradas adultas. Coletou-se uma amostra de 200 plantas, das quais 85 foram consideradas adultas. Construa um IC para a proporção com $\alpha = 0.05$. 
+
+6. Seja $X$ uma variável aleatória com distribuição normal e parâmetros desconhecidos. Retirá-se uma amostra dessa população: \{ 20, 24, 25, 29, 20, 27, 35, 28, 23, 29 \}. Construa um IC para $\mu$ com $\alpha = 0.05$.
+
+7. Numa lagoa de criação, suspeita-se que alguns peixes estão apresentando massa abaixo do esperado para a idade. Coleta-se uma amostra de 400 peixes, dos quais 182 estão com baixa massa. Construa um IC para a proporção com $\alpha=0.05$.
+
+8. Dez ratos de laboratório foram alimentados com uma ração especial ao longo de um mês. As massas finais foram \{46, 54, 43, 51, 58, 60, 75, 30, 55, 51 \}. Construa um IC para a media das massas com $\alpha = 0.05$.
+
 
 
 
