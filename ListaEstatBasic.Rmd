@@ -362,5 +362,3 @@ Table: (\#tab:teste1) Padrão-ouro para a sensibilidade e especificidade do test
 
 1. Uma plantação de uma dada espécie de árvore é destinada a fabricação de móveis. O seu ponto de corte ocorre quando o perímetro à $1m$ de altura atinge $120cm$. Para saber se uma certa área, onde as plantas tem a mesma idade, pode ser destinada ao corte, você coleta uma amostra do perímetro de 20 árvores e obtém uma média igual a $117cm$. Sabendo-se que o perímetro se distribui normalmente e que $\sigma = 20cm$, qual decisão você tomaria?
 
-
-
