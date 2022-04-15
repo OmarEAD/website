@@ -362,3 +362,14 @@ Table: (\#tab:teste1) Padrão-ouro para a sensibilidade e especificidade do test
 
 1. Uma plantação de uma dada espécie de árvore é destinada a fabricação de móveis. O seu ponto de corte ocorre quando o perímetro à $1m$ de altura atinge $120cm$. Para saber se uma certa área, onde as plantas tem a mesma idade, pode ser destinada ao corte, você coleta uma amostra do perímetro de 20 árvores e obtém uma média igual a $117cm$. Sabendo-se que o perímetro se distribui normalmente e que $\sigma = 20cm$, qual decisão você tomaria?
 
+2. Um produtor de camarão comercializa seu produto em pacotes de 500g. Um orgão fiscalizador coleta uma amostra com seis pacotes e pesagem revela que suas massas são 498, 487, 495, 491, 493 e 488 g. Ao nível de 5\%, verificar se o consumidor pode estar sendo lesado pelo produtor.
+  
+3. Um programa de prevenção é realizado em várias indústrias com a intensão de reduzir a quantidade de tempo perdido devido aos acidentes de trabalho que, nos últimos anos, foi de 70 horas/funcionário. Após um ano de programa, uma amostra com 8 indústrias apresentou os seguintes valores: 65, 67, 56, 59, 44, 55, 51 e 69 horas/funcionário. Ao nível de 5\%, houve evidência de que o programa de prevenção trouxe melhoria para funcionários e patrões?
+
+4. O consumo _per capita_ de açucar numa certa cidade é de 15.5 kg ao ano. Um programa feito pela prefeitura, visando diminuir esse valor, foi realizado. Após o programa, uma amostra com 30 pessoas foi selecionada e verificou-se que o consumo médio foi de 14.1 kg/ano e desvio padrão de 0.6 kg/ano. Ao nível de 5\%, testar se houve diminuição no consumo _per capita_ de açúcar pela população da cidade.
+
+5. Uma empresa garante que 90\% dos equipamentos fornecidos por ela atendem as especificações exigidas. Coletou-se uma amostra de 300 peças, das quais constatou-se que 36 eram defeituosas. Ao nível de 5\%, teste se a informação do fabricante está correta. 
+
+6. Um candidato a prefeito de certa cidade acredita que 40\% da população irá votar nele. Caso esse percentual seja menor, ele irá mudar sua estrategia de campanha. Ele encomenda uma pesquisa a um instituto que, a partir de uma amostra de 2000 pessoas, constatou que 760 votam no candidato. Ao nível de 5\%, qual deve ser a decisão do candidato?
+
+7. Suponha que a concentração de oxigênio dissolvido na água ($COD$) de córregos e rios deva ser maior que 5.00 $mg \cdot L^{-1}$. Querendo conhecer a COD num dado córrego, você coletou uma amostra com os seguintes valores em $mg \cdot L^{-1}$: \{ 5.64, 4.87, 5.99, 4.66, 6.02, 4.49, 5.55 \}. Ao nível de 5\%, teste a hipótese de que esse córrego apresenta as condições mínimas para a vida.
