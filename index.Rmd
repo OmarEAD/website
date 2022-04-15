@@ -78,7 +78,7 @@ scale_01 <- function(x){
 ![](./Figuras/Fotos/chile4.jpg){width=100%} 
 
 <span style="color:darkblue;font-weight:800;font-size:40px"> 
-Olá, aqui é o Omar!
+Olá, aqui é o Prof. Omar!
 </span>
 
 # Sejam bem-vindos! {-}

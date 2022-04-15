@@ -7,7 +7,7 @@ output:
     code_folding: show
     theme: flatly
 navbar:
-  title: "Omar Cléo"
+  title: "Prof. Omar"
   left:
     - text: "Home"
       href: index.html
