@@ -70,7 +70,7 @@ scale_01 <- function(x){
 
 [![](./Figuras/linkedin.jpg "linkedin"){width=5%}](https://linkedin.com/in/omar-cléo-neves-pereira)
 [![](./Figuras/lattes.png "lattes"){width=5%}](http://lattes.cnpq.br/9448206585707320)
-[![](./Figuras/github.png "lattes"){width=5%}](https://github.com/OmarEAD)
+[![](./Figuras/github.png "github"){width=5%}](https://github.com/OmarEAD)
 
 <!-- Seja bem-vindo à minha página pessoal! -->
 
