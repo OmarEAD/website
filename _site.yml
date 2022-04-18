@@ -31,9 +31,9 @@ navbar:
               href: Normal1.html
         - text: "Lei de Benford"
           href: Benford.html
-    - text: "Estatística"
+    - text: "Aulas"
       menu:
-        - text: "Básica"
+        - text: "Estatística"
           menu:
             - text: "Lista de exercícios"
               href: ListaEstatBasic.html
@@ -41,6 +41,8 @@ navbar:
               href: EADPresEstBasA1.html
             - text: "Tabelas"
               href: Tabelas.html
+        - text: "Ex-alunos"
+          href: depoimentos.html
     - text: "Destaques"
       menu:
         - text: "Patente"
@@ -51,8 +53,4 @@ navbar:
           menu:
             - text: "Barcelona"
               href: barcelona.html
-        - text: "Fotos"
-          menu:
-            - text: "Lembranças"
-              href: Fotos.html
 output_dir: "."

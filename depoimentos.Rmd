@@ -1,0 +1,55 @@
+---
+title: "Depoimento de ex-alunos"
+#author: "Prof. Omar"
+output: 
+  bookdown::html_document2:
+    css: style.css  
+    #rmdformats::theme:
+    #  flatly
+    #theme: sandstone
+#bibliography: bibliografiaETbook.bib
+#biblio-style: authoryear
+---
+
+
+```{r setup , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      size = "footnotesize",
+                      comment = NA,
+                      warning = FALSE,
+                      message = FALSE,
+                      #out.width = "1\\linewidth",
+                      fig.align = "center",
+                      fig.width = 8, 
+                      fig.height = 4, 
+                      fig.show = "hold",
+                      fig.path = "Figuras1/",
+                      fig.pos = "!htb",
+                      fig.cap = TRUE,
+                      background = "#E6E6FA",
+                      #background = "black",
+                      dev = c("png",'pdf'),
+                      res=300,
+                      dpi = 300,
+                      cache = TRUE)
+```
+
+```{r library, echo=FALSE,results='hide'}
+library(tidyverse)
+#library(tinytex)
+library(knitr)
+library(kableExtra)
+library(xtable)
+```
+
+
+
+Se você é meu ex-aluno e gostaria de deixar seu depoimento aqui, envie-o para o e-mail: omarcnpereiraead@gmail.com
+
+Caso queira, envie também uma imagem sua para que seja publicada junto ao seu depoimento.
+
+
+
+
+
+
