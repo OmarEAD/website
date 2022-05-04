@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       fig.width = 8, 
                       fig.height = 4, 
                       fig.show = "hold",
-                      fig.path = "Figuras1/",
+                      fig.path = "FigurasN/",
                       fig.pos = "!htb",
                       fig.cap = TRUE,
                       background = "#E6E6FA",
@@ -35,7 +35,7 @@ library(xtable)
 ```
 
 
-```{r nz, echo=FALSE, fig.height=0.7, fig.width=3.2, fig.cap= ""}
+```{r echo=FALSE, fig.height=0.7, fig.width=3.2, fig.cap= ""}
 ggplot(data.frame(x = c(-3, 3)), aes(x)) +
   stat_function(fun = dnorm,
                 geom = "line",

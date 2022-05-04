@@ -1,8 +1,15 @@
 ---
 title: "Distribuição Qui-Quadrado"
 author: "Prof. Omar"
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyhead[CO,CE]{Distribuição Qui-Quadrado}
+- \fancyfoot[CO,CE]{Prof. Omar - https://omaread.github.io/website/}
+- \fancyfoot[LE,RO]{\thepage}
 output: pdf_document
 ---
+
 
 ```{r setup , include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, 
@@ -15,7 +22,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       fig.width = 8, 
                       fig.height = 4, 
                       fig.show = "hold",
-                      fig.path = "Figuras1/",
+                      fig.path = "FigurasQ/",
                       fig.pos = "!htb",
                       #fig.pos = "H",
                       fig.cap = TRUE,
@@ -36,7 +43,7 @@ library(xtable)
 ```
 
 
-```{r nz, echo=FALSE, fig.height=1.5, fig.width=4, fig.cap= ""}
+```{r echo=FALSE, fig.height=1.5, fig.width=4, fig.cap= ""}
 xd <- 17
 ggplot(data.frame(x = c(0, 30)), aes(x)) +
   stat_function(fun = dchisq, args = c(df=10),
