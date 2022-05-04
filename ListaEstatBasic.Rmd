@@ -360,7 +360,7 @@ Table: (\#tab:teste1) Padrão-ouro para a sensibilidade e especificidade do test
 
 # Teste de hipóteses
 
-1. Uma plantação de uma dada espécie de árvore é destinada a fabricação de móveis. O seu ponto de corte ocorre quando o perímetro à $1m$ de altura atinge $120cm$. Para saber se uma certa área, onde as plantas tem a mesma idade, pode ser destinada ao corte, você coleta uma amostra do perímetro de 20 árvores e obtém uma média igual a $117cm$. Sabendo-se que o perímetro se distribui normalmente e que $\sigma = 20cm$, qual decisão você tomaria?
+1. Uma plantação de uma dada espécie de árvore é destinada a fabricação de móveis. O seu ponto de corte ocorre quando o perímetro à $1m$ de altura atinge $120cm$. Para saber se uma certa área, onde as plantas tem a mesma idade, pode ser destinada ao corte, você coleta uma amostra do perímetro de 20 árvores e obtém uma média igual a $117cm$. Sabendo-se que o perímetro se distribui normalmente e que $\sigma = 20cm$, qual decisão você tomaria ($\alpha=0.05$)?
 
 2. Um produtor de camarão comercializa seu produto em pacotes de 500g. Um orgão fiscalizador coleta uma amostra com seis pacotes e pesagem revela que suas massas são 498, 487, 495, 491, 493 e 488 g. Ao nível de 5\%, verificar se o consumidor pode estar sendo lesado pelo produtor.
   
