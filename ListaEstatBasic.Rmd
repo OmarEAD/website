@@ -376,7 +376,7 @@ Table: (\#tab:teste1) Padrão-ouro para a sensibilidade e especificidade do test
 
 8. A altura dos universitários do sexo masculino de uma certa universidade é dada como 169cm. Você, como aluno dessa universidade, percebe que nos últimos anos muitos alunos de outros países vieram estudar nela. Isso o faz supor que o valor de referência para a altura tenha mudado. Para testar sua hipótese, você coletou uma amostra com 200 indivíduos e obteve o valor médio de $172cm$ com desvio padrão de 6cm. Ao nível de 5\%, testar a sua hipótese.
 
-9. Leitões de uma suinocultura foram alimentados com uma nova ração rica em proteína ao longo de dois meses. Espera-se que, ao final desse período, tenham, em média, massa igual a $50kg$. Para testar se os animais atingiram esse valor, você coleta uma amostra: \{47, 51, 46, 52, 45, 45, 50, 53, 49, 52 \} $kg$. Ao nível de 5\%, você considera que os animais, alimentados com a nova ração, apresentam crescimento adequado para a idade?
+9. Em uma suinocultura, os animais foram alimentados com uma nova ração, rica em proteína, ao longo de dois meses. Espera-se que, ao final desse período, tenham, em média, massa igual a $50kg$. Para testar se eles atingiram esse valor, você coleta uma amostra: \{47, 51, 46, 52, 45, 45, 50, 53, 49, 52 \} $kg$. Ao nível de 5\%, você considera que os animais, alimentados com a nova ração, apresentam crescimento adequado para a idade?
 
 ```{r echo=FALSE,results='hide'}
 x <- c(47, 51, 46, 52, 45, 45, 50, 53, 49, 52)
