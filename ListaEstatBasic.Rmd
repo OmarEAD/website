@@ -375,3 +375,8 @@ Table: (\#tab:teste1) Padrão-ouro para a sensibilidade e especificidade do test
 7. Suponha que a concentração de oxigênio dissolvido na água ($COD$) de córregos e rios deva ser maior que 5.00 $mg \cdot L^{-1}$. Querendo conhecer a COD num dado córrego, você coletou uma amostra com os seguintes valores em $mg \cdot L^{-1}$: \{ 5.64, 4.87, 5.99, 4.66, 6.02, 4.49, 5.55 \}. Ao nível de 5\%, teste a hipótese de que esse córrego apresenta as condições mínimas para a vida.
 
 8. A altura dos universitários do sexo masculino de uma certa universidade é dada como 169cm. Você, como aluno dessa universidade, percebe que nos últimos anos muitos alunos de outros países vieram estudar nela. Isso o faz supor que o valor de referência para a altura tenha mudado. Para testar sua hipótese, você coletou uma amostra com 200 indivíduos e obteve o valor médio de 172cm com desvio padrão de 6cm. Ao nível de 5\%, testar a sua hipótese.
+
+
+
+
+
