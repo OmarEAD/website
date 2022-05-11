@@ -358,6 +358,12 @@ Table: (\#tab:teste1) Padrão-ouro para a sensibilidade e especificidade do test
 
 9. Dez ratos de laboratório foram alimentados com uma ração especial ao longo de um mês. As massas finais foram \{46, 54, 43, 51, 58, 60, 75, 30, 55, 51 \}. Construa um IC para a media das massas com $\alpha = 0.05$.
 
+10. Para estimar a altura das crianças da $4^a$ série, uma escola coletou uma amostra com 25 crianças observando uma média de $140cm$ e desvio padrão de $5cm$. Supondo que a distribuição da altura das crianças seja normal, construa um intervalo de confiança para a média da população com $\alpha=0.05$.
+
+11. Uma amostra aleatória de 625 clientes de uma loja de material de limpeza revela que 70\% deles preferem a marca $A$ de detergente. Construir um intervalo de confiança para a proporção de clientes que preferem $A$ com $\alpha=0.05$.
+
+12. Com a intensão de estimar a proporção de eleitores favoráveis ao seu candidato, um certo partido político coletou uma amostra com 300 eleitores. Desses, 100 disseram que votam no candidato do partido. Determine o intervalo de confiança para a proporção de eleitores do candidato em questão com $\alpha = 0.05$.
+
 # Teste de hipóteses
 
 1. Uma plantação de uma dada espécie de árvore é destinada a fabricação de móveis. O seu ponto de corte ocorre quando o perímetro à $1m$ de altura atinge $120cm$. Para saber se uma certa área, onde as plantas tem a mesma idade, pode ser destinada ao corte, você coleta uma amostra do perímetro de 20 árvores e obtém uma média igual a $117cm$. Sabendo-se que o perímetro se distribui normalmente e que $\sigma = 20cm$, qual decisão você tomaria ($\alpha=0.05$)?
@@ -377,3 +383,10 @@ Table: (\#tab:teste1) Padrão-ouro para a sensibilidade e especificidade do test
 8. A altura dos universitários do sexo masculino de uma certa universidade é dada como 169cm. Você, como aluno dessa universidade, percebe que nos últimos anos muitos alunos de outros países vieram estudar nela. Isso o faz supor que o valor de referência para a altura tenha mudado. Para testar sua hipótese, você coletou uma amostra com 200 indivíduos e obteve o valor médio de $172cm$ com desvio padrão de 6cm. Ao nível de 5\%, testar a sua hipótese.
 
 9. Em uma suinocultura, os animais foram alimentados com uma nova ração, rica em proteína, ao longo de dois meses. Espera-se que, ao final desse período, tenham, em média, massa igual a $50kg$. Para testar se eles atingiram esse valor, você coleta uma amostra: \{47, 51, 46, 52, 45, 45, 50, 53, 49, 52 \} $kg$. Ao nível de 5\%, você considera que os animais, alimentados com a nova ração, apresentam crescimento adequado para a idade?
+
+10. As indústrias moveleiras de um certo país pagam em média 2.6 salários mínimos aos seus funcionários. Uma amostra com 30 funcionários de uma indústria desse país, escolhida ao acaso, aponta um salário médio de 2.4 salários mínimos e desvio padrão de 0.5 salários mínimos. Admitindo que a distribuição dos salários das indústrias moveleiras seja normal, teste se essa indústria paga salários inferiores à media nacional ($\alpha=0.05$).
+
+11. Um programa de televisão pode ser modificado por seus produtores se menos de um terço das pessoas que assistem televisão, no mesmo horário desse programa, não o assistem regularmente. Para decidir sobre isso, uma pesquisa com 450 famílias foi realizada. Observou-se que 80 delas assistem regularmente ao programa. Qual decisão os produtores devem tomar ($\alpha=0.05$)?
+
+
+12. Para a realização de uma certa tarefa, um funcionário gasta em média 80 minutos. Na tentativa de diminuir esse tempo, um novo procedimento foi introduzido na empresa. Em seguida, mediu-se o tempo gasto para a realização dessa tarefa de 25 funcionários. O tempo médio da amostra foi de 72 minutos com desvio padrão de 10 minutos. Estes resultados apontam para uma diminuição no tempo de execução da tarefa?

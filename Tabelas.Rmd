@@ -3,7 +3,8 @@ title: "Estatística: Tabelas úteis[^1]"
 author: "Prof. Omar"
 output: 
   bookdown::html_document2:
-    css: style.css  
+    css: style.css
+    #keep_md: yes  
     #rmdformats::theme:
     #  flatly
     #theme: sandstone
