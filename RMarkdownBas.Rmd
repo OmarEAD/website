@@ -1,5 +1,5 @@
 ---
-title: "RMarkdown Básico[^1]"
+title: "R Markdown Básico[^1]"
 author: "Omar Cléo"
 output: 
   bookdown::html_document2:
@@ -41,7 +41,7 @@ library(xtable)
 ```
 
 
-[^1]: Este artigo é sobre o __RMarkdown__. Não temos o propósido de esgotar toda demanda sobre o assunto, mas fazer algo introdutório. Pratique muito e você verá que essa _markup languege_ é muito simples e versátil. Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
+[^1]: Este artigo é sobre o __R Markdown__. Não temos o propósido de esgotar toda demanda sobre o assunto, mas fazer algo introdutório. Pratique muito e você verá que essa _markup languege_ é muito simples e versátil. Caso encontre erros, queira fazer comentários, ou trocar uma ideia sobre o artigo, por favor, me escreva: omarcnpereiraead@gmail.com
 
 # Introdução
 
@@ -51,7 +51,7 @@ Este artigo não mostrará os detalhes de instalação dos _softwares_ utilizado
 
 Assim como HTML e $\LaTeX$, _markdown_ é uma [linguagem de marcação](https://pt.wikipedia.org/wiki/Linguagem_de_marca%C3%A7%C3%A3o) ( _markup language_ ). Desenvolvida por [John Gruber](https://en.wikipedia.org/wiki/John_Gruber) e [Aaron Swartz](https://en.wikipedia.org/wiki/Aaron_Swartz) em 2004, a linguagem _markdown_ tem como objetivo facilitar a formatação de conteúdos, sendo mais simples que a HTML. 
 
-O _RMarkdown_ junta a linguagem de programação `R` e a linguagem de marcação `markdown`. Isto facilita a mistura de códigos de texto e de progração em `R`.
+O _R Markdown_ junta a linguagem de programação `R` e a linguagem de marcação `markdown`. Isto facilita a mistura de códigos de texto e de progração em `R`, o que potencializa a geração de relatórios dinâmicos.
 
 # Comentários
 
